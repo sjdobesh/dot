@@ -16,7 +16,7 @@ do
 	echo "1) download packages"
 	echo "2) download repos"
 	echo "3) stowing config files"
-	echo "4) build neovim"
+	echo "4) install neovim"
 	echo "5) complete install (all of the above)"
 	echo "----------------------------------------"
 	read -p ":" install_type
@@ -38,9 +38,7 @@ if [[ $install_type ==  1 || $install_type == 5 ]]; then
 		"zsh"
 		"stow"
 		"cargo"
-		"ninja-build"
-		"gettext"
-		"libc6-dev"
+		"fuse"
 	)
 
 	cd ~ 
@@ -62,7 +60,7 @@ if [[ $install_type ==  1 || $install_type == 5 ]]; then
 	echo "packages downloaded"
 fi
 
-if [[ install_type ==  2 || install_type == 5 ]]; then
+if [[ $install_type ==  2 || $install_type == 5 ]]; then
 	echo "downloading git repositories"
 	REPOS=(
 		"https://github.com/neovim/neovim.git"
@@ -85,7 +83,7 @@ if [[ install_type ==  2 || install_type == 5 ]]; then
 	echo "repos downloaded"
 fi
 
-if [[ install_type ==  3 || install_type == 5 ]]; then
+if [[ $install_type ==  3 || $install_type == 5 ]]; then
 	echo "stowing symlinks"
 	cd ~/dot/.dotfiles
 	stow --no-folding --adopt -vt ~ */
@@ -93,10 +91,14 @@ if [[ install_type ==  3 || install_type == 5 ]]; then
 	echo "configs stowed"
 fi
 
-if [[ install_type ==  4 || install_type == 5 ]]; then
-	echo "building neovim"
-	cd ~/repos/neovim
-	make CMAKE_BUILD_TYPE=RelWithDebInfo
-	sudo make install
-	echo "neovim built"
+if [[ $install_type ==  4 || $install_type == 5 ]]; then
+	echo "installing neovim"
+	cd ~
+	curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.appimage
+	chmod u+x nvim-linux-x86_64.appimage
+	sudo mkdir -p /usr/local/bin
+	sudo mv ./nvim-linux-x86_64.appimage /usr/local/bin/nvim
+	sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+	       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+	echo "neovim installed to /usr/local/bin"
 fi

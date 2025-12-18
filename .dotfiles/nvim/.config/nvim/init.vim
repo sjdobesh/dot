@@ -56,15 +56,15 @@ Plug 'ntpeters/vim-better-whitespace' " whitespace management
 " Plug 'chrisbra/vim-autosave'          " auto save files
 
 " linters and snips
-" Plug 'rafamadriz/friendly-snippets'   " premade snippet set
-" Plug 'neovim/nvim-lspconfig'          " lsp server
-" Plug 'hrsh7th/cmp-nvim-lsp'           " <-+
-" Plug 'hrsh7th/cmp-buffer'             "   |
-" Plug 'hrsh7th/cmp-path'               "   |
-" Plug 'hrsh7th/cmp-cmdline'            "   |
-" Plug 'hrsh7th/nvim-cmp'               " auto complete
-" Plug 'L3MON4D3/LuaSnip', {'tag': 'v2.*', 'do': 'make install_jsregexp'}
-" Plug 'saadparwaiz1/cmp_luasnip'
+Plug 'rafamadriz/friendly-snippets'   " premade snippet set
+Plug 'neovim/nvim-lspconfig'          " lsp server
+Plug 'hrsh7th/cmp-nvim-lsp'           " <-+
+Plug 'hrsh7th/cmp-buffer'             "   |
+Plug 'hrsh7th/cmp-path'               "   |
+Plug 'hrsh7th/cmp-cmdline'            "   |
+Plug 'hrsh7th/nvim-cmp'               " auto complete
+Plug 'L3MON4D3/LuaSnip', {'tag': 'v2.*', 'do': 'make install_jsregexp'}
+Plug 'saadparwaiz1/cmp_luasnip'
 
 call plug#end()
 
@@ -292,27 +292,27 @@ if is_windows then
   require("luasnip.loaders.from_vscode").lazy_load({ paths = {"~/AppData/Local/nvim/custom-snippets"}})
 end
 
-local scnvim = require 'scnvim'
-local map = scnvim.map
-local map_expr = scnvim.map_expr
-require('scnvim').setup({
-  sclang = {cmd = 'C:/Program Files/SuperCollider-3.12.1/sclang.exe'},
-  keymaps = {
-    ['<M-e>'] = map('editor.send_line', {'i', 'n'}),
-    ['<C-e>'] = {
-      map('editor.send_block', {'i', 'n'}),
-      map('editor.send_selection', 'x'),
-    },
-    ['<CR>'] = map('postwin.toggle'),
-    ['<M-CR>'] = map('postwin.toggle', 'i'),
-    ['<M-L>'] = map('postwin.clear', {'n', 'i'}),
-    -- ['<C-k>'] = map('signature.show', {'n', 'i'}),
-    ['<F12>'] = map('sclang.hard_stop', {'n', 'x', 'i'}),
-    -- ['<leader>st'] = map('sclang.start'),
-    -- ['<leader>sk'] = map('sclang.recompile'),
-    ['<leader>sc'] = map_expr('s.boot'),
-    ['<leader>sm'] = map_expr('s.meter'),
-  }
-})
+-- local scnvim = require 'scnvim'
+-- local map = scnvim.map
+-- local map_expr = scnvim.map_expr
+-- require('scnvim').setup({
+--   sclang = {cmd = 'C:/Program Files/SuperCollider-3.12.1/sclang.exe'},
+--   keymaps = {
+--     ['<M-e>'] = map('editor.send_line', {'i', 'n'}),
+--     ['<C-e>'] = {
+--       map('editor.send_block', {'i', 'n'}),
+--       map('editor.send_selection', 'x'),
+--     },
+--     ['<CR>'] = map('postwin.toggle'),
+--     ['<M-CR>'] = map('postwin.toggle', 'i'),
+--     ['<M-L>'] = map('postwin.clear', {'n', 'i'}),
+--     -- ['<C-k>'] = map('signature.show', {'n', 'i'}),
+--     ['<F12>'] = map('sclang.hard_stop', {'n', 'x', 'i'}),
+--     -- ['<leader>st'] = map('sclang.start'),
+--     -- ['<leader>sk'] = map('sclang.recompile'),
+--     ['<leader>sc'] = map_expr('s.boot'),
+--     ['<leader>sm'] = map_expr('s.meter'),
+--   }
+-- })
 
 EOF
