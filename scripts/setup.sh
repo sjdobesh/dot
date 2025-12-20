@@ -22,9 +22,7 @@ do
   read -p ":" install_type
   echo "----------------------------------------"
 
-  if [[ $install_type ==  7 ]]; then
-    exit
-  fi
+
   if [[ $install_type ==  1 || $install_type == 6 ]]; then
     echo "installing apt packages"
     PACKAGES=(
@@ -117,7 +115,10 @@ do
            https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
     echo "neovim installed to /usr/local/bin"
   fi
-
+  if [[ $install_type == 6 || $install_type ==  7 ]]; then
+    exec zsh
+    exit
+  fi
 done
 
 
