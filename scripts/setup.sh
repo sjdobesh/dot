@@ -76,7 +76,6 @@ do
   if [[ $install_type ==  3 || $install_type == 6 ]]; then
     echo "downloading git repositories"
     REPOS=(
-      "https://github.com/neovim/neovim.git"
       "https://github.com/sjdobesh/pngz.git"
     )
     mkdir -p ~/repos
