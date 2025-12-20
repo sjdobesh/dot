@@ -11,20 +11,21 @@ do
   fi
   ((i++))
   echo "please select installation type"
-  echo "1) download packages"
-  echo "2) download repos"
-  echo "3) stowing config files"
-  echo "4) install neovim"
-  echo "5) complete install and exit"
-  echo "6) exit"
+  echo "1) install apt packages"
+  echo "2) install rust"
+  echo "3) download repos"
+  echo "4) stowing config files"
+  echo "5) install neovim"
+  echo "6) complete install and exit"
+  echo "7) exit"
   echo "----------------------------------------"
   read -p ":" install_type
   echo "----------------------------------------"
 
-  if [[ $install_type ==  6 ]]; then
+  if [[ $install_type ==  7 ]]; then
     exit
   fi
-  if [[ $install_type ==  1 || $install_type == 5 ]]; then
+  if [[ $install_type ==  1 || $install_type == 6 ]]; then
     echo "installing apt packages"
     PACKAGES=(
       "git"
@@ -36,7 +37,6 @@ do
       "gdb"
       "zsh"
       "stow"
-      "cargo"
       "fuse"
     )
     cd ~
@@ -49,7 +49,13 @@ do
         echo "$pkg already installed"
       fi
     done
+  fi
 
+  if [[ $install_type ==  2 || $install_type == 6 ]]; then
+    echo "installing rust"
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+    rustup self update
+    rustup update
     echo "downloading cargo crates"
     CRATES=(
       "eza"
@@ -69,7 +75,7 @@ do
 
   fi
 
-  if [[ $install_type ==  2 || $install_type == 5 ]]; then
+  if [[ $install_type ==  3 || $install_type == 6 ]]; then
     echo "downloading git repositories"
     REPOS=(
       "https://github.com/neovim/neovim.git"
@@ -92,7 +98,7 @@ do
     echo "repos downloaded"
   fi
 
-  if [[ $install_type ==  3 || $install_type == 5 ]]; then
+  if [[ $install_type ==  4 || $install_type == 6 ]]; then
     echo "stowing symlinks"
     cd ~/dot/.dotfiles
     stow --no-folding --adopt -vt ~ */
@@ -100,7 +106,7 @@ do
     echo "configs stowed"
   fi
 
-  if [[ $install_type ==  4 || $install_type == 5 ]]; then
+  if [[ $install_type ==  5 || $install_type == 6 ]]; then
     echo "installing neovim"
     cd ~
     curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.appimage

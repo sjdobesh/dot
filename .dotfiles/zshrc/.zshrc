@@ -22,6 +22,7 @@ alias v='nvim'
 alias o='xdg-open'
 alias g='git'
 alias grep='rg'
+alias cat='bat'
 alias l="eza -la -T --level 1"
 alias la="eza -la -T --level 1"
 alias ls="eza -l -T --level 1"
