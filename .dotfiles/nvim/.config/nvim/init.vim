@@ -113,10 +113,10 @@ let g:better_whitespace_ctermcolor='darkgreen'
 " airline settings
 let g:airline_extensions = ['branch', 'tabline']
 let g:airline#extensions#tabline#enabled = 1
-let g:airline_left_sep = 'î‚°'
-let g:airline_right_sep = 'î‚²'
-let g:airline#extensions#tabline#left_sep = 'î‚°'
-let g:airline#extensions#tabline#left_alt_sep = 'ï½œ'
+" let g:airline_left_sep = 'î‚°'
+" let g:airline_right_sep = 'î‚²'
+" let g:airline#extensions#tabline#left_sep = 'î‚°'
+" let g:airline#extensions#tabline#left_alt_sep = 'ï½œ'
 let g:airline#extensions#tabline#ignore_bufadd_pat = 'defx|gundo|nerd_tree|startify|tagbar|undotree|vimfiler'
 
 " auto save
