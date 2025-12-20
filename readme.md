@@ -2,7 +2,7 @@
 
 ## fast set up
 
-`git clone https://github.com/sjdobesh/dot.git & ./dot/scripts/setup.sh`
+`sudo apt update; sudo apt upgrade -y; sudo apt install git; git clone https://github.com/sjdobesh/dot.git; ./dot/scripts/setup.sh`
 
 ## configs
 
