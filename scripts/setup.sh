@@ -36,6 +36,7 @@ do
       "zsh"
       "stow"
       "fuse"
+      "python3"
     )
     cd ~
     sudo apt-get update -y
@@ -52,6 +53,7 @@ do
   if [[ $install_type ==  2 || $install_type == 6 ]]; then
     echo "installing rust"
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+    export PATH=$PATH:$HOME/.cargo/bin
     rustup self update
     rustup update
     echo "downloading cargo crates"
