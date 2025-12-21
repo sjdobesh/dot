@@ -115,7 +115,7 @@ do
     sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
            https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
     echo "neovim installed to /usr/local/bin"
-    exec zsh
+    . $HOME/.bashrc
     nvim --headless -c "PlugInstall" -c "qa"
   fi
   if [[ $install_type == 6 || $install_type ==  7 ]]; then
