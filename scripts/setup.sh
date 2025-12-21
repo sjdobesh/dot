@@ -1,9 +1,9 @@
 #!/bin/bash
 install_type=0
 i=0
-while [[ $install_type -gt 5 || $install_type -lt 1 ]];
+while [[ $install_type != 6 || $install_type != 7]];
 do
-  if ((i != 0)); then
+  if [[ i != 0 && ( $install_type -lt 1 || $install_type -gt 7 ) ]]; then
     echo "invalid selection"
     echo "----------------------------------------"
   else
@@ -120,7 +120,6 @@ do
   fi
   if [[ $install_type == 6 || $install_type ==  7 ]]; then
     exec zsh
-    exit
   fi
 done
 
