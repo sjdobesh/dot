@@ -1,7 +1,7 @@
 #!/bin/bash
 install_type=0
 i=0
-while [[ $install_type != 6 || $install_type != 7]];
+while [[ $install_type != 6 || $install_type != 7 ]];
 do
   if [[ i != 0 && ( $install_type -lt 1 || $install_type -gt 7 ) ]]; then
     echo "invalid selection"
