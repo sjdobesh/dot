@@ -89,7 +89,7 @@ endif
 
 " startify
 let g:startify_fortune_use_unicode = 0
-let g:ascii = ['',
+let g:ascii = [
        \' ._____.                                     ._____.',
        \' | ._. |                                     | ._. |',
        \' | !_|_|_____________________________________|_|_! |',
@@ -103,7 +103,7 @@ let g:ascii = ['',
        \' | !_! |                                     | !_! |',
        \' !_____!                                     !_____!',
        \'',
-       \'']
+]
 let g:startify_custom_header =
       \ 'startify#pad(g:ascii + startify#fortune#boxed())'
 
