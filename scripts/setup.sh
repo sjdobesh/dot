@@ -119,6 +119,16 @@ do
     nvim --headless -c "PlugInstall" -c "qa"
   fi
   if [[ $install_type == 6 || $install_type ==  7 ]]; then
+    count=`ls ~/.ssh -1 *.pub 2>/dev/null | wc -l`
+    if [[ $count == 0 ]]; then
+      echo "no pub key found, generating new ssh keys"
+      ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519 -q -N ""
+    fi
+    echo "ssh pub key :"
+    'cat' ~/.ssh/*.pub
+    git config --global user.email "samjdobesh@gmail.com"
+    git config --global user.name "samantha"
+    git -C ~/dot remote set-url git@github.com:sjdobesh/dot.git
     exec zsh
   fi
 done
