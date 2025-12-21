@@ -116,7 +116,7 @@ do
            https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
     echo "neovim installed to /usr/local/bin"
     . $HOME/.bashrc
-    nvim --headless -c "PlugInstall" -c "qa"
+    nvim --headless -Es -c "PlugInstall" -c "qa"
   fi
   if [[ $install_type == 6 || $install_type ==  7 ]]; then
     exec zsh
