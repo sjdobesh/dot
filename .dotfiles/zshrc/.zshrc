@@ -21,12 +21,22 @@ alias mv='mv -i'
 alias v='nvim'
 alias o='xdg-open'
 alias g='git'
-alias cat='bat'
-alias grep='rg'
-alias l="eza -la -T --level 1"
-alias la="eza -la -T --level 1"
-alias ls="eza -l -T --level 1"
+alias q="exit"
 alias :q="exit"
+alias wq="exit"
 alias :wq="exit"
+
+# if rust utils are available
+if hash bat 2>/dev/null; then
+  alias cat='bat'
+fi
+if hash rg 2>/dev/null; then
+  alias grep='rg'
+fi
+if hash eza 2>/dev/null; then
+  alias l="eza -la -T --level 1"
+  alias la="eza -la -T --level 1"
+  alias ls="eza -l -T --level 1"
+fi
 
 precmd () { print -Pn "\e]2;%-3~\a"; }
