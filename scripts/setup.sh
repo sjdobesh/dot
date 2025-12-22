@@ -23,6 +23,7 @@ do
   echo "----------------------------------------"
 
 
+  # apt packages
   if [[ $install_type ==  1 || $install_type == 6 ]]; then
     echo "installing apt packages"
     PACKAGES=(
@@ -48,8 +49,14 @@ do
         echo "$pkg already installed"
       fi
     done
+    echo "system upgrade"
+    sudo apt-get update -y
+    sudo apt-get upgrade -y
+    sudo apt-get autoclean -y
+    sudo apt-get autoremove -y
   fi
 
+  # rust and cargo packages
   if [[ $install_type ==  2 || $install_type == 6 ]]; then
     echo "installing rust"
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
@@ -65,16 +72,9 @@ do
     for crate in "${CRATES[@]}"; do
       cargo install $crate
     done
-
-    echo "system upgrade"
-    sudo apt-get update -y
-    sudo apt-get upgrade -y
-    sudo apt-get autoclean -y
-    sudo apt-get autoremove -y
-
-
   fi
 
+  # download git repos
   if [[ $install_type ==  3 || $install_type == 6 ]]; then
     echo "downloading git repositories"
     REPOS=(
@@ -97,6 +97,7 @@ do
     echo "repos downloaded"
   fi
 
+  # stow config file symlinks
   if [[ $install_type ==  4 || $install_type == 6 ]]; then
     echo "stowing symlinks"
     cd ~/dot/.dotfiles
@@ -105,6 +106,7 @@ do
     echo "configs stowed"
   fi
 
+  # installing neovim
   if [[ $install_type ==  5 || $install_type == 6 ]]; then
     echo "installing neovim"
     cd ~
@@ -118,6 +120,8 @@ do
     . $HOME/.bashrc
     nvim --headless -c "PlugInstall" -c "qa"
   fi
+
+  # checking for ssh key
   if [[ $install_type == 6 || $install_type ==  7 ]]; then
     count=`ls ~/.ssh -1 *.pub 2>/dev/null | wc -l`
     if [[ $count == 0 ]]; then
@@ -132,5 +136,3 @@ do
     exec zsh
   fi
 done
-
-
