@@ -128,7 +128,7 @@ do
     'cat' ~/.ssh/*.pub
     git config --global user.email "samjdobesh@gmail.com"
     git config --global user.name "samantha"
-    git -C ~/dot remote set-url git@github.com:sjdobesh/dot.git
+    git -C ~/dot remote set-url origin git@github.com:sjdobesh/dot.git
     exec zsh
   fi
 done
