@@ -25,6 +25,7 @@ alias q="exit"
 alias :q="exit"
 alias wq="exit"
 alias :wq="exit"
+alias feh='feh -Zx -g 1920x1080 -B black --force-alias --auto-reload'
 
 # if rust utils are available
 if hash bat 2>/dev/null; then
