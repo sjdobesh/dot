@@ -104,7 +104,10 @@ do
   # stow config file symlinks
   if [[ $install_type ==  4 || $install_type == 7 ]]; then
     echo "stowing symlinks"
-    stow --no-folding --adopt -vt ~ ~/dot/.dotfiles/*/
+    # stow --no-folding --adopt -vt ~ ~/dot/.dotfiles/*/
+    cd ~/dot/.dotfiles
+    stow --no-folding --adopt -vt ~ */
+    cd ~
     chsh -s $(which zsh)
     echo "configs stowed"
   fi
