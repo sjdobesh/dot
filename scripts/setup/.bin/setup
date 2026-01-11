@@ -1,32 +1,56 @@
 #!/bin/bash
+
+# constants and personal info
+git_name="samantha"
+git_email="samjdobesh@gmail.com"
 https_prefix="https://github.com/"
 ssh_prefix="git@github.com:"
-git_email="samjdobesh@gmail.com"
-git_name="samantha"
+
+# apt packages: basic dev tools
 PACKAGES=(
   "git"
   "ssh"
   "curl"
+  "wget"
   "vim"
   "build-essential"
-  "cmake"
   "gdb"
+  "cmake"
+  "libpng-dev"
+  "libsdl3-dev"
+  "libsdl3-image-dev"
+  "libsdl3-ttf-dev"
+  "python3"
   "zsh"
   "stow"
   "fuse"
-  "python3"
-  "libpng-dev"
   "feh"
 )
-REPOS=(
+
+# personal git repositories
+PERSONAL_REPOS=(
   "sjdobesh/pngz.git"
   "sjdobesh/pxl.git"
+  "sjdobesh/sdl_pxl.git"
 )
+
+# public git repositories
+PUBLIC_REPOS=(
+  "nothings/stb.git"
+  "attractivechaos/klib.git"
+)
+
+# full list
+ALL_REPOS=("${PERSONAL_REPOS[@]}" "${PUBLIC_REPOS[@]}")
+
+# rust utils
 CRATES=(
   "eza"
   "bat"
   "ripgrep"
 )
+
+# install #-------------------------------------------------
 
 install_type=0
 i=0
@@ -64,11 +88,11 @@ do
         echo "$pkg already installed"
       fi
     done
-    echo "system upgrade"
     sudo apt-get update -y
     sudo apt-get upgrade -y
     sudo apt-get autoclean -y
     sudo apt-get autoremove -y
+    echo "system up to date"
   fi
 
   # rust and cargo packages
@@ -82,13 +106,14 @@ do
     for crate in "${CRATES[@]}"; do
       cargo install $crate
     done
+    echo "rust installed"
   fi
 
   # download git repos
   if [[ $install_type ==  3 || $install_type == 7 ]]; then
     echo "downloading git repositories"
     mkdir -p ~/repos
-    for repo_url in "${REPOS[@]}"; do
+    for repo_url in "${ALL_REPOS[@]}"; do
       repo_name="$(basename "$repo_url" .git)"
       echo "installing $repo_name with $repo_url"
       if [[ ! -d $repo_name ]]; then
@@ -107,6 +132,8 @@ do
     # stow --no-folding --adopt -vt ~ ~/dot/.dotfiles/*/
     cd ~/dot/.dotfiles
     stow --no-folding --adopt -vt ~ */
+    cd ~/dot/scripts
+    stow --no-folding --adopt -vt ~ */
     cd ~
     chsh -s $(which zsh)
     echo "configs stowed"
@@ -115,6 +142,9 @@ do
   # installing neovim
   if [[ $install_type ==  5 || $install_type == 7 ]]; then
     echo "installing neovim"
+    if [[ -e /usr/local/bin/nvim ]]; then
+      echo "found neovim at /usr/local/bin/nvim"
+    fi
     curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.appimage
     chmod u+x nvim-linux-x86_64.appimage
     sudo mkdir -p /usr/local/bin
@@ -128,17 +158,20 @@ do
 
   # checking for ssh key and git origins
   if [[ $install_type == 6 || $install_type ==  7 ]]; then
+    echo "setting up ssh and git remote urls."
     count=`ls ~/.ssh -1 *.pub 2>/dev/null | wc -l`
     if [[ $count == 0 ]]; then
       echo "no pub key found, generating new ssh keys"
       ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519 -q -N ""
     else
-      echo "found ssh key"
+      echo "found ssh key."
     fi
     echo "setting git config user to $git_name at $git_email"
     git config --global user.email "samjdobesh@gmail.com"
     git config --global user.name "samantha"
-    for repo_url in "${REPOS[@]}"; do
+    # only update personal remots
+    echo "updating personal repo remote urls"
+    for repo_url in "${PERSONAL_REPOS[@]}"; do
       repo_name="$(basename "$repo_url" .git)"
       echo "swapping $repo_name to ssh origin"
       if [[ -d ~/repos/$repo_name ]]; then

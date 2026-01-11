@@ -1,0 +1,160 @@
+#!/bin/bash
+
+# lynxg #-------------------------------------------------#
+# lynx grep browser search script                         |
+# uses ripgrep to generate a list of files with a search  |
+# and then allows user to select one to open in lynx      |
+#---------------------------------------------------------#-----------------(80)
+bar="-----------------------------------------------"
+title="--------------------[lynxg]--------------------"
+toolong=10
+
+# search array
+SEARCHES=()
+searchlen=0
+
+# file result array
+FILES=()
+filelen=0
+
+# if no input, read in to search array
+if [[ "${#@}" -eq 0 ]]; then
+  echo $title
+  read -p ":" input
+  SEARCHES=("$input")
+else
+  SEARCHES=("$@")
+fi
+searchlen="${#SEARCHES[@]}"
+
+
+# for each search entered
+for term in "${SEARCHES[@]}"; do
+
+  term_i=0
+  error=0
+  selection=0
+  displaylen=0
+
+  # map search into file array
+  FILES=()
+  mapfile -t FILES < <( rg -l term )
+  filelen="${#FILES[@]}"
+
+  # loop menu till display len is set
+  while (( displaylen == 0 )); do
+
+    clear
+    echo $title
+    echo "search: [$term]"
+
+    if (( filelen <= toolong )); then
+      displaylen="$filelen"
+      break
+    fi
+
+    # if too long to print
+    echo ""
+    echo "found in $filelen files, print anyway?"
+    echo ""
+    echo $bar
+    echo "> (y)es"
+    echo "> (n)o"
+    echo "> (s)ome (first $toolong) "
+    echo "> enter a number to print"
+    echo $bar
+
+    # read input
+    if (( error == 0 )); then
+      read -p ":" selection
+    else
+      read -p "[input error]:" selection
+      error=0
+    fi
+
+    # handle input
+    case "$selection" in
+      "q"   ) clear; exit ;;
+      "n"   ) break ;;
+      "y"   ) displaylen="$filelen" ;;
+      "s"   ) displaylen="$toolong" ;;
+      [0-9] ) if (( selection <  filelen-1 )) &&
+                 (( selection >= 0         ));
+              then
+                displaylen="$selection"
+              fi
+              ;;
+      *     ) error=1 ;;
+    esac
+
+  done
+
+  # print results #-------------------------------------------------------------
+
+  start=0
+  error=0
+  finished=0
+  while (( finished == 0 )) ; do
+
+    # print result menu
+    clear
+    echo $title
+    echo "search: [$term]"
+    echo "displaying [$displaylen of $filelen] results"
+    echo ""
+    for (( i=start; i < start+displaylen && i < filelen; i++ )); do
+      bname="$(basename "${FILES[$i]}" .html)"
+      echo "$i > $bname"
+    done
+    echo ""
+    echo $bar
+
+    # print interaction menu
+    if (( term_i+1 < searchlen )); then
+      echo "> (n)ext search [${SEARCHES[$term_i+1]}]"
+    fi
+    echo "> (j/k) scroll"
+    echo "> (q)uit"
+    echo "> enter a file number to open"
+    echo $bar
+
+    # read input
+    if (( error == 0 )); then
+      read -p ":" selection
+    else
+      read -p "[input error]:" selection
+      error=0
+    fi
+
+    # open file with an index number
+    # scroll list
+    # move to next search if available
+    # quit
+    case "$selection" in
+      "q"   ) clear; exit ;;
+      "n"   ) clear; finished=1 ;;
+      "j"   )
+        if (( start+toolong < filelen )); then
+          ((start+=toolong))
+        fi
+        ;;
+      "k"   )
+        if (( start >= toolong )); then
+          ((start-=toolong))
+        fi
+        ;;
+      [0-9] )
+        if (( selection <  filelen-1 )) &&
+           (( selection >= 0         ));
+        then
+          lynx -vikeys "${FILES[selection]}"
+        fi
+        ;;
+      *     ) error=1 ;;
+    esac
+
+  done
+  # increment term counter
+  ((term_i++))
+done
+

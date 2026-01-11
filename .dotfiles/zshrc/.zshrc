@@ -13,7 +13,7 @@ setopt inc_append_history
 bindkey "\e[A" history-beginning-search-backward
 bindkey "\e[B" history-beginning-search-forward
 
-export PATH=$PATH:~/.cargo/bin
+export PATH=$PATH:~/.bin:~/.cargo/bin
 
 alias diff='diff --color=auto'
 alias ip='ip -c=auto'

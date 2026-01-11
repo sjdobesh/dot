@@ -56,13 +56,16 @@ Plug 'ntpeters/vim-better-whitespace' " whitespace management
 " Plug 'chrisbra/vim-autosave'          " auto save files
 
 " linters and snips
-Plug 'rafamadriz/friendly-snippets'   " premade snippet set
-Plug 'neovim/nvim-lspconfig'          " lsp server
-Plug 'hrsh7th/cmp-nvim-lsp'           " <-+
-Plug 'hrsh7th/cmp-buffer'             "   |
-Plug 'hrsh7th/cmp-path'               "   |
-Plug 'hrsh7th/cmp-cmdline'            "   |
-Plug 'hrsh7th/nvim-cmp'               " auto complete
+Plug 'rafamadriz/friendly-snippets'      " premade snippet set
+Plug 'neovim/nvim-lspconfig'             " lsp server
+Plug 'williamboman/mason.nvim'           " mason package manager for lsp support
+Plug 'williamboman/mason-lspconfig.nvim' " lsp config for generic languages
+Plug 'nvim-treesitter/nvim-treesitter'   " better syntax highlighting
+Plug 'hrsh7th/cmp-nvim-lsp'              " <-+
+Plug 'hrsh7th/cmp-buffer'                "   |
+Plug 'hrsh7th/cmp-path'                  "   |
+Plug 'hrsh7th/cmp-cmdline'               "   |
+Plug 'hrsh7th/nvim-cmp'                  " auto complete
 Plug 'L3MON4D3/LuaSnip', {'tag': 'v2.*', 'do': 'make install_jsregexp'}
 Plug 'saadparwaiz1/cmp_luasnip'
 
@@ -145,6 +148,8 @@ autocmd FileType c IS
 " general settings
 set wrap!           " line wrap
 set number          " line numbers
+set signcolumn=number
+set relativenumber
 set mouse=a         " mouse
 set hidden path+=** " better file nav
 set tabstop=8 softtabstop=0 expandtab shiftwidth=2 smarttab " tab settings
@@ -232,6 +237,22 @@ smap <silent><expr> <C-E> luasnip#choice_active() ? '<Plug>luasnip-next-choice' 
 
 lua << EOF
 local is_windows = vim.fn.has("win64") == 1 or vim.fn.has("win32") == 1
+
+-- set up nvim lsp --
+require("mason").setup()
+require("mason-lspconfig").setup({
+    ensure_installed = { "clangd", "bashls" },
+})
+
+vim.lsp.config("clangd", { flags = {debounce_text_changes = 300 } })
+vim.lsp.enable({"clangd"})
+vim.diagnostic.config({
+    virtual_text = true,
+    signs = true,
+    underline = true,
+})
+vim.lsp.config("bashls", { flags = {debounce_text_changes = 300 } })
+vim.lsp.enable({"bashls"})
 
 -- set up nvim-cmp.
 local cmp = require'cmp'
