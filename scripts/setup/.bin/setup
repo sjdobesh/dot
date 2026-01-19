@@ -178,6 +178,22 @@ download_repos() {
   echo ""
 }
 
+# download documentation sources (just sdl3 for now)
+download_docs() {
+  echo ""
+  echo "[ downloading documentation... ]"
+  cd ~
+  mkdir docs
+  curl -LO https://wiki.libsdl.org/static_files/offline/sdlwiki.zip
+  mv sdlwiki.zip docs
+  mv docs
+  unzip sdlwiki.zip
+  rm sdlwiki.zip
+  cd ~
+  echo "[ documentation downloaded ]"
+  echo ""
+}
+
 # use the stow util to create managed symlinks for configs and scripts
 stow_configs() {
   echo ""
@@ -272,10 +288,11 @@ do
   echo "|     [3] install haskell               |"
   echo "|     [4] install neovim                |"
   echo "|     [5] download repos                |"
-  echo "|     [6] ssh keygen                    |"
-  echo "|     [7] stow config files             |"
-  echo "|     [8] complete install              |"
-  echo "|     [9] exit                          |"
+  echo "|     [6] download docs                 |"
+  echo "|     [7] ssh keygen                    |"
+  echo "|     [8] stow config files             |"
+  echo "|     [9] complete install              |"
+  echo "|     [0] exit                          |"
   echo "|                                       |"
   echo "+---------------------------------------+"
   if (( error == 1 )); then
@@ -291,9 +308,10 @@ do
     "3"  ) install_haskell  ;;
     "4"  ) install_nvim     ;;
     "5"  ) download_repos   ;;
-    "6"  ) init_ssh         ;;
-    "7"  ) stow_configs     ;;
-    "8"  ) echo "[ installing full environment... ]"
+    "6"  ) download_docs    ;;
+    "7"  ) init_ssh         ;;
+    "8"  ) stow_configs     ;;
+    "9"  ) echo "[ installing full environment... ]"
            install_packages
            install_rust
            install_haskell
@@ -303,7 +321,7 @@ do
            stow_configs
            echo "[ full environment installed. ]"
            ;;
-    [9q] ) clear; exit      ;;
+    [0q] ) clear; exit      ;;
     *    ) error=1          ;;
   esac
 done
