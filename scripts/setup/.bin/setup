@@ -1,31 +1,77 @@
 #!/bin/bash
+# setup script #------------------------------------------------------------(80)
 
-# constants and personal info
+# personal info, packages, and repos #------------------------------------------
+
 git_name="samantha"
 git_email="samjdobesh@gmail.com"
 https_prefix="https://github.com/"
 ssh_prefix="git@github.com:"
 
-# apt packages: basic dev tools
-PACKAGES=(
-  "git"
-  "ssh"
-  "curl"
-  "wget"
-  "vim"
+# minimum cli utils
+CORE=(
+  "git"  # in case of offline setup script
+  "ssh"  # remote work (including git)
+  "vim"  # fall back text editor
+  "wget" # cli file downloader
+  "curl" # cli url interactions: used to download nvim and rust
+  "tar"  # extractor
+)
+
+# full util set
+FULL=(
+  "fzf"    # fuzzy finder
+  "feh"    # image viewer
+  "zsh"    # shell
+  "stow"   # symlink manager
+  "fuze"   # needed to run nvim app image
+  "figlet" # ascii art
+  "pkg-config"
+)
+
+# scripting languages
+SCRIPTING=(
+  "perl"
+  "python3"
+)
+
+# c development utilities
+CDEV=(
   "build-essential"
   "gdb"
   "cmake"
+  "tcc"
+)
+
+# c libraries
+CLIB=(
+  "libclang-dev"
+  "libncurses-dev"
   "libpng-dev"
   "libsdl3-dev"
   "libsdl3-image-dev"
   "libsdl3-ttf-dev"
-  "python3"
-  "zsh"
-  "stow"
-  "fuse"
-  "feh"
 )
+
+HASKELL_DEP=(
+  "libffi-dev"
+  "libffi8"
+  "libgmp-dev"
+  "libgmp10"
+  "libncurses6"
+  "libtinfo6"
+)
+
+# all apt packages
+PACKAGES=(
+  "${CORE[@]}",
+  "${FULL[@]}",
+  "${SCRIPTING[@]}",
+  "${CDEV[@]}",
+  "${HASKELL_DEP[@]}"
+  "${CLIB[@]}"
+)
+
 
 # personal git repositories
 PERSONAL_REPOS=(
@@ -48,146 +94,200 @@ CRATES=(
   "eza"
   "bat"
   "ripgrep"
+  "--locked tree-sitter-cli"
 )
 
-# install #-------------------------------------------------
+# install #---------------------------------------------------------------------
+
+# install all apt packages and update
+install_packages() {
+  echo ""
+  echo "[installing apt packages...]"
+  sudo apt-get update -y
+  for pkg in "${PACKAGES[@]}"; do
+    echo "installing $pkg..."
+    if dpkg -s "$pkg" 2>&1 | grep "not installed" > /dev/null; then
+      sudo apt-get install -y "$pkg"
+    else
+      echo "$pkg already installed"
+    fi
+  done
+  echo "[ packages installed ]"
+  echo ""
+  echo "[ updating system... ]"
+  sudo apt-get update -y
+  sudo apt-get upgrade -y
+  sudo apt-get autoclean -y
+  sudo apt-get autoremove -y
+  echo "[ system up to date ]"
+  echo ""
+}
+
+# install rust (rustup + crates)
+install_rust() {
+  echo ""
+  echo "[ installing rust... ]"
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+  export PATH=$PATH:$HOME/.cargo/bin
+  rustup self update
+  rustup update
+  echo "[ rust installed ]"
+  echo ""
+  echo "[ installing crates... ]"
+  for crate in "${CRATES[@]}"; do
+    echo "installing $crate..."
+    cargo install "$crate"
+  done
+  echo "[ crates installed ]"
+  echo ""
+}
+
+install_haskell() {
+  curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | \
+    BOOTSTRAP_HASKELL_NONINTERACTIVE=1 \
+    BOOTSTRAP_HASKELL_GHC_VERSION=latest \
+    BOOTSTRAP_HASKELL_CABAL_VERSION=latest \
+    BOOTSTRAP_HASKELL_INSTALL_STACK=1 \
+    BOOTSTRAP_HASKELL_INSTALL_HLS=1 \
+    BOOTSTRAP_HASKELL_ADJUST_BASHRC=P \
+    sh
+}
+
+# download personal and external github repos
+download_repos() {
+  echo ""
+  echo "[ downloading git repositories... ]"
+  mkdir -p ~/repos
+  for repo_url in "${ALL_REPOS[@]}"; do
+    repo_name="$(basename "$repo_url" .git)"
+    echo "installing $repo_name with $repo_url ."
+    if [[ ! -d $repo_name ]]; then
+      git -C ~/repos clone "$https_prefix$repo_url"
+    else
+      echo "found $repo_name, pulling latest changes..."
+      git -C ~/repos/$repo_name pull
+    fi
+  done
+  echo "[ repositories downloaded ]"
+  echo ""
+}
+
+# use the stow util to create managed symlinks for configs and scripts
+stow_configs() {
+  echo ""
+  echo "[ stowing symlinks... ]"
+  cd ~/dot/.dotfiles
+  echo "dotfiles..."
+  stow --no-folding --adopt -vt ~ */
+  cd ~/dot/scripts
+  echo "scripts..."
+  stow --no-folding --adopt -vt ~ */
+  cd ~
+  chsh -s $(which zsh)
+  echo "[ configs stowed ]"
+  echo ""
+}
+
+# install neovim, easiest to just download app image
+install_nvim() {
+  echo ""
+  echo "[ installing neovim... ]"
+  if [[ -e /usr/local/bin/nvim ]]; then
+    echo "found neovim at /usr/local/bin/nvim."
+  fi
+  curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.appimage
+  chmod u+x nvim-linux-x86_64.appimage
+  sudo mkdir -p /usr/local/bin
+  sudo mv ./nvim-linux-x86_64.appimage /usr/local/bin/nvim
+  sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+         https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  . $HOME/.bashrc
+  nvim --headless -c "PlugInstall" -c "qa"
+  echo "[ neovim installed to /usr/local/bin ]"
+  echo ""
+}
+
+# init ssh keys and github ssh remotes for personal repos
+init_ssh() {
+  echo ""
+  echo "[ setting up ssh...]"
+  count=`ls ~/.ssh -1 *.pub 2>/dev/null | wc -l`
+  if (( count == 0 )); then
+    echo "no pub key found, generating new ssh key..."
+    ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519 -q -N ""
+  else
+    echo "found existing ssh key."
+  fi
+  echo "setting git config user to $git_name at $git_email."
+  git config --global user.email "$git_email"
+  git config --global user.name "$git_name"
+  # only update personal remotes
+  echo "updating repo remote urls for person repos..."
+  for repo_url in "${PERSONAL_REPOS[@]}"; do
+    repo_name="$(basename "$repo_url" .git)"
+    echo "swapping $repo_name to ssh origin..."
+    if [[ -d ~/repos/$repo_name ]]; then
+      git -C ~/repos/$repo_name remote set-url origin $ssh_prefix$repo_url
+    else
+      echo "couldn't find $repo_name."
+    fi
+  done
+  echo "remote origins set."
+  echo "[ ssh initialized ]"
+  echo "ssh pub key :"
+  'cat' ~/.ssh/*.pub
+  echo ""
+}
 
 install_type=0
-i=0
-while [[ $install_type != 7 || $install_type != 8 ]];
+error=0
+
+# main routine #----------------------------------------------------------------
+
+while (( install_type != 7 || install_type != 8 ));
 do
-  if [[ i != 0 && ( $install_type -lt 1 || $install_type -gt 8 ) ]]; then
-    echo "invalid selection"
-    echo "----------------------------------------"
+  # print menu
+  echo "+------[environment setup script]-------+"
+  echo "|                                       |"
+  echo "|    please select installation type    |"
+  echo "|                                       |"
+  echo "|     [1] install apt packages          |"
+  echo "|     [2] install rust                  |"
+  echo "|     [3] install haskell               |"
+  echo "|     [4] install neovim                |"
+  echo "|     [5] download repos                |"
+  echo "|     [6] ssh keygen                    |"
+  echo "|     [7] stow config files             |"
+  echo "|     [8] complete install              |"
+  echo "|     [9] exit                          |"
+  echo "|                                       |"
+  echo "+---------------------------------------+"
+  if (( error == 1 )); then
+    error=0
+    read -p "[invalid selection]:" install_type
   else
-    echo "-------[environment setup script]-------"
-  fi
-  ((i++))
-  echo "please select installation type"
-  echo "1) install apt packages"
-  echo "2) install rust"
-  echo "3) download repos"
-  echo "4) stowing config files"
-  echo "5) install neovim"
-  echo "6) ssh keygen"
-  echo "7) complete install and exit"
-  echo "8) exit"
-  echo "----------------------------------------"
-  read -p ":" install_type
-  echo "----------------------------------------"
-
-  # apt packages
-  if [[ $install_type ==  1 || $install_type == 7 ]]; then
-    echo "installing apt packages"
-    sudo apt-get update -y
-    for pkg in "${PACKAGES[@]}"; do
-      echo "installing $pkg..."
-      if dpkg -s "$pkg" 2>&1 | grep "not installed" > /dev/null; then
-        sudo apt-get install -y "$pkg"
-      else
-        echo "$pkg already installed"
-      fi
-    done
-    sudo apt-get update -y
-    sudo apt-get upgrade -y
-    sudo apt-get autoclean -y
-    sudo apt-get autoremove -y
-    echo "system up to date"
+    read -p ":" install_type
   fi
 
-  # rust and cargo packages
-  if [[ $install_type ==  2 || $install_type == 7 ]]; then
-    echo "installing rust"
-    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-    export PATH=$PATH:$HOME/.cargo/bin
-    rustup self update
-    rustup update
-    echo "downloading cargo crates"
-    for crate in "${CRATES[@]}"; do
-      cargo install $crate
-    done
-    echo "rust installed"
-  fi
-
-  # download git repos
-  if [[ $install_type ==  3 || $install_type == 7 ]]; then
-    echo "downloading git repositories"
-    mkdir -p ~/repos
-    for repo_url in "${ALL_REPOS[@]}"; do
-      repo_name="$(basename "$repo_url" .git)"
-      echo "installing $repo_name with $repo_url"
-      if [[ ! -d $repo_name ]]; then
-        git -C ~/repos clone "$https_prefix$repo_url"
-      else
-        echo "found $repo_name, pulling latest changes"
-        git -C ~/repos/$repo_name pull
-      fi
-    done
-    echo "repos downloaded"
-  fi
-
-  # stow config file symlinks
-  if [[ $install_type ==  4 || $install_type == 7 ]]; then
-    echo "stowing symlinks"
-    # stow --no-folding --adopt -vt ~ ~/dot/.dotfiles/*/
-    cd ~/dot/.dotfiles
-    stow --no-folding --adopt -vt ~ */
-    cd ~/dot/scripts
-    stow --no-folding --adopt -vt ~ */
-    cd ~
-    chsh -s $(which zsh)
-    echo "configs stowed"
-  fi
-
-  # installing neovim
-  if [[ $install_type ==  5 || $install_type == 7 ]]; then
-    echo "installing neovim"
-    if [[ -e /usr/local/bin/nvim ]]; then
-      echo "found neovim at /usr/local/bin/nvim"
-    fi
-    curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.appimage
-    chmod u+x nvim-linux-x86_64.appimage
-    sudo mkdir -p /usr/local/bin
-    sudo mv ./nvim-linux-x86_64.appimage /usr/local/bin/nvim
-    sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
-           https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-    echo "neovim installed to /usr/local/bin"
-    . $HOME/.bashrc
-    nvim --headless -c "PlugInstall" -c "qa"
-  fi
-
-  # checking for ssh key and git origins
-  if [[ $install_type == 6 || $install_type ==  7 ]]; then
-    echo "setting up ssh and git remote urls."
-    count=`ls ~/.ssh -1 *.pub 2>/dev/null | wc -l`
-    if [[ $count == 0 ]]; then
-      echo "no pub key found, generating new ssh keys"
-      ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519 -q -N ""
-    else
-      echo "found ssh key."
-    fi
-    echo "setting git config user to $git_name at $git_email"
-    git config --global user.email "samjdobesh@gmail.com"
-    git config --global user.name "samantha"
-    # only update personal remots
-    echo "updating personal repo remote urls"
-    for repo_url in "${PERSONAL_REPOS[@]}"; do
-      repo_name="$(basename "$repo_url" .git)"
-      echo "swapping $repo_name to ssh origin"
-      if [[ -d ~/repos/$repo_name ]]; then
-        git -C ~/repos/$repo_name remote set-url origin $ssh_prefix$repo_url
-      else
-        echo "couldn't find $repo_name"
-      fi
-    done
-    echo "remote origins set"
-    echo "ssh pub key :"
-    'cat' ~/.ssh/*.pub
-  fi
-
-  # exit and launch new shell
-  if [[ $install_type == 7 || $install_type ==  8 ]]; then
-    exec zsh
-  fi
-
+  case "$install_type" in
+    "1"  ) install_packages ;;
+    "2"  ) install_rust     ;;
+    "3"  ) install_haskell  ;;
+    "4"  ) install_nvim     ;;
+    "5"  ) download_repos   ;;
+    "6"  ) init_ssh         ;;
+    "7"  ) stow_configs     ;;
+    "8"  ) echo "[ installing full environment... ]"
+           install_packages
+           install_rust
+           install_haskell
+           install_nvim
+           download_repos
+           init_ssh
+           stow_configs
+           echo "[ full environment installed. ]"
+           ;;
+    [9q] ) clear; exit      ;;
+    *    ) error=1          ;;
+  esac
 done

@@ -104,7 +104,7 @@ for term in "${SEARCHES[@]}"; do
     echo ""
     for (( i=start; i < start+displaylen && i < filelen; i++ )); do
       bname="$(basename "${FILES[$i]}" .html)"
-      echo "$i > $bname"
+      echo "[$i] > $bname"
     done
     echo ""
     echo $bar
@@ -113,9 +113,9 @@ for term in "${SEARCHES[@]}"; do
     if (( term_i+1 < searchlen )); then
       echo "> (n)ext search [${SEARCHES[$term_i+1]}]"
     fi
-    echo "> (j/k) scroll"
-    echo "> (q)uit"
-    echo "> enter a file number to open"
+    echo ">  (j/k) scroll"
+    echo ">  (q)uit"
+    echo ">  enter a file number to open"
     echo $bar
 
     # read input

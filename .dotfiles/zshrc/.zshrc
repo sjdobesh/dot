@@ -15,24 +15,25 @@ bindkey "\e[B" history-beginning-search-forward
 
 export PATH=$PATH:~/.bin:~/.cargo/bin
 
-alias diff='diff --color=auto'
-alias ip='ip -c=auto'
-alias mv='mv -i'
-alias v='nvim'
-alias o='xdg-open'
-alias g='git'
+alias diff="diff --color=auto"
+alias ip="ip -c=auto"
+alias mv="mv -i"
+alias v="nvim"
+alias o="xdg-open"
+alias g="git"
 alias q="exit"
 alias :q="exit"
 alias wq="exit"
 alias :wq="exit"
-alias feh='feh -Zx -g 1920x1080 -B black --force-alias --auto-reload'
+alias feh="feh -Zx -g 1920x1080 -B black --force-alias --auto-reload"
+alias 80="echo --------------------------------------------------------------------------------"
 
 # if rust utils are available
 if hash bat 2>/dev/null; then
-  alias cat='bat'
+  alias cat="bat"
 fi
 if hash rg 2>/dev/null; then
-  alias grep='rg'
+  alias grep="rg"
 fi
 if hash eza 2>/dev/null; then
   alias l="eza -la -T --level 1"
@@ -41,3 +42,7 @@ if hash eza 2>/dev/null; then
 fi
 
 precmd () { print -Pn "\e]2;%-3~\a"; }
+
+
+
+[ -f "/home/s/.ghcup/env" ] && . "/home/s/.ghcup/env" # ghcup-env
