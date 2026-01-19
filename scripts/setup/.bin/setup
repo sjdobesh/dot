@@ -18,23 +18,6 @@ CORE=(
   "tar"  # extractor
 )
 
-# full util set
-FULL=(
-  "fzf"    # fuzzy finder
-  "feh"    # image viewer
-  "zsh"    # shell
-  "stow"   # symlink manager
-  "fuze"   # needed to run nvim app image
-  "figlet" # ascii art
-  "pkg-config"
-)
-
-# scripting languages
-SCRIPTING=(
-  "perl"
-  "python3"
-)
-
 # c development utilities
 CDEV=(
   "build-essential"
@@ -53,6 +36,13 @@ CLIB=(
   "libsdl3-ttf-dev"
 )
 
+# scripting languages
+SCRIPTING=(
+  "perl"
+  "python3"
+)
+
+# haskell library dependencies
 HASKELL_DEP=(
   "libffi-dev"
   "libffi8"
@@ -62,14 +52,25 @@ HASKELL_DEP=(
   "libtinfo6"
 )
 
+# full util set with dependencies
+FULL=(
+  "fzf"    # fuzzy finder
+  "feh"    # image viewer
+  "zsh"    # shell
+  "stow"   # symlink manager
+  "fuse"   # needed to run nvim app image
+  "figlet" # ascii art
+  "pkg-config"
+)
+
 # all apt packages
 PACKAGES=(
   "${CORE[@]}",
-  "${FULL[@]}",
-  "${SCRIPTING[@]}",
   "${CDEV[@]}",
-  "${HASKELL_DEP[@]}"
   "${CLIB[@]}"
+  "${SCRIPTING[@]}",
+  "${HASKELL_DEP[@]}"
+  "${FULL[@]}",
 )
 
 
@@ -77,14 +78,13 @@ PACKAGES=(
 PERSONAL_REPOS=(
   "sjdobesh/pngz.git"
   "sjdobesh/pxl.git"
-  "sjdobesh/sdl_pxl.git"
+  "sjdobesh/sdlwin.git"
 )
+
 
 # mine but should be installed at base level
 DOT_REPO=("sjdobesh/dot.git")
 
-# full list
-ALL_REPOS=("${PERSONAL_REPOS[@]}" "${PUBLIC_REPOS[@]}")
 
 # public git repositories
 PUBLIC_REPOS=(
@@ -103,6 +103,13 @@ CRATES=(
   "--locked tree-sitter-cli"
 )
 
+ERROR_LOG=()
+
+log_errors () {
+  if [[ $? != 0 ]]; then
+    ERROR_LOG+=("$1")
+  fi
+}
 # install #---------------------------------------------------------------------
 
 # install all apt packages and update
@@ -114,6 +121,7 @@ install_packages() {
     echo "installing $pkg..."
     if dpkg -s "$pkg" 2>&1 | grep "not installed" > /dev/null; then
       sudo apt-get install -y "$pkg"
+      log_errors "error installing apt package [$pkg]"
     else
       echo "$pkg already installed"
     fi
@@ -134,6 +142,7 @@ install_rust() {
   echo ""
   echo "[ installing rust... ]"
   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+  log_errors "error installing rust" 
   export PATH=$PATH:$HOME/.cargo/bin
   rustup self update
   rustup update
@@ -142,7 +151,8 @@ install_rust() {
   echo "[ installing crates... ]"
   for crate in "${CRATES[@]}"; do
     echo "installing $crate..."
-    cargo install "$crate"
+    cargo install $crate
+    log_errors "error installing rust crate [$crate]" 
   done
   echo "[ crates installed ]"
   echo ""
@@ -157,6 +167,7 @@ install_haskell() {
     BOOTSTRAP_HASKELL_INSTALL_HLS=1 \
     BOOTSTRAP_HASKELL_ADJUST_BASHRC=P \
     sh
+  log_errors "error installing haskell" 
 }
 
 # download personal and external github repos
@@ -167,8 +178,9 @@ download_repos() {
   for repo_url in "${ALL_REPOS[@]}"; do
     repo_name="$(basename "$repo_url" .git)"
     echo "installing $repo_name with $repo_url ."
-    if [[ ! -d $repo_name ]]; then
+    if [[ ! -d repos/$repo_name ]]; then
       git -C ~/repos clone "$https_prefix$repo_url"
+      log_errors "error downloading repository $repo_name" 
     else
       echo "found $repo_name, pulling latest changes..."
       git -C ~/repos/$repo_name pull
@@ -185,9 +197,11 @@ download_docs() {
   cd ~
   mkdir docs
   curl -LO https://wiki.libsdl.org/static_files/offline/sdlwiki.zip
+  log_errors "error downloading documentation" 
   mv sdlwiki.zip docs
   mv docs
   unzip sdlwiki.zip
+  log_errors "error extracting documentation" 
   rm sdlwiki.zip
   cd ~
   echo "[ documentation downloaded ]"
@@ -201,9 +215,11 @@ stow_configs() {
   cd ~/dot/.dotfiles
   echo "dotfiles..."
   stow --no-folding --adopt -vt ~ */
+  log_errors "error stowing configs" 
   cd ~/dot/scripts
   echo "scripts..."
   stow --no-folding --adopt -vt ~ */
+  log_errors "error stowing scripts" 
   cd ~
   chsh -s $(which zsh)
   echo "[ configs stowed ]"
@@ -215,16 +231,16 @@ install_nvim() {
   echo ""
   echo "[ installing neovim... ]"
   if [[ -e /usr/local/bin/nvim ]]; then
-    echo "found neovim at /usr/local/bin/nvim."
+    echo "[ found neovim at /usr/local/bin/nvim ]"
+    return
   fi
   curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.appimage
+  log_errors "error downloading nvim" 
   chmod u+x nvim-linux-x86_64.appimage
   sudo mkdir -p /usr/local/bin
   sudo mv ./nvim-linux-x86_64.appimage /usr/local/bin/nvim
-  sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
-         https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
   . $HOME/.bashrc
-  nvim --headless -c "PlugInstall" -c "qa"
+  # nvim --headless -c "Lazy" -c "qa"
   echo "[ neovim installed to /usr/local/bin ]"
   echo ""
 }
@@ -237,6 +253,7 @@ init_ssh() {
   if (( count == 0 )); then
     echo "no pub key found, generating new ssh key..."
     ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519 -q -N ""
+    log_errors "error in ssh keygen" 
   else
     echo "found existing ssh key."
   fi
@@ -250,6 +267,7 @@ init_ssh() {
     echo "swapping $repo_name to ssh origin..."
     if [[ -d ~/repos/$repo_name ]]; then
       git -C ~/repos/$repo_name remote set-url origin $ssh_prefix$repo_url
+      log_errors "error updating $repo_name origin to $ssh_prefix$repo_url" 
     else
       echo "couldn't find $repo_name."
     fi
@@ -260,6 +278,7 @@ init_ssh() {
     echo "swapping $repo_name to ssh origin..."
     if [[ -d ~/$repo_name ]]; then
       git -C ~/$repo_name remote set-url origin $ssh_prefix$repo_url
+      log_errors "error updating $repo_name origin to $ssh_prefix$repo_url" 
     else
       echo "couldn't find $repo_name."
     fi
@@ -295,6 +314,13 @@ do
   echo "|     [0] exit                          |"
   echo "|                                       |"
   echo "+---------------------------------------+"
+  if [[ "${#ERROR_LOG[@]}" -gt 0 ]]; then
+    for err in "${ERROR_LOG[@]}"; do
+      echo "> $err"
+    done
+    echo "+---------------------------------------+"
+    ERROR_LOG=() # reset list
+  fi
   if (( error == 1 )); then
     error=0
     read -p "[invalid selection]:" install_type
@@ -317,9 +343,11 @@ do
            install_haskell
            install_nvim
            download_repos
+           download_docs
            init_ssh
            stow_configs
            echo "[ full environment installed. ]"
+	   clear; exit
            ;;
     [0q] ) clear; exit      ;;
     *    ) error=1          ;;
