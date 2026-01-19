@@ -80,6 +80,12 @@ PERSONAL_REPOS=(
   "sjdobesh/sdl_pxl.git"
 )
 
+# mine but should be installed at base level
+DOT_REPO=("sjdobesh/dot.git")
+
+# full list
+ALL_REPOS=("${PERSONAL_REPOS[@]}" "${PUBLIC_REPOS[@]}")
+
 # public git repositories
 PUBLIC_REPOS=(
   "nothings/stb.git"
@@ -228,6 +234,16 @@ init_ssh() {
     echo "swapping $repo_name to ssh origin..."
     if [[ -d ~/repos/$repo_name ]]; then
       git -C ~/repos/$repo_name remote set-url origin $ssh_prefix$repo_url
+    else
+      echo "couldn't find $repo_name."
+    fi
+  done
+  # also do dot repo
+  for repo_url in "${DOT_REPO[@]}"; do
+    repo_name="$(basename "$repo_url" .git)"
+    echo "swapping $repo_name to ssh origin..."
+    if [[ -d ~/$repo_name ]]; then
+      git -C ~/$repo_name remote set-url origin $ssh_prefix$repo_url
     else
       echo "couldn't find $repo_name."
     fi
