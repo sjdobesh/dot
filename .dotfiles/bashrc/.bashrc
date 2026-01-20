@@ -112,3 +112,6 @@ if ! shopt -oq posix; then
   fi
 fi
 . "$HOME/.cargo/env"
+
+
+[ -f "/home/s/.ghcup/env" ] && . "/home/s/.ghcup/env" # ghcup-env

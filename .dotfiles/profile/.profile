@@ -28,5 +28,4 @@ fi
 . "$HOME/.cargo/env"
 
 
-
 [ -f "/home/s/.ghcup/env" ] && . "/home/s/.ghcup/env" # ghcup-env

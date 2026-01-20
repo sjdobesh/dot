@@ -199,7 +199,7 @@ download_docs() {
   curl -LO https://wiki.libsdl.org/static_files/offline/sdlwiki.zip
   log_errors "error downloading documentation" 
   mv sdlwiki.zip docs
-  mv docs
+  cd docs
   unzip sdlwiki.zip
   log_errors "error extracting documentation" 
   rm sdlwiki.zip
