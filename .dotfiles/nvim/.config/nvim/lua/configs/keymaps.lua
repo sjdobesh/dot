@@ -34,8 +34,20 @@ vim.keymap.set("n", "<C-t>", ":term<CR>:set nonumber<CR>")
 vim.keymap.set("t", "<C-q>", "<C-\\><C-n>")
 
 -- plugins
+
+-- toggles
 vim.keymap.set("n", "<leader>sw", ":StripWhitespace<CR>")
 vim.keymap.set("n", "<leader>d",  ":Dashboard<CR>:DisableWhitespace<CR>")
 vim.keymap.set("n", "<leader>o",  ":OutlineToggle<CR>")
 vim.keymap.set("n", "<leader>f",  ":Oil<CR>")
--- vim.keymap.set("n", "<leader>u",  ":UndotreeToggle<CR>")
+vim.keymap.set("n", "<leader>u",  ":UndotreeToggle<CR>")
+
+-- fuzzy finding keymaps
+local tele_builtin = require("telescope.builtin")
+vim.keymap.set({"v", "n"}, "<leader>fs", function() tele_builtin.grep_string({cwd = "~"}) end, {})
+vim.keymap.set("n", "<leader>fa", tele_builtin.find_files, {})
+vim.keymap.set("n", "<leader>ff", tele_builtin.git_files, {})
+vim.keymap.set("n", "<leader>fg", tele_builtin.live_grep, {})
+vim.keymap.set("n", "<leader>fb", tele_builtin.buffers, {})
+vim.keymap.set("n", "<leader>fh", tele_builtin.help_tags, {})
+

@@ -16,6 +16,8 @@ CORE=(
   "wget" # cli file downloader
   "curl" # cli url interactions: used to download nvim and rust
   "tar"  # extractor
+  "zip"  # .zip extractor/compressor
+  "npm"  # node bs (dependency for mason lsps in nvim)
 )
 
 # c development utilities
