@@ -5,7 +5,7 @@ return {
     priority = 1000,
     config = function()
       vim.g.sonokai_enable_italic = true
-      vim.cmd.colorscheme("sonokai")
+      --vim.cmd.colorscheme("sonokai")
     end
   },
   {
@@ -21,6 +21,22 @@ return {
   {
     "AlexvZyl/nordic.nvim",
     lazy = false,
+    priority = 1000,
+    config = function()
+      vim.g.sonokai_enable_italic = true
+      vim.cmd.colorscheme("nordic")
+    end
+  },
+  {
+    "LuxVim/lux.nvim",
+    priority = 1000,
+  },
+  {
+    "rebelot/kanagawa.nvim",
+    priority = 1000,
+  },
+  {
+    "rafi/awesome-vim-colorschemes",
     priority = 1000,
   },
 }

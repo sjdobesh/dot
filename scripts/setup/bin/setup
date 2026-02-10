@@ -1,0 +1,1345 @@
+#!/bin/bash
+# setup script #------------------------------------------------------------(80)
+
+# personal info, packages, and repos #------------------------------------------
+
+git_name="samantha"
+git_email="samjdobesh@gmail.com"
+https_prefix="https://github.com/"
+ssh_prefix="git@github.com:"
+
+# minimum cli utils (what do you do on linux without these?)
+CORE=(
+  "git"
+  "ssh"
+  "vim"
+  "curl"
+)
+
+# networking tools
+NETWORKING=(
+  "iproute2"
+  "net-tools"
+)
+
+# basic c development stuff
+CDEV=(
+  "build-essential"
+  "valgrind"
+  "gdb"
+  "lldb"
+  "bear"
+  "cmake"
+  "clang"
+  "clang-tools"
+)
+
+# my most commonly used c libraries
+CXTRA=(
+  "libclang-dev"
+  "libncurses-dev"
+  "libpng-dev"
+  "libsdl3-dev"
+  "libsdl3-image-dev"
+  "libsdl3-ttf-dev"
+)
+
+
+# haskell ghc dependencies
+HASKELL_DEP=(
+  "build-essential"
+  "curl"
+  "libffi-dev"
+  "libffi8"
+  "libgmp-dev"
+  "libgmp10"
+  "libncurses-dev"
+  "libncurses6"
+  "libtinfo6"
+  "pkg-config"
+)
+
+# neovim build dependencies
+NVIM_DEP=(
+  "build-essential"
+  "cmake"
+  "curl"
+  "gettext"
+  "git"
+  "ninja-build"
+  "liblua5.1-0-dev" # <-- nvim plugin dependency
+)
+
+# other language packages
+PROG_LANGS=(
+  "default-jdk" # java
+  "perl"        # perl <3
+  "python3"     # /\/\/\:<- (snek)
+  "python3-pip"
+)
+
+# everything else
+FULL=(
+  "lsof"        # list open files
+  "fdisk"       # format disk
+  "fd-find"     # 'find' util
+  "feh"         # image viewer
+  "figlet"      # ascii art
+  "fuse"        # needed to run nvim app image
+  "fzf"         # fuzzy finder
+  "gettext"     # gnu text utilities
+  "ninja-build" # nvim dep
+  "moreutils"   # extra bash tjools
+  "tcc"         # tiny c compiler
+  "pkg-config"  #pkg-config compiler options
+  "rsync"       # recursive directory syncer
+  "stow"        # symlink manager
+  "wget"        # gnu downloader
+  "zip"         # zip compressor (comes with unzip)
+  "zsh"         # shell
+)
+
+# all apt package groups
+ALL_PACKAGES=(
+  "${CORE[@]}"
+  "${NETOWRKING[@]}"
+  "${CDEV[@]}"
+  "${CXTRA[@]}"
+  "${HASKELL_DEP[@]}"
+  "${NVIM_DEP[@]}"
+  "${PROG_LANGS[@]}"
+  "${FULL[@]}"
+)
+
+
+# get unique package entries an array
+#
+# mine but should be installed at base level
+DOT_REPO=("sjdobesh/dot.git")
+
+# personal project repositories
+PRIVATE_REPOS=(
+  "sjdobesh/pngz.git"
+  "sjdobesh/pxl.git"
+  "sjdobesh/sdlwin.git"
+)
+
+# public git repositories
+PUBLIC_REPOS=(
+  "nothings/stb.git"
+  "attractivechaos/klib.git"
+  "neovim/neovim"
+)
+
+# rust utils
+CRATES=(
+  "eza"
+  "bat"
+  "tealdeer"
+  "ripgrep"
+  "--locked tree-sitter-cli"
+)
+
+# global error log #-----------------------------------------------------------
+
+ERROR_LOG=()
+
+log_errors () {
+  if [[ $? != 0 ]]; then
+    ERROR_LOG+=("$1")
+  fi
+}
+
+print_error_log() {
+  if [[ "${#ERROR_LOG[@]}" -gt 0 ]]; then
+    echo
+    echo "+--------------[ ERROR ]----------------+"
+    for err in "${ERROR_LOG[@]}"; do
+      echo "> $err"
+    done
+    echo "+---------------------------------------+"
+    echo
+    ERROR_LOG=() # reset list
+  fi
+}
+
+# install #---------------------------------------------------------------------
+# install all apt packages and update
+# DEPRECATED!!!
+install_packages() {
+  echo "[ installing apt packages... ]"
+
+  sudo apt-get update -y
+  for pkg in "${PACKAGES[@]}"; do
+    echo "installing $pkg..."
+    # do this in package order
+    if dpkg -s "$pkg" 2>&1 | grep "not installed" > /dev/null; then
+      sudo apt-get install -y "$pkg"
+      log_errors "error installing apt package [$pkg]"
+    else
+      echo "$pkg already installed"
+    fi
+  done
+
+  echo "[ updating system... ]"
+
+  sudo apt-get update -y
+  sudo apt-get upgrade -y
+  sudo apt-get autoclean -y
+  sudo apt-get autoremove -y
+
+  echo "[ system up to date ]"
+}
+
+# DEPRECATED
+uninstall_packages() {
+  echo
+  echo "[ uninstalling apt packages... ]"
+
+  for pkg in "${PACKAGES[@]}"; do
+    echo "installing $pkg..."
+    if dpkg -s "$pkg" 2>&1 | grep "not installed" > /dev/null; then
+      echo "$pkg not installed, nothing to remove..."
+    else
+      sudo apt-get purge -y "$pkg"
+      log_errors "error purging apt package [$pkg]"
+    fi
+  done
+  sudo apt-get autoclean -y
+  sudo apt-get autoremove -y
+
+  echo "[ uninstalled apt packages ]"
+  echo
+}
+
+# install neovim from source
+install_nvim() {
+  echo
+  echo "[ installing neovim... ]"
+
+  # check if source is available
+  if [[ ! -d ~/repos/neovim ]]; then
+    echo "couldn't find repository, downloading now"
+    mkdir -p ~/repos
+    cd ~/repos
+    git clone https://github.com/neovim/neovim
+  fi
+
+  # build from source and install to ~/bin
+  cd ~/repos/neovim
+  make CMAKE_BUILD_TYPE=Release CMAKE_EXTRA_FLAGS="-DCMAKE_INSTALL_PREFIX=$HOME/bin/neovim"
+  sudo make install
+  export PATH="$HOME/bin/neovim/bin:$PATH"
+  cd ~
+
+  echo "[ installed neovim ]"
+  echo
+}
+
+uninstall_nvim() {
+  echo
+  echo "[ uninstalling neovim... ]"
+
+  if [[ ! -d ~/repos/neovim ]]; then
+    log_errors "error couldn't find neovim to uninstall"
+    echo "[ neovim not installed ]"
+    return
+  fi
+  cd ~/repos/neovim
+  sudo cmake --build build/ --target uninstall
+  log_errors "error during cmake build"
+  cd ~
+
+  echo "[ uninstalled neovim ]"
+  echo
+}
+
+# install rust (rustup + crates)
+install_rust() {
+  echo
+  echo "[ installing rust... ]"
+
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+  log_errors "error installing rust"
+  export PATH=$PATH:$HOME/.cargo/bin
+  rustup self update
+  rustup update
+  log_errors "error during rust update"
+  rustup toolchain install nightly
+  log_errors "error during rust nightly install"
+
+  echo "[ rust installed ]"
+  sleep 1
+  echo
+}
+
+install_crates() {
+  echo
+  echo "[ installing crates... ]"
+
+  for crate in "${CRATES[@]}"; do
+    echo "installing $crate..."
+    cargo install $crate
+    log_errors "error installing rust crate [$crate]"
+  done
+
+  echo "[ crates installed ]"
+  sleep 1
+  echo
+}
+
+uninstall_crates() {
+  echo
+  echo "[ uninstalling crates... ]"
+
+  for crate in "${CRATES[@]}"; do
+    echo "uninstalling $crate..."
+    cargo uninstall $crate
+    log_errors "error uninstalling rust crate [ $crate ]"
+  done
+
+  echo "[ crates uninstalled ]"
+  sleep 1
+  echo
+}
+
+uninstall_rust() {
+  echo "[ uninstalling rust... ]"
+  rustup self uninstall
+  log_errors "error uninstalling rust"
+  echo "[ uninstalled rust ]"
+}
+
+install_haskell() {
+  echo
+  echo "[ installing haskell... ]"
+  curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | \
+    BOOTSTRAP_HASKELL_NONINTERACTIVE=1 \
+    BOOTSTRAP_HASKELL_GHC_VERSION=latest \
+    BOOTSTRAP_HASKELL_CABAL_VERSION=latest \
+    BOOTSTRAP_HASKELL_INSTALL_STACK=1 \
+    BOOTSTRAP_HASKELL_INSTALL_HLS=1 \
+    BOOTSTRAP_HASKELL_ADJUST_BASHRC=P \
+    sh
+  log_errors "error installing haskell"
+  echo "[ installed haskell ]"
+  echo
+}
+uninstall_haskell() {
+  echo
+  echo "[ uninstalling haskell... ]"
+
+  ghcup nuke
+  log_errors "error nuking haskell"
+  rm -rf ~/.ghcup ~/.cabal ~/.stack
+
+  echo "[ uninstalled haskell ]"
+  echo
+}
+
+# helper function
+download_repo_set() {
+  local -n arr_ref="$1"
+  for repo_url in "${arr_ref[@]}"; do
+    repo_name="$(basename "$repo_url" .git)"
+    echo "installing $repo_name with $repo_url to $2."
+    if [[ ! -d ~/$2/$repo_name ]]; then
+      git -C ~/$2 clone "$https_prefix$repo_url"
+      log_errors "error downloading repository $repo_name to $2"
+    else
+      echo "found $repo_name, pulling latest changes..."
+      git -C ~/$2/$repo_name pull
+      log_errors "error pulling $repo_name"
+    fi
+  done
+}
+
+# download personal and external github repos
+download_private_repos() {
+  echo
+  echo "[ downloading private git repositories into ~/projects... ]"
+
+  mkdir -p ~/projects
+  download_repo_set PERSONAL_REPOS projects
+
+  echo "[ repositories downloaded ]"
+  echo
+}
+
+# download personal and external github repos
+download_public_repos() {
+  echo
+  echo "[ downloading public git repositories into ~/repos... ]"
+
+  mkdir -p ~/repos
+  download_repo_set PUBLIC_REPOS repos
+
+  echo "[ repositories downloaded ]"
+  echo
+}
+
+remove_public_repos() {
+  echo
+  echo "[ removing public git repositories in ~/public... ]"
+
+  for repo in ${PUBLIC_REPOS[@]}; do
+    echo "removing $repo..."
+    rm -rf ~/repos/$repo
+    echo "$repo removed"
+  done
+
+  echo "[ removed public git repositories ]"
+  echo
+}
+
+remove_private_repos() {
+  # should check for unstaged commits as well
+  echo
+  echo "[ removing private git repositories in ~/projects... ]"
+
+  for repo in ${PRIVATE_REPOS[@]}; do
+    echo "removing $repo..."
+    cd ~/projects/"$repo"
+    gstatus=`git status -s | wc -l`
+    if (( gstatus )); then
+      echo "error, found git conflicts in $repo, please resolve before deleting"
+      break
+    else
+      echo "removing $repo"
+      read -p "[ press any key to continue ] > "
+      rm -rf ~/projects/$repo
+      echo "$repo removed"
+    fi
+  done
+
+  echo "[ removed private git repositories ]"
+  echo
+}
+
+# download documentation sources (just sdl3 for now)
+download_docs() {
+  echo
+  echo "[ downloading documentation... ]"
+
+  cd ~
+  mkdir ~/docs
+  curl -LO https://wiki.libsdl.org/static_files/offline/sdlwiki.zip
+  log_errors "error downloading documentation"
+  mv sdlwiki.zip ~/docs
+  cd ~/docs
+  unzip sdlwiki.zip
+  log_errors "error extracting documentation"
+  rm sdlwiki.zip
+  cd ~
+
+  echo "[ documentation downloaded ]"
+  echo
+}
+
+remove_docs() {
+  echo
+  echo "[ removing documentation... ]"
+  rm -rf ~/docs
+  echo "[ removed documentation ]"
+  echo
+}
+
+# use the stow util to create managed symlinks for configs and scripts
+stow_configs() {
+  echo
+  echo "[ stowing symlinks... ]"
+
+  echo "dotfiles..."
+  cd ~/dot/.dotfiles
+  stow --no-folding --adopt -vt ~ */
+  log_errors "error stowing configs"
+
+  echo "scripts..."
+  cd ~/dot/scripts
+  stow --no-folding --adopt -vt ~ */
+  log_errors "error stowing scripts"
+  cd ~
+
+  # change shells now that there is a .zshrc
+  chsh -s $(which zsh)
+
+  echo "[ symlinks stowed ]"
+  echo
+}
+
+unstow_configs() {
+  echo
+  echo "[ unstowing symlinks... ]"
+
+  echo "dotfiles..."
+  cd ~/dot/.dotfiles
+  stow -D --no-folding --adopt -vt ~ */
+  log_errors "error unstowing configs"
+
+  echo "scripts..."
+  cd ~/dot/scripts
+  stow -D --no-folding --adopt -vt ~ */
+  log_errors "error unstowing scripts"
+  cd ~
+
+  echo "[ symlinks unstowed ]"
+  echo
+}
+
+# init ssh keys and github ssh remotes for personal repos
+init_ssh() {
+  echo
+  echo "[ setting up ssh...]"
+
+  # make sure public ssh key is available
+  count=`ls ~/.ssh -1 *.pub 2>/dev/null | wc -l`
+  if (( count == 0 )); then
+    echo "no pub key found, generating new ssh key..."
+    ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519 -q -N ""
+    log_errors "error in ssh keygen"
+  else
+    echo "found existing ssh key."
+  fi
+
+  echo "setting git config user to $git_name at $git_email."
+  git config --global user.email "$git_email"
+  git config --global user.name "$git_name"
+
+  # only update personal remotes, including dot repo
+  echo "updating repo remote urls for person repos..."
+  UPDATEABLE_REPOS=("${PRIVATE_REPOS[@]}" "${DOT_REPO[@]}")
+  for repo_url in "${UPDATEABLE_REPOS[@]}"; do
+    repo_name="$(basename "$repo_url" .git)"
+    echo "swapping $repo_name to ssh origin..."
+    if [[ -d ~/repos/$repo_name ]]; then
+      git -C ~/repos/$repo_name remote set-url origin $ssh_prefix$repo_url
+      log_errors "error updating $repo_name origin to $ssh_prefix$repo_url"
+    else
+      echo "couldn't find $repo_name."
+    fi
+  done
+  echo "remote origins set."
+
+  echo "ssh pub key :"
+  'cat' ~/.ssh/*.pub
+
+  echo "[ ssh initialized ]"
+  echo
+}
+
+# full installations -----------------------------------------------------------
+
+install_all() {
+  echo
+  echo "[ installing full environment... ]"
+
+  install_packages
+  install_rust
+  install_haskell
+  install_nvim
+  download_repos
+  download_docs
+  init_ssh
+  stow_configs
+
+  echo "[ full environment installed. ]"
+  echo
+  print_error_log
+	exit
+}
+
+uninstall_all() {
+  echo
+  echo "[ uninstalling full environment... ]"
+
+  uninstall_packages
+  uninstall_rust
+  uninstall_haskell
+  uninstall_nvim
+  remove_repos
+  remove_docs
+  unstow_configs
+
+  echo "[ full environment uninstalled. ]"
+  echo
+  print_error_log
+	exit
+}
+
+# menu functions #--------------------------------------------------------------
+
+# apt menu arrays
+declare -a APT_ORDERED_KEYS=(
+  "CORE"
+  "NETWORKING"
+  "CDEV"
+  "CXTRA"
+  "NVIM_DEP"
+  "HASKELL_DEP"
+  "PROG_LANGS"
+  "FULL"
+  "ALL"
+)
+declare -A APT_INSTALL_SELECTION=(
+         ["CORE"]=0
+   ["NETWORKING"]=0
+         ["CDEV"]=0
+        ["CXTRA"]=0
+  ["HASKELL_DEP"]=0
+     ["NVIM_DEP"]=0
+   ["PROG_LANGS"]=0
+         ["FULL"]=0
+          ["ALL"]=0
+)
+declare -A APT_FORMATABLE_MENU=(
+         ["CORE"]="|       1. xxx core                     |"
+   ["NETWORKING"]="|       2. xxx networking               |"
+         ["CDEV"]="|       3. xxx c dev                    |"
+        ["CXTRA"]="|       4. xxx c xtras                  |"
+     ["NVIM_DEP"]="|       5. xxx neovim dependecies       |"
+  ["HASKELL_DEP"]="|       6. xxx haskell dependecies      |"
+   ["PROG_LANGS"]="|       7. xxx additional languages     |"
+         ["FULL"]="|       8. xxx full                     |"
+          ["ALL"]="|       9. xxx all                      |"
+)
+
+declare -A APT_DESCRIPTIONS=(
+
+["CORE"]="\
++-[ CORE ]------------------------------+\n\
+| barebones utilities for linux, idk    |\n\
+| what you could even do without these. |\n\
++---------------------------------------+\n\
+| includes...                           |\n\
+|                                       |\n\
+|   - [ curl ] URL interactions         |\n\
+|                                       |\n\
+|   - [ git ] version control           |\n\
+|                                       |\n\
+|   - [ ssh ] remote shell connection   |\n\
+|                                       |\n\
+|   - [ vim ] default text editor       |\n\
+|                                       |\n\
++---------------------------------------+\n"
+
+["NETWORKING"]="\
++-[ NETWORKING ]------------------------+\n\
+| basic linux networking admin tools    |\n\
++---------------------------------------+\n\
+| includes...                           |\n\
+|                                       |\n\
+|   - [ net-tools ]                     |\n\
+|     legacy tools like ifconfig, route |\n\
+|     netstat, etc.                     |\n\
+|                                       |\n\
+|   - [ iproute2 ]                      |\n\
+|     modern tools like ip, ss, iw, tc, |\n\
+|     supports netlink socket protocol, |\n\
+|     VLANs, policy routing, etc.       |\n\
+|                                       |\n\
++---------------------------------------+\n"
+
+["CDEV"]="\
++-[ C-DEV ]-----------------------------+\n\
+| basic c development tools             |\n\
++---------------------------------------+\n\
+| includes...                           |\n\
+|                                       |\n\
+|   - [ build-essential ]               |\n\
+|     contains all essential c dev      |\n\
+|     tools for unix like gcc/g++,      |\n\
+|     make, and libc                    |\n\
+|                                       |\n\
+|   - [ gdb ] gnu c debugger            |\n\
+|                                       |\n\
+|   - [ cmake ] build system            |\n\
+|                                       |\n\
+|   - [ bear ]                          |\n\
+|     compilation database generator    |\n\
+|                                       |\n\
+|   - [ clang ] llvm based compiler     |\n\
+|                                       |\n\
+|   - [ clang-tools ] llvm utils        |\n\
+|                                       |\n\
+|   - [ lldb ] llvm debugger            |\n\
+|                                       |\n\
+|   - [ valgrind ] memory analyzer      |\n\
+|                                       |\n\
++---------------------------------------+\n"
+
+
+["CXTRA"]="\
++-[ C-XTRA ]----------------------------+\n\
+| commonly used c dev libraries         |\n\
++---------------------------------------+\n\
+| includes...                           |\n\
+|                                       |\n\
+|   - [ libclang-dev ] clang            |\n\
+|                                       |\n\
+|   - [ libncurses-dev ] tui lib        |\n\
+|                                       |\n\
+|   - [ libpng-dev ] png format lib     |\n\
+|                                       |\n\
+|   - [ libsdl3-dev ] SDL3 graphics lib |\n\
+|                                       |\n\
+|   - [ libsdl3-image-dev ]             |\n\
+|     SDL3 img lib for loading images   |\n\
+|     to SDL surfaces or textures       |\n\
+|                                       |\n\
+|   - [ libsdl3-ttf-dev ]               |\n\
+|     SDL3 ttf lib for loading fonts    |\n\
+|                                       |\n\
++---------------------------------------+\n"
+
+
+["NVIM_DEP"]="\
++-[ NEOVIM DEPENDENCIES ]---------------+\n\
+| neovim dependencies                   |\n\
+| https://neovim.io/doc/build           |\n\
++---------------------------------------+\n\
+| includes...                           |\n\
+|                                       |\n\
+|   - [ build-essential ] c build tools |\n\
+|                                       |\n\
+|   - [ cmake ] c build system          |\n\
+|                                       |\n\
+|   - [ curl ] url commands             |\n\
+|                                       |\n\
+|   - [ gettext ] text manipulation     |\n\
+|                                       |\n\
+|   - [ git ] version control           |\n\
+|                                       |\n\
+|   - [ liblua5.1-0-dev ] plugin dep    |\n\
+|                                       |\n\
+|   - [ ninja-build ] build system      |\n\
+|                                       |\n\
++---------------------------------------+\n"
+
+
+["HASKELL_DEP"]="\
++-[ HASKELL DEPENDENCIES ]--------------+\n\
+| haskell dependencies                  |\n\
+| https://www.haskell.org/ghcup/install |\n\
++---------------------------------------+\n\
+| includes...                           |\n\
+|                                       |\n\
+|   - [ build-essential ] c build tools |\n\
+|                                       |\n\
+|   - [ curl ] url commands             |\n\
+|                                       |\n\
+|   - [ libffi-dev & libffi8 ]          |\n\
+|     foreign function interface        |\n\
+|     allows binding between compiled   |\n\
+|     and interpreted languages         |\n\
+|                                       |\n\
+|   - [ libgmp-dev & libgmp10 ]         |\n\
+|     gnu multiple precision math lib   |\n\
+|                                       |\n\
+|   - [ libncurses-dev & libncurses6 ]  |\n\
+|     ncurses tui lib                   |\n\
+|                                       |\n\
+|   - [ libtinfo6 ]                     |\n\
+|     ncurses character conversion dep  |\n\
+|                                       |\n\
+|   - [ pkg-config ]                    |\n\
+|     cross platform compiler flag tool |\n\
+|                                       |\n\
++---------------------------------------+\n"
+
+
+["PROG_LANGS"]="\
++-[ PROGRAMMING LANGUAGES ]-------------+\n\
+| additional programming languages      |\n\
++---------------------------------------+\n\
+| includes...                           |\n\
+|                                       |\n\
+|   - [ default-jdk ] java development  |\n\
+|                                       |\n\
+|   - [ perl ] just another perl hacker |\n\
+|                                       |\n\
+|   - [ python3 ] snek /\\/\\/:<~         |\n\
+|                                       |\n\
+|   - [ python3-pip ] package manager   |\n|
+|                                       |\n\
++---------------------------------------+\n"
+
+
+["FULL"]="\
++-[ EXTENDED PACKAGES ]-----------------+\n\
+| all other packages                    |\n\
++---------------------------------------+\n\
+| includes...                           |\n\
+|                                       |\n\
+|   - [ lsof ]      list open files     |\n\
+|                                       |\n\
+|   - [ fdisk ]     format disk         |\n\
+|                                       |\n\
+|   - [ fd-find ]   better find util    |\n\
+|                                       |\n\
+|   - [ feh ]       image viewer        |\n\
+|                                       |\n\
+|   - [ figlet ]    ascii art           |\n\
+|                                       |\n\
+|   - [ fuse ]      run app images      |\n\
+|                                       |\n\
+|   - [ fzf ]       fuzzy finder        |\n\
+|                                       |\n\
+|   - [ moreutils ] extra bash tools    |\n\
+|                                       |\n\
+|   - [ tcc ]       tiny c compiler     |\n\
+|                                       |\n\
+|   - [ rsync ]     directory sync      |\n\
+|                                       |\n\
+|   - [ stow ]      symlink manager     |\n\
+|                                       |\n\
+|   - [ wget ]      gnu downloader      |\n\
+|                                       |\n\
+|   - [ zip ]       file compressor     |\n\
+|                                       |\n\
+|   - [ zsh ]       shell               |\n\
+|                                       |\n\
++---------------------------------------+\n"
+
+)
+
+# rust menu arrays
+declare -a RUST_ORDERED_KEYS=(
+  "RUSTUP"
+  "CRATES"
+)
+declare -A RUST_INSTALL_SELECTION=(
+  ["RUSTUP"]=0
+  ["CRATES"]=0
+)
+declare -A RUST_FORMATABLE_MENU=(
+  ["RUSTUP"]="|             1. xxx rust               |"
+  ["CRATES"]="|             2. xxx crates             |"
+)
+
+# repos
+declare -a REPO_ORDERED_KEYS=(
+  "PRIVATE"
+  "PUBLIC"
+)
+declare -A REPO_INSTALL_SELECTION=(
+  ["PRIVATE"]=0
+   ["PUBLIC"]=0
+)
+declare -A REPO_FORMATABLE_MENU=(
+  ["PRIVATE"]="|             1. xxx private            |"
+   ["PUBLIC"]="|             2. xxx public             |"
+)
+
+# FORMAT MENUS #----------------------------------------------------------------
+
+# pass $1 as line to format, $2 is the keyed value, selected or not
+# inserts check mark
+format_menu_checkbox() {
+  local line="$1"
+  local val=$2
+  if (( val == 1 )) ; then
+    line="${line/xxx/[x]}"
+  else
+    line="${line/xxx/[ ]}"
+  fi
+  echo "$line"
+}
+
+format_apt_menu() {
+  for key in "${APT_ORDERED_KEYS[@]}"; do
+    format_menu_checkbox "${APT_FORMATABLE_MENU[$key]}" "${APT_INSTALL_SELECTION[$key]}"
+  done
+}
+
+format_rust_menu() {
+  for key in "${RUST_ORDERED_KEYS[@]}"; do
+    format_menu_checkbox "${RUST_FORMATABLE_MENU[$key]}" "${RUST_INSTALL_SELECTION[$key]}"
+  done
+}
+
+format_repo_menu() {
+  for key in "${REPO_ORDERED_KEYS[@]}"; do
+    format_menu_checkbox "${REPO_FORMATABLE_MENU[$key]}" "${REPO_INSTALL_SELECTION[$key]}"
+  done
+}
+
+
+# PRINT MENUS #-----------------------------------------------------------------
+
+
+print_main_menu() {
+  clear
+  echo "+--------[ debian setup script ]--------+"
+  echo "|                                       |"
+  echo "|            [ components ]             |"
+  echo "|                                       |"
+  echo "|          [1] apt packages             |"
+  echo "|          [2] rust                     |"
+  echo "|          [3] haskell                  |"
+  echo "|          [4] neovim                   |"
+  echo "|          [5] git repos                |"
+  echo "|          [6] docs                     |"
+  echo "|          [7] stow symlinks            |"
+  echo "|          [8] complete                 |"
+  echo "|                                       |"
+  echo "|          [q] quit                     |"
+  echo "|                                       |"
+  echo "+---------------------------------------+"
+}
+
+print_apt_menu() {
+  echo "+--------[ debian setup script ]--------+"
+  echo "|                                       |"
+  echo "|         [ apt package groups ]        |"
+  echo "|                                       |"
+  format_apt_menu
+  echo "|                                       |"
+  echo "|          [?] package info             |"
+  echo "|          [i] install                  |"
+  echo "|          [u] uninstall                |"
+  echo "|          [b] back                     |"
+  echo "|          [q] quit                     |"
+  echo "|                                       |"
+  echo "+---------------------------------------+"
+}
+
+print_rust_menu() {
+  clear
+  echo "+--------[ debian setup script ]--------+"
+  echo "|                                       |"
+  echo "|               [ rust ]                |"
+  echo "|                                       |"
+  format_rust_menu
+  echo "|                                       |"
+  echo "|              [i] install              |"
+  echo "|              [u] uninstall            |"
+  echo "|              [b] back                 |"
+  echo "|              [q] quit                 |"
+  echo "|                                       |"
+  echo "+---------------------------------------+"
+}
+
+print_haskell_menu() {
+  clear
+  echo "+--------[ debian setup script ]--------+"
+  echo "|                                       |"
+  echo "|              [ haskell ]              |"
+  echo "|                                       |"
+  echo "|              [i] install              |"
+  echo "|              [u] uninstall            |"
+  echo "|              [b] back                 |"
+  echo "|              [q] quit                 |"
+  echo "|                                       |"
+  echo "+---------------------------------------+"
+}
+
+print_nvim_menu() {
+  clear
+  echo "+--------[ debian setup script ]--------+"
+  echo "|                                       |"
+  echo "|              [ neovim ]               |"
+  echo "|                                       |"
+  echo "|              [i] install              |"
+  echo "|              [u] uninstall            |"
+  echo "|              [b] back                 |"
+  echo "|              [q] quit                 |"
+  echo "|                                       |"
+  echo "+---------------------------------------+"
+}
+
+print_repo_menu() {
+  clear
+  echo "+--------[ debian setup script ]--------+"
+  echo "|                                       |"
+  echo "|            [ git repos ]              |"
+  echo "|                                       |"
+  format_repo_menu
+  echo "|                                       |"
+  echo "|              [i] install              |"
+  echo "|              [u] uninstall            |"
+  echo "|              [b] back                 |"
+  echo "|              [q] quit                 |"
+  echo "|                                       |"
+  echo "+---------------------------------------+"
+}
+
+print_symlink_menu() {
+  clear
+  echo "+--------[ debian setup script ]--------+"
+  echo "|                                       |"
+  echo "|             [ symlinks ]              |"
+  echo "|                                       |"
+  echo "|              [i] stow                 |"
+  echo "|              [u] unstow               |"
+  echo "|              [b] back                 |"
+  echo "|              [q] quit                 |"
+  echo "|                                       |"
+  echo "+---------------------------------------+"
+}
+
+print_doc_menu() {
+  clear
+  echo "+--------[ debian setup script ]--------+"
+  echo "|                                       |"
+  echo "|               [ docs ]                |"
+  echo "|                                       |"
+  echo "|         1. xxx man                    |"
+  echo "|         2. xxx SDL3 documentation     |"
+  echo "|                                       |"
+  echo "|              [i] install              |"
+  echo "|              [u] uninstall            |"
+  echo "|              [b] back                 |"
+  echo "|              [q] quit                 |"
+  echo "|                                       |"
+  echo "+---------------------------------------+"
+}
+
+# args: user input, error flag
+read_input() {
+  local -n user_input="$1"
+  local -n input_error="$2"
+  # different print on error
+  if (( input_error )); then
+    input_error=0
+    read -p "[invalid selection]:" user_input
+  else
+    read -p ":" user_input
+  fi
+}
+
+
+# INSTALLER #-------------------------------------------------------------------
+
+# apt package helper functions
+
+get_selected_packages() {
+
+  local -n ordered_keys="$1"
+  local -n selected_package_groups="$2"
+  local -n package_list="$3"
+
+  for key in "${ordered_keys[@]}"; do
+    if ((  selected_package_groups["$key"] )); then
+      keyref="${key}[@]"
+      package_list+=("${!keyref}")
+    fi
+  done
+
+}
+
+get_unique_packages() {
+
+  local   -n input_pkgs="$1"
+  local   -n unique_pkgs="$2"
+  declare -A found_pkgs # track found pkgs in dictionary
+
+  for pkg in "${input_pkgs[@]}"; do
+    if [[ -z "${found_pkgs[$pkg]}" ]]; then
+      unique_pkgs+=("$pkg")
+      found_pkgs["$pkg"]=1
+    fi
+  done
+}
+
+get_apt_command() {
+
+  local -n install_command="$1"
+  local -n in_or_un="$2"
+
+  install_command="sudo apt-get "
+  if (( $in_or_un )); then
+    install_command+="install -y "
+  else
+    install_command+="purge -y "
+  fi
+
+  install_command+="${UNIQUE_PACKAGES[@]}"
+
+}
+
+get_apt_descriptions() {
+  for group in "${APT_ORDERED_KEYS[@]}"; do
+    if [[ "${APT_INSTALL_SELECTION[$group]}" -eq 1 ]]; then
+      echo -e "${APT_DESCRIPTIONS[$group]}"
+    fi
+  done
+  read -p "[ press any key to continue ] > "
+}
+
+apt_installer() {
+
+  local install_option="$1" # install (1) or uninstall (0)
+  # assemble package list and remove duplicates
+  INSTALL_PACKAGES=()
+  UNIQUE_PACKAGES=()
+
+  # get a list of all packages from the selected groups
+  get_selected_packages APT_ORDERED_KEYS APT_INSTALL_SELECTION INSTALL_PACKAGES
+
+  # error catch empty
+  if [[ -z "${INSTALL_PACKAGES[@]}" ]]; then
+    echo "nothing selected to install"
+    sleep 1
+    return
+  fi
+
+  # remove duplicate pkgs
+  get_unique_packages INSTALL_PACKAGES UNIQUE_PACKAGES
+
+  # make an apt-get command to execute
+  get_apt_command apt_command install_option
+
+  # get user approval
+  echo "[ proposed command ]"
+  echo
+  echo "$apt_command"
+  echo
+  read -p "[ approve execution? (y/n) ] > " user_input
+
+  # execute command
+  if [[ "$user_input" == y ]]; then
+    echo
+    echo "[ updating packages references ... ]"
+    sudo apt-get update -y
+    echo "[ packages references updated ]"
+    echo
+    echo "[ installing package groups ... ]"
+    echo $apt_command
+    $apt_command
+    echo "[ package groups installed ]"
+    sleep 1
+  else
+    echo
+    echo "[ aborting install ]"
+    sleep 1
+    return
+  fi
+  echo
+  echo "[ updating and cleaning... ]"
+  sudo apt-get update -y
+  sudo apt-get upgrade -y
+  sudo apt-get autoclean -y
+  sudo apt-get autoremove -y
+  echo "[ package refresh complete ]"
+
+  # update user on new packages available
+  echo
+  echo "[ added the following packages... ]"
+  for pkg in "${UNIQUE_PACKAGES[@]}"; do
+    echo "- [ $pkg ]"
+  done
+  echo
+  read -p "[ press any key to continue ] > "
+}
+
+rust_installer() {
+  local install_option="$1" # install (1) or uninstall (0)
+  if (( RUST_INSTALL_SELECTION["RUSTUP"] )); then
+    if (( install_option )); then
+      install_rust
+    else
+      uninstall_rust
+    fi
+  fi
+  if (( RUST_INSTALL_SELECTION["CRATES"] )); then
+    if (( install_option )); then
+      install_crates
+    else
+      uninstall_crates
+    fi
+  fi
+}
+
+repo_installer() {
+  local install_option="$1" # install (1) or uninstall (0)
+  if (( REPO_INSTALL_SELECTION["PRIVATE"] )); then
+    if (( install_option )); then
+      download_private_repos
+    else
+      remove_repos
+    fi
+  fi
+  if (( REPO_INSTALL_SELECTION["PUBLIC"] )); then
+    if (( install_option )); then
+      download_public_repos
+    else
+      remove_repos
+    fi
+  fi
+}
+
+# PROMTPS #---------------------------------------------------------------------
+# apt_prompt
+# rust_prompt
+# haskell_prompt
+# nvim_prompt
+# repo_prompt
+# main_menu_prompt
+
+apt_prompt() {
+
+  user_selection=0
+  error=0
+
+  while : ; do
+    clear
+    print_error_log
+    print_apt_menu
+    read_input user_selection error
+
+    # toggle selections
+    case "$user_selection" in
+      "1" ) (( APT_INSTALL_SELECTION["CORE"]        = !APT_INSTALL_SELECTION["CORE"]        )) ;;
+      "2" ) (( APT_INSTALL_SELECTION["NETWORKING"]  = !APT_INSTALL_SELECTION["NETWORKING"]  )) ;;
+      "3" ) (( APT_INSTALL_SELECTION["CDEV"]        = !APT_INSTALL_SELECTION["CDEV"]        )) ;;
+      "4" ) (( APT_INSTALL_SELECTION["CXTRA"]       = !APT_INSTALL_SELECTION["CXTRA"]       )) ;;
+      "5" ) (( APT_INSTALL_SELECTION["NVIM_DEP"]    = !APT_INSTALL_SELECTION["NVIM_DEP"]    )) ;;
+      "6" ) (( APT_INSTALL_SELECTION["HASKELL_DEP"] = !APT_INSTALL_SELECTION["HASKELL_DEP"] )) ;;
+      "7" ) (( APT_INSTALL_SELECTION["PROG_LANGS"]  = !APT_INSTALL_SELECTION["PROG_LANGS"]  )) ;;
+      "8" ) (( APT_INSTALL_SELECTION["FULL"]        = !APT_INSTALL_SELECTION["FULL"]        )) ;;
+      "9" )
+        (( APT_INSTALL_SELECTION["ALL"]         = !APT_INSTALL_SELECTION["ALL"]         ))
+        EVERYTHING_ELSE=("${APT_ORDERED_KEYS[@]:0:$((${#APT_ORDERED_KEYS[@]} - 1))}")
+        if (( APT_INSTALL_SELECTION["ALL"] )); then
+          val=1
+        else
+          val=0
+        fi
+        for key in "${EVERYTHING_ELSE[@]}"; do
+            APT_INSTALL_SELECTION["$key"]=$val
+        done
+      ;;
+      [i] ) apt_installer 1        ;;
+      [u] ) apt_installer 0 ;;
+      [\?] ) get_apt_descriptions ;;
+      [b] ) main_menu_prompt ;;
+      [q] ) exit             ;;
+      *   ) error=1          ;;
+    esac
+
+  done
+}
+
+rust_prompt() {
+  user_selection=0
+  error=0
+  while : ; do
+    clear
+    print_error_log
+    print_rust_menu
+    read_input user_selection error
+    case "$user_selection" in
+      "1" ) (( RUST_INSTALL_SELECTION["RUSTUP"]  = !RUST_INSTALL_SELECTION["RUSTUP"]  )) ;;
+      "2" ) (( RUST_INSTALL_SELECTION["CRATES"]  = !RUST_INSTALL_SELECTION["CRATES"]  )) ;;
+      [i] ) rust_installer 1 ;;
+      [u] ) rust_installer 0 ;;
+      [b] ) main_menu_prompt ;;
+      [q] ) exit             ;;
+      *   ) error=1          ;;
+    esac
+  done
+}
+
+haskell_prompt() {
+  user_selection=0
+  error=0
+  while : ; do
+    clear
+    print_error_log
+    print_haskell_menu
+    read_input user_selection error
+    # toggle selections
+    case "$user_selection" in
+      [i] ) install_haskell   ;;
+      [u] ) uninstall_haskell ;;
+      [b] ) main_menu_prompt  ;;
+      [q] ) exit              ;;
+      *   ) error=1           ;;
+    esac
+  done
+}
+
+nvim_prompt() {
+  user_selection=0
+  error=0
+  while : ; do
+    clear
+    print_error_log
+    print_nvim_menu
+    read_input user_selection error
+    # toggle selections
+    case "$user_selection" in
+      [i] ) install_nvim   ;;
+      [u] ) uninstall_nvim ;;
+      [b] ) main_menu_prompt  ;;
+      [q] ) exit              ;;
+      *   ) error=1           ;;
+    esac
+  done
+}
+
+repo_prompt() {
+  user_selection=0
+  error=0
+  while : ; do
+    clear
+    print_error_log
+    print_repo_menu
+    read_input user_selection error
+    case "$user_selection" in
+      "1" ) (( REPO_INSTALL_SELECTION["PRIVATE"] = !REPO_INSTALL_SELECTION["PRIVATE"]  )) ;;
+      "2" ) (( REPO_INSTALL_SELECTION["PUBLIC"]  = !REPO_INSTALL_SELECTION["PUBLIC"]  )) ;;
+      [i] ) repo_installer 1 ;;
+      [u] ) repo_installer 0 ;;
+      [b] ) main_menu_prompt ;;
+      [q] ) exit             ;;
+      *   ) error=1          ;;
+    esac
+  done
+}
+
+doc_prompt() {
+  user_selection=0
+  error=0
+  while : ; do
+    clear
+    print_error_log
+    print_doc_menu
+    read_input user_selection error
+    case "$user_selection" in
+      "1" ) (( REPO_INSTALL_SELECTION["PRIVATE"] = !REPO_INSTALL_SELECTION["PRIVATE"]  )) ;;
+      "2" ) (( REPO_INSTALL_SELECTION["PUBLIC"]  = !REPO_INSTALL_SELECTION["PUBLIC"]  )) ;;
+      [i] ) repo_installer 1 ;;
+      [u] ) repo_installer 0 ;;
+      [b] ) main_menu_prompt ;;
+      [q] ) exit             ;;
+      *   ) error=1          ;;
+    esac
+  done
+}
+
+main_menu_prompt() {
+  user_selection=0
+  error=0
+
+  while : ; do
+    clear
+    print_error_log
+    print_main_menu
+    read_input user_selection error
+    # toggle selections
+    case "$user_selection" in
+      "1" ) apt_prompt     ;;
+      "2" ) rust_prompt    ;;
+      "3" ) haskell_prompt ;;
+      "4" ) nvim_prompt    ;;
+      "5" ) repo_prompt    ;;
+      "6" ) doc_prompt     ;;
+    esac
+  done
+}
+
+# start log & prompt
+LOG_FILE="setup.log"
+exec > >(tee -a "$LOG_FILE") 2>&1
+main_menu_prompt

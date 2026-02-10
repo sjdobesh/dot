@@ -1,65 +1,81 @@
---- -- -    ______    ________  ___
---   / ___/ |  / /  _/  |/  /
---   \__ \| | / // // /|_/ /
---  ___/ /| |/ // // /  / /
--- /____(_)___/___/_/  /_/
---
+----------------------------------------/
+--    _____   _   ___    ________  ___  |
+--   / ___/  / | / / |  / /  _/  |/  /  |
+--   \__ \  /  |/ /| | / // // /|_/ /   |
+--  ___/ / / /|  / | |/ // // /  / /    |
+-- /____(_)_/ |_/  |___/___/_/  /_/     |
+--                                      /
 ----------------------------------------------------------------------------(80)
-
 
 -- PLUGINS ---------------------------------------------------------------------
 
 local plugins = {
 
+  -- load colorschemes first
+  require( "configs.colorschemes" ),
+
   -- simple configuration plugins
-  { "tpope/vim-surround"   },           -- (s)urround command
-  { "tpope/vim-commentary" },           -- group comments
-  { "tpope/vim-fugitive" },             -- vim git integration
-  { "hedyhli/outline.nvim" },           -- symbol viewer
-  { "mbbill/undotree" },                -- branching undo tree
-  { "nvim-tree/nvim-web-devicons"    }, -- icons (common dependency)
+  { "mbbill/undotree"                }, -- branching undo tree
+  { "tpope/vim-repeat"               }, -- add repeat command to plugins
+  { "tpope/vim-fugitive"             }, -- (:G)it integration
+  { "tpope/vim-surround"             }, -- (s)urround command
+  { "tpope/vim-commentary"           }, -- comment selections
   { "ntpeters/vim-better-whitespace" }, -- whitespace management
+  { "nvim-tree/nvim-web-devicons"    }, -- icons (common dependency)
 
   -- external configuration plugins
-  require("plugins.dashboard"), -- file viewer/editor
-  require("plugins.lazydev"),   -- file viewer/editor
-  require("plugins.lualine"),   -- status line and tabs
-  require("plugins.oil"),       -- file viewer/editor
-  require("plugins.telescope"), -- status line and tabs
-  require("plugins.blink"),     -- autocomplete
-  require("plugins.mason"),     -- lsp info (load last to acquire other plugin maps)
+  require( "plugins.autosession" ), -- reload session data
+  require( "plugins.dashboard"   ), -- start screen
+  require( "plugins.glimmer"     ), -- command animations
+  require( "plugins.lualine"     ), -- status line and tabs
+  require( "plugins.luxmotion"   ), -- movement animations
+  require( "plugins.oil"         ), -- file viewer/editor
+  require( "plugins.outline"     ), -- symbol viewer
+  require( "plugins.otree"       ), -- file tree
+  require( "plugins.scope"       ), -- scope/indent outliner
+  require( "plugins.telescope"   ), -- fuzzy finder
+  require( "plugins.toggleterm"  ), -- persistent term
+  require( "plugins.treesitter"  ), -- syntax parser
 
-  -- colorschemes
-  require("configs.colorschemes"),
+  -- lsp stuff
+  require( "plugins.mason"   ), -- lsp manager
+  require( "plugins.lazydev" ), -- lua lsp management
+  require( "plugins.blink"   ), -- autocomplete
 
 }
--- -- lazy ------------------------------------------------------------------------
---
--- install lazy loader if not available
+
+-- lazy ------------------------------------------------------------------------
+
+-- make sure these are available to lazy
+vim.g.mapleader = " "
+vim.g.maplocalleader = "\\"
+
+-- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({dashboard
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable",
-    lazypath,
-  })
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+  local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+  local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+  if vim.v.shell_error ~= 0 then
+    vim.api.nvim_echo({
+      { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+      { out, "WarningMsg" },
+      { "\nPress any key to exit..." },
+    }, true, {})
+    vim.fn.getchar()
+    os.exit(1)
+  end
 end
 vim.opt.rtp:prepend(lazypath)
 
 -- install plugins
-require("lazy").setup(
-  plugins, -- plugin table acquired through require commands above
+require("lazy").setup({
+  spec = {
+    plugins, -- plugin table acquired through require commands above
+  },
   { checker = { enabled = true,}} -- auto update
-)
+})
 
--- options ---------------------------------------------------------------------
+-- config files ----------------------------------------------------------------
 
 require("configs.options")
-
--- key maps --------------------------------------------------------------------
-
 require("configs.keymaps")
-

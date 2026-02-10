@@ -29,10 +29,11 @@ return {
       {
         icon = "  ",
         desc = " new",
-        key = "n",
+        key = "e",
         action = "ene | startinsert",
         group = "DashboardNewFile", -- highlight group
       },
+
       -- search
       {
         icon = " ⟳ ",
@@ -41,6 +42,15 @@ return {
         action = "lua require('telescope.builtin').oldfiles()",
         group = "DashboardRecentFiles",
       },
+
+      {
+        icon = " 󰗚 ",
+        desc = " sessions ",
+        key = "s",
+        action = "Telescope session-lens",
+        group = "DashboardRecentFiles",
+      },
+
       {
         icon = "  ",
         desc = " grep",
@@ -48,21 +58,25 @@ return {
         action = "lua require('telescope.builtin').live_grep()",
         group = "DashboardFindText",
       },
+
       -- config files
       {
         icon = "  ",
         desc = " vimconfig",
         key = "v",
-        action = "e ~/.config/nvim/init.lua",
+        action = "cd ~/dot/.dotfiles/nvim/.config/nvim/ | e ./init.lua | LazyDev ",
+        -- action = "lcd %:p:h",
         group = "DashboardConfig",
       },
+
       {
         icon = "  ",
         desc = " zconfig",
         key = "z",
-        action = "e ~/.zshrc",
+        action = "cd ~ | e ./.zshrc",
         group = "DashboardConfig",
       },
+
       {
         icon = "  ",
         desc = " lconfig",
@@ -70,13 +84,15 @@ return {
         action = "lua require('telescope.builtin').find_files({cwd = vim.fn.stdpath('config')})",
         group = "DashboardConfig",
       },
+
       {
         icon = " 󱆃 ",
-        desc = " setup",
-        key = "s",
-        action = "e ~/dot/scripts/setup/.bin/setup",
+        desc = " installer ",
+        key = "i",
+        action = "cd ~/dot/scripts/setup/bin/ | e ./setup",
         group = "DashboardConfig",
       },
+
       {
         icon = " 󰿅 ",
         desc = " quit",

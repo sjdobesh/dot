@@ -13,7 +13,7 @@ setopt inc_append_history
 bindkey "\e[A" history-beginning-search-backward
 bindkey "\e[B" history-beginning-search-forward
 
-export PATH=$PATH:~/.bin:~/.cargo/bin
+export PATH=$PATH:$HOME/bin:$HOME/.cargo/bin:$HOME/bin/neovim/bin:
 
 alias diff="diff --color=auto"
 alias ip="ip -c=auto"
@@ -42,6 +42,8 @@ if hash eza 2>/dev/null; then
 fi
 
 precmd () { print -Pn "\e]2;%-3~\a"; }
+
+
 
 
 

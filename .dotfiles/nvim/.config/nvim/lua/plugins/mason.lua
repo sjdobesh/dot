@@ -4,10 +4,12 @@
 local mason_lsps = {
 
   -- "lua is handled by lazydev"
+  "lua_ls",
   "bashls",
   "clangd",
   "glsl_analyzer",
   "rust_analyzer",
+
 }
 
 return {
@@ -20,3 +22,4 @@ return {
       "neovim/nvim-lspconfig",
   },
 }
+
