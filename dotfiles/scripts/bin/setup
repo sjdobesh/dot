@@ -1,6 +1,10 @@
 #!/bin/bash
 # setup script #------------------------------------------------------------(80)
 
+# setup folders
+public_repo_folder="public"
+private_repo_folder="project"
+
 # personal info, packages, and repos #------------------------------------------
 
 git_name="samantha"
@@ -70,33 +74,48 @@ NVIM_DEP=(
   "liblua5.1-0-dev" # <-- nvim plugin dependency
 )
 
+LOVE_DEP=(
+"build-essential"
+"autotools-dev"
+"automake"
+"libtool"
+"pkg-config"
+"libfreetype6-dev"
+"libluajit-5.1-dev"
+"libsdl3-dev"
+"libopenal-dev"
+"libogg-dev"
+"libvorbis-dev"
+"libmodplug-dev"
+"libtheora-dev"
+"libharfbuzz-dev"
+)
+
 # other language packages
 PROG_LANGS=(
   "default-jdk" # java
   "perl"        # perl <3
   "python3"     # /\/\/\:<- (snek)
-  "python3-pip"
+  "python3-pip" # _____:< (snek had a snack)
 )
 
 # everything else
 FULL=(
-  "lsof"        # list open files
-  "fdisk"       # format disk
-  "fd-find"     # 'find' util
-  "feh"         # image viewer
-  "figlet"      # ascii art
-  "fuse"        # needed to run nvim app image
-  "fzf"         # fuzzy finder
-  "gettext"     # gnu text utilities
-  "ninja-build" # nvim dep
-  "moreutils"   # extra bash tjools
-  "tcc"         # tiny c compiler
-  "pkg-config"  #pkg-config compiler options
-  "rsync"       # recursive directory syncer
-  "stow"        # symlink manager
-  "wget"        # gnu downloader
-  "zip"         # zip compressor (comes with unzip)
-  "zsh"         # shell
+  "debian-goodies" # deb tools
+  "lsof"           # list open files
+  "fdisk"          # format disk
+  "fd-find"        # 'find' util
+  "feh"            # image viewer
+  "figlet"         # ascii art
+  "fuse"           # needed to run nvim app image
+  "fzf"            # fuzzy finder
+  "moreutils"      # extra bash tools
+  "tcc"            # tiny c compiler
+  "rsync"          # recursive directory syncer
+  "stow"           # symlink manager
+  "wget"           # gnu downloader
+  "zip"            # zip compressor (comes with unzip)
+  "zsh"            # shell
 )
 
 # all apt package groups
@@ -165,12 +184,12 @@ print_error_log() {
 
 # install #---------------------------------------------------------------------
 # install all apt packages and update
-# DEPRECATED!!!
-install_packages() {
-  echo "[ installing apt packages... ]"
+install_all_packages() {
+  echo
+  echo "[ installing all apt packages... ]"
 
   sudo apt-get update -y
-  for pkg in "${PACKAGES[@]}"; do
+  for pkg in "${ALL_PACKAGES[@]}"; do
     echo "installing $pkg..."
     # do this in package order
     if dpkg -s "$pkg" 2>&1 | grep "not installed" > /dev/null; then
@@ -189,6 +208,7 @@ install_packages() {
   sudo apt-get autoremove -y
 
   echo "[ system up to date ]"
+  echo
 }
 
 # DEPRECATED
@@ -533,7 +553,7 @@ install_all() {
   echo
   echo "[ installing full environment... ]"
 
-  install_packages
+  install_all_packages
   install_rust
   install_haskell
   install_nvim

@@ -1,0 +1,181 @@
+[H[2J[3J[H[2J[3J+--------[ debian setup script ]--------+
+|                                       |
+|            [ components ]             |
+|                                       |
+|          [1] apt packages             |
+|          [2] rust                     |
+|          [3] haskell                  |
+|          [4] neovim                   |
+|          [5] git repos                |
+|          [6] docs                     |
+|          [7] stow symlinks            |
+|          [8] complete                 |
+|                                       |
+|          [q] quit                     |
+|                                       |
++---------------------------------------+
+:[H[2J[3J+--------[ debian setup script ]--------+
+|                                       |
+|         [ apt package groups ]        |
+|                                       |
+|       1. [ ] core                     |
+|       2. [ ] networking               |
+|       3. [ ] c dev                    |
+|       4. [ ] c xtras                  |
+|       5. [ ] neovim dependecies       |
+|       6. [ ] haskell dependecies      |
+|       7. [ ] additional languages     |
+|       8. [ ] full                     |
+|       9. [ ] all                      |
+|                                       |
+|          [?] package info             |
+|          [i] install                  |
+|          [u] uninstall                |
+|          [b] back                     |
+|          [q] quit                     |
+|                                       |
++---------------------------------------+
+:[H[2J[3J+--------[ debian setup script ]--------+
+|                                       |
+|         [ apt package groups ]        |
+|                                       |
+|       1. [x] core                     |
+|       2. [ ] networking               |
+|       3. [ ] c dev                    |
+|       4. [ ] c xtras                  |
+|       5. [ ] neovim dependecies       |
+|       6. [ ] haskell dependecies      |
+|       7. [ ] additional languages     |
+|       8. [ ] full                     |
+|       9. [ ] all                      |
+|                                       |
+|          [?] package info             |
+|          [i] install                  |
+|          [u] uninstall                |
+|          [b] back                     |
+|          [q] quit                     |
+|                                       |
++---------------------------------------+
+:[H[2J[3J+--------[ debian setup script ]--------+
+|                                       |
+|         [ apt package groups ]        |
+|                                       |
+|       1. [x] core                     |
+|       2. [x] networking               |
+|       3. [ ] c dev                    |
+|       4. [ ] c xtras                  |
+|       5. [ ] neovim dependecies       |
+|       6. [ ] haskell dependecies      |
+|       7. [ ] additional languages     |
+|       8. [ ] full                     |
+|       9. [ ] all                      |
+|                                       |
+|          [?] package info             |
+|          [i] install                  |
+|          [u] uninstall                |
+|          [b] back                     |
+|          [q] quit                     |
+|                                       |
++---------------------------------------+
+:[H[2J[3J+--------[ debian setup script ]--------+
+|                                       |
+|         [ apt package groups ]        |
+|                                       |
+|       1. [x] core                     |
+|       2. [x] networking               |
+|       3. [x] c dev                    |
+|       4. [ ] c xtras                  |
+|       5. [ ] neovim dependecies       |
+|       6. [ ] haskell dependecies      |
+|       7. [ ] additional languages     |
+|       8. [ ] full                     |
+|       9. [ ] all                      |
+|                                       |
+|          [?] package info             |
+|          [i] install                  |
+|          [u] uninstall                |
+|          [b] back                     |
+|          [q] quit                     |
+|                                       |
++---------------------------------------+
+:+-[ CORE ]------------------------------+
+| barebones utilities for linux, idk    |
+| what you could even do without these. |
++---------------------------------------+
+| includes...                           |
+|                                       |
+|   - [ curl ] URL interactions         |
+|                                       |
+|   - [ git ] version control           |
+|                                       |
+|   - [ ssh ] remote shell connection   |
+|                                       |
+|   - [ vim ] default text editor       |
+|                                       |
++---------------------------------------+
+
++-[ NETWORKING ]------------------------+
+| basic linux networking admin tools    |
++---------------------------------------+
+| includes...                           |
+|                                       |
+|   - [ net-tools ]                     |
+|     legacy tools like ifconfig, route |
+|     netstat, etc.                     |
+|                                       |
+|   - [ iproute2 ]                      |
+|     modern tools like ip, ss, iw, tc, |
+|     supports netlink socket protocol, |
+|     VLANs, policy routing, etc.       |
+|                                       |
++---------------------------------------+
+
++-[ C-DEV ]-----------------------------+
+| basic c development tools             |
++---------------------------------------+
+| includes...                           |
+|                                       |
+|   - [ build-essential ]               |
+|     contains all essential c dev      |
+|     tools for unix like gcc/g++,      |
+|     make, and libc                    |
+|                                       |
+|   - [ gdb ] gnu c debugger            |
+|                                       |
+|   - [ cmake ] build system            |
+|                                       |
+|   - [ bear ]                          |
+|     compilation database generator    |
+|                                       |
+|   - [ clang ] llvm based compiler     |
+|                                       |
+|   - [ clang-tools ] llvm utils        |
+|                                       |
+|   - [ lldb ] llvm debugger            |
+|                                       |
+|   - [ valgrind ] memory analyzer      |
+|                                       |
++---------------------------------------+
+
+[ press any key to continue ] > [H[2J[3J+--------[ debian setup script ]--------+
+|                                       |
+|         [ apt package groups ]        |
+|                                       |
+|       1. [x] core                     |
+|       2. [x] networking               |
+|       3. [x] c dev                    |
+|       4. [ ] c xtras                  |
+|       5. [ ] neovim dependecies       |
+|       6. [ ] haskell dependecies      |
+|       7. [ ] additional languages     |
+|       8. [ ] full                     |
+|       9. [ ] all                      |
+|                                       |
+|          [?] package info             |
+|          [i] install                  |
+|          [u] uninstall                |
+|          [b] back                     |
+|          [q] quit                     |
+|                                       |
++---------------------------------------+
+:

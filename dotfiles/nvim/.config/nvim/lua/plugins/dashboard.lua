@@ -64,7 +64,7 @@ return {
         icon = "  ",
         desc = " vimconfig",
         key = "v",
-        action = "cd ~/dot/.dotfiles/nvim/.config/nvim/ | e ./init.lua | LazyDev ",
+        action = "cd ~/dot/dotfiles/nvim/.config/nvim/ | e ./init.lua | LazyDev ",
         -- action = "lcd %:p:h",
         group = "DashboardConfig",
       },
@@ -89,7 +89,7 @@ return {
         icon = " 󱆃 ",
         desc = " installer ",
         key = "i",
-        action = "cd ~/dot/scripts/setup/bin/ | e ./setup",
+        action = "cd ~/dot | e dotfiles/scripts/bin/setup",
         group = "DashboardConfig",
       },
 
