@@ -3,8 +3,6 @@ return {
 	lazy = false,
 	config = function()
 		require("auto-session").setup({
-			pre_save_cmds = { "Otree" }, -- or "NvimTreeClose"
-			post_restore_cmds = { "Otree" }, -- or "NvimTreeOpen"
 			suppressed_dirs = {
 				"/",
 				"~/",

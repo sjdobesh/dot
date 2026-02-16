@@ -24,6 +24,7 @@ local plugins = {
 	{ "tpope/vim-commentary"           }, -- comment selections
 	{ "ntpeters/vim-better-whitespace" }, -- whitespace management
 	{ "nvim-tree/nvim-web-devicons"    }, -- icons (common dependency)
+  { "mfussenegger/nvim-dap"          }, -- debugger adapter protocol
 
 	-- external configuration plugins
 	require( "plugins.autosession"     ), -- reload session data

@@ -10,6 +10,8 @@ local function feedkeys(keys, mode, escape_ks)
 end
 
 -- core ----------------------------------------------------------------------80
+--
+vim.keymap.set("n", "<leader>>", "<cmd>!love .<cr>")
 
 -- leader
 vim.g.mapleader = " "
@@ -167,15 +169,15 @@ local function conditional_smooth_move(key)
 end
 
 -- map buttons you want to spam
-vim.keymap.set("n", "j", function()
+vim.keymap.set({ "n", "v" }, "j", function()
 	conditional_smooth_move("j")
 end)
-vim.keymap.set("n", "k", function()
+vim.keymap.set({ "n", "v" }, "k", function()
 	conditional_smooth_move("k")
 end)
-vim.keymap.set("n", "l", function()
+vim.keymap.set({ "n", "v" }, "l", function()
 	conditional_smooth_move("l")
 end)
-vim.keymap.set("n", "h", function()
+vim.keymap.set({ "n", "v" }, "h", function()
 	conditional_smooth_move("h")
 end)
