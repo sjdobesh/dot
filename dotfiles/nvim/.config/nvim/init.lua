@@ -24,7 +24,6 @@ local plugins = {
 	{ "tpope/vim-commentary"           }, -- comment selections
 	{ "ntpeters/vim-better-whitespace" }, -- whitespace management
 	{ "nvim-tree/nvim-web-devicons"    }, -- icons (common dependency)
-  { "mfussenegger/nvim-dap"          }, -- debugger adapter protocol
 
 	-- external configuration plugins
 	require( "plugins.autosession"     ), -- reload session data
@@ -32,14 +31,19 @@ local plugins = {
 	require( "plugins.glimmer"         ), -- command animations
 	require( "plugins.lualine"         ), -- status line and tabs
 	require( "plugins.luxmotion"       ), -- movement animations
+	require( "plugins.mdpreview"       ), -- render markdown into a browser
 	require( "plugins.oil"             ), -- file viewer/editor
 	require( "plugins.outline"         ), -- symbol viewer
 	require( "plugins.otree"           ), -- file tree
+	require( "plugins.rendermd"        ), -- render markdown in terminal
 	require( "plugins.scope"           ), -- scope/indent outliner
 	require( "plugins.telescope"       ), -- fuzzy finder
 	require( "plugins.toggleterm"      ), -- persistent term
 	require( "plugins.treesitter"      ), -- syntax parser
-	require( "plugins.mason"           ), -- lsp manager
+
+  -- lsp configurations (do last)
+  require( "plugins.mason"           ), -- lsp manager
+  require( "plugins.dap"             ), -- debugger adapter protocol
 	require( "plugins.conform"         ), -- formatter
 
 }

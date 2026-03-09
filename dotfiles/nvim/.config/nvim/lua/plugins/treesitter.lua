@@ -11,6 +11,11 @@ return {
 				"javascript",
 				"lua",
 				"rust",
+				"markdown",
+				"markdown_inline",
+				"html",
+				"latex",
+				"yaml",
 			})
 			vim.api.nvim_create_autocmd("FileType", {
 				pattern = { "<filetype>" },

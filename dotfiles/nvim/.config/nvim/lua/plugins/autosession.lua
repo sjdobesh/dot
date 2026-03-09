@@ -1,6 +1,11 @@
 return {
 	"rmagatti/auto-session",
 	lazy = false,
+	keys = {
+		{ "<leader>at", "<cmd>AutoSession toggle<CR>" },
+		{ "<leader>as", "<cmd>AutoSession save<CR>" },
+		{ "<leader>ad", "<cmd>AutoSession delete<CR>" },
+	},
 	config = function()
 		require("auto-session").setup({
 			suppressed_dirs = {

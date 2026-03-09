@@ -2,17 +2,33 @@
 
 ## fast set up
 
-`sudo apt update; sudo apt upgrade -y; sudo apt install git -y; git clone https://github.com/sjdobesh/dot.git; ./dot/scripts/setup/.bin/setup.sh`
+```
+sudo apt update
+sudo apt upgrade -y
+sudo apt install git -y
+git clone https://github.com/sjdobesh/dot.git
+./dot/scripts/setup/.bin/setup.sh`
+```
 
 ## configs
 
-- nvim
-- zsh
-- bash
-- stow
-- rust
-
-## scripts
-
-- setup.sh
-install script for all default system packages, repos, and configs
+- packages
+    - apt packages
+    - cargo packages
+- shells
+    - zsh
+    - bash
+- editor
+    - nvim
+- configs
+    - stow
+    - ssh
+    - git
+- scripts
+    - setup
+- language setup & dependencies
+    - c
+    - lua
+    - haskell
+    - python
+    - rust

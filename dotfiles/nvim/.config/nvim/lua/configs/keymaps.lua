@@ -10,7 +10,7 @@ local function feedkeys(keys, mode, escape_ks)
 end
 
 -- core ----------------------------------------------------------------------80
---
+-- run curret directory
 vim.keymap.set("n", "<leader>>", "<cmd>!love .<cr>")
 
 -- leader
@@ -45,7 +45,6 @@ vim.keymap.set("n", "<A-h>", "<cmd>bprevious<CR>")
 vim.keymap.set("n", "<A-l>", "<cmd>bnext<CR>")
 
 -- terminal nav
-vim.keymap.set({ "t", "n" }, "<C-t>", "<Cmd>ToggleTerm<CR>")
 vim.keymap.set("t", "<C-q>", "<C-\\><C-n>")
 vim.keymap.set("n", "<leader>cd", function()
 	vim.cmd("lcd %:p:h")
@@ -92,92 +91,71 @@ end)
 vim.keymap.set("n", "<leader>w", "<cmd>StripWhitespace<CR>")
 vim.keymap.set("n", "<leader>f", "<cmd>Otree<CR>")
 vim.keymap.set("n", "<leader>o", "<cmd>Outline<CR>")
-vim.keymap.set("n", "<leader>d", "<cmd>Dashboard<CR>:DisableWhitespace<CR>")
+vim.keymap.set("n", "<leader>d", "<cmd>Dashboard<CR><cmd>DisableWhitespace<CR>")
 vim.keymap.set("n", "<leader>u", "<cmd>UndotreeToggle<CR>")
-vim.keymap.set("n", "<leader>at", "<cmd>AutoSession toggle<CR>")
-vim.keymap.set("n", "<leader>as", "<cmd>AutoSession save<CR>")
-vim.keymap.set("n", "<leader>ad", "<cmd>AutoSession delete<CR>")
 
--- fuzzy finding keymaps
+-- oil keymaps 'lua/plugins/oil.lua'
+--
+-- only for oil buffers
+-- g?     help
+-- <CR>   select
+-- <A-p>  preview
+-- <A-c>  close
+-- -      parent directory
+-- _      open_cwd
+-- ` | g~ cd
+-- gs     change_sort
+-- gx     open_external
+-- g.     toggle_hidden
+-- g\\    toggle_trash
+-- <A-h>  select
+-- <A-l>  refresh
+--
 
--- telescope commands
--- (f)iles
--- (r)ecent
--- (g)it
--- (l)ive
--- (b)uffers
--- (h)elp
--- (d)irectory
--- (s)ession
--- (w)ord
--- (c)olor
+-- auto session : 'lua/plugins/autosession.lua'
+--
+-- vim.keymap.set("n", "<leader>at", "<cmd>AutoSession toggle<CR>")
+-- vim.keymap.set("n", "<leader>as", "<cmd>AutoSession save<CR>")
+-- vim.keymap.set("n", "<leader>ad", "<cmd>AutoSession delete<CR>")
 
--- local tele_builtin = require("telescope.builtin")
--- vim.keymap.set("n", "<leader>tf", tele_builtin.find_files)
--- vim.keymap.set("n", "<leader>tr", tele_builtin.oldfiles)
--- vim.keymap.set("n", "<leader>tg", tele_builtin.git_files)
--- vim.keymap.set("n", "<leader>tl", tele_builtin.live_grep)
--- vim.keymap.set("n", "<leader>tb", tele_builtin.buffers)
--- vim.keymap.set("n", "<leader>th", tele_builtin.help_tags)
--- vim.keymap.set("n", "<leader>td", "<cmd>Telescope cder<CR>")
--- vim.keymap.set("n", "<leader>ts", "<cmd>Telescope session-lens<CR>")
--- vim.keymap.set(
---   {"v", "n"}, "<leader>tw",
---   function() tele_builtin.grep_string({cwd = "~"}) end
--- )
--- vim.keymap.set(
---   {"v", "n"}, "<leader>tc",
---   function()
---     tele_builtin.colorscheme({
---       ignore_builtins = true,
---       previewer = false,
---       -- list colorschemes to ignore
---       file_ignore_patterns = {
---         "^lux$",
---         "eos",
---         "chroma",
---         "aurora",
---         "^kanagawa$",
---         "lotus",
---         "lite",
---         "light",
---         "Light",
---         "^github$",
---         "pyte",
---         "rdark-terminal2",
---         "lucius",
---       },
---     })
---   end
--- )
+-- telescope commands : 'lua/plugins/telescope.lua'
+--
+-- t (f)iles
+-- t (r)ecent
+-- t (g)it
+-- t (l)ive
+-- t (b)uffers
+-- t (h)elp
+-- t (d)irectory
+-- t (s)ession
+-- t (w)ord
+-- t (c)olor
 
--- lux animations
+-- <C-t> toggleterm : 'lua/plugins/toggleterm.lua'
+--
+--
+--
 
--- lux animation plugin smooths cursor movement but also prevents
--- holding down to feed keys. this means you can't hold j to go down
--- the following creates a conditional mapping to disable plugin
--- functionality on single movements
+--
 
--- disable smoothing when a commands v.count == 0
-local orchestrator = require("luxmotion.engine.orchestrator")
-local function conditional_smooth_move(key)
-	if vim.v.count == 0 then
-		feedkeys(key, "n", true) -- recreate normal functionality
-	else
-		return orchestrator.execute("basic_" .. key, { count = vim.v.count1, direction = key })
-	end
-end
+--
 
--- map buttons you want to spam
-vim.keymap.set({ "n", "v" }, "j", function()
-	conditional_smooth_move("j")
-end)
-vim.keymap.set({ "n", "v" }, "k", function()
-	conditional_smooth_move("k")
-end)
-vim.keymap.set({ "n", "v" }, "l", function()
-	conditional_smooth_move("l")
-end)
-vim.keymap.set({ "n", "v" }, "h", function()
-	conditional_smooth_move("h")
-end)
+-- todo
+--
+-- dap commands
+--
+-- local dap = require("dap")
+-- local dapui = require("dapui")
+-- --
+-- vim.keymap.set("n", "<leader>b", "<cmd>DapToggleBreakpoint<cr>")
+-- vim.keymap.set("n", "<leader><", function()
+-- 	dapui.toggle()
+-- end)
+-- -- -- vim.keymap.set("n", "<F5>", dap.continue, { desc = "Debug: Start/Continue" })
+-- -- -- vim.keymap.set("n", "<F1>", dap.step_into, { desc = "Debug: Step Into" })
+-- -- -- vim.keymap.set("n", "<F2>", dap.step_over, { desc = "Debug: Step Over" })
+-- -- -- vim.keymap.set("n", "<F3>", dap.step_out, { desc = "Debug: Step Out" })
+-- vim.keymap.set("n", "<F5>", dap.continue, { desc = "Debug: Start/Continue" })
+-- vim.keymap.set("n", "<F1>", dap.step_into, { desc = "Debug: Step Into" })
+-- vim.keymap.set("n", "<F2>", dap.step_over, { desc = "Debug: Step Over" })
+-- vim.keymap.set("n", "<F3>", dap.step_out, { desc = "Debug: Step Out" })
