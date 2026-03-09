@@ -1,23 +1,25 @@
 #!/bin/bash
 # setup script #------------------------------------------------------------(80)
 
-# setup folders
+# folders
 public_repo_folder="public"
 private_repo_folder="project"
 
-# personal info, packages, and repos #------------------------------------------
-
+# personal info
 git_name="samantha"
 git_email="samjdobesh@gmail.com"
 https_prefix="https://github.com/"
 ssh_prefix="git@github.com:"
 
-# minimum cli utils (what do you do on linux without these?)
+
+# packages #--------------------------------------------------------------------
+
+# minimum cli utils (what do you even do on linux without these?)
 CORE=(
+  "curl"
   "git"
   "ssh"
   "vim"
-  "curl"
 )
 
 # networking tools
@@ -26,19 +28,19 @@ NETWORKING=(
   "net-tools"
 )
 
-# basic c development stuff
+# c development tools
 CDEV=(
-  "build-essential"
-  "valgrind"
-  "gdb"
-  "lldb"
   "bear"
-  "cmake"
+  "build-essential"
   "clang"
   "clang-tools"
+  "cmake"
+  "gdb"
+  "lldb"
+  "valgrind"
 )
 
-# my most commonly used c libraries
+# c libraries
 CXTRA=(
   "libclang-dev"
   "libncurses-dev"
@@ -49,7 +51,7 @@ CXTRA=(
 )
 
 
-# haskell ghc dependencies
+# haskell ghc dependencies (https://www.haskell.org/ghcup/install/)
 HASKELL_DEP=(
   "build-essential"
   "curl"
@@ -63,7 +65,7 @@ HASKELL_DEP=(
   "pkg-config"
 )
 
-# neovim build dependencies
+# neovim build dependencies (https://neovim.io/doc/build/)
 NVIM_DEP=(
   "build-essential"
   "cmake"
@@ -71,32 +73,15 @@ NVIM_DEP=(
   "gettext"
   "git"
   "ninja-build"
-  "liblua5.1-0-dev" # <-- nvim plugin dependency
+  "liblua5.1-0-dev" # <-- plugin dependency
 )
-
-LOVE_DEP=(
-"build-essential"
-"autotools-dev"
-"automake"
-"libtool"
-"pkg-config"
-"libfreetype6-dev"
-"libluajit-5.1-dev"
-"libsdl3-dev"
-"libopenal-dev"
-"libogg-dev"
-"libvorbis-dev"
-"libmodplug-dev"
-"libtheora-dev"
-"libharfbuzz-dev"
-)
-
 # other language packages
 PROG_LANGS=(
   "default-jdk" # java
+  "gnucobol"    # cobol
   "perl"        # perl <3
   "python3"     # /\/\/\:<- (snek)
-  "python3-pip" # _____:< (snek had a snack)
+  "python3-pip" # _____:< (snek snacks)
 )
 
 # everything else
@@ -104,17 +89,16 @@ FULL=(
   "debian-goodies" # deb tools
   "lsof"           # list open files
   "fdisk"          # format disk
-  "fd-find"        # 'find' util
   "feh"            # image viewer
   "figlet"         # ascii art
-  "fuse"           # needed to run nvim app image
+  "fuse"           # needed to run app images
   "fzf"            # fuzzy finder
   "moreutils"      # extra bash tools
   "tcc"            # tiny c compiler
   "rsync"          # recursive directory syncer
   "stow"           # symlink manager
   "wget"           # gnu downloader
-  "zip"            # zip compressor (comes with unzip)
+  "zip"            # file compressor
   "zsh"            # shell
 )
 
@@ -130,34 +114,34 @@ ALL_PACKAGES=(
   "${FULL[@]}"
 )
 
+# rust cargo packages (crates)
+CRATES=(
+  "bat"       # cat replacement
+  "eza"       # ls replacement
+  "fd-find"   # find replacement
+  "ripgrep"   # grep replacement
+  "tealdeer"  # tldr man pages
+  "--locked tree-sitter-cli" # tree sitter parser generator
+)
 
-# get unique package entries an array
-#
+# git repos #-------------------------------------------------------------------
+
 # mine but should be installed at base level
 DOT_REPO=("sjdobesh/dot.git")
 
 # personal project repositories
 PRIVATE_REPOS=(
-  "sjdobesh/pngz.git"
-  "sjdobesh/pxl.git"
-  "sjdobesh/sdlwin.git"
+  "sjdobesh/pngz.git"    # png io library
+  "sjdobesh/sdlwin.git"  # sdl powered pixel sorter
 )
 
 # public git repositories
 PUBLIC_REPOS=(
-  "nothings/stb.git"
-  "attractivechaos/klib.git"
-  "neovim/neovim"
+  "nothings/stb.git"         # header only libraries
+  "attractivechaos/klib.git" # macro libraries
+  "neovim/neovim"            # neovim source
 )
 
-# rust utils
-CRATES=(
-  "eza"
-  "bat"
-  "tealdeer"
-  "ripgrep"
-  "--locked tree-sitter-cli"
-)
 
 # global error log #-----------------------------------------------------------
 
@@ -182,7 +166,8 @@ print_error_log() {
   fi
 }
 
-# install #---------------------------------------------------------------------
+# installer functions #---------------------------------------------------------
+
 # install all apt packages and update
 install_all_packages() {
   echo
@@ -191,7 +176,7 @@ install_all_packages() {
   sudo apt-get update -y
   for pkg in "${ALL_PACKAGES[@]}"; do
     echo "installing $pkg..."
-    # do this in package order
+    # do this in package order # why did i do this...??
     if dpkg -s "$pkg" 2>&1 | grep "not installed" > /dev/null; then
       sudo apt-get install -y "$pkg"
       log_errors "error installing apt package [$pkg]"
@@ -238,10 +223,10 @@ install_nvim() {
   echo "[ installing neovim... ]"
 
   # check if source is available
-  if [[ ! -d ~/repos/neovim ]]; then
+  if [[ ! -d ~/public/neovim ]]; then
     echo "couldn't find repository, downloading now"
-    mkdir -p ~/repos
-    cd ~/repos
+    mkdir -p ~/public
+    cd ~/public
     git clone https://github.com/neovim/neovim
   fi
 
@@ -260,7 +245,7 @@ uninstall_nvim() {
   echo
   echo "[ uninstalling neovim... ]"
 
-  if [[ ! -d ~/repos/neovim ]]; then
+  if [[ ! -d ~/public/neovim ]]; then
     log_errors "error couldn't find neovim to uninstall"
     echo "[ neovim not installed ]"
     return
@@ -389,10 +374,10 @@ download_private_repos() {
 # download personal and external github repos
 download_public_repos() {
   echo
-  echo "[ downloading public git repositories into ~/repos... ]"
+  echo "[ downloading public git repositories into ~/public/... ]"
 
-  mkdir -p ~/repos
-  download_repo_set PUBLIC_REPOS repos
+  mkdir -p ~/public
+  download_repo_set PUBLIC_REPOS public
 
   echo "[ repositories downloaded ]"
   echo
@@ -404,7 +389,7 @@ remove_public_repos() {
 
   for repo in ${PUBLIC_REPOS[@]}; do
     echo "removing $repo..."
-    rm -rf ~/repos/$repo
+    rm -rf ~/public/$repo
     echo "$repo removed"
   done
 
@@ -470,17 +455,12 @@ stow_configs() {
   echo "[ stowing symlinks... ]"
 
   echo "dotfiles..."
-  cd ~/dot/.dotfiles
-  stow --no-folding --adopt -vt ~ */
+  cd ~/dot/dotfiles
+  stow --no-folding -vt ~ */
+  cd ~
   log_errors "error stowing configs"
 
-  echo "scripts..."
-  cd ~/dot/scripts
-  stow --no-folding --adopt -vt ~ */
-  log_errors "error stowing scripts"
-  cd ~
-
-  # change shells now that there is a .zshrc
+  # change shells now that there is a .zshrc : todo, move this elsewhere
   chsh -s $(which zsh)
 
   echo "[ symlinks stowed ]"
@@ -492,15 +472,9 @@ unstow_configs() {
   echo "[ unstowing symlinks... ]"
 
   echo "dotfiles..."
-  cd ~/dot/.dotfiles
-  stow -D --no-folding --adopt -vt ~ */
+  cd ~/dot/dotfiles
+  stow -D --no-folding -vt ~ */
   log_errors "error unstowing configs"
-
-  echo "scripts..."
-  cd ~/dot/scripts
-  stow -D --no-folding --adopt -vt ~ */
-  log_errors "error unstowing scripts"
-  cd ~
 
   echo "[ symlinks unstowed ]"
   echo
@@ -526,13 +500,12 @@ init_ssh() {
   git config --global user.name "$git_name"
 
   # only update personal remotes, including dot repo
-  echo "updating repo remote urls for person repos..."
-  UPDATEABLE_REPOS=("${PRIVATE_REPOS[@]}" "${DOT_REPO[@]}")
-  for repo_url in "${UPDATEABLE_REPOS[@]}"; do
+  echo "updating repo remote urls for personal repos..."
+  for repo_url in "${PRIVATE_REPOS[@]}"; do
     repo_name="$(basename "$repo_url" .git)"
     echo "swapping $repo_name to ssh origin..."
-    if [[ -d ~/repos/$repo_name ]]; then
-      git -C ~/repos/$repo_name remote set-url origin $ssh_prefix$repo_url
+    if [[ -d ~/project/$repo_name ]]; then
+      git -C ~/project/$repo_name remote set-url origin $ssh_prefix$repo_url
       log_errors "error updating $repo_name origin to $ssh_prefix$repo_url"
     else
       echo "couldn't find $repo_name."
@@ -648,14 +621,14 @@ declare -A APT_DESCRIPTIONS=(
 +---------------------------------------+\n\
 | includes...                           |\n\
 |                                       |\n\
-|   - [ net-tools ]                     |\n\
-|     legacy tools like ifconfig, route |\n\
-|     netstat, etc.                     |\n\
-|                                       |\n\
 |   - [ iproute2 ]                      |\n\
 |     modern tools like ip, ss, iw, tc, |\n\
 |     supports netlink socket protocol, |\n\
 |     VLANs, policy routing, etc.       |\n\
+|                                       |\n\
+|   - [ net-tools ]                     |\n\
+|     legacy tools like ifconfig, route |\n\
+|     netstat, etc.                     |\n\
 |                                       |\n\
 +---------------------------------------+\n"
 
@@ -665,21 +638,21 @@ declare -A APT_DESCRIPTIONS=(
 +---------------------------------------+\n\
 | includes...                           |\n\
 |                                       |\n\
+|   - [ bear ]                          |\n\
+|     compilation database generator    |\n\
+|                                       |\n\
 |   - [ build-essential ]               |\n\
 |     contains all essential c dev      |\n\
 |     tools for unix like gcc/g++,      |\n\
 |     make, and libc                    |\n\
 |                                       |\n\
-|   - [ gdb ] gnu c debugger            |\n\
-|                                       |\n\
-|   - [ cmake ] build system            |\n\
-|                                       |\n\
-|   - [ bear ]                          |\n\
-|     compilation database generator    |\n\
-|                                       |\n\
 |   - [ clang ] llvm based compiler     |\n\
 |                                       |\n\
 |   - [ clang-tools ] llvm utils        |\n\
+|                                       |\n\
+|   - [ cmake ] build system            |\n\
+|                                       |\n\
+|   - [ gdb ] gnu c debugger            |\n\
 |                                       |\n\
 |   - [ lldb ] llvm debugger            |\n\
 |                                       |\n\
@@ -694,7 +667,7 @@ declare -A APT_DESCRIPTIONS=(
 +---------------------------------------+\n\
 | includes...                           |\n\
 |                                       |\n\
-|   - [ libclang-dev ] clang            |\n\
+|   - [ libclang-dev ] clang lib        |\n\
 |                                       |\n\
 |   - [ libncurses-dev ] tui lib        |\n\
 |                                       |\n\
@@ -793,8 +766,6 @@ declare -A APT_DESCRIPTIONS=(
 |   - [ lsof ]      list open files     |\n\
 |                                       |\n\
 |   - [ fdisk ]     format disk         |\n\
-|                                       |\n\
-|   - [ fd-find ]   better find util    |\n\
 |                                       |\n\
 |   - [ feh ]       image viewer        |\n\
 |                                       |\n\
