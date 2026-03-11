@@ -10,8 +10,6 @@ local function feedkeys(keys, mode, escape_ks)
 end
 
 -- core ----------------------------------------------------------------------80
--- run curret directory
-vim.keymap.set("n", "<leader>>", "<cmd>!love .<cr>")
 
 -- leader
 vim.g.mapleader = " "
@@ -65,6 +63,9 @@ vim.keymap.set("n", "<leader>8", function()
 	end
 end)
 
+-- make shortcut
+vim.keymap.set("n", "<leader>>", ":make<cr>")
+
 -- lsp commands
 -- gd - go to definition
 -- gb - go back
@@ -86,6 +87,10 @@ vim.keymap.set("n", "gr", function()
 	require("telescope.builtin").lsp_references()
 end)
 
+-- leap (s)kip to (2 letter search)
+vim.keymap.set({ "n", "x", "o" }, "s", "<Plug>(leap-forward)")
+vim.keymap.set({ "n", "x", "o" }, "S", "<Plug>(leap-backward)")
+
 -- toggles
 
 vim.keymap.set("n", "<leader>w", "<cmd>StripWhitespace<CR>")
@@ -94,31 +99,13 @@ vim.keymap.set("n", "<leader>o", "<cmd>Outline<CR>")
 vim.keymap.set("n", "<leader>d", "<cmd>Dashboard<CR><cmd>DisableWhitespace<CR>")
 vim.keymap.set("n", "<leader>u", "<cmd>UndotreeToggle<CR>")
 
--- oil keymaps 'lua/plugins/oil.lua'
+-- auto session (lua/plugins/autosession.lua)
 --
--- only for oil buffers
--- g?     help
--- <CR>   select
--- <A-p>  preview
--- <A-c>  close
--- -      parent directory
--- _      open_cwd
--- ` | g~ cd
--- gs     change_sort
--- gx     open_external
--- g.     toggle_hidden
--- g\\    toggle_trash
--- <A-h>  select
--- <A-l>  refresh
---
+-- a (t)oggle
+-- a (s)ave
+-- a (d)elete
 
--- auto session : 'lua/plugins/autosession.lua'
---
--- vim.keymap.set("n", "<leader>at", "<cmd>AutoSession toggle<CR>")
--- vim.keymap.set("n", "<leader>as", "<cmd>AutoSession save<CR>")
--- vim.keymap.set("n", "<leader>ad", "<cmd>AutoSession delete<CR>")
-
--- telescope commands : 'lua/plugins/telescope.lua'
+-- telescope commands (lua/plugins/telescope.lua)
 --
 -- t (f)iles
 -- t (r)ecent
@@ -131,9 +118,27 @@ vim.keymap.set("n", "<leader>u", "<cmd>UndotreeToggle<CR>")
 -- t (w)ord
 -- t (c)olor
 
--- <C-t> toggleterm : 'lua/plugins/toggleterm.lua'
+-- <C-t> toggleterm (lua/plugins/toggleterm.lua)
 --
 --
+-- oil keymaps (lua/plugins/oil.lua)
+--
+-- only for oil buffers
+-- g?     help
+-- <CR>   select
+-- <A-p>  peeview
+-- <A-c>  close
+-- -      parent directory
+-- _      open_cwd
+-- ` | g~ cd
+-- gs     change_sort
+-- gx     open_external
+-- g.     toggle_hidden
+-- g\\    toggle_trash
+-- <A-h>  select
+-- <A-l>  refresh
+--
+
 --
 
 --

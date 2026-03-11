@@ -1,5 +1,13 @@
 return {
   {
+    "rose-pine/neovim",
+    lazy = false,
+    priority = 1000,
+    config = function()
+      vim.cmd.colorscheme("rose-pine")
+    end
+  },
+  {
     "sainnhe/sonokai",
     lazy = false,
     priority = 1000,
@@ -24,9 +32,10 @@ return {
     priority = 1000,
     config = function()
       vim.g.sonokai_enable_italic = true
-      vim.cmd.colorscheme("nordic")
+      -- vim.cmd.colorscheme("nordic")
     end
   },
+  { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
   {
     "LuxVim/lux.nvim",
     priority = 1000,

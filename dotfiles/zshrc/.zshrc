@@ -43,8 +43,4 @@ fi
 
 precmd () { print -Pn "\e]2;%-3~\a"; }
 
-
-
-
-
 [ -f "/home/s/.ghcup/env" ] && . "/home/s/.ghcup/env" # ghcup-env

@@ -9,42 +9,48 @@
 
 -- PLUGINS ---------------------------------------------------------------------
 
- -- stylua: ignore
+vim.cmd("filetype plugin on")
+
+-- stylua: ignore
 local plugins = {
 
-	-- load colorschemes first
-	require("configs.colorschemes"),
+  -- load colorschemes first
+  require("configs.colorschemes"),
 
-	-- simple configuration plugins
-	{ "mbbill/undotree"                }, -- branching undo tree
-	{ "tpope/vim-repeat"               }, -- add repeat command to plugins
-	{ "tpope/vim-fugitive"             }, -- (:G)it integration
-	{ "airblade/vim-gitgutter"         }, -- git gutter in sign column
-	{ "tpope/vim-surround"             }, -- (s)urround command
-	{ "tpope/vim-commentary"           }, -- comment selections
-	{ "ntpeters/vim-better-whitespace" }, -- whitespace management
-	{ "nvim-tree/nvim-web-devicons"    }, -- icons (common dependency)
+  -- simple configuration plugins
+  { "https://codeberg.org/andyg/leap.nvim" }, -- leap command
+  { "mbbill/undotree" },                      -- branching undo tree
+  { "tpope/vim-repeat" },                     -- add repeat command to plugins
+  { "tpope/vim-fugitive" },                   -- (:G)it integration
+  { "tpope/vim-repeat" },                     -- plugin integrated dot command
+  { "airblade/vim-gitgutter" },               -- git gutter in sign column
+  { "tpope/vim-surround" },                   -- (s)urround command
+  { "tpope/vim-commentary" },                 -- comment selections
+  { "ntpeters/vim-better-whitespace" },       -- whitespace management
+  { "nvim-tree/nvim-web-devicons" },          -- icons (common dependency)
 
-	-- external configuration plugins
-	require( "plugins.autosession"     ), -- reload session data
-	require( "plugins.dashboard"       ), -- start screen
-	require( "plugins.glimmer"         ), -- command animations
-	require( "plugins.lualine"         ), -- status line and tabs
-	require( "plugins.luxmotion"       ), -- movement animations
-	require( "plugins.mdpreview"       ), -- render markdown into a browser
-	require( "plugins.oil"             ), -- file viewer/editor
-	require( "plugins.outline"         ), -- symbol viewer
-	require( "plugins.otree"           ), -- file tree
-	require( "plugins.rendermd"        ), -- render markdown in terminal
-	require( "plugins.scope"           ), -- scope/indent outliner
-	require( "plugins.telescope"       ), -- fuzzy finder
-	require( "plugins.toggleterm"      ), -- persistent term
-	require( "plugins.treesitter"      ), -- syntax parser
+  -- external configuration plugins
+  require("plugins.autosession"), -- reload session data
+  require("plugins.dashboard"),   -- start screen
+  require("plugins.glimmer"),     -- command animations
+  require("plugins.imgpreview"),  -- image previews
+  require("plugins.luaconsole"),  -- lua scratch pad
+  require("plugins.lualine"),     -- status line and tabs
+  require("plugins.luxmotion"),   -- movement animations
+  require("plugins.mdpreview"),   -- render markdown into a browser
+  require("plugins.oil"),         -- file viewer/editor
+  require("plugins.outline"),     -- symbol viewer
+  require("plugins.otree"),       -- file tree
+  require("plugins.rendermd"),    -- render markdown in terminal
+  require("plugins.scope"),       -- scope/indent outliner
+  require("plugins.telescope"),   -- fuzzy finder
+  require("plugins.toggleterm"),  -- persistent term
+  require("plugins.treesitter"),  -- syntax parser
 
   -- lsp configurations (do last)
-  require( "plugins.mason"           ), -- lsp manager
-  require( "plugins.dap"             ), -- debugger adapter protocol
-	require( "plugins.conform"         ), -- formatter
+  require("plugins.mason"),   -- lsp manager
+  require("plugins.conform"), -- formatter
+  -- require("plugins.dap"),     -- debugger adapter protocol
 
 }
 
@@ -54,7 +60,7 @@ local plugins = {
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
--- Bootstrap lazy.nvim
+-- bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
 	local lazyrepo = "https://github.com/folke/lazy.nvim.git"

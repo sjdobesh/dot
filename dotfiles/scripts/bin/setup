@@ -231,7 +231,7 @@ install_nvim() {
   fi
 
   # build from source and install to ~/bin
-  cd ~/repos/neovim
+  cd ~/public/neovim
   make CMAKE_BUILD_TYPE=Release CMAKE_EXTRA_FLAGS="-DCMAKE_INSTALL_PREFIX=$HOME/bin/neovim"
   sudo make install
   export PATH="$HOME/bin/neovim/bin:$PATH"

@@ -26,8 +26,3 @@ if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 . "$HOME/.cargo/env"
-
-
-
-
-[ -f "/home/s/.ghcup/env" ] && . "/home/s/.ghcup/env" # ghcup-env
