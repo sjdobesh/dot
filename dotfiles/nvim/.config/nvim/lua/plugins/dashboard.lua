@@ -47,7 +47,7 @@ return {
 				icon = " 󰗚 ",
 				desc = " sessions ",
 				key = "s",
-				action = "Telescope session-lens",
+				action = "lua require('telescope').extensions.session-lens.search_session()",
 				group = "DashboardRecentFiles",
 			},
 

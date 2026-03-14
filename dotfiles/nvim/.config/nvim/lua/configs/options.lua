@@ -3,30 +3,30 @@
 -- options -------------------------------------------------------------------80
 
 -- core
-vim.opt.number         = true     -- line numbering
-vim.opt.relativenumber = true     -- relative line numbering
-vim.opt.wrap           = false    -- no wrap
-vim.opt.signcolumn     = "number" -- lets signs and numbers share a collumn
-vim.opt.mouse          = "a"      -- mouse support
-vim.opt.spelllang      = "en-gb"  -- default dictionary
-vim.opt.path:append      "**"     -- better file nav
+vim.opt.number = true -- line numbering
+vim.opt.relativenumber = true -- relative line numbering
+vim.opt.wrap = false -- no wrap
+vim.opt.signcolumn = "number" -- lets signs and numbers share a collumn
+vim.opt.mouse = "a" -- mouse support
+vim.opt.spelllang = "en-gb" -- default dictionary
+vim.opt.path:append("**") -- better file nav
 
 -- tabs (2 tab width as spaces is default)
-vim.opt.tabstop     = 2
+vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
-vim.opt.shiftwidth  = 2
-vim.opt.expandtab   = true
-vim.opt.smarttab    = true
-vim.opt.autoindent  = true
+vim.opt.shiftwidth = 2
+vim.opt.expandtab = true
+vim.opt.smarttab = true
+vim.opt.autoindent = true
 
 -- smart searching
 vim.opt.ignorecase = true -- ignore case in searches
-vim.opt.smartcase  = true -- unless its a capital
-vim.opt.gdefault   = true
+vim.opt.smartcase = true -- unless its a capital
+vim.opt.gdefault = true
 
 -- folding
-vim.opt.foldmethod     = "syntax"
-vim.opt.foldcolumn     = "1"
+vim.opt.foldmethod = "syntax"
+vim.opt.foldcolumn = "1"
 vim.opt.foldlevelstart = 7
 
 -- terminal colors

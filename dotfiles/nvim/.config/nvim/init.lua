@@ -31,13 +31,15 @@ local plugins = {
 
   -- external configuration plugins
   require("plugins.autosession"), -- reload session data
+  require("plugins.compilebuf"),  -- compilation buffer
   require("plugins.dashboard"),   -- start screen
   require("plugins.glimmer"),     -- command animations
   require("plugins.imgpreview"),  -- image previews
   require("plugins.luaconsole"),  -- lua scratch pad
   require("plugins.lualine"),     -- status line and tabs
-  require("plugins.luxmotion"),   -- movement animations
+  require("plugins.whisk"),       -- movement animations
   require("plugins.mdpreview"),   -- render markdown into a browser
+  require("plugins.neorg"),       -- org mode
   require("plugins.oil"),         -- file viewer/editor
   require("plugins.outline"),     -- symbol viewer
   require("plugins.otree"),       -- file tree
@@ -46,6 +48,7 @@ local plugins = {
   require("plugins.telescope"),   -- fuzzy finder
   require("plugins.toggleterm"),  -- persistent term
   require("plugins.treesitter"),  -- syntax parser
+  require("plugins.yanky"),       -- yank and put manager
 
   -- lsp configurations (do last)
   require("plugins.mason"),   -- lsp manager

@@ -7,7 +7,7 @@ sudo apt update
 sudo apt upgrade -y
 sudo apt install git -y
 git clone https://github.com/sjdobesh/dot.git
-./dot/scripts/setup/.bin/setup.sh`
+./dot/scripts/bin/setup
 ```
 
 ## configs
@@ -15,9 +15,8 @@ git clone https://github.com/sjdobesh/dot.git
 - packages
     - apt packages
     - cargo packages
-- shells
-    - zsh
-    - bash
+- shell
+    - fsh
 - editor
     - nvim
 - configs
