@@ -2,6 +2,9 @@
 
 -- options -------------------------------------------------------------------80
 
+-- load filetype files after other init
+vim.cmd("filetype plugin on")
+
 -- core
 vim.opt.number = true -- line numbering
 vim.opt.relativenumber = true -- relative line numbering
@@ -29,7 +32,8 @@ vim.opt.foldmethod = "syntax"
 vim.opt.foldcolumn = "1"
 vim.opt.foldlevelstart = 7
 
--- terminal colors
+-- terminal
+vim.opt.shell = "fish"
 vim.opt.termguicolors = true
 
 -- title
@@ -41,3 +45,6 @@ vim.opt.cursorcolumn = true
 -- open new split panes to right and below (as expected)
 vim.opt.splitright = true
 vim.opt.splitbelow = true
+
+-- set plugin notifications
+vim.notify = require("notify")

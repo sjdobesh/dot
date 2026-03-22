@@ -1,20 +1,191 @@
--- s.nvim keymaps
+-- # s.nvim keymaps
+------------------------------------------------------------------------------80
+--[[
 
--- helpers -------------------------------------------------------------------80
+## core keymaps
+these are all the keymaps defined in this file
 
--- uses nvim api to recreate normal key functionality
--- usefule for conditional mappings
+| type | key | map |
+| -- | -- | -- |
+| leader | " " | leader |
+| | "\\" | local leader |
+| exiting | "<C-q>" | close  |
+| | "<C-c>" | close window |
+| | "<C-b>"| close buffer |
+| refreshing |  "<leader>/"| unhighlight search |
+| |  "<leader>r"| restart system |
+| selection |  "<A-j>" / "<A-k>" | move line/selection   |
+| navigation |  "<C-h>" / "<C-j>" / "<C-k>" / "<C-l>" | window movement |
+| | "<A-h>" / "<A-l>"| tab navigation |
+| window sizing |  "<C-w>w"| "<C-w>w"|
+| |  "<A-=>"| "<C-W>="|
+| |  "<A-_>"| "<C-W>_"|
+| |  "<A-\|>" | "<C-W>\|" |
+| terminal |"<C-q>"| escape terminal input |
+| |"<leader>cd"| cd to current buffer |
+| compilation | "<leader>?"| compile buffer |
+| | "<leader>>"| filetype specific make |
+| lsp navigation | "gd" | go to definition |
+| | "gb" | go back          |
+| | "ge" | get error        |
+| | "gi" | get info         |
+| | "gr" | get references   |
+| | "gx" | get url |
+| | "gf" | get file |
+| | "]d" | next diagnostic |
+| | "[d" | previous diagnostic |
+| | "]u" | next link |
+| | "[u" | previous link |
+| | "K" | documentation |
+| hacks | "<leader>m" | execute macros |
+| |  "<leader>8" | draws 80 char bar |
+
+
+## plugin dependent keymaps
+
+-----
+-- toggles
+| keys | command |
+|--|--|
+| "<leader>w"| stripwhitespace |
+| "<leader>f"| otree|
+| "<leader>o"| outline|
+| "<leader>d"| dashboard|
+| "<leader>u"| undotree|
+
+-----
+-- leap
+-- (s)kip to (2 letter search)
+| keys | command |
+|--|--|
+| s | leap forward |
+| S | leap backward |
+
+-----
+-- notify clear
+| keys | command |
+|--|--|
+| "<ESC>" | dismiss notification  |
+
+---
+[auto session](./lua/plugins/autosession.lua)
+| keys | command |
+|--|--|
+| "<leader>at"  | toggle |
+| "<leader>as"  | save   |
+| "<leader>ad"  | delete |
+
+---
+[telescope commands](./lua/plugins/telescope.lua)
+| keys | command |
+|--|--|
+| "<leader>tf" | files     |
+| "<leader>tr" | recent    |
+| "<leader>tg" | git       |
+| "<leader>tl" | live      |
+| "<leader>tb" | buffers   |
+| "<leader>th" | help      |
+| "<leader>td" | directory |
+| "<leader>ts" | session   |
+| "<leader>tw" | word      |
+| "<leader>tc" | color     |
+
+---
+[toggleterm](./lua/plugins/toggleterm.lua)
+| keys | command |
+|--|--|
+| "<C-t>" | toggle the term |
+
+---
+[treesitter-textobjects](./lua/plugins/treesitter.lua)
+| action | keys | command |
+| --- | --- | ---|
+| select | "am" | after function |
+| | "im" | inside function |
+| | "ac" | after class |
+| | "ic" | inside class |
+| swap | "<leader>a" | rotate args |
+|  | "<leader>A" | rotate args |
+| move | "]m" | goto next function |
+| | "[m" | goto prev function |
+| | "]M" | goto end of next function |
+| | "[M" | goto end of prev function |
+| | "\]\]" | goto next class |
+| | "[]" | goto prev class |
+| | "][" | goto end of next class |
+| | "[[" | goto end of prev class |
+| | "]o" | goto next loop|
+| | "]s" | goto next scope|
+| | "]z" | goto next fold |
+| | "]?" | goto next condition |
+| | "[?" | goto previous condition |
+
+---
+[oil](./lua/plugins/oil.lua)
+only for oil buffers
+| key | command |
+|--|--|
+| ["g?"]    | show_help     |
+| ["<CR>"]  | select        |
+| ["<A-s>"] | select        |
+| ["<A-f>"] | select        |
+| ["<A-p>"] | preview       |
+| ["<A-c>"] | close         |
+| ["-"]     | parent        |
+| ["_"]     | open_cwd      |
+| ["`"]     | cd            |
+| ["g~"]    | cd            |
+| ["gs"]    | change_sort   |
+| ["gx"]    | open_external |
+| ["g."]    | toggle_hidden |
+| ["g\\"]   | toggle_trash  |
+| ["<A-h>"] | select        |
+| ["<A-l>"] | refresh       |
+
+
+---
+[otree](lua/plugins/otree.lua)
+
+| key | command |
+| -- | -- |
+| ["<CR>"] | select          |
+| ["l"] | select             |
+| ["h"] | close_dir          |
+| ["<C-c>"] | close_win      |
+| ["<C-q>"] | close_win      |
+| ["<C-t>"] | close_win      |
+| ["-"] | goto_parent        |
+| ["<C-d>"] | goto_dir       |
+| ["<M-h>"] | goto_home_dir  |
+| ["cd"] | change_home_dir   |
+| ["L"] | open_dirs          |
+| ["H"] | close_dirs         |
+| ["o"] | oil_dir            |
+| ["O"] | oil_into_dir       |
+| ["\|"]  | open_vsplit        |
+| ["_"] | open_split         |
+| ["."] | toggle_hidden      |
+| ["i"] | toggle_ignore      |
+| ["r"] | refresh            |
+| ["f"] | focus_file         |
+| ["?"] | open_help          |
+
+]]
+
+-----
+-- helper function
+-- useful for conditional mappings and hacks
 local function feedkeys(keys, mode, escape_ks)
 	local replaced_keys = vim.api.nvim_replace_termcodes(keys, true, true, escape_ks)
 	vim.api.nvim_feedkeys(replaced_keys, mode, escape_ks)
 end
 
--- core ----------------------------------------------------------------------80
-
+-----
 -- leader
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
+-----
 -- quit / refresh
 vim.keymap.set({ "n", "i" }, "<C-q>", "<cmd>q!<CR>")
 vim.keymap.set({ "n", "i" }, "<C-c>", "<cmd>close!<CR>")
@@ -22,12 +193,14 @@ vim.keymap.set({ "n", "i" }, "<C-b>", "<cmd>bd!<CR>")
 vim.keymap.set("n", "<leader>/", "<cmd>noh<CR>")
 vim.keymap.set("n", "<leader>r", "<cmd>restart<CR>")
 
+-----
 -- move selection
 vim.keymap.set({ "n", "i" }, "<A-j>", "<cmd>m+<CR>")
 vim.keymap.set({ "n", "i" }, "<A-k>", "<cmd>m-2<CR>")
 vim.keymap.set("v", "<A-j>", "<cmd>m '>+1<CR>gv=gv")
 vim.keymap.set("v", "<A-k>", "<cmd>m '<-2<CR>gv=gv")
 
+-----
 -- window nav
 vim.keymap.set("n", "<C-h>", "<C-w>h")
 vim.keymap.set("n", "<C-j>", "<C-w>j")
@@ -38,14 +211,44 @@ vim.keymap.set("n", "<A-=>", "<C-W>=")
 vim.keymap.set("n", "<A-_>", "<C-W>_")
 vim.keymap.set("n", "<A-|>", "<C-W>|")
 
+-----
 -- buffer nav
 vim.keymap.set("n", "<A-h>", "<cmd>bprevious<CR>")
 vim.keymap.set("n", "<A-l>", "<cmd>bnext<CR>")
 
+-----
 -- terminal nav
 vim.keymap.set("t", "<C-q>", "<C-\\><C-n>")
 vim.keymap.set("n", "<leader>cd", function()
 	vim.cmd("lcd %:p:h")
+end)
+
+-----
+-- compilation
+vim.keymap.set("n", "<leader>?", ":Compile<cr>")
+vim.keymap.set("n", "<leader>>", ":make<cr>")
+
+-----
+-- lsp
+-- stylua: ignore start
+vim.keymap.set("n", "gb", "<C-O>")
+vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end)
+vim.keymap.set("n", "gi", function() vim.lsp.buf.hover() end)
+vim.keymap.set("n", "ge", function() vim.diagnostic.open_float({ scope = "line" }) end)
+vim.keymap.set("n", "gr", function() require("telescope.builtin").lsp_references() end)
+-- stylua: ignore end
+
+-----
+-- hacks
+
+-- macro wrapper
+vim.keymap.set("n", "<leader>m", function()
+	local register = vim.fn.getchar(-1, { number = false })
+	vim.cmd("WhiskDisable")
+	for _ = 1, vim.v.count1 do
+		vim.cmd("normal! @" .. register)
+	end
+	vim.cmd("WhiskEnable")
 end)
 
 -- the perfect comment seperator
@@ -63,48 +266,28 @@ vim.keymap.set("n", "<leader>8", function()
 	end
 end)
 
--- compile
-vim.keymap.set("n", "<leader>?", ":Compile<cr>")
--- make shortcut
-vim.keymap.set("n", "<leader>>", ":make<cr>")
+-----
+-- ## plugins
 
--- lsp commands
--- gd - go to definition
--- gb - go back
--- ge - get error
--- gi - get info
--- gr - get references
-
-vim.keymap.set("n", "gd", function()
-	vim.lsp.buf.definition()
-end)
-vim.keymap.set("n", "gb", "<C-O>")
-vim.keymap.set("n", "gi", function()
-	vim.lsp.buf.hover()
-end)
-vim.keymap.set("n", "ge", function()
-	vim.diagnostic.open_float({ scope = "line" })
-end)
-vim.keymap.set("n", "gr", function()
-	require("telescope.builtin").lsp_references()
-end)
-
--- leap (s)kip to (2 letter search)
-vim.keymap.set({ "n", "x", "o" }, "s", "<Plug>(leap-forward)")
-vim.keymap.set({ "n", "x", "o" }, "S", "<Plug>(leap-backward)")
-
+-----
 -- toggles
-
 vim.keymap.set("n", "<leader>w", "<cmd>StripWhitespace<CR>")
 vim.keymap.set("n", "<leader>f", "<cmd>Otree<CR>")
 vim.keymap.set("n", "<leader>o", "<cmd>Outline<CR>")
 vim.keymap.set("n", "<leader>d", "<cmd>Dashboard<CR><cmd>DisableWhitespace<CR>")
 vim.keymap.set("n", "<leader>u", "<cmd>UndotreeToggle<CR>")
 
--- keymaps
+-----
+-- leap (s)kip to (2 letter search)
+vim.keymap.set({ "n", "x", "o" }, "s", "<Plug>(leap-forward)")
+vim.keymap.set({ "n", "x", "o" }, "S", "<Plug>(leap-backward)")
 
--- (i)nside
--- (a)fter
+-----
+-- notify clear
+vim.keymap.set("n", "<Esc>", ':lua require("notify").dismiss()<CR>', { silent = true })
+
+-----
+-- nvim-treesitter-textobjects
 
 -- select
 -- function blocks
@@ -121,12 +304,8 @@ end)
 vim.keymap.set({ "x", "o" }, "ic", function()
 	require("nvim-treesitter-textobjects.select").select_textobject("@class.inner", "textobjects")
 end)
--- You can also use captures from other query groups like `locals.scm`
-vim.keymap.set({ "x", "o" }, "as", function()
-	require("nvim-treesitter-textobjects.select").select_textobject("@local.scope", "locals")
-end)
 
--- swap arguments forward or backwards
+-- swap arguments
 vim.keymap.set("n", "<leader>a", function()
 	require("nvim-treesitter-textobjects.swap").swap_next("@parameter.inner")
 end)
@@ -135,93 +314,54 @@ vim.keymap.set("n", "<leader>A", function()
 end)
 
 -- move
+-- functions next / previous
 vim.keymap.set({ "n", "x", "o" }, "]m", function()
 	require("nvim-treesitter-textobjects.move").goto_next_start("@function.outer", "textobjects")
-end)
-vim.keymap.set({ "n", "x", "o" }, "]]", function()
-	require("nvim-treesitter-textobjects.move").goto_next_start("@class.outer", "textobjects")
-end)
-vim.keymap.set({ "n", "x", "o" }, "]o", function()
-	require("nvim-treesitter-textobjects.move").goto_next_start({ "@loop.inner", "@loop.outer" }, "textobjects")
-end)
-vim.keymap.set({ "n", "x", "o" }, "]s", function()
-	require("nvim-treesitter-textobjects.move").goto_next_start("@local.scope", "locals")
-end)
-vim.keymap.set({ "n", "x", "o" }, "]z", function()
-	require("nvim-treesitter-textobjects.move").goto_next_start("@fold", "folds")
-end)
-vim.keymap.set({ "n", "x", "o" }, "]M", function()
-	require("nvim-treesitter-textobjects.move").goto_next_end("@function.outer", "textobjects")
-end)
-vim.keymap.set({ "n", "x", "o" }, "][", function()
-	require("nvim-treesitter-textobjects.move").goto_next_end("@class.outer", "textobjects")
 end)
 vim.keymap.set({ "n", "x", "o" }, "[m", function()
 	require("nvim-treesitter-textobjects.move").goto_previous_start("@function.outer", "textobjects")
 end)
-vim.keymap.set({ "n", "x", "o" }, "[[", function()
-	require("nvim-treesitter-textobjects.move").goto_previous_start("@class.outer", "textobjects")
+vim.keymap.set({ "n", "x", "o" }, "]M", function()
+	require("nvim-treesitter-textobjects.move").goto_next_end("@function.outer", "textobjects")
 end)
 vim.keymap.set({ "n", "x", "o" }, "[M", function()
 	require("nvim-treesitter-textobjects.move").goto_previous_end("@function.outer", "textobjects")
+end)
+
+-- class next / previous
+vim.keymap.set({ "n", "x", "o" }, "]]", function()
+	require("nvim-treesitter-textobjects.move").goto_next_start("@class.outer", "textobjects")
+end)
+vim.keymap.set({ "n", "x", "o" }, "][", function()
+	require("nvim-treesitter-textobjects.move").goto_next_end("@class.outer", "textobjects")
+end)
+vim.keymap.set({ "n", "x", "o" }, "[[", function()
+	require("nvim-treesitter-textobjects.move").goto_previous_start("@class.outer", "textobjects")
 end)
 vim.keymap.set({ "n", "x", "o" }, "[]", function()
 	require("nvim-treesitter-textobjects.move").goto_previous_end("@class.outer", "textobjects")
 end)
 
--- Go to either the start or the end, whichever is closer.
--- Use if you want more granular movements
-vim.keymap.set({ "n", "x", "o" }, "]d", function()
+-- next loop
+vim.keymap.set({ "n", "x", "o" }, "]o", function()
+	require("nvim-treesitter-textobjects.move").goto_next_start({ "@loop.inner", "@loop.outer" }, "textobjects")
+end)
+-- next scope
+vim.keymap.set({ "n", "x", "o" }, "]s", function()
+	require("nvim-treesitter-textobjects.move").goto_next_start("@local.scope", "locals")
+end)
+-- next fold
+vim.keymap.set({ "n", "x", "o" }, "]z", function()
+	require("nvim-treesitter-textobjects.move").goto_next_start("@fold", "folds")
+end)
+
+-- next / previous condition
+vim.keymap.set({ "n", "x", "o" }, "]?", function()
 	require("nvim-treesitter-textobjects.move").goto_next("@conditional.outer", "textobjects")
 end)
-vim.keymap.set({ "n", "x", "o" }, "[d", function()
+vim.keymap.set({ "n", "x", "o" }, "[?", function()
 	require("nvim-treesitter-textobjects.move").goto_previous("@conditional.outer", "textobjects")
 end)
--- auto session (lua/plugins/autosession.lua)
---
--- a (t)oggle
--- a (s)ave
--- a (d)elete
-
--- telescope commands (lua/plugins/telescope.lua)
---
--- t (f)iles
--- t (r)ecent
--- t (g)it
--- t (l)ive
--- t (b)uffers
--- t (h)elp
--- t (d)irectory
--- t (s)ession
--- t (w)ord
--- t (c)olor
-
--- <C-t> toggleterm (lua/plugins/toggleterm.lua)
---
---
--- oil keymaps (lua/plugins/oil.lua)
---
--- only for oil buffers
--- g?     help
--- <CR>   select
--- <A-p>  peeview
--- <A-c>  close
--- -      parent directory
--- _      open_cwd
--- ` | g~ cd
--- gs     change_sort
--- gx     open_external
--- g.     toggle_hidden
--- g\\    toggle_trash
--- <A-h>  select
--- <A-l>  refresh
---
-
---
-
---
-
---
 
 -- todo
 --

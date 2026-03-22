@@ -8,12 +8,12 @@ return {
 				scroll = true,
 			},
 			cursor = {
-				duration = 200,
-				easing = "ease-in-out",
+				duration = 150,
+				easing = "linear",
 			},
 			scroll = {
-				duration = 250,
-				easing = "ease-out",
+				duration = 150,
+				easing = "linear",
 			},
 		})
 	end,

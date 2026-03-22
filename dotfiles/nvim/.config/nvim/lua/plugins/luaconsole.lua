@@ -2,8 +2,10 @@ return {
   "yarospace/lua-console.nvim",
   lazy = true,
   keys = {
-    { "`",         desc = "Lua-console - toggle" },
+    { "`", desc = "Lua-console - toggle" },
     { "<Leader>`", desc = "Lua-console - attach to buffer" },
   },
-  opts = {},
+  opts = {
+    preserve_context = false,
+  },
 }

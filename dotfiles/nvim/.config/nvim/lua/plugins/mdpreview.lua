@@ -19,7 +19,6 @@ return {
   end,
 }
 
-
 -- for wsl
 -- vim.cmd([[
 --   function OpenMarkdownPreview (url)

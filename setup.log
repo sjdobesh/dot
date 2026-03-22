@@ -1,0 +1,65 @@
+[H[2J[3J[H[2J[3J+--------[ debian setup script ]--------+
+|                                       |
+|            [ components ]             |
+|                                       |
+|          [1] apt packages             |
+|          [2] rust                     |
+|          [3] haskell                  |
+|          [4] neovim                   |
+|          [5] git repos                |
+|          [6] docs                     |
+|          [7] stow symlinks            |
+|          [8] complete                 |
+|                                       |
+|          [q] quit                     |
+|                                       |
++---------------------------------------+
+:[H[2J[3J+--------[ debian setup script ]--------+
+|                                       |
+|         [ apt package groups ]        |
+|                                       |
+|       1. [ ] core                     |
+|       2. [ ] networking               |
+|       3. [ ] c dev                    |
+|       4. [ ] c xtras                  |
+|       5. [ ] neovim dependecies       |
+|       6. [ ] haskell dependecies      |
+|       7. [ ] additional languages     |
+|       8. [ ] full                     |
+|       9. [ ] all                      |
+|                                       |
+|          [?] package info             |
+|          [i] install                  |
+|          [u] uninstall                |
+|          [b] back                     |
+|          [q] quit                     |
+|                                       |
++---------------------------------------+
+:[H[2J[3J+--------[ debian setup script ]--------+
+|                                       |
+|         [ apt package groups ]        |
+|                                       |
+|       1. [x] core                     |
+|       2. [x] networking               |
+|       3. [x] c dev                    |
+|       4. [x] c xtras                  |
+|       5. [x] neovim dependecies       |
+|       6. [x] haskell dependecies      |
+|       7. [x] additional languages     |
+|       8. [x] full                     |
+|       9. [x] all                      |
+|                                       |
+|          [?] package info             |
+|          [i] install                  |
+|          [u] uninstall                |
+|          [b] back                     |
+|          [q] quit                     |
+|                                       |
++---------------------------------------+
+:[ proposed command ]
+
+sudo apt-get install -y curl git ssh vim iproute2 net-tools bear build-essential clang clang-tools cmake gdb lldb valgrind libclang-dev libncurses-dev libpng-dev libsdl3-dev libsdl3-image-dev libsdl3-ttf-dev gettext ninja-build liblua5.1-0-dev libffi-dev libffi8 libgmp-dev libgmp10 libncurses6 libtinfo6 pkg-config default-jdk gnucobol perl python3 python3-pip debian-goodies lsof fdisk feh figlet fuse fzf moreutils tcc rsync stow wget zip zsh
+
+[ approve execution? (y/n) ] > /home/valentine/bin/setup: line 1088: read: read error: 0: Input/output error
+
+[ aborting install ]

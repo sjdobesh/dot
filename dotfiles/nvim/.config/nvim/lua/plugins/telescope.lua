@@ -2,6 +2,7 @@ return {
 	{ "zane-/cder.nvim" },
 	{
 		"nvim-telescope/telescope.nvim",
+		lazy = false,
 		keys = {
 			{ "<leader>tf", "<cmd>Telescope find_files<cr>" },
 			{ "<leader>tr", "<cmd>Telescope old_files<cr>" },

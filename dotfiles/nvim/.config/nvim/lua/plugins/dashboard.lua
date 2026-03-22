@@ -33,6 +33,14 @@ return {
 				action = "ene | startinsert",
 				group = "DashboardNewFile", -- highlight group
 			},
+			-- open notes file
+			{
+				icon = "  ",
+				desc = " notes",
+				key = "n",
+				action = "cd ~ | e ~/projects/todo.org",
+				group = "DashboardNewFile", -- highlight group
+			},
 
 			-- search
 			{
@@ -47,12 +55,12 @@ return {
 				icon = " 󰗚 ",
 				desc = " sessions ",
 				key = "s",
-				action = "lua require('telescope').extensions.session-lens.search_session()",
+				action = ":Telescope session-lens",
 				group = "DashboardRecentFiles",
 			},
 
 			{
-				icon = "  ",
+				icon = "  ",
 				desc = " grep",
 				key = "g",
 				action = "lua require('telescope.builtin').live_grep()",
@@ -62,7 +70,7 @@ return {
 			-- config files
 			{
 				icon = "  ",
-				desc = " vimconfig",
+				desc = " vim",
 				key = "v",
 				action = "cd ~/dot/dotfiles/nvim/.config/nvim/ | e ./init.lua | LazyDev ",
 				-- action = "lcd %:p:h",
@@ -70,13 +78,20 @@ return {
 			},
 
 			{
-				icon = "  ",
-				desc = " zconfig",
-				key = "z",
-				action = "cd ~ | e ./.zshrc",
+				icon = " 󰈺 ",
+				desc = " fish",
+				key = "f",
+				action = "cd ~ | e ./.config/fish/config.fish",
 				group = "DashboardConfig",
 			},
 
+			{
+				icon = " 󰄛 ",
+				desc = " kitty",
+				key = "k",
+				action = "cd ~ | e ./.config/kitty/kitty.conf",
+				group = "DashboardConfig",
+			},
 			{
 				icon = "  ",
 				desc = " lconfig",
@@ -121,6 +136,7 @@ return {
 		db.setup({
 			theme = "doom", -- "hyper" or "doom"
 			config = {
+				padding = 0,
 				header = custom_header,
 				center = custom_shortcuts,
 				footer = custom_footer,
