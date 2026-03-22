@@ -33,6 +33,7 @@ local plugins = {
   { "https://codeberg.org/andyg/leap.nvim" }, -- leap command
 
   -- external configuration plugins
+  require("plugins.align"),       -- align by X (ala EMACS)
   require("plugins.autosession"), -- reload session data
   require("plugins.compilebuf"),  -- compilation buffer
   require("plugins.dashboard"),   -- start screen

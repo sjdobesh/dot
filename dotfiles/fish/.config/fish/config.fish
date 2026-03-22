@@ -55,6 +55,9 @@ if status is-interactive
         end
     end
 
+    # spotify flatpak
+    alias spotify="flatpak run com.spotify.Client"
+
 
     # conditional mappings for rust replacements
     # act as original when piping io but have richer interactive UIs
@@ -85,5 +88,11 @@ if status is-interactive
     # settings
     set -g fish_key_bindings fish_vi_key_bindings
     set -g fish_greeting
+
+    # access vim arrows in insert mode for auto complete
+    bind -M insert \ch backward-char
+    bind -M insert \cj down-or-search
+    bind -M insert \ck up-or-search
+    bind -M insert \cl forward-char
 
 end
