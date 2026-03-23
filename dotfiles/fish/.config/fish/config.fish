@@ -68,6 +68,8 @@ if status is-interactive
         alias ls="eza -l -T --level 1"
         alias la="eza -la -T --level 1"
         alias l.="eza -lad -T --level 1 .*"
+        alias lsa="eza -l -T --absolute --level 1"
+        alias laa="eza -la -T --absolute --level 1"
     end
 
     # grep replacement

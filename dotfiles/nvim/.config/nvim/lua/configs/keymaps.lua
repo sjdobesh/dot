@@ -196,8 +196,8 @@ vim.keymap.set("n", "<leader>r", "<cmd>restart<CR>")
 -- move selection
 vim.keymap.set({ "n", "i" }, "<A-j>", "<cmd>m+<CR>")
 vim.keymap.set({ "n", "i" }, "<A-k>", "<cmd>m-2<CR>")
-vim.keymap.set("v", "<A-j>", "<cmd>m '>+1<CR>gv=gv")
-vim.keymap.set("v", "<A-k>", "<cmd>m '<-2<CR>gv=gv")
+vim.keymap.set("x", "<A-k>", ":move '<-2<CR>gv=gv", { silent = true })
+vim.keymap.set("x", "<A-j>", ":move '>+1<CR>gv=gv", { silent = true })
 
 ----
 -- append/prepend visual
@@ -242,7 +242,7 @@ vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end)
 vim.keymap.set("n", "gi", function() vim.lsp.buf.hover() end)
 vim.keymap.set("n", "ge", function() vim.diagnostic.open_float({ scope = "line" }) end)
 vim.keymap.set("n", "gr", function() require("telescope.builtin").lsp_references() end)
-vim.api.nvim_set_keymap('n', 'gF', ':e <cfile><CR>', { noremap = true, silent = true }) -- better get file
+vim.api.nvim_set_keymap('n', 'gF', ':e <cfile><CR>', { noremap = true, silent = false}) -- better get file
 -- stylua: ignore end
 
 -----

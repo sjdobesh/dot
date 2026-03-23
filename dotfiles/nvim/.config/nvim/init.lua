@@ -53,8 +53,7 @@ local plugins = {
   require("plugins.timers"),      -- timer manager
   require("plugins.toggleterm"),  -- persistent term
   require("plugins.treesitter"),  -- syntax parser
-  require("plugins.urlview"),     -- url manager
-  require("plugins.whisk"),       -- movement animations
+ require("plugins.urlview"),     -- url manager
   require("plugins.yanky"),       -- yank and put manager
 
   -- lsp configurations
