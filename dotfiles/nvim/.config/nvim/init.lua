@@ -1,4 +1,5 @@
 -- # s.nvim init
+-- [github](https://github.com/sjdobesh/dot)
 ------------------------------------------------------------------------------80
 --[[
 
@@ -30,7 +31,7 @@ local plugins = {
   { "airblade/vim-gitgutter" },               -- git gutter in sign column
   { "nvim-tree/nvim-web-devicons" },          -- icons (common dependency)
   { "ntpeters/vim-better-whitespace" },       -- whitespace management
-  { "https://codeberg.org/andyg/leap.nvim" }, -- leap command
+  { "https://codeberg.org/andyg/leap.nvim" }, -- leap command (sneak but better)
 
   -- external configuration plugins
   require("plugins.align"),       -- align by X (ala EMACS)
@@ -53,8 +54,8 @@ local plugins = {
   require("plugins.timers"),      -- timer manager
   require("plugins.toggleterm"),  -- persistent term
   require("plugins.treesitter"),  -- syntax parser
- require("plugins.urlview"),     -- url manager
-  require("plugins.yanky"),       -- yank and put manager
+  require("plugins.urlview"),     -- url manager
+  require("plugins.yanky"),       -- kill ring
 
   -- lsp configurations
   require("plugins.mason"),   -- lsp manager

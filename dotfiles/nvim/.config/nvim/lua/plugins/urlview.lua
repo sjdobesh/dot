@@ -1,5 +1,5 @@
 return {
-  "axieax/urlview.nvim",
+  "sjdobesh/urlview.nvim",
   lazy = false,
   config = function()
     require("urlview").setup({
