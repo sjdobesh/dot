@@ -47,7 +47,7 @@ local plugins = {
   require("plugins.mdpreview"),   -- render markdown into a browser
   require("plugins.neorg"),       -- org mode
   require("plugins.neotree"),     -- file tree
-  require("plugins.notify"),      -- nice notification
+  require("plugins.notify"),      -- nice notifications
   require("plugins.oil"),         -- file viewer/editor
   require("plugins.outline"),     -- symbol viewer
   require("plugins.rendermd"),    -- render markdown in terminal
@@ -57,6 +57,7 @@ local plugins = {
   require("plugins.toggleterm"),  -- persistent term
   require("plugins.treesitter"),  -- syntax parser
   require("plugins.linkview"),    -- link manager
+  require("plugins.whichkey"),    -- key descriptions (ala hydra)
   require("plugins.yanky"),       -- kill ring
 }
 

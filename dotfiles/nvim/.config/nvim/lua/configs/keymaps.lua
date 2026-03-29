@@ -1,10 +1,6 @@
 -- # s.nvim keymaps
 ------------------------------------------------------------------------------80
---[[
 
-## core keymaps
-]]
------
 -- helper function
 -- useful for conditional mappings and hacks
 local function feedkeys(keys, mode, escape_ks)
@@ -19,62 +15,59 @@ vim.g.maplocalleader = "\\"
 
 -----
 -- quit / refresh
-vim.keymap.set({ "n", "i" }, "<C-q>", "<cmd>q!<CR>")
-vim.keymap.set({ "n", "i" }, "<C-c>", "<cmd>close!<CR>")
-vim.keymap.set({ "n", "i" }, "<C-b>", "<cmd>bd!<CR>")
-vim.keymap.set("n", "<leader>/", "<cmd>noh<CR>")
-vim.keymap.set("n", "<leader>r", "<cmd>restart<CR>")
+vim.keymap.set({ "n", "i" }, "<C-q>", "<cmd>q!<CR>", { desc = "close program" })
+vim.keymap.set({ "n", "i" }, "<C-c>", "<cmd>close!<CR>", { desc = "close window" })
+vim.keymap.set({ "n", "i" }, "<C-b>", "<cmd>bd!<CR>", { desc = "close buffer" })
+vim.keymap.set("n", "<leader>/", "<cmd>noh<CR>", { desc = "clear highlights" })
+vim.keymap.set("n", "<leader>r", "<cmd>restart<CR>", { desc = "restart neovim" })
 
 -----
 -- move selection
-vim.keymap.set({ "n", "i" }, "<A-j>", "<cmd>m+<CR>")
-vim.keymap.set({ "n", "i" }, "<A-k>", "<cmd>m-2<CR>")
+vim.keymap.set({ "n", "i" }, "<A-j>", "<cmd>m+<CR>", { desc = "move line down" })
+vim.keymap.set({ "n", "i" }, "<A-k>", "<cmd>m-2<CR>", { desc = "move line up" })
 vim.keymap.set("x", "<A-k>", ":move '<-2<CR>gv=gv", { desc = "move selection up" })
 vim.keymap.set("x", "<A-j>", ":move '>+1<CR>gv=gv", { desc = "move selection down" })
-vim.keymap.set("n", "<S-h>", "Xph", { silent = true })
-vim.keymap.set("n", "<S-l>", "xp", { silent = true })
--- rotate letters
-vim.keymap.set("v", "<S-h>", "xhPgv=gv", { desc = "rotate selection left" })
-vim.keymap.set("v", "<S-l>", "xpgv=gv", { desc = "rotate selection right" })
+vim.keymap.set("n", "<A-h>", "Xph", { desc = "move character left" })
+vim.keymap.set("n", "<A-l>", "xp", { desc = "move character right" })
+vim.keymap.set("v", "<A-h>", "xhPgv=gv", { desc = "rotate selection left" })
+vim.keymap.set("v", "<A-l>", "xpgv=gv", { desc = "rotate selection right" })
 
 -----
 -- append/prepend visual
 vim.keymap.set("x", "<C-a>", function()
   local arg = vim.fn.input("append: ")
   feedkeys(": '<,'>normal A" .. arg .. "<CR>", "v", true)
-end)
+end, { desc = "append to selection" })
 vim.keymap.set("x", "<C-i>", function()
   local arg = vim.fn.input("prepend: ")
   feedkeys(": '<,'>normal I" .. arg .. "<CR>", "v", true)
-end)
+end, { desc = "prepend to selection" })
 
 -----
 -- window nav
-vim.keymap.set("n", "<C-h>", "<C-w>h")
-vim.keymap.set("n", "<C-j>", "<C-w>j")
-vim.keymap.set("n", "<C-k>", "<C-w>k")
-vim.keymap.set("n", "<C-l>", "<C-w>l")
-vim.keymap.set("n", "<C-w>w", "<C-w>w")
-vim.keymap.set("n", "<A-=>", "<C-W>=")
-vim.keymap.set("n", "<A-_>", "<C-W>_")
-vim.keymap.set("n", "<A-|>", "<C-W>|")
+vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "move window left" })
+vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "move window down" })
+vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "move window up" })
+vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "move window right" })
+vim.keymap.set("n", "<C-w>", "<C-w>w", { desc = "toggle windows" })
 
 -----
 -- buffer nav
-vim.keymap.set("n", "<A-h>", "<cmd>bprevious<CR>")
-vim.keymap.set("n", "<A-l>", "<cmd>bnext<CR>")
+vim.keymap.set("n", "<S-h>", "<cmd>bprevious<CR>", { desc = "tab left" })
+vim.keymap.set("n", "<S-l>", "<cmd>bnext<CR>", { desc = "tab right" })
 
 -----
 -- terminal nav
-vim.keymap.set("t", "<C-q>", "<C-\\><C-n>")
+vim.keymap.set("t", "<C-q>", "<C-\\><C-n>", { desc = "escape terminal capture" })
 vim.keymap.set("n", "<leader>cd", function()
   vim.cmd("cd %:p:h")
-end)
+end, { desc = "cd to current file" })
 
 -----
 -- compilation
-vim.keymap.set("n", "<leader>?", ":Compile<cr>")
-vim.keymap.set("n", "<leader>>", ":make<cr>")
+vim.keymap.set("n", "<leader><", ":Compile<cr>", { desc = "compile buffer" })
+vim.keymap.set("n", "<leader>>", ":Recompile<cr>", { desc = "rerun compile buffer" })
+vim.keymap.set("n", "<leader>!", ":make<cr>", { desc = "filetype make" })
 
 local function bangbuf(cmd)
   -- write objdump to new file
@@ -85,13 +78,13 @@ local function bangbuf(cmd)
 end
 
 vim.keymap.set("n", "<leader>so", function()
-  cmd = vim.fn.input(":buf!")
+  local cmd = vim.fn.input(":buf!")
   if cmd == "" then
     return
   else
     bangbuf(cmd)
   end
-end)
+end, { desc = "dump shell output to new buffer" })
 
 -- write hex to new file
 vim.keymap.set("n", "<leader>x", function()
@@ -102,7 +95,7 @@ vim.keymap.set("n", "<leader>x", function()
   vim.api.nvim_set_current_buf(target_buf)
   feedkeys(":%!xxd<cr>", "n", true)
   vim.g.hexmode = true
-end)
+end, { desc = "dump current file hex to new buffer" })
 
 -- toggle current file
 vim.g.hexmode = false
@@ -113,16 +106,16 @@ vim.keymap.set("n", "<leader>X", function()
     feedkeys(":%!xxd -r<cr>", "n", true)
   end
   vim.g.hexmode = not vim.g.hexmode
-end)
+end, { desc = "toggle hex view" })
 
 -----
 -- lsp
 -- stylua: ignore start
-vim.keymap.set("n", "gb", "<C-O>")
-vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end)
-vim.keymap.set("n", "gi", function() vim.lsp.buf.hover() end)
-vim.keymap.set("n", "ge", function() vim.diagnostic.open_float({ scope = "line" }) end)
-vim.keymap.set("n", "gr", function() require("telescope.builtin").lsp_references() end)
+vim.keymap.set("n", "gb", "<C-O>", { desc = "go back" })
+vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, { desc = "get definition" })
+vim.keymap.set("n", "gi", function() vim.lsp.buf.hover() end, { desc = "get information" })
+vim.keymap.set("n", "ge", function() vim.diagnostic.open_float({ scope = "line" }) end, { desc = "get error" })
+vim.keymap.set("n", "gr", function() require("telescope.builtin").lsp_references() end, { desc = "get references" })
 
 -- make a new file path from a word
 -- ie ./folder/newrelativefile.txt
@@ -134,7 +127,7 @@ local function makeNewFile()
     feedkeys(":e " .. newpath .. "<cr>", "n", true)
   end
 end
-vim.keymap.set("n", "gnf", function() makeNewFile() end)
+vim.keymap.set("n", "gnf", function() makeNewFile() end, { desc = "get new file under cursor" })
 -- stylua: ignore end
 
 -----
@@ -143,12 +136,10 @@ vim.keymap.set("n", "gnf", function() makeNewFile() end)
 -- macro wrapper
 vim.keymap.set("n", "<leader>m", function()
   local register = vim.fn.getchar(-1, { number = false })
-  vim.cmd("WhiskDisable")
   for _ = 1, vim.v.count1 do
     vim.cmd("normal! @" .. register)
   end
-  vim.cmd("WhiskEnable")
-end)
+end, { desc = "run macro" })
 
 -- the perfect comment seperator
 vim.keymap.set("n", "<leader>8", function()
@@ -169,24 +160,24 @@ end)
 -- ## plugins
 
 -- toggles
-vim.keymap.set("n", "<leader>w", "<cmd>StripWhitespace<CR>")
+vim.keymap.set("n", "<leader>w", "<cmd>StripWhitespace<CR>", { desc = "strip whitespace" })
 vim.g.otreeopen = false -- default is false
 vim.keymap.set("n", "<leader>f", function()
   vim.g.neotreeopen = not vim.g.otreeopen
   vim.cmd("Neotree toggle")
-end)
-vim.keymap.set("n", "<leader>o", "<cmd>Outline<CR>")
-vim.keymap.set("n", "<leader>d", "<cmd>Dashboard<CR><cmd>DisableWhitespace<CR>")
-vim.keymap.set("n", "<leader>u", "<cmd>UndotreeToggle<CR>")
+end, { desc = "toggle neotree and record state for autosession" })
+vim.keymap.set("n", "<leader>o", "<cmd>Outline<CR>", { desc = "toggle symbol viewer" })
+vim.keymap.set("n", "<leader>d", "<cmd>Dashboard<CR><cmd>DisableWhitespace<CR>", { desc = "open dashboard" })
+vim.keymap.set("n", "<leader>u", "<cmd>UndotreeToggle<CR>", { desc = "toggle undotree" })
 
 -----
 -- leap (s)kip to (2 letter search)
-vim.keymap.set({ "n", "x", "o" }, "s", "<Plug>(leap-forward)")
-vim.keymap.set({ "n", "x", "o" }, "S", "<Plug>(leap-backward)")
+vim.keymap.set({ "n", "x", "o" }, "s", "<Plug>(leap-forward)", { desc = "2 letter search forwards" })
+vim.keymap.set({ "n", "x", "o" }, "S", "<Plug>(leap-backward)", { desc = "2 letter search backwards" })
 
 -----
 -- notify clear
-vim.keymap.set("n", "<Esc>", ':lua require("notify").dismiss()<CR>', { silent = true })
+vim.keymap.set("n", "<Esc>", ':lua require("notify").dismiss()<CR>', { desc = "dismiss fancy notifications" })
 
 -----
 -- nvim-treesitter-textobjects
@@ -195,92 +186,72 @@ vim.keymap.set("n", "<Esc>", ':lua require("notify").dismiss()<CR>', { silent = 
 -- function blocks
 vim.keymap.set({ "x", "o" }, "am", function()
   require("nvim-treesitter-textobjects.select").select_textobject("@function.outer", "textobjects")
-end)
+end, { desc = "select around function" })
 vim.keymap.set({ "x", "o" }, "im", function()
   require("nvim-treesitter-textobjects.select").select_textobject("@function.inner", "textobjects")
-end)
+end, { desc = "select inside function" })
 -- class blocks
 vim.keymap.set({ "x", "o" }, "ac", function()
   require("nvim-treesitter-textobjects.select").select_textobject("@class.outer", "textobjects")
-end)
+end, { desc = "select around class" })
 vim.keymap.set({ "x", "o" }, "ic", function()
   require("nvim-treesitter-textobjects.select").select_textobject("@class.inner", "textobjects")
-end)
+end, { desc = "select inside class" })
 
 -- swap arguments
 vim.keymap.set("n", "<leader>a", function()
   require("nvim-treesitter-textobjects.swap").swap_next("@parameter.inner")
-end)
+end, { desc = "swap next arg" })
 vim.keymap.set("n", "<leader>A", function()
   require("nvim-treesitter-textobjects.swap").swap_previous("@parameter.outer")
-end)
+end, { desc = "swap prev arg" })
 
 -- move
 -- functions next / previous
 vim.keymap.set({ "n", "x", "o" }, "]m", function()
   require("nvim-treesitter-textobjects.move").goto_next_start("@function.outer", "textobjects")
-end)
+end, { desc = "goto next function" })
 vim.keymap.set({ "n", "x", "o" }, "[m", function()
   require("nvim-treesitter-textobjects.move").goto_previous_start("@function.outer", "textobjects")
-end)
+end, { desc = "goto previous function" })
 vim.keymap.set({ "n", "x", "o" }, "]M", function()
   require("nvim-treesitter-textobjects.move").goto_next_end("@function.outer", "textobjects")
-end)
+end, { desc = "goto next function end" })
 vim.keymap.set({ "n", "x", "o" }, "[M", function()
   require("nvim-treesitter-textobjects.move").goto_previous_end("@function.outer", "textobjects")
-end)
+end, { desc = "goto previous function end" })
 
 -- class next / previous
 vim.keymap.set({ "n", "x", "o" }, "]]", function()
   require("nvim-treesitter-textobjects.move").goto_next_start("@class.outer", "textobjects")
-end)
-vim.keymap.set({ "n", "x", "o" }, "][", function()
-  require("nvim-treesitter-textobjects.move").goto_next_end("@class.outer", "textobjects")
-end)
+end, { desc = "goto next class" })
 vim.keymap.set({ "n", "x", "o" }, "[[", function()
   require("nvim-treesitter-textobjects.move").goto_previous_start("@class.outer", "textobjects")
-end)
+end, { desc = "goto previous class" })
+vim.keymap.set({ "n", "x", "o" }, "][", function()
+  require("nvim-treesitter-textobjects.move").goto_next_end("@class.outer", "textobjects")
+end, { desc = "goto next class end" })
 vim.keymap.set({ "n", "x", "o" }, "[]", function()
   require("nvim-treesitter-textobjects.move").goto_previous_end("@class.outer", "textobjects")
-end)
+end, { desc = "goto previous class end" })
 
 -- next loop
 vim.keymap.set({ "n", "x", "o" }, "]o", function()
   require("nvim-treesitter-textobjects.move").goto_next_start({ "@loop.inner", "@loop.outer" }, "textobjects")
-end)
+end, { desc = "goto next loop start" })
 -- next scope
 vim.keymap.set({ "n", "x", "o" }, "]s", function()
   require("nvim-treesitter-textobjects.move").goto_next_start("@local.scope", "locals")
-end)
+end, { desc = "goto next scope" })
 -- next fold
 vim.keymap.set({ "n", "x", "o" }, "]z", function()
   require("nvim-treesitter-textobjects.move").goto_next_start("@fold", "folds")
-end)
+end, { desc = "goto next fold" })
 
 -- next / previous condition
 vim.keymap.set({ "n", "x", "o" }, "]?", function()
   require("nvim-treesitter-textobjects.move").goto_next("@conditional.outer", "textobjects")
-end)
+end, { desc = "goto next conditional" })
 vim.keymap.set({ "n", "x", "o" }, "[?", function()
   require("nvim-treesitter-textobjects.move").goto_previous("@conditional.outer", "textobjects")
-end)
-
--- todo
---
--- dap commands
---
--- local dap = require("dap")
--- local dapui = require("dapui")
--- --
--- vim.keymap.set("n", "<leader>b", "<cmd>DapToggleBreakpoint<cr>")
--- vim.keymap.set("n", "<leader><", function()
--- 	dapui.toggle()
--- end)
--- -- -- vim.keymap.set("n", "<F5>", dap.continue, { desc = "Debug: Start/Continue" })
--- -- -- vim.keymap.set("n", "<F1>", dap.step_into, { desc = "Debug: Step Into" })
--- -- -- vim.keymap.set("n", "<F2>", dap.step_over, { desc = "Debug: Step Over" })
--- -- -- vim.keymap.set("n", "<F3>", dap.step_out, { desc = "Debug: Step Out" })
--- vim.keymap.set("n", "<F5>", dap.continue, { desc = "Debug: Start/Continue" })
--- vim.keymap.set("n", "<F1>", dap.step_into, { desc = "Debug: Step Into" })
--- vim.keymap.set("n", "<F2>", dap.step_over, { desc = "Debug: Step Over" })
--- vim.keymap.set("n", "<F3>", dap.step_out, { desc = "Debug: Step Out" })
+end, { desc = "goto previous conditional" })

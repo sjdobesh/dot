@@ -52,8 +52,7 @@ CXTRA=(
 
 
 # haskell ghc dependencies (https://www.haskell.org/ghcup/install/)
-HASKELL_DEP=(
-  "build-essential"
+HASKELL_DEP=( "build-essential"
   "curl"
   "libffi-dev"
   "libffi8"
@@ -1326,9 +1325,14 @@ main_menu_prompt() {
       "4" ) nvim_prompt    ;;
       "5" ) repo_prompt    ;;
       "6" ) doc_prompt     ;;
+      # TODO FINISH THESE
     esac
   done
 }
+# TODO add kitten config
+# install from source for latest kittens (mpv panel etc)
+# kitten themes --reload-in=all Rosé Pine
+# kitten fonts --reload-in=all Rosé Pine
 
 # start log & prompt
 LOG_FILE="setup.log"

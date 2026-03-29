@@ -2,16 +2,17 @@ if status is-interactive
     # aliases
 
     # command abbreviations
-    alias v "nvim"
-    alias o "xdg-open"
-    alias g "git"
-    alias mv "mv -i"
-    alias diff "diff --color=auto"
-    alias ip "ip -c=auto"
-    alias feh "feh -Zx -g 1920x1080 -B black --force-alias --auto-reload"
-    alias icat "kitten icat"
-    alias video "mpv --profile=sw-fast --vo=kitty --vo-kitty-use-shm=yes --really-quiet"
-    alias 80 "echo --------------------------------------------------------------------------------"
+    abbr --add v "nvim"
+    abbr --add o "xdg-open"
+    abbr --add g "git"
+    abbr --add mv "mv -i"
+    abbr --add ly "lynx"
+    abbr --add l2 "links2"
+    abbr --add diff "kitten diff"
+    abbr --add ip "ip -c=auto"
+    abbr --add feh "feh -Zx -g 1920x1080 -B black --force-alias --auto-reload"
+    abbr --add icat "kitten icat"
+    abbr --add video "mpv --profile=sw-fast --vo=kitty --vo-kitty-use-shm=yes --really-quiet"
 
     # symlink management
     alias upstow "cd ~/dot/dotfiles/; stow --no-folding -vt ~ */; cd -"
@@ -55,10 +56,6 @@ if status is-interactive
         end
     end
 
-    # spotify flatpak
-    alias spotify="flatpak run com.spotify.Client"
-
-
     # conditional mappings for rust replacements
     # act as original when piping io but have richer interactive UIs
 
@@ -86,6 +83,7 @@ if status is-interactive
     fish_add_path ~/bin
     fish_add_path ~/bin/neovim/bin
     fish_add_path ~/.cargo/bin
+    fish_add_path ~/public/kitty/kitty/launcher/kitty
 
     # settings
     set -g fish_key_bindings fish_vi_key_bindings
