@@ -86,6 +86,7 @@ if status is-interactive
     fish_add_path ~/public/kitty/kitty/launcher/kitty
 
     # settings
+    set -x BROWSER lynx
     set -g fish_key_bindings fish_vi_key_bindings
     set -g fish_greeting
 

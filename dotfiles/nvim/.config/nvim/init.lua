@@ -2,14 +2,12 @@
 -- [github](https://github.com/sjdobesh/dot)
 ------------------------------------------------------------------------------80
 --[[
-
 main init.lua for my nvim rice
 ## toc
   - [plugins](./lua/plugins/)
   - [keymaps](./lua/configs/keymaps.lua)
   - [options](./lua/configs/options.lua)
   - [colorschemes](./lua/configs/colorschemes.lua)
-
 ]]
 -- ---
 -- ## [plugin table](./ftplugin/c.lua)
@@ -40,7 +38,8 @@ local plugins = {
   require("plugins.conform"),     -- formatter
   require("plugins.dashboard"),   -- start screen
   require("plugins.glimmer"),     -- command animations
-  -- require("plugins.imgpreview"),  -- image previews
+  require("plugins.imagenvim"),   -- image support for injected languages (3rd)
+  require("plugins.imagesnacks"), -- main image support (folke)
   require("plugins.luaconsole"),  -- lua scratch pad
   require("plugins.lualine"),     -- status line and tabs
   require("plugins.mason"),       -- lsp manager
