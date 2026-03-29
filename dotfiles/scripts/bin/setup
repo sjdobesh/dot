@@ -86,14 +86,14 @@ PROG_LANGS=(
 
 # everything else
 FULL=(
-  "debian-goodies" # deb tools
+#  "debian-goodies" # deb tools
   "lsof"           # list open files
   "fdisk"          # format disk
   "feh"            # image viewer
   "figlet"         # ascii art
   "fuse"           # needed to run app images
   "fzf"            # fuzzy finder
-  "moreutils"      # extra bash tools
+#  "moreutils"      # extra bash tools
   "tcc"            # tiny c compiler
   "rsync"          # recursive directory syncer
   "stow"           # symlink manager

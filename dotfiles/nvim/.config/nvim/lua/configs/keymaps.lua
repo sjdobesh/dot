@@ -3,43 +3,6 @@
 --[[
 
 ## core keymaps
-these are all the keymaps defined in this file
-
-| type | key | map |
-| -- | -- | -- |
-| leader | " " | leader |
-| | "\\" | local leader |
-| exiting | "<C-q>" | close  |
-| | "<C-c>" | close window |
-| | "<C-b>"| close buffer |
-| refreshing |  "<leader>/"| unhighlight search |
-| |  "<leader>r"| restart system |
-| selection |  "<A-j>" / "<A-k>" | move line/selection   |
-| navigation |  "<C-h>" / "<C-j>" / "<C-k>" / "<C-l>" | window movement |
-| | "<A-h>" / "<A-l>"| tab navigation |
-| window sizing |  "<C-w>w"| "<C-w>w"|
-| |  "<A-=>"| "<C-W>="|
-| |  "<A-_>"| "<C-W>_"|
-| |  "<A-\|>" | "<C-W>\|" |
-| terminal |"<C-q>"| escape terminal input |
-| |"<leader>cd"| cd to current buffer |
-| compilation | "<leader>?"| compile buffer |
-| | "<leader>>"| filetype specific make |
-| lsp navigation | "gd" | go to definition |
-| | "gb" | go back          |
-| | "ge" | get error        |
-| | "gi" | get info         |
-| | "gr" | get references   |
-| | "gx" | get url |
-| | "gf" | get file |
-| | "]d" | next diagnostic |
-| | "[d" | previous diagnostic |
-| | "]u" | next link |
-| | "[u" | previous link |
-| | "K" | documentation |
-| hacks | "<leader>m" | execute macros |
-| |  "<leader>8" | draws 80 char bar |
-
 ]]
 -----
 -- helper function
@@ -66,8 +29,13 @@ vim.keymap.set("n", "<leader>r", "<cmd>restart<CR>")
 -- move selection
 vim.keymap.set({ "n", "i" }, "<A-j>", "<cmd>m+<CR>")
 vim.keymap.set({ "n", "i" }, "<A-k>", "<cmd>m-2<CR>")
-vim.keymap.set("x", "<A-k>", ":move '<-2<CR>gv=gv", { silent = true })
-vim.keymap.set("x", "<A-j>", ":move '>+1<CR>gv=gv", { silent = true })
+vim.keymap.set("x", "<A-k>", ":move '<-2<CR>gv=gv", { desc = "move selection up" })
+vim.keymap.set("x", "<A-j>", ":move '>+1<CR>gv=gv", { desc = "move selection down" })
+vim.keymap.set("n", "<S-h>", "Xph", { silent = true })
+vim.keymap.set("n", "<S-l>", "xp", { silent = true })
+-- rotate letters
+vim.keymap.set("v", "<S-h>", "xhPgv=gv", { desc = "rotate selection left" })
+vim.keymap.set("v", "<S-l>", "xpgv=gv", { desc = "rotate selection right" })
 
 -----
 -- append/prepend visual
@@ -100,7 +68,7 @@ vim.keymap.set("n", "<A-l>", "<cmd>bnext<CR>")
 -- terminal nav
 vim.keymap.set("t", "<C-q>", "<C-\\><C-n>")
 vim.keymap.set("n", "<leader>cd", function()
-  vim.cmd("lcd %:p:h")
+  vim.cmd("cd %:p:h")
 end)
 
 -----
@@ -166,7 +134,7 @@ local function makeNewFile()
     feedkeys(":e " .. newpath .. "<cr>", "n", true)
   end
 end
-vim.keymap.set("n", "gnf", function() makeNewFile() end )
+vim.keymap.set("n", "gnf", function() makeNewFile() end)
 -- stylua: ignore end
 
 -----
@@ -199,144 +167,13 @@ end)
 
 -----
 -- ## plugins
---[[
 
-todo
-(./lua/plugins/align.lua)
-
------
--- toggles
-| keys | command |
-|--|--|
-| "<leader>w"| stripwhitespace |
-| "<leader>f"| otree|
-| "<leader>o"| outline|
-| "<leader>d"| dashboard|
-| "<leader>u"| undotree|
-
------
-[leap](./init.lua)
-(s)kip to (2 letter search)
-| keys | command |
-|--|--|
-| s | leap forward |
-| S | leap backward |
-
------
-[notify](./lua/plugins/notify.lua)
-| keys | command |
-|--|--|
-| "<ESC>" | dismiss notification  |
-
----
-[auto session](./lua/plugins/autosession.lua)
-| keys | command |
-|--|--|
-| "<leader>at"  | toggle |
-| "<leader>as"  | save   |
-| "<leader>ad"  | delete |
-
----
-[telescope commands](./lua/plugins/telescope.lua)
-| keys | command |
-|--|--|
-| "<leader>tf" | files     |
-| "<leader>tr" | recent    |
-| "<leader>tg" | git       |
-| "<leader>tl" | live      |
-| "<leader>tb" | buffers   |
-| "<leader>th" | help      |
-| "<leader>td" | directory |
-| "<leader>ts" | session   |
-| "<leader>tw" | word      |
-| "<leader>tc" | color     |
-
----
-[toggleterm](./lua/plugins/toggleterm.lua) | keys | command | |--|--| | "<C-t>" | toggle the term |
---- [treesitter-textobjects](./lua/plugins/treesitter.lua)
-| action | keys | command |
-| --- | --- | ---|
-| select | "am" | after function |
-| | "im" | inside function |
-| | "ac" | after class |
-| | "ic" | inside class |
-| swap | "<leader>a" | rotate args |
-|  | "<leader>A" | rotate args |
-| move | "]m" | goto next function |
-| | "[m" | goto prev function |
-| | "]M" | goto end of next function |
-| | "[M" | goto end of prev function |
-| | "\]\]" | goto next class |
-| | "[]" | goto prev class |
-| | "][" | goto end of next class |
-| | "[[" | goto end of prev class |
-| | "]o" | goto next loop|
-| | "]s" | goto next scope|
-| | "]z" | goto next fold |
-| | "]?" | goto next condition |
-| | "[?" | goto previous condition |
-
----
-[oil](./lua/plugins/oil.lua)
-only for oil buffers
-| key | command |
-|--|--|
-| ["g?"]    | show_help     |
-| ["<CR>"]  | select        |
-| ["<A-s>"] | select        |
-| ["<A-f>"] | select        |
-| ["<A-p>"] | preview       |
-| ["<A-c>"] | close         |
-| ["-"]     | parent        |
-| ["_"]     | open_cwd      |
-| ["`"]     | cd            |
-| ["g~"]    | cd            |
-| ["gs"]    | change_sort   |
-| ["gx"]    | open_external |
-| ["g."]    | toggle_hidden |
-| ["g\\"]   | toggle_trash  |
-| ["<A-h>"] | select        |
-| ["<A-l>"] | refresh       |
-
-
----
-[otree](lua/plugins/otree.lua)
-
-| key | command |
-| -- | -- |
-| ["<CR>"] | select          |
-| ["l"] | select             |
-| ["h"] | close_dir          |
-| ["<C-c>"] | close_win      |
-| ["<C-q>"] | close_win      |
-| ["<C-t>"] | close_win      |
-| ["-"] | goto_parent        |
-| ["<C-d>"] | goto_dir       |
-| ["<M-h>"] | goto_home_dir  |
-| ["cd"] | change_home_dir   |
-| ["L"] | open_dirs          |
-| ["H"] | close_dirs         |
-| ["o"] | oil_dir            |
-| ["O"] | oil_into_dir       |
-| ["\|"]  | open_vsplit        |
-| ["_"] | open_split         |
-| ["."] | toggle_hidden      |
-| ["i"] | toggle_ignore      |
-| ["r"] | refresh            |
-| ["f"] | focus_file         |
-| ["?"] | open_help          |
-
-]]
-
------
 -- toggles
 vim.keymap.set("n", "<leader>w", "<cmd>StripWhitespace<CR>")
--- vim.keymap.set("n", "<leader>f", "<cmd>Otree<CR>")
 vim.g.otreeopen = false -- default is false
 vim.keymap.set("n", "<leader>f", function()
-  vim.g.otreeopen = not vim.g.otreeopen
-  print(vim.g.otreeopen)
-  vim.cmd("Otree")
+  vim.g.neotreeopen = not vim.g.otreeopen
+  vim.cmd("Neotree toggle")
 end)
 vim.keymap.set("n", "<leader>o", "<cmd>Outline<CR>")
 vim.keymap.set("n", "<leader>d", "<cmd>Dashboard<CR><cmd>DisableWhitespace<CR>")

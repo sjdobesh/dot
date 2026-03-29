@@ -37,30 +37,27 @@ local plugins = {
   require("plugins.align"),       -- align by X (ala EMACS)
   require("plugins.autosession"), -- reload session data
   require("plugins.compilebuf"),  -- compilation buffer
+  require("plugins.conform"),     -- formatter
   require("plugins.dashboard"),   -- start screen
   require("plugins.glimmer"),     -- command animations
-  require("plugins.imgpreview"),  -- image previews
+  -- require("plugins.imgpreview"),  -- image previews
   require("plugins.luaconsole"),  -- lua scratch pad
   require("plugins.lualine"),     -- status line and tabs
+  require("plugins.mason"),       -- lsp manager
   require("plugins.mdpreview"),   -- render markdown into a browser
   require("plugins.neorg"),       -- org mode
+  require("plugins.neotree"),     -- file tree
   require("plugins.notify"),      -- nice notification
   require("plugins.oil"),         -- file viewer/editor
   require("plugins.outline"),     -- symbol viewer
-  require("plugins.otree"),       -- file tree
   require("plugins.rendermd"),    -- render markdown in terminal
   require("plugins.scope"),       -- scope/indent outliner
   require("plugins.telescope"),   -- fuzzy finder
   require("plugins.timers"),      -- timer manager
   require("plugins.toggleterm"),  -- persistent term
   require("plugins.treesitter"),  -- syntax parser
-  require("plugins.urlview"),     -- url manager
+  require("plugins.linkview"),    -- link manager
   require("plugins.yanky"),       -- kill ring
-
-  -- lsp configurations
-  require("plugins.mason"),   -- lsp manager
-  require("plugins.conform"), -- formatter
-  -- require("plugins.dap"),     -- debugger adapter protocol
 }
 
 -----
@@ -78,7 +75,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
   if vim.v.shell_error ~= 0 then
     vim.api.nvim_echo({
       { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
-      { out, "WarningMsg" },
+      { out,                            "WarningMsg" },
       { "\nPress any key to exit..." },
     }, true, {})
     vim.fn.getchar()
@@ -90,7 +87,7 @@ vim.opt.rtp:prepend(lazypath)
 -- install plugins
 require("lazy").setup({
   spec = {
-    plugins, -- plugin table acquired through require commands above
+    plugins,                        -- plugin table acquired through require commands above
   },
   { checker = { enabled = true } }, -- auto update
 })

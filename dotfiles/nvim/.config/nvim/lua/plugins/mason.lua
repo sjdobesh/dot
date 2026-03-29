@@ -11,7 +11,6 @@
 
 local mason_lsps = {
   "lua_ls",
-  "bashls",
   "clangd",
   "glsl_analyzer",
   "rust_analyzer",

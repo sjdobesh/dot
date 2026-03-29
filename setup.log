@@ -63,3 +63,3281 @@ sudo apt-get install -y curl git ssh vim iproute2 net-tools bear build-essential
 [ approve execution? (y/n) ] > /home/valentine/bin/setup: line 1088: read: read error: 0: Input/output error
 
 [ aborting install ]
+[H[2J[H[2J+--------[ debian setup script ]--------+
+|                                       |
+|            [ components ]             |
+|                                       |
+|          [1] apt packages             |
+|          [2] rust                     |
+|          [3] haskell                  |
+|          [4] neovim                   |
+|          [5] git repos                |
+|          [6] docs                     |
+|          [7] stow symlinks            |
+|          [8] complete                 |
+|                                       |
+|          [q] quit                     |
+|                                       |
++---------------------------------------+
+:[H[2J+--------[ debian setup script ]--------+
+|                                       |
+|         [ apt package groups ]        |
+|                                       |
+|       1. [ ] core                     |
+|       2. [ ] networking               |
+|       3. [ ] c dev                    |
+|       4. [ ] c xtras                  |
+|       5. [ ] neovim dependecies       |
+|       6. [ ] haskell dependecies      |
+|       7. [ ] additional languages     |
+|       8. [ ] full                     |
+|       9. [ ] all                      |
+|                                       |
+|          [?] package info             |
+|          [i] install                  |
+|          [u] uninstall                |
+|          [b] back                     |
+|          [q] quit                     |
+|                                       |
++---------------------------------------+
+:[H[2J+--------[ debian setup script ]--------+
+|                                       |
+|         [ apt package groups ]        |
+|                                       |
+|       1. [x] core                     |
+|       2. [x] networking               |
+|       3. [x] c dev                    |
+|       4. [x] c xtras                  |
+|       5. [x] neovim dependecies       |
+|       6. [x] haskell dependecies      |
+|       7. [x] additional languages     |
+|       8. [x] full                     |
+|       9. [x] all                      |
+|                                       |
+|          [?] package info             |
+|          [i] install                  |
+|          [u] uninstall                |
+|          [b] back                     |
+|          [q] quit                     |
+|                                       |
++---------------------------------------+
+:[ proposed command ]
+
+sudo apt-get install -y curl git ssh vim iproute2 net-tools bear build-essential clang clang-tools cmake gdb lldb valgrind libclang-dev libncurses-dev libpng-dev libsdl3-dev libsdl3-image-dev libsdl3-ttf-dev gettext ninja-build liblua5.1-0-dev libffi-dev libffi8 libgmp-dev libgmp10 libncurses6 libtinfo6 pkg-config default-jdk gnucobol perl python3 python3-pip debian-goodies lsof fdisk feh figlet fuse fzf moreutils tcc rsync stow wget zip zsh
+
+[ approve execution? (y/n) ] > 
+[ updating packages references ... ]
+Hit:1 http://security.debian.org/debian-security trixie-security InRelease
+Get:2 http://deb.debian.org/debian trixie InRelease [140 kB]
+Hit:3 http://deb.debian.org/debian trixie-updates InRelease
+Hit:4 http://deb.debian.org/debian trixie-backports InRelease
+Fetched 140 kB in 0s (1,461 kB/s)
+Reading package lists...
+[ packages references updated ]
+
+[ installing package groups ... ]
+sudo apt-get install -y curl git ssh vim iproute2 net-tools bear build-essential clang clang-tools cmake gdb lldb valgrind libclang-dev libncurses-dev libpng-dev libsdl3-dev libsdl3-image-dev libsdl3-ttf-dev gettext ninja-build liblua5.1-0-dev libffi-dev libffi8 libgmp-dev libgmp10 libncurses6 libtinfo6 pkg-config default-jdk gnucobol perl python3 python3-pip debian-goodies lsof fdisk feh figlet fuse fzf moreutils tcc rsync stow wget zip zsh
+Reading package lists...
+Building dependency tree...
+Reading state information...
+curl is already the newest version (8.14.1-2+deb13u2).
+curl set to manually installed.
+git is already the newest version (1:2.47.3-0+deb13u1).
+vim is already the newest version (2:9.1.1230-2).
+iproute2 is already the newest version (6.15.0-1).
+build-essential is already the newest version (12.12).
+build-essential set to manually installed.
+gdb is already the newest version (16.3-1).
+gdb set to manually installed.
+libffi8 is already the newest version (3.4.8-2).
+libffi8 set to manually installed.
+libgmp10 is already the newest version (2:6.3.0+dfsg-3).
+libncurses6 is already the newest version (6.5+20250216-2).
+libncurses6 set to manually installed.
+libtinfo6 is already the newest version (6.5+20250216-2).
+perl is already the newest version (5.40.1-6).
+perl set to manually installed.
+python3 is already the newest version (3.13.5-1).
+python3 set to manually installed.
+fdisk is already the newest version (2.41-5).
+rsync is already the newest version (3.4.1+ds1-5+deb13u1).
+rsync set to manually installed.
+zip is already the newest version (3.0-15).
+zip set to manually installed.
+The following additional packages will be installed:
+  autoconf automake autopoint autotools-dev bsd-mailx bzip2-doc
+  ca-certificates-java clang-19 clang-tools-19 cmake-data dctrl-tools
+  debhelper default-jdk-headless default-jre default-jre-headless
+  dh-autoreconf dh-strip-nondeterminism dwz elfutils equivs exim4-base
+  exim4-config exim4-daemon-light gir1.2-freedesktop-dev gir1.2-glib-2.0-dev
+  girepository-tools gnucobol3 icu-devtools intltool-debian java-common
+  lib32gcc-s1 lib32stdc++6 libarchive-cpio-perl libarchive-zip-perl libasm1t64
+  libasound2-dev libatk-wrapper-java libatk-wrapper-java-jni libblkid-dev
+  libbrotli-dev libbz2-dev libc6-dbg libc6-i386 libcap-dev libcares2
+  libclang-19-dev libclang-common-19-dev libclang-cpp19 libclang-rt-19-dev
+  libclang1-19 libcob4-dev libcob4t64 libdbus-1-dev libdebhelper-perl
+  libdecor-0-dev libdeflate-dev libdrm-dev libear libegl-dev libexpat1-dev
+  libfile-slurper-perl libfile-stripnondeterminism-perl libfile-which-perl
+  libfreetype-dev libgbm-dev libgif7 libgio-2.0-dev libgio-2.0-dev-bin
+  libgirepository-2.0-0 libgl-dev libgles-dev libgles1 libglib2.0-dev
+  libglib2.0-dev-bin libglx-dev libgmpxx4ldbl libgraphite2-dev
+  libgrpc++1.51t64 libgrpc29t64 libharfbuzz-cairo0 libharfbuzz-dev
+  libibus-1.0-dev libice-dev libicu-dev libid3tag0 libimlib2t64 libio-pty-perl
+  libipc-run-perl libjbig-dev libjpeg-dev libjpeg-turbo-progs
+  libjpeg62-turbo-dev libjsoncpp26 liblerc-dev liblldb-19 liblockfile-bin
+  liblockfile1 liblsof0 libltdl-dev liblua5.1-0 liblzma-dev
+  libmail-sendmail-perl libmount-dev libnsl2 libobjc-14-dev libpciaccess-dev
+  libpcre2-dev libpcre2-posix3 libperlio-utf8-strict-perl libpfm4
+  libpipewire-0.3-dev libpng-tools libprotoc32t64 libpulse-dev libpython3-dev
+  libpython3.13-dev libreadline-dev librhash1 libsdl3-0 libsdl3-image0
+  libsdl3-ttf0 libselinux1-dev libsepol-dev libsharpyuv-dev libsm-dev
+  libsndio-dev libsndio7.0 libspa-0.2-dev libsys-hostname-long-perl
+  libsysprof-capture-4-dev libsystemd-dev libtiff-dev libtiffxx6
+  libtime-duration-perl libtool libturbojpeg0 libudev-dev libwayland-bin
+  libwayland-dev libwebp-dev libwebpdecoder3 libwtmpdb0 libx11-dev libxau-dev
+  libxcb1-dev libxcursor-dev libxdmcp-dev libxext-dev libxfixes-dev libxi-dev
+  libxinerama-dev libxkbcommon-dev libxml2-dev libxrandr-dev libxrender-dev
+  libxss-dev libxt-dev libxv-dev libxxf86vm-dev libz3-dev libzstd-dev lldb-19
+  llvm-19 llvm-19-dev llvm-19-linker-tools llvm-19-runtime llvm-19-tools m4
+  native-architecture ncurses-term openjdk-21-jdk openjdk-21-jdk-headless
+  openjdk-21-jre openjdk-21-jre-headless openssh-server openssh-sftp-server
+  po-debconf popularity-contest python3-dev python3-lldb-19 python3-packaging
+  python3-pygments python3-wheel python3-yaml python3.13-dev runit-helper
+  uuid-dev x11proto-dev xorg-sgml-doctools xtrans-dev yudit-common zlib1g-dev
+  zsh-common
+Suggested packages:
+  autoconf-archive gnu-standards autoconf-doc clang-19-doc wasi-libc cmake-doc
+  cmake-format elpa-cmake-mode debtags dh-make apt-file ccze debsums
+  lsb-release exim4-doc-html | exim4-doc-info eximon4 spf-tools-perl swaks
+  gettext-doc libasprintf-dev libgettextpo-dev gnulib-l10n libasound2-doc
+  freetype2-doc libglib2.0-doc gmp-doc libgmp10-doc libmpfr-dev
+  libgraphite2-utils libice-doc icu-doc libtool-doc liblzma-doc ncurses-doc
+  pipewire-doc readline-doc libayatana-appindicator3-1 | libappindicator3-1
+  liburing2 libsm-doc sndiod gfortran | fortran95-compiler gcj-jdk
+  libwayland-doc libx11-doc libxcb-doc libxext-doc libxt-doc llvm-19-doc
+  m4-doc openjdk-21-demo openjdk-21-source visualvm fonts-wqy-microhei
+  | fonts-wqy-zenhei fonts-indic molly-guard monkeysphere ufw libmail-box-perl
+  tor torsocks python-pygments-doc ttf-bitstream-vera python3-setuptools
+  doc-base valgrind-mpi kcachegrind yudit-doc yudit zsh-doc
+The following NEW packages will be installed:
+  autoconf automake autopoint autotools-dev bear bsd-mailx bzip2-doc
+  ca-certificates-java clang clang-19 clang-tools clang-tools-19 cmake
+  cmake-data dctrl-tools debhelper debian-goodies default-jdk
+  default-jdk-headless default-jre default-jre-headless dh-autoreconf
+  dh-strip-nondeterminism dwz elfutils equivs exim4-base exim4-config
+  exim4-daemon-light feh figlet fuse fzf gettext gir1.2-freedesktop-dev
+  gir1.2-glib-2.0-dev girepository-tools gnucobol gnucobol3 icu-devtools
+  intltool-debian java-common lib32gcc-s1 lib32stdc++6 libarchive-cpio-perl
+  libarchive-zip-perl libasm1t64 libasound2-dev libatk-wrapper-java
+  libatk-wrapper-java-jni libblkid-dev libbrotli-dev libbz2-dev libc6-dbg
+  libc6-i386 libcap-dev libcares2 libclang-19-dev libclang-common-19-dev
+  libclang-cpp19 libclang-dev libclang-rt-19-dev libclang1-19 libcob4-dev
+  libcob4t64 libdbus-1-dev libdebhelper-perl libdecor-0-dev libdeflate-dev
+  libdrm-dev libear libegl-dev libexpat1-dev libffi-dev libfile-slurper-perl
+  libfile-stripnondeterminism-perl libfile-which-perl libfreetype-dev
+  libgbm-dev libgif7 libgio-2.0-dev libgio-2.0-dev-bin libgirepository-2.0-0
+  libgl-dev libgles-dev libgles1 libglib2.0-dev libglib2.0-dev-bin libglx-dev
+  libgmp-dev libgmpxx4ldbl libgraphite2-dev libgrpc++1.51t64 libgrpc29t64
+  libharfbuzz-cairo0 libharfbuzz-dev libibus-1.0-dev libice-dev libicu-dev
+  libid3tag0 libimlib2t64 libio-pty-perl libipc-run-perl libjbig-dev
+  libjpeg-dev libjpeg-turbo-progs libjpeg62-turbo-dev libjsoncpp26 liblerc-dev
+  liblldb-19 liblockfile-bin liblockfile1 liblsof0 libltdl-dev liblua5.1-0
+  liblua5.1-0-dev liblzma-dev libmail-sendmail-perl libmount-dev
+  libncurses-dev libnsl2 libobjc-14-dev libpciaccess-dev libpcre2-dev
+  libpcre2-posix3 libperlio-utf8-strict-perl libpfm4 libpipewire-0.3-dev
+  libpng-dev libpng-tools libprotoc32t64 libpulse-dev libpython3-dev
+  libpython3.13-dev libreadline-dev librhash1 libsdl3-0 libsdl3-dev
+  libsdl3-image-dev libsdl3-image0 libsdl3-ttf-dev libsdl3-ttf0
+  libselinux1-dev libsepol-dev libsharpyuv-dev libsm-dev libsndio-dev
+  libsndio7.0 libspa-0.2-dev libsys-hostname-long-perl
+  libsysprof-capture-4-dev libsystemd-dev libtiff-dev libtiffxx6
+  libtime-duration-perl libtool libturbojpeg0 libudev-dev libwayland-bin
+  libwayland-dev libwebp-dev libwebpdecoder3 libwtmpdb0 libx11-dev libxau-dev
+  libxcb1-dev libxcursor-dev libxdmcp-dev libxext-dev libxfixes-dev libxi-dev
+  libxinerama-dev libxkbcommon-dev libxml2-dev libxrandr-dev libxrender-dev
+  libxss-dev libxt-dev libxv-dev libxxf86vm-dev libz3-dev libzstd-dev lldb
+  lldb-19 llvm-19 llvm-19-dev llvm-19-linker-tools llvm-19-runtime
+  llvm-19-tools lsof m4 moreutils native-architecture ncurses-term net-tools
+  ninja-build openjdk-21-jdk openjdk-21-jdk-headless openjdk-21-jre
+  openjdk-21-jre-headless openssh-server openssh-sftp-server pkg-config
+  po-debconf popularity-contest python3-dev python3-lldb-19 python3-packaging
+  python3-pip python3-pygments python3-wheel python3-yaml python3.13-dev
+  runit-helper ssh stow tcc uuid-dev valgrind wget x11proto-dev
+  xorg-sgml-doctools xtrans-dev yudit-common zlib1g-dev zsh zsh-common
+0 upgraded, 227 newly installed, 0 to remove and 0 not upgraded.
+Need to get 371 MB of archives.
+After this operation, 1,784 MB of additional disk space will be used.
+Get:1 http://security.debian.org/debian-security trixie-security/main amd64 libfreetype-dev amd64 2.13.3+dfsg-1+deb13u1 [623 kB]
+Get:2 http://deb.debian.org/debian trixie/main amd64 openssh-sftp-server amd64 1:10.0p1-7+deb13u1 [65.3 kB]
+Get:3 http://deb.debian.org/debian trixie/main amd64 runit-helper all 2.16.4 [7,296 B]
+Get:4 http://deb.debian.org/debian trixie/main amd64 libwtmpdb0 amd64 0.73.0-3+deb13u1 [13.1 kB]
+Get:5 http://deb.debian.org/debian trixie/main amd64 openssh-server amd64 1:10.0p1-7+deb13u1 [602 kB]
+Get:6 http://deb.debian.org/debian trixie/main amd64 popularity-contest all 1.78 [54.1 kB]
+Get:7 http://deb.debian.org/debian trixie/main amd64 liblockfile-bin amd64 1.17-2 [15.8 kB]
+Get:8 http://deb.debian.org/debian trixie/main amd64 liblsof0 amd64 4.99.4+dfsg-2 [134 kB]
+Get:9 http://deb.debian.org/debian trixie/main amd64 lsof amd64 4.99.4+dfsg-2 [316 kB]
+Get:10 http://deb.debian.org/debian trixie/main amd64 ncurses-term all 6.5+20250216-2 [518 kB]
+Get:11 http://deb.debian.org/debian trixie/main amd64 wget amd64 1.25.0-2 [984 kB]
+Get:12 http://deb.debian.org/debian trixie/main amd64 m4 amd64 1.4.19-8 [294 kB]
+Get:13 http://deb.debian.org/debian trixie/main amd64 autoconf all 2.72-3.1 [494 kB]
+Get:14 http://deb.debian.org/debian trixie/main amd64 autotools-dev all 20240727.1 [60.2 kB]
+Get:15 http://deb.debian.org/debian trixie/main amd64 automake all 1:1.17-4 [862 kB]
+Get:16 http://deb.debian.org/debian trixie/main amd64 autopoint all 0.23.1-2 [770 kB]
+Get:17 http://deb.debian.org/debian trixie/main amd64 libcares2 amd64 1.34.5-1+deb13u1 [98.3 kB]
+Get:18 http://deb.debian.org/debian trixie/main amd64 libprotoc32t64 amd64 3.21.12-11 [922 kB]
+Get:19 http://deb.debian.org/debian trixie/main amd64 libgrpc29t64 amd64 1.51.1-6 [2,859 kB]
+Get:20 http://deb.debian.org/debian trixie/main amd64 libgrpc++1.51t64 amd64 1.51.1-6 [497 kB]
+Get:21 http://deb.debian.org/debian trixie/main amd64 libear amd64 3.1.6-1 [137 kB]
+Get:22 http://deb.debian.org/debian trixie/main amd64 bear amd64 3.1.6-1 [342 kB]
+Get:23 http://deb.debian.org/debian trixie/main amd64 exim4-config all 4.98.2-1 [249 kB]
+Get:24 http://deb.debian.org/debian trixie/main amd64 exim4-base amd64 4.98.2-1 [1,141 kB]
+Get:25 http://deb.debian.org/debian trixie/main amd64 libnsl2 amd64 1.3.0-3+b3 [40.6 kB]
+Get:26 http://deb.debian.org/debian trixie/main amd64 exim4-daemon-light amd64 4.98.2-1 [629 kB]
+Get:27 http://deb.debian.org/debian trixie/main amd64 liblockfile1 amd64 1.17-2 [11.9 kB]
+Get:28 http://deb.debian.org/debian trixie/main amd64 bsd-mailx amd64 8.1.2-0.20220412cvs-1.1 [82.2 kB]
+Get:29 http://deb.debian.org/debian trixie/main amd64 bzip2-doc all 1.0.8-6 [505 kB]
+Get:30 http://deb.debian.org/debian trixie/main amd64 ca-certificates-java all 20240118 [11.6 kB]
+Get:31 http://deb.debian.org/debian trixie/main amd64 libclang-cpp19 amd64 1:19.1.7-3+b1 [13.2 MB]
+Get:32 http://deb.debian.org/debian trixie/main amd64 libobjc-14-dev amd64 14.2.0-19 [173 kB]
+Get:33 http://deb.debian.org/debian trixie/main amd64 libclang-common-19-dev amd64 1:19.1.7-3+b1 [740 kB]
+Get:34 http://deb.debian.org/debian trixie/main amd64 llvm-19-linker-tools amd64 1:19.1.7-3+b1 [1,263 kB]
+Get:35 http://deb.debian.org/debian trixie/main amd64 libclang1-19 amd64 1:19.1.7-3+b1 [7,623 kB]
+Get:36 http://deb.debian.org/debian trixie/main amd64 clang-19 amd64 1:19.1.7-3+b1 [117 kB]
+Get:37 http://deb.debian.org/debian trixie/main amd64 clang amd64 1:19.0-63 [6,244 B]
+Get:38 http://deb.debian.org/debian trixie/main amd64 clang-tools-19 amd64 1:19.1.7-3+b1 [8,952 kB]
+Get:39 http://deb.debian.org/debian trixie/main amd64 clang-tools amd64 1:19.0-63 [6,164 B]
+Get:40 http://deb.debian.org/debian trixie/main amd64 cmake-data all 3.31.6-2 [2,268 kB]
+Get:41 http://deb.debian.org/debian trixie/main amd64 libjsoncpp26 amd64 1.9.6-3 [81.7 kB]
+Get:42 http://deb.debian.org/debian trixie/main amd64 librhash1 amd64 1.4.5-1 [132 kB]
+Get:43 http://deb.debian.org/debian trixie/main amd64 cmake amd64 3.31.6-2 [12.0 MB]
+Get:44 http://deb.debian.org/debian trixie/main amd64 dctrl-tools amd64 2.24-3+b1 [104 kB]
+Get:45 http://deb.debian.org/debian trixie/main amd64 libdebhelper-perl all 13.24.2 [90.9 kB]
+Get:46 http://deb.debian.org/debian trixie/main amd64 tcc amd64 0.9.27+git20200814.62c30a4a-2 [294 kB]
+Get:47 http://deb.debian.org/debian trixie/main amd64 libtool all 2.5.4-4 [539 kB]
+Get:48 http://deb.debian.org/debian trixie/main amd64 dh-autoreconf all 20 [17.1 kB]
+Get:49 http://deb.debian.org/debian trixie/main amd64 libarchive-zip-perl all 1.68-1 [104 kB]
+Get:50 http://deb.debian.org/debian trixie/main amd64 libfile-stripnondeterminism-perl all 1.14.1-2 [19.7 kB]
+Get:51 http://deb.debian.org/debian trixie/main amd64 dh-strip-nondeterminism all 1.14.1-2 [8,620 B]
+Get:52 http://deb.debian.org/debian trixie/main amd64 dwz amd64 0.15-1+b1 [110 kB]
+Get:53 http://deb.debian.org/debian trixie/main amd64 gettext amd64 0.23.1-2 [1,680 kB]
+Get:54 http://deb.debian.org/debian trixie/main amd64 intltool-debian all 0.35.0+20060710.6 [22.9 kB]
+Get:55 http://deb.debian.org/debian trixie/main amd64 po-debconf all 1.0.21+nmu1 [248 kB]
+Get:56 http://deb.debian.org/debian trixie/main amd64 debhelper all 13.24.2 [919 kB]
+Get:57 http://deb.debian.org/debian trixie/main amd64 debian-goodies all 0.88.2 [80.0 kB]
+Get:58 http://deb.debian.org/debian trixie/main amd64 java-common all 0.76 [6,776 B]
+Get:59 http://deb.debian.org/debian trixie/main amd64 openjdk-21-jre-headless amd64 21.0.10+7-1~deb13u1 [41.8 MB]
+Get:60 http://deb.debian.org/debian trixie/main amd64 default-jre-headless amd64 2:1.21-76 [3,192 B]
+Get:61 http://deb.debian.org/debian trixie/main amd64 libgif7 amd64 5.2.2-1+b1 [44.2 kB]
+Get:62 http://deb.debian.org/debian trixie/main amd64 openjdk-21-jre amd64 21.0.10+7-1~deb13u1 [208 kB]
+Get:63 http://deb.debian.org/debian trixie/main amd64 default-jre amd64 2:1.21-76 [1,068 B]
+Get:64 http://deb.debian.org/debian trixie/main amd64 openjdk-21-jdk-headless amd64 21.0.10+7-1~deb13u1 [82.9 MB]
+Get:65 http://deb.debian.org/debian trixie/main amd64 default-jdk-headless amd64 2:1.21-76 [1,124 B]
+Get:66 http://deb.debian.org/debian trixie/main amd64 openjdk-21-jdk amd64 21.0.10+7-1~deb13u1 [3,528 kB]
+Get:67 http://deb.debian.org/debian trixie/main amd64 default-jdk amd64 2:1.21-76 [1,076 B]
+Get:68 http://deb.debian.org/debian trixie/main amd64 libasm1t64 amd64 0.192-4 [28.4 kB]
+Get:69 http://deb.debian.org/debian trixie/main amd64 elfutils amd64 0.192-4 [505 kB]
+Get:70 http://deb.debian.org/debian trixie/main amd64 equivs all 2.3.2 [15.2 kB]
+Get:71 http://deb.debian.org/debian trixie/main amd64 libid3tag0 amd64 0.16.3-1 [35.0 kB]
+Get:72 http://deb.debian.org/debian trixie/main amd64 libimlib2t64 amd64 1.12.4-2 [219 kB]
+Get:73 http://deb.debian.org/debian trixie/main amd64 yudit-common all 3.1.0-1 [1,752 kB]
+Get:74 http://deb.debian.org/debian trixie/main amd64 feh amd64 3.10.3-1 [158 kB]
+Get:75 http://deb.debian.org/debian trixie/main amd64 figlet amd64 2.2.5-3+b2 [136 kB]
+Get:76 http://deb.debian.org/debian trixie/main amd64 fuse all 3.17.2-3 [16.4 kB]
+Get:77 http://deb.debian.org/debian trixie/main amd64 fzf amd64 0.60.3-1+b2 [1,474 kB]
+Get:78 http://deb.debian.org/debian trixie/main amd64 gir1.2-glib-2.0-dev amd64 2.84.4-3~deb13u2 [917 kB]
+Get:79 http://deb.debian.org/debian trixie/main amd64 gir1.2-freedesktop-dev amd64 1.84.0-1 [51.6 kB]
+Get:80 http://deb.debian.org/debian trixie/main amd64 native-architecture all 0.2.6 [2,264 B]
+Get:81 http://deb.debian.org/debian trixie/main amd64 libgirepository-2.0-0 amd64 2.84.4-3~deb13u2 [144 kB]
+Get:82 http://deb.debian.org/debian trixie/main amd64 girepository-tools amd64 2.84.4-3~deb13u2 [151 kB]
+Get:83 http://deb.debian.org/debian trixie/main amd64 libcob4t64 amd64 3.2-3 [215 kB]
+Get:84 http://deb.debian.org/debian trixie/main amd64 libcob4-dev amd64 3.2-3 [258 kB]
+Get:85 http://deb.debian.org/debian trixie/main amd64 libgmpxx4ldbl amd64 2:6.3.0+dfsg-3 [329 kB]
+Get:86 http://deb.debian.org/debian trixie/main amd64 libgmp-dev amd64 2:6.3.0+dfsg-3 [642 kB]
+Get:87 http://deb.debian.org/debian trixie/main amd64 libncurses-dev amd64 6.5+20250216-2 [353 kB]
+Get:88 http://deb.debian.org/debian trixie/main amd64 gnucobol3 amd64 3.2-3 [1,072 kB]
+Get:89 http://deb.debian.org/debian trixie/main amd64 gnucobol amd64 5 [1,792 B]
+Get:90 http://deb.debian.org/debian trixie/main amd64 icu-devtools amd64 76.1-4 [215 kB]
+Get:91 http://deb.debian.org/debian trixie/main amd64 libc6-i386 amd64 2.41-12+deb13u2 [2,540 kB]
+Get:92 http://deb.debian.org/debian trixie/main amd64 lib32gcc-s1 amd64 14.2.0-19 [88.4 kB]
+Get:93 http://deb.debian.org/debian trixie/main amd64 lib32stdc++6 amd64 14.2.0-19 [745 kB]
+Get:94 http://deb.debian.org/debian trixie/main amd64 libarchive-cpio-perl all 0.10-3 [10.8 kB]
+Get:95 http://deb.debian.org/debian trixie/main amd64 libasound2-dev amd64 1.2.14-1 [120 kB]
+Get:96 http://deb.debian.org/debian trixie/main amd64 libatk-wrapper-java all 0.40.0-3 [63.4 kB]
+Get:97 http://deb.debian.org/debian trixie/main amd64 libatk-wrapper-java-jni amd64 0.40.0-3+b3 [53.6 kB]
+Get:98 http://deb.debian.org/debian trixie/main amd64 uuid-dev amd64 2.41-5 [48.8 kB]
+Get:99 http://deb.debian.org/debian trixie/main amd64 libblkid-dev amd64 2.41-5 [208 kB]
+Get:100 http://deb.debian.org/debian trixie/main amd64 libbrotli-dev amd64 1.1.0-2+b7 [316 kB]
+Get:101 http://deb.debian.org/debian trixie/main amd64 libbz2-dev amd64 1.0.8-6 [31.4 kB]
+Get:102 http://deb.debian.org/debian trixie/main amd64 libc6-dbg amd64 2.41-12+deb13u2 [7,366 kB]
+Get:103 http://deb.debian.org/debian trixie/main amd64 libcap-dev amd64 1:2.75-10+b8 [545 kB]
+Get:104 http://deb.debian.org/debian trixie/main amd64 libclang-19-dev amd64 1:19.1.7-3+b1 [28.3 MB]
+Get:105 http://deb.debian.org/debian trixie/main amd64 libclang-dev amd64 1:19.0-63 [5,828 B]
+Get:106 http://deb.debian.org/debian trixie/main amd64 libclang-rt-19-dev amd64 1:19.1.7-3+b1 [3,690 kB]
+Get:107 http://deb.debian.org/debian trixie/main amd64 libsystemd-dev amd64 257.9-1~deb13u1 [1,357 kB]
+Get:108 http://deb.debian.org/debian trixie/main amd64 libdbus-1-dev amd64 1.16.2-2 [215 kB]
+Get:109 http://deb.debian.org/debian trixie/main amd64 libwayland-bin amd64 1.23.1-3 [21.7 kB]
+Get:110 http://deb.debian.org/debian trixie/main amd64 libffi-dev amd64 3.4.8-2 [61.1 kB]
+Get:111 http://deb.debian.org/debian trixie/main amd64 libwayland-dev amd64 1.23.1-3 [73.9 kB]
+Get:112 http://deb.debian.org/debian trixie/main amd64 libdecor-0-dev amd64 0.2.2-2 [7,580 B]
+Get:113 http://deb.debian.org/debian trixie/main amd64 libdeflate-dev amd64 1.23-2 [55.9 kB]
+Get:114 http://deb.debian.org/debian trixie/main amd64 libpciaccess-dev amd64 0.17-3+b3 [55.4 kB]
+Get:115 http://deb.debian.org/debian trixie/main amd64 libdrm-dev amd64 2.4.124-2 [296 kB]
+Get:116 http://deb.debian.org/debian trixie/main amd64 xorg-sgml-doctools all 1:1.11-1.1 [22.1 kB]
+Get:117 http://deb.debian.org/debian trixie/main amd64 x11proto-dev all 2024.1-1 [603 kB]
+Get:118 http://deb.debian.org/debian trixie/main amd64 libxau-dev amd64 1:1.0.11-1 [23.6 kB]
+Get:119 http://deb.debian.org/debian trixie/main amd64 libxdmcp-dev amd64 1:1.1.5-1 [44.3 kB]
+Get:120 http://deb.debian.org/debian trixie/main amd64 xtrans-dev all 1.4.0-1 [98.7 kB]
+Get:121 http://deb.debian.org/debian trixie/main amd64 libxcb1-dev amd64 1.17.0-2+b1 [181 kB]
+Get:122 http://deb.debian.org/debian trixie/main amd64 libx11-dev amd64 2:1.8.12-1 [894 kB]
+Get:123 http://deb.debian.org/debian trixie/main amd64 libglx-dev amd64 1.7.0-1+b2 [15.8 kB]
+Get:124 http://deb.debian.org/debian trixie/main amd64 libgl-dev amd64 1.7.0-1+b2 [101 kB]
+Get:125 http://deb.debian.org/debian trixie/main amd64 libegl-dev amd64 1.7.0-1+b2 [19.5 kB]
+Get:126 http://deb.debian.org/debian trixie/main amd64 libexpat1-dev amd64 2.7.1-2 [161 kB]
+Get:127 http://deb.debian.org/debian trixie/main amd64 libfile-slurper-perl all 0.014-1 [8,560 B]
+Get:128 http://deb.debian.org/debian trixie/main amd64 libfile-which-perl all 1.27-2 [15.1 kB]
+Get:129 http://deb.debian.org/debian trixie/main amd64 zlib1g-dev amd64 1:1.3.dfsg+really1.3.1-1+b1 [920 kB]
+Get:130 http://deb.debian.org/debian trixie/main amd64 libpng-dev amd64 1.6.48-1+deb13u3 [367 kB]
+Get:131 http://deb.debian.org/debian trixie/main amd64 libgbm-dev amd64 25.0.7-2 [23.6 kB]
+Get:132 http://deb.debian.org/debian trixie/main amd64 libsepol-dev amd64 3.8.1-1 [373 kB]
+Get:133 http://deb.debian.org/debian trixie/main amd64 libpcre2-posix3 amd64 10.46-1~deb13u1 [63.9 kB]
+Get:134 http://deb.debian.org/debian trixie/main amd64 libpcre2-dev amd64 10.46-1~deb13u1 [853 kB]
+Get:135 http://deb.debian.org/debian trixie/main amd64 libselinux1-dev amd64 3.8.1-1 [169 kB]
+Get:136 http://deb.debian.org/debian trixie/main amd64 libmount-dev amd64 2.41-5 [30.5 kB]
+Get:137 http://deb.debian.org/debian trixie/main amd64 libsysprof-capture-4-dev amd64 48.0-2 [49.9 kB]
+Get:138 http://deb.debian.org/debian trixie/main amd64 libgio-2.0-dev amd64 2.84.4-3~deb13u2 [1,689 kB]
+Get:139 http://deb.debian.org/debian trixie/main amd64 python3-packaging all 25.0-1 [56.6 kB]
+Get:140 http://deb.debian.org/debian trixie/main amd64 libgio-2.0-dev-bin amd64 2.84.4-3~deb13u2 [167 kB]
+Get:141 http://deb.debian.org/debian trixie/main amd64 libgles1 amd64 1.7.0-1+b2 [12.1 kB]
+Get:142 http://deb.debian.org/debian trixie/main amd64 libgles-dev amd64 1.7.0-1+b2 [50.8 kB]
+Get:143 http://deb.debian.org/debian trixie/main amd64 libglib2.0-dev-bin amd64 2.84.4-3~deb13u2 [55.3 kB]
+Get:144 http://deb.debian.org/debian trixie/main amd64 libglib2.0-dev amd64 2.84.4-3~deb13u2 [56.1 kB]
+Get:145 http://deb.debian.org/debian trixie/main amd64 libgraphite2-dev amd64 1.3.14-2+b1 [20.3 kB]
+Get:146 http://deb.debian.org/debian trixie/main amd64 libharfbuzz-cairo0 amd64 10.2.0-1+b1 [45.8 kB]
+Get:147 http://deb.debian.org/debian trixie/main amd64 libicu-dev amd64 76.1-4 [10.8 MB]
+Get:148 http://deb.debian.org/debian trixie/main amd64 libharfbuzz-dev amd64 10.2.0-1+b1 [145 kB]
+Get:149 http://deb.debian.org/debian trixie/main amd64 libibus-1.0-dev amd64 1.5.32-2 [493 kB]
+Get:150 http://deb.debian.org/debian trixie/main amd64 libice-dev amd64 2:1.1.1-1 [73.8 kB]
+Get:151 http://deb.debian.org/debian trixie/main amd64 libio-pty-perl amd64 1:1.20-1+b3 [34.3 kB]
+Get:152 http://deb.debian.org/debian trixie/main amd64 libipc-run-perl all 20231003.0-2 [101 kB]
+Get:153 http://deb.debian.org/debian trixie/main amd64 libjbig-dev amd64 2.1-6.1+b2 [31.4 kB]
+Get:154 http://deb.debian.org/debian trixie/main amd64 libjpeg62-turbo-dev amd64 1:2.1.5-4 [292 kB]
+Get:155 http://deb.debian.org/debian trixie/main amd64 libjpeg-dev amd64 1:2.1.5-4 [72.2 kB]
+Get:156 http://deb.debian.org/debian trixie/main amd64 libturbojpeg0 amd64 1:2.1.5-4 [212 kB]
+Get:157 http://deb.debian.org/debian trixie/main amd64 libjpeg-turbo-progs amd64 1:2.1.5-4 [145 kB]
+Get:158 http://deb.debian.org/debian trixie/main amd64 liblerc-dev amd64 4.0.0+ds-5 [183 kB]
+Get:159 http://deb.debian.org/debian trixie/main amd64 liblldb-19 amd64 1:19.1.7-3+b1 [4,165 kB]
+Get:160 http://deb.debian.org/debian trixie/main amd64 libltdl-dev amd64 2.5.4-4 [168 kB]
+Get:161 http://deb.debian.org/debian trixie/main amd64 liblua5.1-0 amd64 5.1.5-11 [109 kB]
+Get:162 http://deb.debian.org/debian trixie/main amd64 libreadline-dev amd64 8.2-6 [153 kB]
+Get:163 http://deb.debian.org/debian trixie/main amd64 liblua5.1-0-dev amd64 5.1.5-11 [135 kB]
+Get:164 http://deb.debian.org/debian trixie/main amd64 liblzma-dev amd64 5.8.1-1 [348 kB]
+Get:165 http://deb.debian.org/debian trixie/main amd64 libsys-hostname-long-perl all 1.5-3 [11.6 kB]
+Get:166 http://deb.debian.org/debian trixie/main amd64 libmail-sendmail-perl all 0.80-3 [24.3 kB]
+Get:167 http://deb.debian.org/debian trixie/main amd64 libperlio-utf8-strict-perl amd64 0.010-1+b3 [11.4 kB]
+Get:168 http://deb.debian.org/debian trixie/main amd64 libpfm4 amd64 4.13.0+git99-gc5587f9-1 [371 kB]
+Get:169 http://deb.debian.org/debian trixie/main amd64 libspa-0.2-dev amd64 1.4.2-1 [119 kB]
+Get:170 http://deb.debian.org/debian trixie/main amd64 libpipewire-0.3-dev amd64 1.4.2-1 [73.6 kB]
+Get:171 http://deb.debian.org/debian trixie/main amd64 libpng-tools amd64 1.6.48-1+deb13u3 [130 kB]
+Get:172 http://deb.debian.org/debian trixie/main amd64 libpulse-dev amd64 17.0+dfsg1-2+b1 [90.6 kB]
+Get:173 http://deb.debian.org/debian trixie/main amd64 libpython3.13-dev amd64 3.13.5-2 [5,291 kB]
+Get:174 http://deb.debian.org/debian trixie/main amd64 libpython3-dev amd64 3.13.5-1 [10.4 kB]
+Get:175 http://deb.debian.org/debian trixie/main amd64 libsndio7.0 amd64 1.10.0-0.1 [27.6 kB]
+Get:176 http://deb.debian.org/debian trixie/main amd64 libsdl3-0 amd64 3.2.10+ds-1 [916 kB]
+Get:177 http://deb.debian.org/debian trixie/main amd64 libsndio-dev amd64 1.10.0-0.1 [25.1 kB]
+Get:178 http://deb.debian.org/debian trixie/main amd64 libudev-dev amd64 257.9-1~deb13u1 [74.9 kB]
+Get:179 http://deb.debian.org/debian trixie/main amd64 libxrender-dev amd64 1:0.9.12-1 [39.0 kB]
+Get:180 http://deb.debian.org/debian trixie/main amd64 libxfixes-dev amd64 1:6.0.0-2+b4 [22.4 kB]
+Get:181 http://deb.debian.org/debian trixie/main amd64 libxcursor-dev amd64 1:1.2.3-1 [51.2 kB]
+Get:182 http://deb.debian.org/debian trixie/main amd64 libxext-dev amd64 2:1.3.4-1+b3 [104 kB]
+Get:183 http://deb.debian.org/debian trixie/main amd64 libxi-dev amd64 2:1.8.2-1 [241 kB]
+Get:184 http://deb.debian.org/debian trixie/main amd64 libxinerama-dev amd64 2:1.1.4-3+b4 [18.4 kB]
+Get:185 http://deb.debian.org/debian trixie/main amd64 libxkbcommon-dev amd64 1.7.0-2 [53.6 kB]
+Get:186 http://deb.debian.org/debian trixie/main amd64 libxrandr-dev amd64 2:1.5.4-1+b3 [44.4 kB]
+Get:187 http://deb.debian.org/debian trixie/main amd64 libxss-dev amd64 1:1.2.3-1+b3 [22.7 kB]
+Get:188 http://deb.debian.org/debian trixie/main amd64 libsm-dev amd64 2:1.2.6-1 [39.7 kB]
+Get:189 http://deb.debian.org/debian trixie/main amd64 libxt-dev amd64 1:1.2.1-1.2+b2 [407 kB]
+Get:190 http://deb.debian.org/debian trixie/main amd64 libxv-dev amd64 2:1.0.11-1.1+b3 [47.0 kB]
+Get:191 http://deb.debian.org/debian trixie/main amd64 libxxf86vm-dev amd64 1:1.1.4-1+b4 [24.1 kB]
+Get:192 http://deb.debian.org/debian trixie/main amd64 libsdl3-dev amd64 3.2.10+ds-1 [1,511 kB]
+Get:193 http://deb.debian.org/debian trixie/main amd64 libsdl3-image0 amd64 3.2.4+ds-1 [64.5 kB]
+Get:194 http://deb.debian.org/debian trixie/main amd64 libzstd-dev amd64 1.5.7+dfsg-1 [371 kB]
+Get:195 http://deb.debian.org/debian trixie/main amd64 libwebpdecoder3 amd64 1.5.0-0.1 [208 kB]
+Get:196 http://deb.debian.org/debian trixie/main amd64 libsharpyuv-dev amd64 1.5.0-0.1 [120 kB]
+Get:197 http://deb.debian.org/debian trixie/main amd64 libwebp-dev amd64 1.5.0-0.1 [450 kB]
+Get:198 http://deb.debian.org/debian trixie/main amd64 libtiffxx6 amd64 4.7.0-3+deb13u1 [164 kB]
+Get:199 http://deb.debian.org/debian trixie/main amd64 libtiff-dev amd64 4.7.0-3+deb13u1 [488 kB]
+Get:200 http://deb.debian.org/debian trixie/main amd64 libsdl3-image-dev amd64 3.2.4+ds-1 [18.0 kB]
+Get:201 http://deb.debian.org/debian trixie/main amd64 libsdl3-ttf0 amd64 3.2.2+ds-1 [55.9 kB]
+Get:202 http://deb.debian.org/debian trixie/main amd64 libsdl3-ttf-dev amd64 3.2.2+ds-1 [27.8 kB]
+Get:203 http://deb.debian.org/debian trixie/main amd64 libtime-duration-perl all 1.21-2 [13.1 kB]
+Get:204 http://deb.debian.org/debian trixie/main amd64 libxml2-dev amd64 2.12.7+dfsg+really2.9.14-2.1+deb13u2 [794 kB]
+Get:205 http://deb.debian.org/debian trixie/main amd64 libz3-dev amd64 4.13.3-1 [107 kB]
+Get:206 http://deb.debian.org/debian trixie/main amd64 python3-lldb-19 amd64 1:19.1.7-3+b1 [159 kB]
+Get:207 http://deb.debian.org/debian trixie/main amd64 lldb-19 amd64 1:19.1.7-3+b1 [1,217 kB]
+Get:208 http://deb.debian.org/debian trixie/main amd64 lldb amd64 1:19.0-63 [6,072 B]
+Get:209 http://deb.debian.org/debian trixie/main amd64 llvm-19-runtime amd64 1:19.1.7-3+b1 [551 kB]
+Get:210 http://deb.debian.org/debian trixie/main amd64 llvm-19 amd64 1:19.1.7-3+b1 [16.4 MB]
+Get:211 http://deb.debian.org/debian trixie/main amd64 python3-pygments all 2.18.0+dfsg-2 [836 kB]
+Get:212 http://deb.debian.org/debian trixie/main amd64 python3-yaml amd64 6.0.2-1+b2 [136 kB]
+Get:213 http://deb.debian.org/debian trixie/main amd64 llvm-19-tools amd64 1:19.1.7-3+b1 [511 kB]
+Get:214 http://deb.debian.org/debian trixie/main amd64 llvm-19-dev amd64 1:19.1.7-3+b1 [43.1 MB]
+Get:215 http://deb.debian.org/debian trixie/main amd64 moreutils amd64 0.69-1 [62.8 kB]
+Get:216 http://deb.debian.org/debian trixie/main amd64 net-tools amd64 2.10-1.3 [245 kB]
+Get:217 http://deb.debian.org/debian trixie/main amd64 ninja-build amd64 1.12.1-1 [142 kB]
+Get:218 http://deb.debian.org/debian trixie/main amd64 pkg-config amd64 1.8.1-4 [14.0 kB]
+Get:219 http://deb.debian.org/debian trixie/main amd64 python3.13-dev amd64 3.13.5-2 [504 kB]
+Get:220 http://deb.debian.org/debian trixie/main amd64 python3-dev amd64 3.13.5-1 [26.1 kB]
+Get:221 http://deb.debian.org/debian trixie/main amd64 python3-wheel all 0.46.1-2 [21.7 kB]
+Get:222 http://deb.debian.org/debian trixie/main amd64 python3-pip all 25.1.1+dfsg-1 [1,457 kB]
+Get:223 http://deb.debian.org/debian trixie/main amd64 ssh all 1:10.0p1-7+deb13u1 [143 kB]
+Get:224 http://deb.debian.org/debian trixie/main amd64 stow all 2.4.1-2 [154 kB]
+Get:225 http://deb.debian.org/debian trixie/main amd64 valgrind amd64 1:3.24.0-3 [15.4 MB]
+Get:226 http://deb.debian.org/debian trixie/main amd64 zsh-common all 5.9-8 [4,146 kB]
+Get:227 http://deb.debian.org/debian trixie/main amd64 zsh amd64 5.9-8+b21 [915 kB]
+Preconfiguring packages ...
+[?1049h[1;22r[4l[?25l(B[m[37m[40m[1;22r[H[2J[1;1H[97m[44m                                                                       [2;1H                                                                       [3;1H                                                                       [4;1H                                                                       [5;1H                                                                       [6;1H                                                                       [7;1H                                                                       [8;1H                                                                       [9;1H                                                                       [10;1H                                                                       [11;1H                                                                       [12;1H                                                                       [13;1H                                                                       [14;1H                                                                       [15;1H                                                                       [16;1H                                                                       [17;1H                                                                       [18;1H                                                                       [19;1H                                                                       [20;1H                                                                       [21;1H                                                                       [22;1H                                                                       [22;70H [4h [4l[1;1H[37mPackage configuration[3;2H[30m[47m┌────────────────┤ [31mConfiguring popularity-contest[30m ├────────────────┐[4;2H│                                                                  │[97m[40m [5;2H[30m[47m│ The system may anonymously supply the distribution developers    │[97m[40m [6;2H[30m[47m│ with statistics about the most used packages on this system.     │[97m[40m [7;2H[30m[47m│ This information influences decisions such as which packages     │[97m[40m [8;2H[30m[47m│ should go on the first distribution CD.                          │[97m[40m [9;2H[30m[47m│                                                                  │[97m[40m [10;2H[30m[47m│ If you choose to participate, the automatic submission script    │[97m[40m [11;2H[30m[47m│ will run once every week, sending statistics to the              │[97m[40m [12;2H[30m[47m│ distribution developers. The collected statistics can be viewed  │[97m[40m [13;2H[30m[47m│ on https://popcon.debian.org/.                                   │[97m[40m [14;2H[30m[47m│                                                                  │[97m[40m [15;2H[30m[47m│ This choice can be later modified by running "dpkg-reconfigure   │[97m[40m [16;2H[30m[47m│ popularity-contest".                                             │[97m[40m [17;2H[30m[47m│                                                                  │[97m[40m [18;2H[30m[47m│                              [37m[41m<Ok>[30m[47m                                │[97m[40m [19;2H[30m[47m│                                                                  │[97m[40m [20;2H[30m[47m└──────────────────────────────────────────────────────────────────┘[97m[40m [21;3H                                                                    [18;34H[H[2J[H[2J+--------[ debian setup script ]--------+
+|                                       |
+|            [ components ]             |
+|                                       |
+|          [1] apt packages             |
+|          [2] rust                     |
+|          [3] haskell                  |
+|          [4] neovim                   |
+|          [5] git repos                |
+|          [6] docs                     |
+|          [7] stow symlinks            |
+|          [8] complete                 |
+|                                       |
+|          [q] quit                     |
+|                                       |
++---------------------------------------+
+:[H[2J+--------[ debian setup script ]--------+
+|                                       |
+|         [ apt package groups ]        |
+|                                       |
+|       1. [ ] core                     |
+|       2. [ ] networking               |
+|       3. [ ] c dev                    |
+|       4. [ ] c xtras                  |
+|       5. [ ] neovim dependecies       |
+|       6. [ ] haskell dependecies      |
+|       7. [ ] additional languages     |
+|       8. [ ] full                     |
+|       9. [ ] all                      |
+|                                       |
+|          [?] package info             |
+|          [i] install                  |
+|          [u] uninstall                |
+|          [b] back                     |
+|          [q] quit                     |
+|                                       |
++---------------------------------------+
+:[H[2J+--------[ debian setup script ]--------+
+|                                       |
+|         [ apt package groups ]        |
+|                                       |
+|       1. [x] core                     |
+|       2. [x] networking               |
+|       3. [x] c dev                    |
+|       4. [x] c xtras                  |
+|       5. [x] neovim dependecies       |
+|       6. [x] haskell dependecies      |
+|       7. [x] additional languages     |
+|       8. [x] full                     |
+|       9. [x] all                      |
+|                                       |
+|          [?] package info             |
+|          [i] install                  |
+|          [u] uninstall                |
+|          [b] back                     |
+|          [q] quit                     |
+|                                       |
++---------------------------------------+
+:[ proposed command ]
+
+sudo apt-get install -y curl git ssh vim iproute2 net-tools bear build-essential clang clang-tools cmake gdb lldb valgrind libclang-dev libncurses-dev libpng-dev libsdl3-dev libsdl3-image-dev libsdl3-ttf-dev gettext ninja-build liblua5.1-0-dev libffi-dev libffi8 libgmp-dev libgmp10 libncurses6 libtinfo6 pkg-config default-jdk gnucobol perl python3 python3-pip lsof fdisk feh figlet fuse fzf tcc rsync stow wget zip zsh
+
+[ approve execution? (y/n) ] > 
+[ updating packages references ... ]
+Hit:1 http://security.debian.org/debian-security trixie-security InRelease
+Get:2 http://deb.debian.org/debian trixie InRelease [140 kB]
+Hit:3 http://deb.debian.org/debian trixie-updates InRelease
+Hit:4 http://deb.debian.org/debian trixie-backports InRelease
+Fetched 140 kB in 0s (1,432 kB/s)
+Reading package lists...
+[ packages references updated ]
+
+[ installing package groups ... ]
+sudo apt-get install -y curl git ssh vim iproute2 net-tools bear build-essential clang clang-tools cmake gdb lldb valgrind libclang-dev libncurses-dev libpng-dev libsdl3-dev libsdl3-image-dev libsdl3-ttf-dev gettext ninja-build liblua5.1-0-dev libffi-dev libffi8 libgmp-dev libgmp10 libncurses6 libtinfo6 pkg-config default-jdk gnucobol perl python3 python3-pip lsof fdisk feh figlet fuse fzf tcc rsync stow wget zip zsh
+Reading package lists...
+Building dependency tree...
+Reading state information...
+curl is already the newest version (8.14.1-2+deb13u2).
+curl set to manually installed.
+git is already the newest version (1:2.47.3-0+deb13u1).
+vim is already the newest version (2:9.1.1230-2).
+iproute2 is already the newest version (6.15.0-1).
+build-essential is already the newest version (12.12).
+build-essential set to manually installed.
+gdb is already the newest version (16.3-1).
+gdb set to manually installed.
+libffi8 is already the newest version (3.4.8-2).
+libffi8 set to manually installed.
+libgmp10 is already the newest version (2:6.3.0+dfsg-3).
+libncurses6 is already the newest version (6.5+20250216-2).
+libncurses6 set to manually installed.
+libtinfo6 is already the newest version (6.5+20250216-2).
+perl is already the newest version (5.40.1-6).
+perl set to manually installed.
+python3 is already the newest version (3.13.5-1).
+python3 set to manually installed.
+fdisk is already the newest version (2.41-5).
+rsync is already the newest version (3.4.1+ds1-5+deb13u1).
+rsync set to manually installed.
+zip is already the newest version (3.0-15).
+zip set to manually installed.
+The following additional packages will be installed:
+  autoconf automake autotools-dev bzip2-doc ca-certificates-java clang-19
+  clang-tools-19 cmake-data default-jdk-headless default-jre
+  default-jre-headless gir1.2-freedesktop-dev gir1.2-glib-2.0-dev
+  girepository-tools gnucobol3 icu-devtools java-common lib32gcc-s1
+  lib32stdc++6 libasound2-dev libatk-wrapper-java libatk-wrapper-java-jni
+  libblkid-dev libbrotli-dev libbz2-dev libc6-dbg libc6-i386 libcap-dev
+  libcares2 libclang-19-dev libclang-common-19-dev libclang-cpp19
+  libclang-rt-19-dev libclang1-19 libcob4-dev libcob4t64 libdbus-1-dev
+  libdecor-0-dev libdeflate-dev libdrm-dev libear libegl-dev libexpat1-dev
+  libfreetype-dev libgbm-dev libgif7 libgio-2.0-dev libgio-2.0-dev-bin
+  libgirepository-2.0-0 libgl-dev libgles-dev libgles1 libglib2.0-dev
+  libglib2.0-dev-bin libglx-dev libgmpxx4ldbl libgraphite2-dev
+  libgrpc++1.51t64 libgrpc29t64 libharfbuzz-cairo0 libharfbuzz-dev
+  libibus-1.0-dev libice-dev libicu-dev libid3tag0 libimlib2t64 libjbig-dev
+  libjpeg-dev libjpeg-turbo-progs libjpeg62-turbo-dev libjsoncpp26 liblerc-dev
+  liblldb-19 liblsof0 libltdl-dev liblua5.1-0 liblzma-dev libmount-dev
+  libobjc-14-dev libpciaccess-dev libpcre2-dev libpcre2-posix3 libpfm4
+  libpipewire-0.3-dev libpng-tools libprotoc32t64 libpulse-dev libpython3-dev
+  libpython3.13-dev libreadline-dev librhash1 libsdl3-0 libsdl3-image0
+  libsdl3-ttf0 libselinux1-dev libsepol-dev libsharpyuv-dev libsm-dev
+  libsndio-dev libsndio7.0 libspa-0.2-dev libsysprof-capture-4-dev
+  libsystemd-dev libtiff-dev libtiffxx6 libtool libturbojpeg0 libudev-dev
+  libwayland-bin libwayland-dev libwebp-dev libwebpdecoder3 libwtmpdb0
+  libx11-dev libxau-dev libxcb1-dev libxcursor-dev libxdmcp-dev libxext-dev
+  libxfixes-dev libxi-dev libxinerama-dev libxkbcommon-dev libxml2-dev
+  libxrandr-dev libxrender-dev libxss-dev libxt-dev libxv-dev libxxf86vm-dev
+  libz3-dev libzstd-dev lldb-19 llvm-19 llvm-19-dev llvm-19-linker-tools
+  llvm-19-runtime llvm-19-tools m4 native-architecture ncurses-term
+  openjdk-21-jdk openjdk-21-jdk-headless openjdk-21-jre
+  openjdk-21-jre-headless openssh-server openssh-sftp-server python3-dev
+  python3-lldb-19 python3-packaging python3-pygments python3-wheel
+  python3-yaml python3.13-dev runit-helper uuid-dev x11proto-dev
+  xorg-sgml-doctools xtrans-dev yudit-common zlib1g-dev zsh-common
+Suggested packages:
+  autoconf-archive gnu-standards autoconf-doc clang-19-doc wasi-libc cmake-doc
+  cmake-format elpa-cmake-mode autopoint gettext-doc libasprintf-dev
+  libgettextpo-dev gnulib-l10n libasound2-doc freetype2-doc libglib2.0-doc
+  gmp-doc libgmp10-doc libmpfr-dev libgraphite2-utils libice-doc icu-doc
+  libtool-doc liblzma-doc ncurses-doc pipewire-doc readline-doc
+  libayatana-appindicator3-1 | libappindicator3-1 liburing2 libsm-doc sndiod
+  gfortran | fortran95-compiler gcj-jdk libwayland-doc libx11-doc libxcb-doc
+  libxext-doc libxt-doc llvm-19-doc m4-doc openjdk-21-demo openjdk-21-source
+  visualvm fonts-wqy-microhei | fonts-wqy-zenhei fonts-indic molly-guard
+  monkeysphere ufw python-pygments-doc ttf-bitstream-vera python3-setuptools
+  doc-base valgrind-mpi kcachegrind yudit-doc yudit zsh-doc
+The following NEW packages will be installed:
+  autoconf automake autotools-dev bear bzip2-doc ca-certificates-java clang
+  clang-19 clang-tools clang-tools-19 cmake cmake-data default-jdk
+  default-jdk-headless default-jre default-jre-headless feh figlet fuse fzf
+  gettext gir1.2-freedesktop-dev gir1.2-glib-2.0-dev girepository-tools
+  gnucobol gnucobol3 icu-devtools java-common lib32gcc-s1 lib32stdc++6
+  libasound2-dev libatk-wrapper-java libatk-wrapper-java-jni libblkid-dev
+  libbrotli-dev libbz2-dev libc6-dbg libc6-i386 libcap-dev libcares2
+  libclang-19-dev libclang-common-19-dev libclang-cpp19 libclang-dev
+  libclang-rt-19-dev libclang1-19 libcob4-dev libcob4t64 libdbus-1-dev
+  libdecor-0-dev libdeflate-dev libdrm-dev libear libegl-dev libexpat1-dev
+  libffi-dev libfreetype-dev libgbm-dev libgif7 libgio-2.0-dev
+  libgio-2.0-dev-bin libgirepository-2.0-0 libgl-dev libgles-dev libgles1
+  libglib2.0-dev libglib2.0-dev-bin libglx-dev libgmp-dev libgmpxx4ldbl
+  libgraphite2-dev libgrpc++1.51t64 libgrpc29t64 libharfbuzz-cairo0
+  libharfbuzz-dev libibus-1.0-dev libice-dev libicu-dev libid3tag0
+  libimlib2t64 libjbig-dev libjpeg-dev libjpeg-turbo-progs libjpeg62-turbo-dev
+  libjsoncpp26 liblerc-dev liblldb-19 liblsof0 libltdl-dev liblua5.1-0
+  liblua5.1-0-dev liblzma-dev libmount-dev libncurses-dev libobjc-14-dev
+  libpciaccess-dev libpcre2-dev libpcre2-posix3 libpfm4 libpipewire-0.3-dev
+  libpng-dev libpng-tools libprotoc32t64 libpulse-dev libpython3-dev
+  libpython3.13-dev libreadline-dev librhash1 libsdl3-0 libsdl3-dev
+  libsdl3-image-dev libsdl3-image0 libsdl3-ttf-dev libsdl3-ttf0
+  libselinux1-dev libsepol-dev libsharpyuv-dev libsm-dev libsndio-dev
+  libsndio7.0 libspa-0.2-dev libsysprof-capture-4-dev libsystemd-dev
+  libtiff-dev libtiffxx6 libtool libturbojpeg0 libudev-dev libwayland-bin
+  libwayland-dev libwebp-dev libwebpdecoder3 libwtmpdb0 libx11-dev libxau-dev
+  libxcb1-dev libxcursor-dev libxdmcp-dev libxext-dev libxfixes-dev libxi-dev
+  libxinerama-dev libxkbcommon-dev libxml2-dev libxrandr-dev libxrender-dev
+  libxss-dev libxt-dev libxv-dev libxxf86vm-dev libz3-dev libzstd-dev lldb
+  lldb-19 llvm-19 llvm-19-dev llvm-19-linker-tools llvm-19-runtime
+  llvm-19-tools lsof m4 native-architecture ncurses-term net-tools ninja-build
+  openjdk-21-jdk openjdk-21-jdk-headless openjdk-21-jre
+  openjdk-21-jre-headless openssh-server openssh-sftp-server pkg-config
+  python3-dev python3-lldb-19 python3-packaging python3-pip python3-pygments
+  python3-wheel python3-yaml python3.13-dev runit-helper ssh stow tcc uuid-dev
+  valgrind wget x11proto-dev xorg-sgml-doctools xtrans-dev yudit-common
+  zlib1g-dev zsh zsh-common
+Preconfiguring packages ...
+0 upgraded, 194 newly installed, 0 to remove and 0 not upgraded.
+Need to get 0 B/366 MB of archives.
+After this operation, 1,770 MB of additional disk space will be used.
+Selecting previously unselected package openssh-sftp-server.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 305150 files and directories currently installed.)
+Preparing to unpack .../000-openssh-sftp-server_1%3a10.0p1-7+deb13u1_amd64.deb ...
+Unpacking openssh-sftp-server (1:10.0p1-7+deb13u1) ...
+Selecting previously unselected package runit-helper.
+Preparing to unpack .../001-runit-helper_2.16.4_all.deb ...
+Unpacking runit-helper (2.16.4) ...
+Selecting previously unselected package libwtmpdb0:amd64.
+Preparing to unpack .../002-libwtmpdb0_0.73.0-3+deb13u1_amd64.deb ...
+Unpacking libwtmpdb0:amd64 (0.73.0-3+deb13u1) ...
+Selecting previously unselected package openssh-server.
+Preparing to unpack .../003-openssh-server_1%3a10.0p1-7+deb13u1_amd64.deb ...
+Unpacking openssh-server (1:10.0p1-7+deb13u1) ...
+Selecting previously unselected package liblsof0.
+Preparing to unpack .../004-liblsof0_4.99.4+dfsg-2_amd64.deb ...
+Unpacking liblsof0 (4.99.4+dfsg-2) ...
+Selecting previously unselected package lsof.
+Preparing to unpack .../005-lsof_4.99.4+dfsg-2_amd64.deb ...
+Unpacking lsof (4.99.4+dfsg-2) ...
+Selecting previously unselected package ncurses-term.
+Preparing to unpack .../006-ncurses-term_6.5+20250216-2_all.deb ...
+Unpacking ncurses-term (6.5+20250216-2) ...
+Selecting previously unselected package wget.
+Preparing to unpack .../007-wget_1.25.0-2_amd64.deb ...
+Unpacking wget (1.25.0-2) ...
+Selecting previously unselected package m4.
+Preparing to unpack .../008-m4_1.4.19-8_amd64.deb ...
+Unpacking m4 (1.4.19-8) ...
+Selecting previously unselected package autoconf.
+Preparing to unpack .../009-autoconf_2.72-3.1_all.deb ...
+Unpacking autoconf (2.72-3.1) ...
+Selecting previously unselected package autotools-dev.
+Preparing to unpack .../010-autotools-dev_20240727.1_all.deb ...
+Unpacking autotools-dev (20240727.1) ...
+Selecting previously unselected package automake.
+Preparing to unpack .../011-automake_1%3a1.17-4_all.deb ...
+Unpacking automake (1:1.17-4) ...
+Selecting previously unselected package libcares2:amd64.
+Preparing to unpack .../012-libcares2_1.34.5-1+deb13u1_amd64.deb ...
+Unpacking libcares2:amd64 (1.34.5-1+deb13u1) ...
+Selecting previously unselected package libprotoc32t64:amd64.
+Preparing to unpack .../013-libprotoc32t64_3.21.12-11_amd64.deb ...
+Unpacking libprotoc32t64:amd64 (3.21.12-11) ...
+Selecting previously unselected package libgrpc29t64:amd64.
+Preparing to unpack .../014-libgrpc29t64_1.51.1-6_amd64.deb ...
+Unpacking libgrpc29t64:amd64 (1.51.1-6) ...
+Selecting previously unselected package libgrpc++1.51t64:amd64.
+Preparing to unpack .../015-libgrpc++1.51t64_1.51.1-6_amd64.deb ...
+Unpacking libgrpc++1.51t64:amd64 (1.51.1-6) ...
+Selecting previously unselected package libear:amd64.
+Preparing to unpack .../016-libear_3.1.6-1_amd64.deb ...
+Unpacking libear:amd64 (3.1.6-1) ...
+Selecting previously unselected package bear.
+Preparing to unpack .../017-bear_3.1.6-1_amd64.deb ...
+Unpacking bear (3.1.6-1) ...
+Selecting previously unselected package bzip2-doc.
+Preparing to unpack .../018-bzip2-doc_1.0.8-6_all.deb ...
+Unpacking bzip2-doc (1.0.8-6) ...
+Selecting previously unselected package ca-certificates-java.
+Preparing to unpack .../019-ca-certificates-java_20240118_all.deb ...
+Unpacking ca-certificates-java (20240118) ...
+Selecting previously unselected package libclang-cpp19.
+Preparing to unpack .../020-libclang-cpp19_1%3a19.1.7-3+b1_amd64.deb ...
+Unpacking libclang-cpp19 (1:19.1.7-3+b1) ...
+Selecting previously unselected package libobjc-14-dev:amd64.
+Preparing to unpack .../021-libobjc-14-dev_14.2.0-19_amd64.deb ...
+Unpacking libobjc-14-dev:amd64 (14.2.0-19) ...
+Selecting previously unselected package libclang-common-19-dev:amd64.
+Preparing to unpack .../022-libclang-common-19-dev_1%3a19.1.7-3+b1_amd64.deb ...
+Unpacking libclang-common-19-dev:amd64 (1:19.1.7-3+b1) ...
+Selecting previously unselected package llvm-19-linker-tools.
+Preparing to unpack .../023-llvm-19-linker-tools_1%3a19.1.7-3+b1_amd64.deb ...
+Unpacking llvm-19-linker-tools (1:19.1.7-3+b1) ...
+Selecting previously unselected package libclang1-19.
+Preparing to unpack .../024-libclang1-19_1%3a19.1.7-3+b1_amd64.deb ...
+Unpacking libclang1-19 (1:19.1.7-3+b1) ...
+Selecting previously unselected package clang-19.
+Preparing to unpack .../025-clang-19_1%3a19.1.7-3+b1_amd64.deb ...
+Unpacking clang-19 (1:19.1.7-3+b1) ...
+Selecting previously unselected package clang.
+Preparing to unpack .../026-clang_1%3a19.0-63_amd64.deb ...
+Unpacking clang (1:19.0-63) ...
+Selecting previously unselected package clang-tools-19.
+Preparing to unpack .../027-clang-tools-19_1%3a19.1.7-3+b1_amd64.deb ...
+Unpacking clang-tools-19 (1:19.1.7-3+b1) ...
+Selecting previously unselected package clang-tools:amd64.
+Preparing to unpack .../028-clang-tools_1%3a19.0-63_amd64.deb ...
+Unpacking clang-tools:amd64 (1:19.0-63) ...
+Selecting previously unselected package cmake-data.
+Preparing to unpack .../029-cmake-data_3.31.6-2_all.deb ...
+Unpacking cmake-data (3.31.6-2) ...
+Selecting previously unselected package libjsoncpp26:amd64.
+Preparing to unpack .../030-libjsoncpp26_1.9.6-3_amd64.deb ...
+Unpacking libjsoncpp26:amd64 (1.9.6-3) ...
+Selecting previously unselected package librhash1:amd64.
+Preparing to unpack .../031-librhash1_1.4.5-1_amd64.deb ...
+Unpacking librhash1:amd64 (1.4.5-1) ...
+Selecting previously unselected package cmake.
+Preparing to unpack .../032-cmake_3.31.6-2_amd64.deb ...
+Unpacking cmake (3.31.6-2) ...
+Selecting previously unselected package java-common.
+Preparing to unpack .../033-java-common_0.76_all.deb ...
+Unpacking java-common (0.76) ...
+Selecting previously unselected package openjdk-21-jre-headless:amd64.
+Preparing to unpack .../034-openjdk-21-jre-headless_21.0.10+7-1~deb13u1_amd64.deb ...
+Unpacking openjdk-21-jre-headless:amd64 (21.0.10+7-1~deb13u1) ...
+Selecting previously unselected package default-jre-headless.
+Preparing to unpack .../035-default-jre-headless_2%3a1.21-76_amd64.deb ...
+Unpacking default-jre-headless (2:1.21-76) ...
+Selecting previously unselected package libgif7:amd64.
+Preparing to unpack .../036-libgif7_5.2.2-1+b1_amd64.deb ...
+Unpacking libgif7:amd64 (5.2.2-1+b1) ...
+Selecting previously unselected package openjdk-21-jre:amd64.
+Preparing to unpack .../037-openjdk-21-jre_21.0.10+7-1~deb13u1_amd64.deb ...
+Unpacking openjdk-21-jre:amd64 (21.0.10+7-1~deb13u1) ...
+Selecting previously unselected package default-jre.
+Preparing to unpack .../038-default-jre_2%3a1.21-76_amd64.deb ...
+Unpacking default-jre (2:1.21-76) ...
+Selecting previously unselected package openjdk-21-jdk-headless:amd64.
+Preparing to unpack .../039-openjdk-21-jdk-headless_21.0.10+7-1~deb13u1_amd64.deb ...
+Unpacking openjdk-21-jdk-headless:amd64 (21.0.10+7-1~deb13u1) ...
+Selecting previously unselected package default-jdk-headless.
+Preparing to unpack .../040-default-jdk-headless_2%3a1.21-76_amd64.deb ...
+Unpacking default-jdk-headless (2:1.21-76) ...
+Selecting previously unselected package openjdk-21-jdk:amd64.
+Preparing to unpack .../041-openjdk-21-jdk_21.0.10+7-1~deb13u1_amd64.deb ...
+Unpacking openjdk-21-jdk:amd64 (21.0.10+7-1~deb13u1) ...
+Selecting previously unselected package default-jdk.
+Preparing to unpack .../042-default-jdk_2%3a1.21-76_amd64.deb ...
+Unpacking default-jdk (2:1.21-76) ...
+Selecting previously unselected package libid3tag0:amd64.
+Preparing to unpack .../043-libid3tag0_0.16.3-1_amd64.deb ...
+Unpacking libid3tag0:amd64 (0.16.3-1) ...
+Selecting previously unselected package libimlib2t64:amd64.
+Preparing to unpack .../044-libimlib2t64_1.12.4-2_amd64.deb ...
+Unpacking libimlib2t64:amd64 (1.12.4-2) ...
+Selecting previously unselected package yudit-common.
+Preparing to unpack .../045-yudit-common_3.1.0-1_all.deb ...
+Unpacking yudit-common (3.1.0-1) ...
+Selecting previously unselected package feh.
+Preparing to unpack .../046-feh_3.10.3-1_amd64.deb ...
+Unpacking feh (3.10.3-1) ...
+Selecting previously unselected package figlet.
+Preparing to unpack .../047-figlet_2.2.5-3+b2_amd64.deb ...
+Unpacking figlet (2.2.5-3+b2) ...
+Selecting previously unselected package fuse.
+Preparing to unpack .../048-fuse_3.17.2-3_all.deb ...
+Unpacking fuse (3.17.2-3) ...
+Selecting previously unselected package fzf.
+Preparing to unpack .../049-fzf_0.60.3-1+b2_amd64.deb ...
+Unpacking fzf (0.60.3-1+b2) ...
+Selecting previously unselected package gettext.
+Preparing to unpack .../050-gettext_0.23.1-2_amd64.deb ...
+Unpacking gettext (0.23.1-2) ...
+Selecting previously unselected package gir1.2-glib-2.0-dev:amd64.
+Preparing to unpack .../051-gir1.2-glib-2.0-dev_2.84.4-3~deb13u2_amd64.deb ...
+Unpacking gir1.2-glib-2.0-dev:amd64 (2.84.4-3~deb13u2) ...
+Selecting previously unselected package gir1.2-freedesktop-dev:amd64.
+Preparing to unpack .../052-gir1.2-freedesktop-dev_1.84.0-1_amd64.deb ...
+Unpacking gir1.2-freedesktop-dev:amd64 (1.84.0-1) ...
+Selecting previously unselected package native-architecture.
+Preparing to unpack .../053-native-architecture_0.2.6_all.deb ...
+Unpacking native-architecture (0.2.6) ...
+Selecting previously unselected package libgirepository-2.0-0:amd64.
+Preparing to unpack .../054-libgirepository-2.0-0_2.84.4-3~deb13u2_amd64.deb ...
+Unpacking libgirepository-2.0-0:amd64 (2.84.4-3~deb13u2) ...
+Selecting previously unselected package girepository-tools:amd64.
+Preparing to unpack .../055-girepository-tools_2.84.4-3~deb13u2_amd64.deb ...
+Unpacking girepository-tools:amd64 (2.84.4-3~deb13u2) ...
+Selecting previously unselected package libcob4t64:amd64.
+Preparing to unpack .../056-libcob4t64_3.2-3_amd64.deb ...
+Unpacking libcob4t64:amd64 (3.2-3) ...
+Selecting previously unselected package libcob4-dev:amd64.
+Preparing to unpack .../057-libcob4-dev_3.2-3_amd64.deb ...
+Unpacking libcob4-dev:amd64 (3.2-3) ...
+Selecting previously unselected package libgmpxx4ldbl:amd64.
+Preparing to unpack .../058-libgmpxx4ldbl_2%3a6.3.0+dfsg-3_amd64.deb ...
+Unpacking libgmpxx4ldbl:amd64 (2:6.3.0+dfsg-3) ...
+Selecting previously unselected package libgmp-dev:amd64.
+Preparing to unpack .../059-libgmp-dev_2%3a6.3.0+dfsg-3_amd64.deb ...
+Unpacking libgmp-dev:amd64 (2:6.3.0+dfsg-3) ...
+Selecting previously unselected package libncurses-dev:amd64.
+Preparing to unpack .../060-libncurses-dev_6.5+20250216-2_amd64.deb ...
+Unpacking libncurses-dev:amd64 (6.5+20250216-2) ...
+Selecting previously unselected package gnucobol3.
+Preparing to unpack .../061-gnucobol3_3.2-3_amd64.deb ...
+Unpacking gnucobol3 (3.2-3) ...
+Selecting previously unselected package gnucobol.
+Preparing to unpack .../062-gnucobol_5_amd64.deb ...
+Unpacking gnucobol (5) ...
+Selecting previously unselected package icu-devtools.
+Preparing to unpack .../063-icu-devtools_76.1-4_amd64.deb ...
+Unpacking icu-devtools (76.1-4) ...
+Selecting previously unselected package libc6-i386.
+Preparing to unpack .../064-libc6-i386_2.41-12+deb13u2_amd64.deb ...
+Unpacking libc6-i386 (2.41-12+deb13u2) ...
+Selecting previously unselected package lib32gcc-s1.
+Preparing to unpack .../065-lib32gcc-s1_14.2.0-19_amd64.deb ...
+Unpacking lib32gcc-s1 (14.2.0-19) ...
+Selecting previously unselected package lib32stdc++6.
+Preparing to unpack .../066-lib32stdc++6_14.2.0-19_amd64.deb ...
+Unpacking lib32stdc++6 (14.2.0-19) ...
+Selecting previously unselected package libasound2-dev:amd64.
+Preparing to unpack .../067-libasound2-dev_1.2.14-1_amd64.deb ...
+Unpacking libasound2-dev:amd64 (1.2.14-1) ...
+Selecting previously unselected package libatk-wrapper-java.
+Preparing to unpack .../068-libatk-wrapper-java_0.40.0-3_all.deb ...
+Unpacking libatk-wrapper-java (0.40.0-3) ...
+Selecting previously unselected package libatk-wrapper-java-jni:amd64.
+Preparing to unpack .../069-libatk-wrapper-java-jni_0.40.0-3+b3_amd64.deb ...
+Unpacking libatk-wrapper-java-jni:amd64 (0.40.0-3+b3) ...
+Selecting previously unselected package uuid-dev:amd64.
+Preparing to unpack .../070-uuid-dev_2.41-5_amd64.deb ...
+Unpacking uuid-dev:amd64 (2.41-5) ...
+Selecting previously unselected package libblkid-dev:amd64.
+Preparing to unpack .../071-libblkid-dev_2.41-5_amd64.deb ...
+Unpacking libblkid-dev:amd64 (2.41-5) ...
+Selecting previously unselected package libbrotli-dev:amd64.
+Preparing to unpack .../072-libbrotli-dev_1.1.0-2+b7_amd64.deb ...
+Unpacking libbrotli-dev:amd64 (1.1.0-2+b7) ...
+Selecting previously unselected package libbz2-dev:amd64.
+Preparing to unpack .../073-libbz2-dev_1.0.8-6_amd64.deb ...
+Unpacking libbz2-dev:amd64 (1.0.8-6) ...
+Selecting previously unselected package libc6-dbg:amd64.
+Preparing to unpack .../074-libc6-dbg_2.41-12+deb13u2_amd64.deb ...
+Unpacking libc6-dbg:amd64 (2.41-12+deb13u2) ...
+Selecting previously unselected package libcap-dev:amd64.
+Preparing to unpack .../075-libcap-dev_1%3a2.75-10+b8_amd64.deb ...
+Unpacking libcap-dev:amd64 (1:2.75-10+b8) ...
+Selecting previously unselected package libclang-19-dev.
+Preparing to unpack .../076-libclang-19-dev_1%3a19.1.7-3+b1_amd64.deb ...
+Unpacking libclang-19-dev (1:19.1.7-3+b1) ...
+Selecting previously unselected package libclang-dev.
+Preparing to unpack .../077-libclang-dev_1%3a19.0-63_amd64.deb ...
+Unpacking libclang-dev (1:19.0-63) ...
+Selecting previously unselected package libclang-rt-19-dev:amd64.
+Preparing to unpack .../078-libclang-rt-19-dev_1%3a19.1.7-3+b1_amd64.deb ...
+Unpacking libclang-rt-19-dev:amd64 (1:19.1.7-3+b1) ...
+Selecting previously unselected package libsystemd-dev:amd64.
+Preparing to unpack .../079-libsystemd-dev_257.9-1~deb13u1_amd64.deb ...
+Unpacking libsystemd-dev:amd64 (257.9-1~deb13u1) ...
+Selecting previously unselected package libdbus-1-dev:amd64.
+Preparing to unpack .../080-libdbus-1-dev_1.16.2-2_amd64.deb ...
+Unpacking libdbus-1-dev:amd64 (1.16.2-2) ...
+Selecting previously unselected package libwayland-bin.
+Preparing to unpack .../081-libwayland-bin_1.23.1-3_amd64.deb ...
+Unpacking libwayland-bin (1.23.1-3) ...
+Selecting previously unselected package libffi-dev:amd64.
+Preparing to unpack .../082-libffi-dev_3.4.8-2_amd64.deb ...
+Unpacking libffi-dev:amd64 (3.4.8-2) ...
+Selecting previously unselected package libwayland-dev:amd64.
+Preparing to unpack .../083-libwayland-dev_1.23.1-3_amd64.deb ...
+Unpacking libwayland-dev:amd64 (1.23.1-3) ...
+Selecting previously unselected package libdecor-0-dev:amd64.
+Preparing to unpack .../084-libdecor-0-dev_0.2.2-2_amd64.deb ...
+Unpacking libdecor-0-dev:amd64 (0.2.2-2) ...
+Selecting previously unselected package libdeflate-dev:amd64.
+Preparing to unpack .../085-libdeflate-dev_1.23-2_amd64.deb ...
+Unpacking libdeflate-dev:amd64 (1.23-2) ...
+Selecting previously unselected package libpciaccess-dev:amd64.
+Preparing to unpack .../086-libpciaccess-dev_0.17-3+b3_amd64.deb ...
+Unpacking libpciaccess-dev:amd64 (0.17-3+b3) ...
+Selecting previously unselected package libdrm-dev:amd64.
+Preparing to unpack .../087-libdrm-dev_2.4.124-2_amd64.deb ...
+Unpacking libdrm-dev:amd64 (2.4.124-2) ...
+Selecting previously unselected package xorg-sgml-doctools.
+Preparing to unpack .../088-xorg-sgml-doctools_1%3a1.11-1.1_all.deb ...
+Unpacking xorg-sgml-doctools (1:1.11-1.1) ...
+Selecting previously unselected package x11proto-dev.
+Preparing to unpack .../089-x11proto-dev_2024.1-1_all.deb ...
+Unpacking x11proto-dev (2024.1-1) ...
+Selecting previously unselected package libxau-dev:amd64.
+Preparing to unpack .../090-libxau-dev_1%3a1.0.11-1_amd64.deb ...
+Unpacking libxau-dev:amd64 (1:1.0.11-1) ...
+Selecting previously unselected package libxdmcp-dev:amd64.
+Preparing to unpack .../091-libxdmcp-dev_1%3a1.1.5-1_amd64.deb ...
+Unpacking libxdmcp-dev:amd64 (1:1.1.5-1) ...
+Selecting previously unselected package xtrans-dev.
+Preparing to unpack .../092-xtrans-dev_1.4.0-1_all.deb ...
+Unpacking xtrans-dev (1.4.0-1) ...
+Selecting previously unselected package libxcb1-dev:amd64.
+Preparing to unpack .../093-libxcb1-dev_1.17.0-2+b1_amd64.deb ...
+Unpacking libxcb1-dev:amd64 (1.17.0-2+b1) ...
+Selecting previously unselected package libx11-dev:amd64.
+Preparing to unpack .../094-libx11-dev_2%3a1.8.12-1_amd64.deb ...
+Unpacking libx11-dev:amd64 (2:1.8.12-1) ...
+Selecting previously unselected package libglx-dev:amd64.
+Preparing to unpack .../095-libglx-dev_1.7.0-1+b2_amd64.deb ...
+Unpacking libglx-dev:amd64 (1.7.0-1+b2) ...
+Selecting previously unselected package libgl-dev:amd64.
+Preparing to unpack .../096-libgl-dev_1.7.0-1+b2_amd64.deb ...
+Unpacking libgl-dev:amd64 (1.7.0-1+b2) ...
+Selecting previously unselected package libegl-dev:amd64.
+Preparing to unpack .../097-libegl-dev_1.7.0-1+b2_amd64.deb ...
+Unpacking libegl-dev:amd64 (1.7.0-1+b2) ...
+Selecting previously unselected package libexpat1-dev:amd64.
+Preparing to unpack .../098-libexpat1-dev_2.7.1-2_amd64.deb ...
+Unpacking libexpat1-dev:amd64 (2.7.1-2) ...
+Selecting previously unselected package zlib1g-dev:amd64.
+Preparing to unpack .../099-zlib1g-dev_1%3a1.3.dfsg+really1.3.1-1+b1_amd64.deb ...
+Unpacking zlib1g-dev:amd64 (1:1.3.dfsg+really1.3.1-1+b1) ...
+Selecting previously unselected package libpng-dev:amd64.
+Preparing to unpack .../100-libpng-dev_1.6.48-1+deb13u3_amd64.deb ...
+Unpacking libpng-dev:amd64 (1.6.48-1+deb13u3) ...
+Selecting previously unselected package libfreetype-dev:amd64.
+Preparing to unpack .../101-libfreetype-dev_2.13.3+dfsg-1+deb13u1_amd64.deb ...
+Unpacking libfreetype-dev:amd64 (2.13.3+dfsg-1+deb13u1) ...
+Selecting previously unselected package libgbm-dev:amd64.
+Preparing to unpack .../102-libgbm-dev_25.0.7-2_amd64.deb ...
+Unpacking libgbm-dev:amd64 (25.0.7-2) ...
+Selecting previously unselected package libsepol-dev:amd64.
+Preparing to unpack .../103-libsepol-dev_3.8.1-1_amd64.deb ...
+Unpacking libsepol-dev:amd64 (3.8.1-1) ...
+Selecting previously unselected package libpcre2-posix3:amd64.
+Preparing to unpack .../104-libpcre2-posix3_10.46-1~deb13u1_amd64.deb ...
+Unpacking libpcre2-posix3:amd64 (10.46-1~deb13u1) ...
+Selecting previously unselected package libpcre2-dev:amd64.
+Preparing to unpack .../105-libpcre2-dev_10.46-1~deb13u1_amd64.deb ...
+Unpacking libpcre2-dev:amd64 (10.46-1~deb13u1) ...
+Selecting previously unselected package libselinux1-dev:amd64.
+Preparing to unpack .../106-libselinux1-dev_3.8.1-1_amd64.deb ...
+Unpacking libselinux1-dev:amd64 (3.8.1-1) ...
+Selecting previously unselected package libmount-dev:amd64.
+Preparing to unpack .../107-libmount-dev_2.41-5_amd64.deb ...
+Unpacking libmount-dev:amd64 (2.41-5) ...
+Selecting previously unselected package libsysprof-capture-4-dev:amd64.
+Preparing to unpack .../108-libsysprof-capture-4-dev_48.0-2_amd64.deb ...
+Unpacking libsysprof-capture-4-dev:amd64 (48.0-2) ...
+Selecting previously unselected package libgio-2.0-dev:amd64.
+Preparing to unpack .../109-libgio-2.0-dev_2.84.4-3~deb13u2_amd64.deb ...
+Unpacking libgio-2.0-dev:amd64 (2.84.4-3~deb13u2) ...
+Selecting previously unselected package python3-packaging.
+Preparing to unpack .../110-python3-packaging_25.0-1_all.deb ...
+Unpacking python3-packaging (25.0-1) ...
+Selecting previously unselected package libgio-2.0-dev-bin.
+Preparing to unpack .../111-libgio-2.0-dev-bin_2.84.4-3~deb13u2_amd64.deb ...
+Unpacking libgio-2.0-dev-bin (2.84.4-3~deb13u2) ...
+Selecting previously unselected package libgles1:amd64.
+Preparing to unpack .../112-libgles1_1.7.0-1+b2_amd64.deb ...
+Unpacking libgles1:amd64 (1.7.0-1+b2) ...
+Selecting previously unselected package libgles-dev:amd64.
+Preparing to unpack .../113-libgles-dev_1.7.0-1+b2_amd64.deb ...
+Unpacking libgles-dev:amd64 (1.7.0-1+b2) ...
+Selecting previously unselected package libglib2.0-dev-bin.
+Preparing to unpack .../114-libglib2.0-dev-bin_2.84.4-3~deb13u2_amd64.deb ...
+Unpacking libglib2.0-dev-bin (2.84.4-3~deb13u2) ...
+Selecting previously unselected package libglib2.0-dev:amd64.
+Preparing to unpack .../115-libglib2.0-dev_2.84.4-3~deb13u2_amd64.deb ...
+Unpacking libglib2.0-dev:amd64 (2.84.4-3~deb13u2) ...
+Selecting previously unselected package libgraphite2-dev:amd64.
+Preparing to unpack .../116-libgraphite2-dev_1.3.14-2+b1_amd64.deb ...
+Unpacking libgraphite2-dev:amd64 (1.3.14-2+b1) ...
+Selecting previously unselected package libharfbuzz-cairo0:amd64.
+Preparing to unpack .../117-libharfbuzz-cairo0_10.2.0-1+b1_amd64.deb ...
+Unpacking libharfbuzz-cairo0:amd64 (10.2.0-1+b1) ...
+Selecting previously unselected package libicu-dev:amd64.
+Preparing to unpack .../118-libicu-dev_76.1-4_amd64.deb ...
+Unpacking libicu-dev:amd64 (76.1-4) ...
+Selecting previously unselected package libharfbuzz-dev:amd64.
+Preparing to unpack .../119-libharfbuzz-dev_10.2.0-1+b1_amd64.deb ...
+Unpacking libharfbuzz-dev:amd64 (10.2.0-1+b1) ...
+Selecting previously unselected package libibus-1.0-dev:amd64.
+Preparing to unpack .../120-libibus-1.0-dev_1.5.32-2_amd64.deb ...
+Unpacking libibus-1.0-dev:amd64 (1.5.32-2) ...
+Selecting previously unselected package libice-dev:amd64.
+Preparing to unpack .../121-libice-dev_2%3a1.1.1-1_amd64.deb ...
+Unpacking libice-dev:amd64 (2:1.1.1-1) ...
+Selecting previously unselected package libjbig-dev:amd64.
+Preparing to unpack .../122-libjbig-dev_2.1-6.1+b2_amd64.deb ...
+Unpacking libjbig-dev:amd64 (2.1-6.1+b2) ...
+Selecting previously unselected package libjpeg62-turbo-dev:amd64.
+Preparing to unpack .../123-libjpeg62-turbo-dev_1%3a2.1.5-4_amd64.deb ...
+Unpacking libjpeg62-turbo-dev:amd64 (1:2.1.5-4) ...
+Selecting previously unselected package libjpeg-dev:amd64.
+Preparing to unpack .../124-libjpeg-dev_1%3a2.1.5-4_amd64.deb ...
+Unpacking libjpeg-dev:amd64 (1:2.1.5-4) ...
+Selecting previously unselected package libturbojpeg0:amd64.
+Preparing to unpack .../125-libturbojpeg0_1%3a2.1.5-4_amd64.deb ...
+Unpacking libturbojpeg0:amd64 (1:2.1.5-4) ...
+Selecting previously unselected package libjpeg-turbo-progs.
+Preparing to unpack .../126-libjpeg-turbo-progs_1%3a2.1.5-4_amd64.deb ...
+Unpacking libjpeg-turbo-progs (1:2.1.5-4) ...
+Selecting previously unselected package liblerc-dev:amd64.
+Preparing to unpack .../127-liblerc-dev_4.0.0+ds-5_amd64.deb ...
+Unpacking liblerc-dev:amd64 (4.0.0+ds-5) ...
+Selecting previously unselected package liblldb-19.
+Preparing to unpack .../128-liblldb-19_1%3a19.1.7-3+b1_amd64.deb ...
+Unpacking liblldb-19 (1:19.1.7-3+b1) ...
+Selecting previously unselected package libltdl-dev:amd64.
+Preparing to unpack .../129-libltdl-dev_2.5.4-4_amd64.deb ...
+Unpacking libltdl-dev:amd64 (2.5.4-4) ...
+Selecting previously unselected package liblua5.1-0:amd64.
+Preparing to unpack .../130-liblua5.1-0_5.1.5-11_amd64.deb ...
+Unpacking liblua5.1-0:amd64 (5.1.5-11) ...
+Selecting previously unselected package libreadline-dev:amd64.
+Preparing to unpack .../131-libreadline-dev_8.2-6_amd64.deb ...
+Unpacking libreadline-dev:amd64 (8.2-6) ...
+Selecting previously unselected package liblua5.1-0-dev:amd64.
+Preparing to unpack .../132-liblua5.1-0-dev_5.1.5-11_amd64.deb ...
+Unpacking liblua5.1-0-dev:amd64 (5.1.5-11) ...
+Selecting previously unselected package liblzma-dev:amd64.
+Preparing to unpack .../133-liblzma-dev_5.8.1-1_amd64.deb ...
+Unpacking liblzma-dev:amd64 (5.8.1-1) ...
+Selecting previously unselected package libpfm4:amd64.
+Preparing to unpack .../134-libpfm4_4.13.0+git99-gc5587f9-1_amd64.deb ...
+Unpacking libpfm4:amd64 (4.13.0+git99-gc5587f9-1) ...
+Selecting previously unselected package libspa-0.2-dev:amd64.
+Preparing to unpack .../135-libspa-0.2-dev_1.4.2-1_amd64.deb ...
+Unpacking libspa-0.2-dev:amd64 (1.4.2-1) ...
+Selecting previously unselected package libpipewire-0.3-dev:amd64.
+Preparing to unpack .../136-libpipewire-0.3-dev_1.4.2-1_amd64.deb ...
+Unpacking libpipewire-0.3-dev:amd64 (1.4.2-1) ...
+Selecting previously unselected package libpng-tools.
+Preparing to unpack .../137-libpng-tools_1.6.48-1+deb13u3_amd64.deb ...
+Unpacking libpng-tools (1.6.48-1+deb13u3) ...
+Selecting previously unselected package libpulse-dev:amd64.
+Preparing to unpack .../138-libpulse-dev_17.0+dfsg1-2+b1_amd64.deb ...
+Unpacking libpulse-dev:amd64 (17.0+dfsg1-2+b1) ...
+Selecting previously unselected package libpython3.13-dev:amd64.
+Preparing to unpack .../139-libpython3.13-dev_3.13.5-2_amd64.deb ...
+Unpacking libpython3.13-dev:amd64 (3.13.5-2) ...
+Selecting previously unselected package libpython3-dev:amd64.
+Preparing to unpack .../140-libpython3-dev_3.13.5-1_amd64.deb ...
+Unpacking libpython3-dev:amd64 (3.13.5-1) ...
+Selecting previously unselected package libsndio7.0:amd64.
+Preparing to unpack .../141-libsndio7.0_1.10.0-0.1_amd64.deb ...
+Unpacking libsndio7.0:amd64 (1.10.0-0.1) ...
+Selecting previously unselected package libsdl3-0:amd64.
+Preparing to unpack .../142-libsdl3-0_3.2.10+ds-1_amd64.deb ...
+Unpacking libsdl3-0:amd64 (3.2.10+ds-1) ...
+Selecting previously unselected package libsndio-dev:amd64.
+Preparing to unpack .../143-libsndio-dev_1.10.0-0.1_amd64.deb ...
+Unpacking libsndio-dev:amd64 (1.10.0-0.1) ...
+Selecting previously unselected package libudev-dev:amd64.
+Preparing to unpack .../144-libudev-dev_257.9-1~deb13u1_amd64.deb ...
+Unpacking libudev-dev:amd64 (257.9-1~deb13u1) ...
+Selecting previously unselected package libxrender-dev:amd64.
+Preparing to unpack .../145-libxrender-dev_1%3a0.9.12-1_amd64.deb ...
+Unpacking libxrender-dev:amd64 (1:0.9.12-1) ...
+Selecting previously unselected package libxfixes-dev:amd64.
+Preparing to unpack .../146-libxfixes-dev_1%3a6.0.0-2+b4_amd64.deb ...
+Unpacking libxfixes-dev:amd64 (1:6.0.0-2+b4) ...
+Selecting previously unselected package libxcursor-dev:amd64.
+Preparing to unpack .../147-libxcursor-dev_1%3a1.2.3-1_amd64.deb ...
+Unpacking libxcursor-dev:amd64 (1:1.2.3-1) ...
+Selecting previously unselected package libxext-dev:amd64.
+Preparing to unpack .../148-libxext-dev_2%3a1.3.4-1+b3_amd64.deb ...
+Unpacking libxext-dev:amd64 (2:1.3.4-1+b3) ...
+Selecting previously unselected package libxi-dev:amd64.
+Preparing to unpack .../149-libxi-dev_2%3a1.8.2-1_amd64.deb ...
+Unpacking libxi-dev:amd64 (2:1.8.2-1) ...
+Selecting previously unselected package libxinerama-dev:amd64.
+Preparing to unpack .../150-libxinerama-dev_2%3a1.1.4-3+b4_amd64.deb ...
+Unpacking libxinerama-dev:amd64 (2:1.1.4-3+b4) ...
+Selecting previously unselected package libxkbcommon-dev:amd64.
+Preparing to unpack .../151-libxkbcommon-dev_1.7.0-2_amd64.deb ...
+Unpacking libxkbcommon-dev:amd64 (1.7.0-2) ...
+Selecting previously unselected package libxrandr-dev:amd64.
+Preparing to unpack .../152-libxrandr-dev_2%3a1.5.4-1+b3_amd64.deb ...
+Unpacking libxrandr-dev:amd64 (2:1.5.4-1+b3) ...
+Selecting previously unselected package libxss-dev:amd64.
+Preparing to unpack .../153-libxss-dev_1%3a1.2.3-1+b3_amd64.deb ...
+Unpacking libxss-dev:amd64 (1:1.2.3-1+b3) ...
+Selecting previously unselected package libsm-dev:amd64.
+Preparing to unpack .../154-libsm-dev_2%3a1.2.6-1_amd64.deb ...
+Unpacking libsm-dev:amd64 (2:1.2.6-1) ...
+Selecting previously unselected package libxt-dev:amd64.
+Preparing to unpack .../155-libxt-dev_1%3a1.2.1-1.2+b2_amd64.deb ...
+Unpacking libxt-dev:amd64 (1:1.2.1-1.2+b2) ...
+Selecting previously unselected package libxv-dev:amd64.
+Preparing to unpack .../156-libxv-dev_2%3a1.0.11-1.1+b3_amd64.deb ...
+Unpacking libxv-dev:amd64 (2:1.0.11-1.1+b3) ...
+Selecting previously unselected package libxxf86vm-dev:amd64.
+Preparing to unpack .../157-libxxf86vm-dev_1%3a1.1.4-1+b4_amd64.deb ...
+Unpacking libxxf86vm-dev:amd64 (1:1.1.4-1+b4) ...
+Selecting previously unselected package libsdl3-dev:amd64.
+Preparing to unpack .../158-libsdl3-dev_3.2.10+ds-1_amd64.deb ...
+Unpacking libsdl3-dev:amd64 (3.2.10+ds-1) ...
+Selecting previously unselected package libsdl3-image0:amd64.
+Preparing to unpack .../159-libsdl3-image0_3.2.4+ds-1_amd64.deb ...
+Unpacking libsdl3-image0:amd64 (3.2.4+ds-1) ...
+Selecting previously unselected package libzstd-dev:amd64.
+Preparing to unpack .../160-libzstd-dev_1.5.7+dfsg-1_amd64.deb ...
+Unpacking libzstd-dev:amd64 (1.5.7+dfsg-1) ...
+Selecting previously unselected package libwebpdecoder3:amd64.
+Preparing to unpack .../161-libwebpdecoder3_1.5.0-0.1_amd64.deb ...
+Unpacking libwebpdecoder3:amd64 (1.5.0-0.1) ...
+Selecting previously unselected package libsharpyuv-dev:amd64.
+Preparing to unpack .../162-libsharpyuv-dev_1.5.0-0.1_amd64.deb ...
+Unpacking libsharpyuv-dev:amd64 (1.5.0-0.1) ...
+Selecting previously unselected package libwebp-dev:amd64.
+Preparing to unpack .../163-libwebp-dev_1.5.0-0.1_amd64.deb ...
+Unpacking libwebp-dev:amd64 (1.5.0-0.1) ...
+Selecting previously unselected package libtiffxx6:amd64.
+Preparing to unpack .../164-libtiffxx6_4.7.0-3+deb13u1_amd64.deb ...
+Unpacking libtiffxx6:amd64 (4.7.0-3+deb13u1) ...
+Selecting previously unselected package libtiff-dev:amd64.
+Preparing to unpack .../165-libtiff-dev_4.7.0-3+deb13u1_amd64.deb ...
+Unpacking libtiff-dev:amd64 (4.7.0-3+deb13u1) ...
+Selecting previously unselected package libsdl3-image-dev:amd64.
+Preparing to unpack .../166-libsdl3-image-dev_3.2.4+ds-1_amd64.deb ...
+Unpacking libsdl3-image-dev:amd64 (3.2.4+ds-1) ...
+Selecting previously unselected package libsdl3-ttf0:amd64.
+Preparing to unpack .../167-libsdl3-ttf0_3.2.2+ds-1_amd64.deb ...
+Unpacking libsdl3-ttf0:amd64 (3.2.2+ds-1) ...
+Selecting previously unselected package libsdl3-ttf-dev:amd64.
+Preparing to unpack .../168-libsdl3-ttf-dev_3.2.2+ds-1_amd64.deb ...
+Unpacking libsdl3-ttf-dev:amd64 (3.2.2+ds-1) ...
+Selecting previously unselected package tcc.
+Preparing to unpack .../169-tcc_0.9.27+git20200814.62c30a4a-2_amd64.deb ...
+Unpacking tcc (0.9.27+git20200814.62c30a4a-2) ...
+Selecting previously unselected package libtool.
+Preparing to unpack .../170-libtool_2.5.4-4_all.deb ...
+Unpacking libtool (2.5.4-4) ...
+Selecting previously unselected package libxml2-dev:amd64.
+Preparing to unpack .../171-libxml2-dev_2.12.7+dfsg+really2.9.14-2.1+deb13u2_amd64.deb ...
+Unpacking libxml2-dev:amd64 (2.12.7+dfsg+really2.9.14-2.1+deb13u2) ...
+Selecting previously unselected package libz3-dev:amd64.
+Preparing to unpack .../172-libz3-dev_4.13.3-1_amd64.deb ...
+Unpacking libz3-dev:amd64 (4.13.3-1) ...
+Selecting previously unselected package python3-lldb-19.
+Preparing to unpack .../173-python3-lldb-19_1%3a19.1.7-3+b1_amd64.deb ...
+Unpacking python3-lldb-19 (1:19.1.7-3+b1) ...
+Selecting previously unselected package lldb-19.
+Preparing to unpack .../174-lldb-19_1%3a19.1.7-3+b1_amd64.deb ...
+Unpacking lldb-19 (1:19.1.7-3+b1) ...
+Selecting previously unselected package lldb:amd64.
+Preparing to unpack .../175-lldb_1%3a19.0-63_amd64.deb ...
+Unpacking lldb:amd64 (1:19.0-63) ...
+Selecting previously unselected package llvm-19-runtime.
+Preparing to unpack .../176-llvm-19-runtime_1%3a19.1.7-3+b1_amd64.deb ...
+Unpacking llvm-19-runtime (1:19.1.7-3+b1) ...
+Selecting previously unselected package llvm-19.
+Preparing to unpack .../177-llvm-19_1%3a19.1.7-3+b1_amd64.deb ...
+Unpacking llvm-19 (1:19.1.7-3+b1) ...
+Selecting previously unselected package python3-pygments.
+Preparing to unpack .../178-python3-pygments_2.18.0+dfsg-2_all.deb ...
+Unpacking python3-pygments (2.18.0+dfsg-2) ...
+Selecting previously unselected package python3-yaml.
+Preparing to unpack .../179-python3-yaml_6.0.2-1+b2_amd64.deb ...
+Unpacking python3-yaml (6.0.2-1+b2) ...
+Selecting previously unselected package llvm-19-tools.
+Preparing to unpack .../180-llvm-19-tools_1%3a19.1.7-3+b1_amd64.deb ...
+Unpacking llvm-19-tools (1:19.1.7-3+b1) ...
+Selecting previously unselected package llvm-19-dev.
+Preparing to unpack .../181-llvm-19-dev_1%3a19.1.7-3+b1_amd64.deb ...
+Unpacking llvm-19-dev (1:19.1.7-3+b1) ...
+Selecting previously unselected package net-tools.
+Preparing to unpack .../182-net-tools_2.10-1.3_amd64.deb ...
+Unpacking net-tools (2.10-1.3) ...
+Selecting previously unselected package ninja-build.
+Preparing to unpack .../183-ninja-build_1.12.1-1_amd64.deb ...
+Unpacking ninja-build (1.12.1-1) ...
+Selecting previously unselected package pkg-config:amd64.
+Preparing to unpack .../184-pkg-config_1.8.1-4_amd64.deb ...
+Unpacking pkg-config:amd64 (1.8.1-4) ...
+Selecting previously unselected package python3.13-dev.
+Preparing to unpack .../185-python3.13-dev_3.13.5-2_amd64.deb ...
+Unpacking python3.13-dev (3.13.5-2) ...
+Selecting previously unselected package python3-dev.
+Preparing to unpack .../186-python3-dev_3.13.5-1_amd64.deb ...
+Unpacking python3-dev (3.13.5-1) ...
+Selecting previously unselected package python3-wheel.
+Preparing to unpack .../187-python3-wheel_0.46.1-2_all.deb ...
+Unpacking python3-wheel (0.46.1-2) ...
+Selecting previously unselected package python3-pip.
+Preparing to unpack .../188-python3-pip_25.1.1+dfsg-1_all.deb ...
+Unpacking python3-pip (25.1.1+dfsg-1) ...
+Selecting previously unselected package ssh.
+Preparing to unpack .../189-ssh_1%3a10.0p1-7+deb13u1_all.deb ...
+Unpacking ssh (1:10.0p1-7+deb13u1) ...
+Selecting previously unselected package stow.
+Preparing to unpack .../190-stow_2.4.1-2_all.deb ...
+Unpacking stow (2.4.1-2) ...
+Selecting previously unselected package valgrind.
+Preparing to unpack .../191-valgrind_1%3a3.24.0-3_amd64.deb ...
+Unpacking valgrind (1:3.24.0-3) ...
+Selecting previously unselected package zsh-common.
+Preparing to unpack .../192-zsh-common_5.9-8_all.deb ...
+Unpacking zsh-common (5.9-8) ...
+Selecting previously unselected package zsh.
+Preparing to unpack .../193-zsh_5.9-8+b21_amd64.deb ...
+Unpacking zsh (5.9-8+b21) ...
+Setting up fuse (3.17.2-3) ...
+Setting up runit-helper (2.16.4) ...
+Setting up bzip2-doc (1.0.8-6) ...
+Setting up libz3-dev:amd64 (4.13.3-1) ...
+Setting up openssh-sftp-server (1:10.0p1-7+deb13u1) ...
+Setting up net-tools (2.10-1.3) ...
+Setting up libncurses-dev:amd64 (6.5+20250216-2) ...
+Setting up gettext (0.23.1-2) ...
+Setting up native-architecture (0.2.6) ...
+Setting up libpciaccess-dev:amd64 (0.17-3+b3) ...
+Setting up libclang1-19 (1:19.1.7-3+b1) ...
+Setting up libzstd-dev:amd64 (1.5.7+dfsg-1) ...
+Setting up wget (1.25.0-2) ...
+Setting up java-common (0.76) ...
+Setting up libpng-tools (1.6.48-1+deb13u3) ...
+Setting up libclang-common-19-dev:amd64 (1:19.1.7-3+b1) ...
+Setting up libgirepository-2.0-0:amd64 (2.84.4-3~deb13u2) ...
+Setting up zsh-common (5.9-8) ...
+Setting up tcc (0.9.27+git20200814.62c30a4a-2) ...
+Setting up liblsof0 (4.99.4+dfsg-2) ...
+Setting up libxkbcommon-dev:amd64 (1.7.0-2) ...
+Setting up libjbig-dev:amd64 (2.1-6.1+b2) ...
+Setting up libwebpdecoder3:amd64 (1.5.0-0.1) ...
+Setting up m4 (1.4.19-8) ...
+Setting up python3-yaml (6.0.2-1+b2) ...
+Setting up libobjc-14-dev:amd64 (14.2.0-19) ...
+Setting up libreadline-dev:amd64 (8.2-6) ...
+Setting up libffi-dev:amd64 (3.4.8-2) ...
+Setting up libturbojpeg0:amd64 (1:2.1.5-4) ...
+Setting up libgbm-dev:amd64 (25.0.7-2) ...
+Setting up ninja-build (1.12.1-1) ...
+Setting up libc6-dbg:amd64 (2.41-12+deb13u2) ...
+Setting up libsysprof-capture-4-dev:amd64 (48.0-2) ...
+Setting up libid3tag0:amd64 (0.16.3-1) ...
+Setting up xtrans-dev (1.4.0-1) ...
+Setting up libwayland-bin (1.23.1-3) ...
+Setting up libgraphite2-dev:amd64 (1.3.14-2+b1) ...
+Setting up autotools-dev (20240727.1) ...
+Setting up python3-pygments (2.18.0+dfsg-2) ...
+Setting up libxml2-dev:amd64 (2.12.7+dfsg+really2.9.14-2.1+deb13u2) ...
+Setting up python3-packaging (25.0-1) ...
+Setting up libgmpxx4ldbl:amd64 (2:6.3.0+dfsg-3) ...
+Setting up libpfm4:amd64 (4.13.0+git99-gc5587f9-1) ...
+Setting up libexpat1-dev:amd64 (2.7.1-2) ...
+Setting up libcob4t64:amd64 (3.2-3) ...
+Setting up libharfbuzz-cairo0:amd64 (10.2.0-1+b1) ...
+Setting up libcob4-dev:amd64 (3.2-3) ...
+Setting up libjpeg62-turbo-dev:amd64 (1:2.1.5-4) ...
+Setting up libjsoncpp26:amd64 (1.9.6-3) ...
+Setting up uuid-dev:amd64 (2.41-5) ...
+Setting up libgles1:amd64 (1.7.0-1+b2) ...
+Setting up figlet (2.2.5-3+b2) ...
+update-alternatives: using /usr/bin/figlet-figlet to provide /usr/bin/figlet (figlet) in auto mode
+Setting up libcares2:amd64 (1.34.5-1+deb13u1) ...
+Setting up stow (2.4.1-2) ...
+Setting up icu-devtools (76.1-4) ...
+Setting up pkg-config:amd64 (1.8.1-4) ...
+Setting up libsepol-dev:amd64 (3.8.1-1) ...
+Setting up liblerc-dev:amd64 (4.0.0+ds-5) ...
+Setting up lsof (4.99.4+dfsg-2) ...
+Setting up autoconf (2.72-3.1) ...
+Setting up liblzma-dev:amd64 (5.8.1-1) ...
+Setting up libsndio7.0:amd64 (1.10.0-0.1) ...
+Setting up libgif7:amd64 (5.2.2-1+b1) ...
+Setting up zlib1g-dev:amd64 (1:1.3.dfsg+really1.3.1-1+b1) ...
+Setting up yudit-common (3.1.0-1) ...
+Setting up fzf (0.60.3-1+b2) ...
+Setting up libpcre2-posix3:amd64 (10.46-1~deb13u1) ...
+Setting up gir1.2-glib-2.0-dev:amd64 (2.84.4-3~deb13u2) ...
+Setting up liblua5.1-0:amd64 (5.1.5-11) ...
+Setting up libc6-i386 (2.41-12+deb13u2) ...
+Setting up xorg-sgml-doctools (1:1.11-1.1) ...
+Setting up libwtmpdb0:amd64 (0.73.0-3+deb13u1) ...
+Setting up cmake-data (3.31.6-2) ...
+Setting up librhash1:amd64 (1.4.5-1) ...
+Setting up llvm-19-linker-tools (1:19.1.7-3+b1) ...
+Setting up zsh (5.9-8+b21) ...
+Setting up libatk-wrapper-java (0.40.0-3) ...
+Setting up libclang-19-dev (1:19.1.7-3+b1) ...
+Setting up ca-certificates-java (20240118) ...
+No JRE found. Skipping Java certificates setup.
+Setting up libprotoc32t64:amd64 (3.21.12-11) ...
+Setting up llvm-19-runtime (1:19.1.7-3+b1) ...
+Setting up libspa-0.2-dev:amd64 (1.4.2-1) ...
+Setting up libasound2-dev:amd64 (1.2.14-1) ...
+Setting up libsharpyuv-dev:amd64 (1.5.0-0.1) ...
+Setting up valgrind (1:3.24.0-3) ...
+Setting up libtiffxx6:amd64 (4.7.0-3+deb13u1) ...
+Setting up libcap-dev:amd64 (1:2.75-10+b8) ...
+Setting up libdeflate-dev:amd64 (1.23-2) ...
+Setting up llvm-19-tools (1:19.1.7-3+b1) ...
+Setting up libicu-dev:amd64 (76.1-4) ...
+Setting up libsystemd-dev:amd64 (257.9-1~deb13u1) ...
+Setting up libbrotli-dev:amd64 (1.1.0-2+b7) ...
+Setting up libclang-cpp19 (1:19.1.7-3+b1) ...
+Setting up ncurses-term (6.5+20250216-2) ...
+Setting up libbz2-dev:amd64 (1.0.8-6) ...
+Setting up automake (1:1.17-4) ...
+update-alternatives: using /usr/bin/automake-1.17 to provide /usr/bin/automake (automake) in auto mode
+Setting up libblkid-dev:amd64 (2.41-5) ...
+Setting up libimlib2t64:amd64 (1.12.4-2) ...
+Setting up libgio-2.0-dev-bin (2.84.4-3~deb13u2) ...
+Setting up libdrm-dev:amd64 (2.4.124-2) ...
+Setting up libsndio-dev:amd64 (1.10.0-0.1) ...
+Setting up girepository-tools:amd64 (2.84.4-3~deb13u2) ...
+Setting up libgmp-dev:amd64 (2:6.3.0+dfsg-3) ...
+Setting up libclang-dev (1:19.0-63) ...
+Setting up openjdk-21-jre-headless:amd64 (21.0.10+7-1~deb13u1) ...
+update-alternatives: using /usr/lib/jvm/java-21-openjdk-amd64/bin/java to provide /usr/bin/java (java) in auto mode
+update-alternatives: using /usr/lib/jvm/java-21-openjdk-amd64/bin/jpackage to provide /usr/bin/jpackage (jpackage) in auto mode
+update-alternatives: using /usr/lib/jvm/java-21-openjdk-amd64/bin/keytool to provide /usr/bin/keytool (keytool) in auto mode
+update-alternatives: using /usr/lib/jvm/java-21-openjdk-amd64/bin/rmiregistry to provide /usr/bin/rmiregistry (rmiregistry) in auto mode
+update-alternatives: using /usr/lib/jvm/java-21-openjdk-amd64/lib/jexec to provide /usr/bin/jexec (jexec) in auto mode
+Setting up libpcre2-dev:amd64 (10.46-1~deb13u1) ...
+Setting up openssh-server (1:10.0p1-7+deb13u1) ...
+Creating config file /etc/ssh/sshd_config with new version
+Creating SSH2 RSA key; this may take some time ...
+3072 SHA256:EVeIxK5RRzDmDrOfZuSLvHpHilKuUOr5tSbj9sQ9gc4 root@valenloft (RSA)
+Creating SSH2 ECDSA key; this may take some time ...
+256 SHA256:VjuNCYAICVZoQrFKuTu6Uph+hrztwPKMUk1QnWVhiK8 root@valenloft (ECDSA)
+Creating SSH2 ED25519 key; this may take some time ...
+256 SHA256:I2mO/ZQBriOWA4G0paoUSvSo2w3epcZg8nt6UAkAHPo root@valenloft (ED25519)
+Creating user 'sshd' (sshd user) with UID 987 and GID 65534.
+Created symlink '/etc/systemd/system/sshd.service' → '/usr/lib/systemd/system/ssh.service'.
+Created symlink '/etc/systemd/system/multi-user.target.wants/ssh.service' → '/usr/lib/systemd/system/ssh.service'.
+ssh.socket is a disabled or a static unit, not starting it.
+Created symlink '/etc/systemd/system/ssh.service.wants/sshd-keygen.service' → '/usr/lib/systemd/system/sshd-keygen.service'.
+Created symlink '/etc/systemd/system/sshd.service.wants/sshd-keygen.service' → '/usr/lib/systemd/system/sshd-keygen.service'.
+Created symlink '/etc/systemd/system/sshd@.service.wants/sshd-keygen.service' → '/usr/lib/systemd/system/sshd-keygen.service'.
+Created symlink '/etc/systemd/system/ssh.socket.wants/sshd-keygen.service' → '/usr/lib/systemd/system/sshd-keygen.service'.
+Setting up liblua5.1-0-dev:amd64 (5.1.5-11) ...
+Setting up libtool (2.5.4-4) ...
+Setting up libselinux1-dev:amd64 (3.8.1-1) ...
+Setting up liblldb-19 (1:19.1.7-3+b1) ...
+Setting up libpng-dev:amd64 (1.6.48-1+deb13u3) ...
+Setting up libsdl3-0:amd64 (3.2.10+ds-1) ...
+Setting up libjpeg-dev:amd64 (1:2.1.5-4) ...
+Setting up libjpeg-turbo-progs (1:2.1.5-4) ...
+Setting up libwayland-dev:amd64 (1.23.1-3) ...
+Setting up clang-19 (1:19.1.7-3+b1) ...
+Setting up clang-tools-19 (1:19.1.7-3+b1) ...
+Setting up python3-wheel (0.46.1-2) ...
+Setting up libatk-wrapper-java-jni:amd64 (0.40.0-3+b3) ...
+Setting up libfreetype-dev:amd64 (2.13.3+dfsg-1+deb13u1) ...
+Setting up libdecor-0-dev:amd64 (0.2.2-2) ...
+Setting up libltdl-dev:amd64 (2.5.4-4) ...
+Setting up libwebp-dev:amd64 (1.5.0-0.1) ...
+Setting up libtiff-dev:amd64 (4.7.0-3+deb13u1) ...
+Setting up libdbus-1-dev:amd64 (1.16.2-2) ...
+Setting up lib32gcc-s1 (14.2.0-19) ...
+Setting up lib32stdc++6 (14.2.0-19) ...
+Setting up clang (1:19.0-63) ...
+Setting up libpython3.13-dev:amd64 (3.13.5-2) ...
+Setting up libsdl3-image0:amd64 (3.2.4+ds-1) ...
+Setting up gir1.2-freedesktop-dev:amd64 (1.84.0-1) ...
+Setting up libgrpc29t64:amd64 (1.51.1-6) ...
+Setting up gnucobol3 (3.2-3) ...
+Setting up feh (3.10.3-1) ...
+Setting up libudev-dev:amd64 (257.9-1~deb13u1) ...
+Setting up python3-pip (25.1.1+dfsg-1) ...
+Setting up libclang-rt-19-dev:amd64 (1:19.1.7-3+b1) ...
+Setting up libpipewire-0.3-dev:amd64 (1.4.2-1) ...
+Setting up cmake (3.31.6-2) ...
+Setting up llvm-19 (1:19.1.7-3+b1) ...
+Setting up python3-lldb-19 (1:19.1.7-3+b1) ...
+Setting up clang-tools:amd64 (1:19.0-63) ...
+Setting up libmount-dev:amd64 (2.41-5) ...
+Setting up libglib2.0-dev-bin (2.84.4-3~deb13u2) ...
+Setting up libsdl3-ttf0:amd64 (3.2.2+ds-1) ...
+Setting up libgio-2.0-dev:amd64 (2.84.4-3~deb13u2) ...
+Setting up libpython3-dev:amd64 (3.13.5-1) ...
+Setting up ssh (1:10.0p1-7+deb13u1) ...
+Setting up python3.13-dev (3.13.5-2) ...
+Setting up libgrpc++1.51t64:amd64 (1.51.1-6) ...
+Setting up lldb-19 (1:19.1.7-3+b1) ...
+Setting up gnucobol (5) ...
+Setting up python3-dev (3.13.5-1) ...
+Setting up llvm-19-dev (1:19.1.7-3+b1) ...
+Setting up lldb:amd64 (1:19.0-63) ...
+Setting up libear:amd64 (3.1.6-1) ...
+Setting up bear (3.1.6-1) ...
+Processing triggers for libglib2.0-0t64:amd64 (2.84.4-3~deb13u2) ...
+Setting up libglib2.0-dev:amd64 (2.84.4-3~deb13u2) ...
+Setting up libpulse-dev:amd64 (17.0+dfsg1-2+b1) ...
+Processing triggers for sgml-base (1.31+nmu1) ...
+Processing triggers for debianutils (5.23.2) ...
+Processing triggers for install-info (7.1.1-1+b1) ...
+Processing triggers for base-files (13.8+deb13u4) ...
+Processing triggers for mailcap (3.74) ...
+Setting up x11proto-dev (2024.1-1) ...
+Setting up libharfbuzz-dev:amd64 (10.2.0-1+b1) ...
+Setting up libxau-dev:amd64 (1:1.0.11-1) ...
+Processing triggers for hicolor-icon-theme (0.18-2) ...
+Setting up libice-dev:amd64 (2:1.1.1-1) ...
+Setting up libsm-dev:amd64 (2:1.2.6-1) ...
+Processing triggers for libc-bin (2.41-12+deb13u2) ...
+Processing triggers for systemd (257.9-1~deb13u1) ...
+Processing triggers for man-db (2.13.1-1) ...
+Setting up libibus-1.0-dev:amd64 (1.5.32-2) ...
+Setting up libxdmcp-dev:amd64 (1:1.1.5-1) ...
+Setting up libxcb1-dev:amd64 (1.17.0-2+b1) ...
+Setting up libx11-dev:amd64 (2:1.8.12-1) ...
+Setting up libxfixes-dev:amd64 (1:6.0.0-2+b4) ...
+Setting up libxt-dev:amd64 (1:1.2.1-1.2+b2) ...
+Setting up libxext-dev:amd64 (2:1.3.4-1+b3) ...
+Setting up libglx-dev:amd64 (1.7.0-1+b2) ...
+Setting up libxi-dev:amd64 (2:1.8.2-1) ...
+Setting up libxrender-dev:amd64 (1:0.9.12-1) ...
+Setting up libgl-dev:amd64 (1.7.0-1+b2) ...
+Setting up libegl-dev:amd64 (1.7.0-1+b2) ...
+Setting up libxcursor-dev:amd64 (1:1.2.3-1) ...
+Setting up libxxf86vm-dev:amd64 (1:1.1.4-1+b4) ...
+Setting up libxss-dev:amd64 (1:1.2.3-1+b3) ...
+Setting up libxv-dev:amd64 (2:1.0.11-1.1+b3) ...
+Setting up libxrandr-dev:amd64 (2:1.5.4-1+b3) ...
+Setting up libxinerama-dev:amd64 (2:1.1.4-3+b4) ...
+Setting up libgles-dev:amd64 (1.7.0-1+b2) ...
+Setting up libsdl3-dev:amd64 (3.2.10+ds-1) ...
+Setting up libsdl3-ttf-dev:amd64 (3.2.2+ds-1) ...
+Setting up libsdl3-image-dev:amd64 (3.2.4+ds-1) ...
+Processing triggers for ca-certificates-java (20240118) ...
+Adding debian:ACCVRAIZ1.pem
+Adding debian:AC_RAIZ_FNMT-RCM.pem
+Adding debian:AC_RAIZ_FNMT-RCM_SERVIDORES_SEGUROS.pem
+Adding debian:Actalis_Authentication_Root_CA.pem
+Adding debian:AffirmTrust_Commercial.pem
+Adding debian:AffirmTrust_Networking.pem
+Adding debian:AffirmTrust_Premium_ECC.pem
+Adding debian:AffirmTrust_Premium.pem
+Adding debian:Amazon_Root_CA_1.pem
+Adding debian:Amazon_Root_CA_2.pem
+Adding debian:Amazon_Root_CA_3.pem
+Adding debian:Amazon_Root_CA_4.pem
+Adding debian:ANF_Secure_Server_Root_CA.pem
+Adding debian:Atos_TrustedRoot_2011.pem
+Adding debian:Atos_TrustedRoot_Root_CA_ECC_TLS_2021.pem
+Adding debian:Atos_TrustedRoot_Root_CA_RSA_TLS_2021.pem
+Adding debian:Autoridad_de_Certificacion_Firmaprofesional_CIF_A62634068.pem
+Adding debian:Baltimore_CyberTrust_Root.pem
+Adding debian:BJCA_Global_Root_CA1.pem
+Adding debian:BJCA_Global_Root_CA2.pem
+Adding debian:Buypass_Class_2_Root_CA.pem
+Adding debian:Buypass_Class_3_Root_CA.pem
+Adding debian:CA_Disig_Root_R2.pem
+Adding debian:Certainly_Root_E1.pem
+Adding debian:Certainly_Root_R1.pem
+Adding debian:Certigna.pem
+Adding debian:Certigna_Root_CA.pem
+Adding debian:certSIGN_Root_CA_G2.pem
+Adding debian:certSIGN_ROOT_CA.pem
+Adding debian:Certum_EC-384_CA.pem
+Adding debian:Certum_Trusted_Network_CA_2.pem
+Adding debian:Certum_Trusted_Network_CA.pem
+Adding debian:Certum_Trusted_Root_CA.pem
+Adding debian:CFCA_EV_ROOT.pem
+Adding debian:CommScope_Public_Trust_ECC_Root-01.pem
+Adding debian:CommScope_Public_Trust_ECC_Root-02.pem
+Adding debian:CommScope_Public_Trust_RSA_Root-01.pem
+Adding debian:CommScope_Public_Trust_RSA_Root-02.pem
+Adding debian:Comodo_AAA_Services_root.pem
+Adding debian:COMODO_Certification_Authority.pem
+Adding debian:COMODO_ECC_Certification_Authority.pem
+Adding debian:COMODO_RSA_Certification_Authority.pem
+Adding debian:DigiCert_Assured_ID_Root_CA.pem
+Adding debian:DigiCert_Assured_ID_Root_G2.pem
+Adding debian:DigiCert_Assured_ID_Root_G3.pem
+Adding debian:DigiCert_Global_Root_CA.pem
+Adding debian:DigiCert_Global_Root_G2.pem
+Adding debian:DigiCert_Global_Root_G3.pem
+Adding debian:DigiCert_High_Assurance_EV_Root_CA.pem
+Adding debian:DigiCert_TLS_ECC_P384_Root_G5.pem
+Adding debian:DigiCert_TLS_RSA4096_Root_G5.pem
+Adding debian:DigiCert_Trusted_Root_G4.pem
+Adding debian:D-TRUST_BR_Root_CA_1_2020.pem
+Adding debian:D-TRUST_BR_Root_CA_2_2023.pem
+Adding debian:D-TRUST_EV_Root_CA_1_2020.pem
+Adding debian:D-TRUST_EV_Root_CA_2_2023.pem
+Adding debian:D-TRUST_Root_Class_3_CA_2_2009.pem
+Adding debian:D-TRUST_Root_Class_3_CA_2_EV_2009.pem
+Adding debian:emSign_ECC_Root_CA_-_C3.pem
+Adding debian:emSign_ECC_Root_CA_-_G3.pem
+Adding debian:emSign_Root_CA_-_C1.pem
+Adding debian:emSign_Root_CA_-_G1.pem
+Adding debian:Entrust.net_Premium_2048_Secure_Server_CA.pem
+Adding debian:Entrust_Root_Certification_Authority_-_EC1.pem
+Adding debian:Entrust_Root_Certification_Authority_-_G2.pem
+Adding debian:Entrust_Root_Certification_Authority.pem
+Adding debian:ePKI_Root_Certification_Authority.pem
+Adding debian:e-Szigno_Root_CA_2017.pem
+Adding debian:FIRMAPROFESIONAL_CA_ROOT-A_WEB.pem
+Adding debian:GDCA_TrustAUTH_R5_ROOT.pem
+Adding debian:GlobalSign_ECC_Root_CA_-_R4.pem
+Adding debian:GlobalSign_ECC_Root_CA_-_R5.pem
+Adding debian:GlobalSign_Root_CA.pem
+Adding debian:GlobalSign_Root_CA_-_R3.pem
+Adding debian:GlobalSign_Root_CA_-_R6.pem
+Adding debian:GlobalSign_Root_E46.pem
+Adding debian:GlobalSign_Root_R46.pem
+Adding debian:GLOBALTRUST_2020.pem
+Adding debian:Go_Daddy_Class_2_CA.pem
+Adding debian:Go_Daddy_Root_Certificate_Authority_-_G2.pem
+Adding debian:GTS_Root_R1.pem
+Adding debian:GTS_Root_R2.pem
+Adding debian:GTS_Root_R3.pem
+Adding debian:GTS_Root_R4.pem
+Adding debian:HARICA_TLS_ECC_Root_CA_2021.pem
+Adding debian:HARICA_TLS_RSA_Root_CA_2021.pem
+Adding debian:Hellenic_Academic_and_Research_Institutions_ECC_RootCA_2015.pem
+Adding debian:Hellenic_Academic_and_Research_Institutions_RootCA_2015.pem
+Adding debian:HiPKI_Root_CA_-_G1.pem
+Adding debian:Hongkong_Post_Root_CA_3.pem
+Adding debian:IdenTrust_Commercial_Root_CA_1.pem
+Adding debian:IdenTrust_Public_Sector_Root_CA_1.pem
+Adding debian:ISRG_Root_X1.pem
+Adding debian:ISRG_Root_X2.pem
+Adding debian:Izenpe.com.pem
+Adding debian:Microsec_e-Szigno_Root_CA_2009.pem
+Adding debian:Microsoft_ECC_Root_Certificate_Authority_2017.pem
+Adding debian:Microsoft_RSA_Root_Certificate_Authority_2017.pem
+Adding debian:NAVER_Global_Root_Certification_Authority.pem
+Adding debian:NetLock_Arany_=Class_Gold=_Főtanúsítvány.pem
+Adding debian:OISTE_WISeKey_Global_Root_GB_CA.pem
+Adding debian:OISTE_WISeKey_Global_Root_GC_CA.pem
+Adding debian:QuoVadis_Root_CA_1_G3.pem
+Adding debian:QuoVadis_Root_CA_2_G3.pem
+Adding debian:QuoVadis_Root_CA_2.pem
+Adding debian:QuoVadis_Root_CA_3_G3.pem
+Adding debian:QuoVadis_Root_CA_3.pem
+Adding debian:Sectigo_Public_Server_Authentication_Root_E46.pem
+Adding debian:Sectigo_Public_Server_Authentication_Root_R46.pem
+Adding debian:Secure_Global_CA.pem
+Adding debian:SecureSign_Root_CA12.pem
+Adding debian:SecureSign_Root_CA14.pem
+Adding debian:SecureSign_Root_CA15.pem
+Adding debian:SecureTrust_CA.pem
+Adding debian:Security_Communication_ECC_RootCA1.pem
+Adding debian:Security_Communication_RootCA2.pem
+Adding debian:SSL.com_EV_Root_Certification_Authority_ECC.pem
+Adding debian:SSL.com_EV_Root_Certification_Authority_RSA_R2.pem
+Adding debian:SSL.com_Root_Certification_Authority_ECC.pem
+Adding debian:SSL.com_Root_Certification_Authority_RSA.pem
+Adding debian:SSL.com_TLS_ECC_Root_CA_2022.pem
+Adding debian:SSL.com_TLS_RSA_Root_CA_2022.pem
+Adding debian:Starfield_Class_2_CA.pem
+Adding debian:Starfield_Root_Certificate_Authority_-_G2.pem
+Adding debian:Starfield_Services_Root_Certificate_Authority_-_G2.pem
+Adding debian:SwissSign_Gold_CA_-_G2.pem
+Adding debian:SZAFIR_ROOT_CA2.pem
+Adding debian:Telekom_Security_TLS_ECC_Root_2020.pem
+Adding debian:Telekom_Security_TLS_RSA_Root_2023.pem
+Adding debian:Telia_Root_CA_v2.pem
+Adding debian:TeliaSonera_Root_CA_v1.pem
+Adding debian:TrustAsia_Global_Root_CA_G3.pem
+Adding debian:TrustAsia_Global_Root_CA_G4.pem
+Adding debian:Trustwave_Global_Certification_Authority.pem
+Adding debian:Trustwave_Global_ECC_P256_Certification_Authority.pem
+Adding debian:Trustwave_Global_ECC_P384_Certification_Authority.pem
+Adding debian:T-TeleSec_GlobalRoot_Class_2.pem
+Adding debian:T-TeleSec_GlobalRoot_Class_3.pem
+Adding debian:TUBITAK_Kamu_SM_SSL_Kok_Sertifikasi_-_Surum_1.pem
+Adding debian:TunTrust_Root_CA.pem
+Adding debian:TWCA_CYBER_Root_CA.pem
+Adding debian:TWCA_Global_Root_CA.pem
+Adding debian:TWCA_Root_Certification_Authority.pem
+Adding debian:UCA_Extended_Validation_Root.pem
+Adding debian:UCA_Global_G2_Root.pem
+Adding debian:USERTrust_ECC_Certification_Authority.pem
+Adding debian:USERTrust_RSA_Certification_Authority.pem
+Adding debian:vTrus_ECC_Root_CA.pem
+Adding debian:vTrus_Root_CA.pem
+Adding debian:XRamp_Global_CA_Root.pem
+done.
+Setting up default-jre-headless (2:1.21-76) ...
+Setting up openjdk-21-jre:amd64 (21.0.10+7-1~deb13u1) ...
+Setting up openjdk-21-jdk-headless:amd64 (21.0.10+7-1~deb13u1) ...
+update-alternatives: using /usr/lib/jvm/java-21-openjdk-amd64/bin/jar to provide /usr/bin/jar (jar) in auto mode
+update-alternatives: using /usr/lib/jvm/java-21-openjdk-amd64/bin/jarsigner to provide /usr/bin/jarsigner (jarsigner) in auto mode
+update-alternatives: using /usr/lib/jvm/java-21-openjdk-amd64/bin/javac to provide /usr/bin/javac (javac) in auto mode
+update-alternatives: using /usr/lib/jvm/java-21-openjdk-amd64/bin/javadoc to provide /usr/bin/javadoc (javadoc) in auto mode
+update-alternatives: using /usr/lib/jvm/java-21-openjdk-amd64/bin/javap to provide /usr/bin/javap (javap) in auto mode
+update-alternatives: using /usr/lib/jvm/java-21-openjdk-amd64/bin/jcmd to provide /usr/bin/jcmd (jcmd) in auto mode
+update-alternatives: using /usr/lib/jvm/java-21-openjdk-amd64/bin/jdb to provide /usr/bin/jdb (jdb) in auto mode
+update-alternatives: using /usr/lib/jvm/java-21-openjdk-amd64/bin/jdeprscan to provide /usr/bin/jdeprscan (jdeprscan) in auto mode
+update-alternatives: using /usr/lib/jvm/java-21-openjdk-amd64/bin/jdeps to provide /usr/bin/jdeps (jdeps) in auto mode
+update-alternatives: using /usr/lib/jvm/java-21-openjdk-amd64/bin/jfr to provide /usr/bin/jfr (jfr) in auto mode
+update-alternatives: using /usr/lib/jvm/java-21-openjdk-amd64/bin/jimage to provide /usr/bin/jimage (jimage) in auto mode
+update-alternatives: using /usr/lib/jvm/java-21-openjdk-amd64/bin/jinfo to provide /usr/bin/jinfo (jinfo) in auto mode
+update-alternatives: using /usr/lib/jvm/java-21-openjdk-amd64/bin/jlink to provide /usr/bin/jlink (jlink) in auto mode
+update-alternatives: using /usr/lib/jvm/java-21-openjdk-amd64/bin/jmap to provide /usr/bin/jmap (jmap) in auto mode
+update-alternatives: using /usr/lib/jvm/java-21-openjdk-amd64/bin/jmod to provide /usr/bin/jmod (jmod) in auto mode
+update-alternatives: using /usr/lib/jvm/java-21-openjdk-amd64/bin/jps to provide /usr/bin/jps (jps) in auto mode
+update-alternatives: using /usr/lib/jvm/java-21-openjdk-amd64/bin/jrunscript to provide /usr/bin/jrunscript (jrunscript) in auto mode
+update-alternatives: using /usr/lib/jvm/java-21-openjdk-amd64/bin/jshell to provide /usr/bin/jshell (jshell) in auto mode
+update-alternatives: using /usr/lib/jvm/java-21-openjdk-amd64/bin/jstack to provide /usr/bin/jstack (jstack) in auto mode
+update-alternatives: using /usr/lib/jvm/java-21-openjdk-amd64/bin/jstat to provide /usr/bin/jstat (jstat) in auto mode
+update-alternatives: using /usr/lib/jvm/java-21-openjdk-amd64/bin/jstatd to provide /usr/bin/jstatd (jstatd) in auto mode
+update-alternatives: using /usr/lib/jvm/java-21-openjdk-amd64/bin/jwebserver to provide /usr/bin/jwebserver (jwebserver) in auto mode
+update-alternatives: using /usr/lib/jvm/java-21-openjdk-amd64/bin/serialver to provide /usr/bin/serialver (serialver) in auto mode
+update-alternatives: using /usr/lib/jvm/java-21-openjdk-amd64/bin/jhsdb to provide /usr/bin/jhsdb (jhsdb) in auto mode
+Setting up default-jre (2:1.21-76) ...
+Setting up openjdk-21-jdk:amd64 (21.0.10+7-1~deb13u1) ...
+update-alternatives: using /usr/lib/jvm/java-21-openjdk-amd64/bin/jconsole to provide /usr/bin/jconsole (jconsole) in auto mode
+Setting up default-jdk-headless (2:1.21-76) ...
+Setting up default-jdk (2:1.21-76) ...
+[ package groups installed ]
+
+[ updating and cleaning... ]
+Hit:1 http://security.debian.org/debian-security trixie-security InRelease
+Get:2 http://deb.debian.org/debian trixie InRelease [140 kB]
+Hit:3 http://deb.debian.org/debian trixie-updates InRelease
+Hit:4 http://deb.debian.org/debian trixie-backports InRelease
+Fetched 140 kB in 0s (1,338 kB/s)
+Reading package lists...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+Calculating upgrade...
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+Reading package lists...
+Building dependency tree...
+Reading state information...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+[ package refresh complete ]
+
+[ added the following packages... ]
+- [ curl ]
+- [ git ]
+- [ ssh ]
+- [ vim ]
+- [ iproute2 ]
+- [ net-tools ]
+- [ bear ]
+- [ build-essential ]
+- [ clang ]
+- [ clang-tools ]
+- [ cmake ]
+- [ gdb ]
+- [ lldb ]
+- [ valgrind ]
+- [ libclang-dev ]
+- [ libncurses-dev ]
+- [ libpng-dev ]
+- [ libsdl3-dev ]
+- [ libsdl3-image-dev ]
+- [ libsdl3-ttf-dev ]
+- [ gettext ]
+- [ ninja-build ]
+- [ liblua5.1-0-dev ]
+- [ libffi-dev ]
+- [ libffi8 ]
+- [ libgmp-dev ]
+- [ libgmp10 ]
+- [ libncurses6 ]
+- [ libtinfo6 ]
+- [ pkg-config ]
+- [ default-jdk ]
+- [ gnucobol ]
+- [ perl ]
+- [ python3 ]
+- [ python3-pip ]
+- [ lsof ]
+- [ fdisk ]
+- [ feh ]
+- [ figlet ]
+- [ fuse ]
+- [ fzf ]
+- [ tcc ]
+- [ rsync ]
+- [ stow ]
+- [ wget ]
+- [ zip ]
+- [ zsh ]
+
+[ press any key to continue ] > [H[2J+--------[ debian setup script ]--------+
+|                                       |
+|         [ apt package groups ]        |
+|                                       |
+|       1. [x] core                     |
+|       2. [x] networking               |
+|       3. [x] c dev                    |
+|       4. [x] c xtras                  |
+|       5. [x] neovim dependecies       |
+|       6. [x] haskell dependecies      |
+|       7. [x] additional languages     |
+|       8. [x] full                     |
+|       9. [x] all                      |
+|                                       |
+|          [?] package info             |
+|          [i] install                  |
+|          [u] uninstall                |
+|          [b] back                     |
+|          [q] quit                     |
+|                                       |
++---------------------------------------+
+:[H[2J[H[2J+--------[ debian setup script ]--------+
+|                                       |
+|            [ components ]             |
+|                                       |
+|          [1] apt packages             |
+|          [2] rust                     |
+|          [3] haskell                  |
+|          [4] neovim                   |
+|          [5] git repos                |
+|          [6] docs                     |
+|          [7] stow symlinks            |
+|          [8] complete                 |
+|                                       |
+|          [q] quit                     |
+|                                       |
++---------------------------------------+
+:[H[2J[H[2J+--------[ debian setup script ]--------+
+|                                       |
+|               [ rust ]                |
+|                                       |
+|             1. [ ] rust               |
+|             2. [ ] crates             |
+|                                       |
+|              [i] install              |
+|              [u] uninstall            |
+|              [b] back                 |
+|              [q] quit                 |
+|                                       |
++---------------------------------------+
+:[H[2J[H[2J+--------[ debian setup script ]--------+
+|                                       |
+|               [ rust ]                |
+|                                       |
+|             1. [x] rust               |
+|             2. [ ] crates             |
+|                                       |
+|              [i] install              |
+|              [u] uninstall            |
+|              [b] back                 |
+|              [q] quit                 |
+|                                       |
++---------------------------------------+
+:[H[2J[H[2J+--------[ debian setup script ]--------+
+|                                       |
+|               [ rust ]                |
+|                                       |
+|             1. [x] rust               |
+|             2. [x] crates             |
+|                                       |
+|              [i] install              |
+|              [u] uninstall            |
+|              [b] back                 |
+|              [q] quit                 |
+|                                       |
++---------------------------------------+
+:
+[ installing rust... ]
+info: downloading installer
+warn: It looks like you have an existing rustup settings file at:
+warn: /home/valentine/.rustup/settings.toml
+warn: Rustup will install the default toolchain as specified in the settings file,
+warn: instead of the one inferred from the default host triple.
+info: profile set to default
+info: default host triple is x86_64-unknown-linux-gnu
+info: syncing channel updates for stable-x86_64-unknown-linux-gnu
+info: latest update on 2026-03-26 for version 1.94.1 (e408947bf 2026-03-25)
+info: downloading 6 components
+info: default toolchain set to stable-x86_64-unknown-linux-gnu
+
+  stable-x86_64-unknown-linux-gnu installed - rustc 1.94.1 (e408947bf 2026-03-25)
+
+
+Rust is installed now. Great!
+
+To get started you may need to restart your current shell.
+This would reload your PATH environment variable to include
+Cargo's bin directory ($HOME/.cargo/bin).
+
+To configure your current shell, you need to source
+the corresponding env file under $HOME/.cargo.
+
+This is usually done by running one of the following (note the leading DOT):
+. "$HOME/.cargo/env"            # For sh/bash/zsh/ash/dash/pdksh
+source "$HOME/.cargo/env.fish"  # For fish
+source "~/.cargo/env.nu"  # For nushell
+source "$HOME/.cargo/env.tcsh"  # For tcsh
+. "$HOME/.cargo/env.ps1"        # For pwsh
+source "$HOME/.cargo/env.xsh"   # For xonsh
+info: checking for self-update (current version: 1.29.0)
+  rustup unchanged - 1.29.0
+
+info: syncing channel updates for stable-x86_64-unknown-linux-gnu
+
+  stable-x86_64-unknown-linux-gnu unchanged - rustc 1.94.1 (e408947bf 2026-03-25)
+
+info: checking for self-update (current version: 1.29.0)
+info: cleaning up downloads & tmp directories
+info: syncing channel updates for nightly-x86_64-unknown-linux-gnu
+info: latest update on 2026-03-29 for version 1.96.0-nightly (fb27476aa 2026-03-28)
+info: downloading 6 components
+
+  nightly-x86_64-unknown-linux-gnu installed - rustc 1.96.0-nightly (fb27476aa 2026-03-28)
+
+info: checking for self-update (current version: 1.29.0)
+[ rust installed ]
+
+
+[ installing crates... ]
+installing bat...
+    Updating crates.io index
+ Downloading crates ...
+  Downloaded bat v0.26.1
+  Installing bat v0.26.1
+    Updating crates.io index
+     Locking 215 packages to latest compatible versions
+      Adding bincode v1.3.3 (available: v3.0.0)
+      Adding bugreport v0.5.1 (available: v0.6.0)
+      Adding bytesize v1.3.3 (available: v2.3.1)
+      Adding toml v0.9.12+spec-1.1.0 (available: v1.1.0+spec-1.1.0)
+ Downloading crates ...
+  Downloaded anstyle-parse v1.0.0
+  Downloaded adler2 v2.0.1
+  Downloaded anstyle-query v1.1.5
+  Downloaded idna_adapter v1.2.1
+  Downloaded linked-hash-map v0.5.6
+  Downloaded ansi_colours v1.2.3
+  Downloaded anstyle v1.0.14
+  Downloaded anstream v1.0.0
+  Downloaded parking_lot v0.12.5
+  Downloaded plist v1.8.0
+  Downloaded itoa v1.0.18
+  Downloaded cfg-if v1.0.4
+  Downloaded cc v1.2.58
+  Downloaded scopeguard v1.2.0
+  Downloaded bytesize v1.3.3
+  Downloaded same-file v1.0.6
+  Downloaded bytemuck v1.25.0
+  Downloaded time-core v0.1.8
+  Downloaded shell-words v1.1.1
+  Downloaded potential_utf v0.1.4
+  Downloaded num-conv v0.2.1
+  Downloaded etcetera v0.11.0
+  Downloaded simd-adler32 v0.3.9
+  Downloaded semver v1.0.27
+  Downloaded serde_derive v1.0.228
+  Downloaded termcolor v1.4.1
+  Downloaded thiserror v1.0.69
+  Downloaded utf8parse v0.2.2
+  Downloaded utf8_iter v1.0.4
+  Downloaded unsafe-libyaml v0.2.11
+  Downloaded terminal-trx v0.2.6
+  Downloaded proc-macro2 v1.0.106
+  Downloaded time-macros v0.2.27
+  Downloaded regex v1.12.3
+  Downloaded zerofrom-derive v0.1.6
+  Downloaded zerofrom v0.1.6
+  Downloaded yoke-derive v0.8.1
+  Downloaded wild v2.2.1
+  Downloaded walkdir v2.5.0
+  Downloaded signal-hook-registry v1.4.8
+  Downloaded thiserror-impl v1.0.69
+  Downloaded terminal-colorsaurus v1.0.3
+  Downloaded toml_writer v1.1.0+spec-1.1.0
+  Downloaded yaml-rust v0.4.5
+  Downloaded zerovec-derive v0.11.2
+  Downloaded toml_datetime v0.7.5+spec-1.1.0
+  Downloaded mio v0.8.11
+  Downloaded toml_parser v1.1.0+spec-1.1.0
+  Downloaded tinystr v0.8.2
+  Downloaded zmij v1.0.21
+  Downloaded rayon v1.11.0
+  Downloaded unicode-ident v1.0.24
+  Downloaded zerotrie v0.2.3
+  Downloaded url v2.5.8
+  Downloaded unicode-segmentation v1.13.2
+  Downloaded git2 v0.20.4
+  Downloaded winnow v1.0.0
+  Downloaded winnow v0.7.15
+  Downloaded sysinfo v0.33.1
+  Downloaded unicode-width v0.2.2
+  Downloaded zerovec v0.11.5
+  Downloaded vcpkg v0.2.15
+  Downloaded time v0.3.47
+  Downloaded rustix v1.1.4
+  Downloaded syn v2.0.117
+  Downloaded serde_with v3.18.0
+  Downloaded regex-syntax v0.8.10
+  Downloaded bstr v1.12.1
+  Downloaded signal-hook v0.3.18
+  Downloaded serde_yaml v0.9.34+deprecated
+  Downloaded quick-xml v0.38.4
+  Downloaded itertools v0.14.0
+  Downloaded idna v1.1.0
+  Downloaded regex-automata v0.4.14
+  Downloaded onig_sys v69.9.1
+  Downloaded clap_builder v4.6.0
+  Downloaded minus v5.6.1
+  Downloaded synstructure v0.13.2
+  Downloaded hashbrown v0.16.1
+  Downloaded std_prelude v0.2.12
+  Downloaded crossterm v0.27.0
+  Downloaded toml v0.9.12+spec-1.1.0
+  Downloaded textwrap v0.16.2
+  Downloaded mio v1.2.0
+  Downloaded flate2 v1.1.9
+  Downloaded libc v0.2.183
+  Downloaded thiserror-impl v2.0.18
+  Downloaded yoke v0.8.1
+  Downloaded xterm-color v1.0.2
+  Downloaded thiserror v2.0.18
+  Downloaded libz-sys v1.1.25
+  Downloaded miniz_oxide v0.8.9
+  Downloaded indexmap v2.13.0
+  Downloaded writeable v0.6.2
+  Downloaded syntect v5.3.0
+  Downloaded smallvec v1.15.1
+  Downloaded serde_with_macros v3.18.0
+  Downloaded icu_collections v2.1.1
+  Downloaded shlex v1.3.0
+  Downloaded memchr v2.8.0
+  Downloaded terminal_size v0.4.4
+  Downloaded shell-escape v0.1.5
+  Downloaded rayon-core v1.13.0
+  Downloaded prettyplease v0.2.37
+  Downloaded icu_properties_data v2.1.2
+  Downloaded aho-corasick v1.1.4
+  Downloaded icu_provider v2.1.1
+  Downloaded icu_normalizer v2.1.1
+  Downloaded icu_locale_core v2.1.1
+  Downloaded serde_json v1.0.149
+  Downloaded ryu v1.0.23
+  Downloaded encoding_rs v0.8.35
+  Downloaded parking_lot_core v0.9.12
+  Downloaded log v0.4.29
+  Downloaded crc32fast v1.5.0
+  Downloaded litemap v0.8.1
+  Downloaded icu_properties v2.1.2
+  Downloaded console v0.16.3
+  Downloaded signal-hook-mio v0.2.5
+  Downloaded once_cell v1.21.4
+  Downloaded nu-ansi-term v0.50.3
+  Downloaded strsim v0.11.1
+  Downloaded stable_deref_trait v1.2.1
+  Downloaded serde_core v1.0.228
+  Downloaded serde v1.0.228
+  Downloaded darling_core v0.23.0
+  Downloaded crossbeam-utils v0.8.21
+  Downloaded pkg-config v0.3.32
+  Downloaded onig v6.5.1
+  Downloaded lock_api v0.4.14
+  Downloaded jobserver v0.1.34
+  Downloaded crossbeam-deque v0.8.6
+  Downloaded quote v1.0.45
+  Downloaded path_abs v0.5.1
+  Downloaded globset v0.4.18
+  Downloaded either v1.15.0
+  Downloaded displaydoc v0.2.5
+  Downloaded bugreport v0.5.1
+  Downloaded bincode v1.3.3
+  Downloaded icu_normalizer_data v2.1.1
+  Downloaded grep-cli v0.1.12
+  Downloaded find-msvc-tools v0.1.9
+  Downloaded libgit2-sys v0.18.3+1.9.2
+  Downloaded powerfmt v0.2.0
+  Downloaded git-version v0.3.9
+  Downloaded form_urlencoded v1.2.2
+  Downloaded fnv v1.0.7
+  Downloaded darling_macro v0.23.0
+  Downloaded clap_lex v1.1.0
+  Downloaded rgb v0.8.53
+  Downloaded ident_case v1.0.1
+  Downloaded git-version-macro v0.3.9
+  Downloaded equivalent v1.0.2
+  Downloaded serde_spanned v1.1.0
+  Downloaded percent-encoding v2.3.2
+  Downloaded is_terminal_polyfill v1.70.2
+  Downloaded colorchoice v1.0.5
+  Downloaded clircle v0.6.1
+  Downloaded deranged v0.5.8
+  Downloaded crossbeam-epoch v0.9.18
+  Downloaded clap v4.6.0
+  Downloaded darling v0.23.0
+  Downloaded crossbeam-channel v0.5.15
+  Downloaded bitflags v2.11.0
+  Downloaded base64 v0.22.1
+  Downloaded errno v0.3.14
+  Downloaded content_inspector v0.2.4
+  Downloaded anyhow v1.0.102
+  Downloaded linux-raw-sys v0.12.1
+   Compiling proc-macro2 v1.0.106
+   Compiling unicode-ident v1.0.24
+   Compiling quote v1.0.45
+   Compiling libc v0.2.183
+   Compiling memchr v2.8.0
+   Compiling stable_deref_trait v1.2.1
+   Compiling cfg-if v1.0.4
+   Compiling find-msvc-tools v0.1.9
+   Compiling shlex v1.3.0
+   Compiling rustix v1.1.4
+   Compiling pkg-config v0.3.32
+   Compiling smallvec v1.15.1
+   Compiling crossbeam-utils v0.8.21
+   Compiling serde_core v1.0.228
+   Compiling serde v1.0.228
+   Compiling bitflags v2.11.0
+   Compiling strsim v0.11.1
+   Compiling writeable v0.6.2
+   Compiling litemap v0.8.1
+   Compiling parking_lot_core v0.9.12
+   Compiling icu_normalizer_data v2.1.1
+   Compiling ident_case v1.0.1
+   Compiling icu_properties_data v2.1.2
+   Compiling regex-syntax v0.8.10
+   Compiling log v0.4.29
+   Compiling aho-corasick v1.1.4
+   Compiling vcpkg v0.2.15
+   Compiling linux-raw-sys v0.12.1
+   Compiling utf8parse v0.2.2
+   Compiling syn v2.0.117
+   Compiling crossbeam-epoch v0.9.18
+   Compiling anstyle-parse v1.0.0
+   Compiling jobserver v0.1.34
+   Compiling errno v0.3.14
+   Compiling itoa v1.0.18
+   Compiling anstyle-query v1.1.5
+   Compiling rayon-core v1.13.0
+   Compiling cc v1.2.58
+   Compiling colorchoice v1.0.5
+   Compiling is_terminal_polyfill v1.70.2
+   Compiling signal-hook v0.3.18
+   Compiling anstyle v1.0.14
+   Compiling signal-hook-registry v1.4.8
+   Compiling crossbeam-deque v0.8.6
+   Compiling anstream v1.0.0
+   Compiling hashbrown v0.16.1
+   Compiling terminal_size v0.4.4
+   Compiling winnow v1.0.0
+   Compiling crc32fast v1.5.0
+   Compiling zmij v1.0.21
+   Compiling prettyplease v0.2.37
+   Compiling powerfmt v0.2.0
+   Compiling equivalent v1.0.2
+   Compiling either v1.15.0
+   Compiling anyhow v1.0.102
+   Compiling regex-automata v0.4.14
+   Compiling clap_lex v1.1.0
+   Compiling scopeguard v1.2.0
+   Compiling indexmap v2.13.0
+   Compiling clap_builder v4.6.0
+   Compiling lock_api v0.4.14
+   Compiling libz-sys v1.1.25
+   Compiling onig_sys v69.9.1
+   Compiling libgit2-sys v0.18.3+1.9.2
+   Compiling serde_spanned v1.1.0
+   Compiling toml_datetime v0.7.5+spec-1.1.0
+   Compiling deranged v0.5.8
+   Compiling toml_parser v1.1.0+spec-1.1.0
+   Compiling once_cell v1.21.4
+   Compiling mio v0.8.11
+   Compiling synstructure v0.13.2
+   Compiling darling_core v0.23.0
+   Compiling same-file v1.0.6
+   Compiling simd-adler32 v0.3.9
+   Compiling serde_json v1.0.149
+   Compiling winnow v0.7.15
+   Compiling percent-encoding v2.3.2
+   Compiling adler2 v2.0.1
+   Compiling unicode-width v0.2.2
+   Compiling thiserror v1.0.69
+   Compiling toml_writer v1.1.0+spec-1.1.0
+   Compiling utf8_iter v1.0.4
+   Compiling thiserror v2.0.18
+   Compiling num-conv v0.2.1
+   Compiling time-core v0.1.8
+   Compiling bstr v1.12.1
+   Compiling itertools v0.14.0
+   Compiling time v0.3.47
+   Compiling miniz_oxide v0.8.9
+   Compiling form_urlencoded v1.2.2
+   Compiling walkdir v2.5.0
+   Compiling clap v4.6.0
+   Compiling signal-hook-mio v0.2.5
+   Compiling zerofrom-derive v0.1.6
+   Compiling yoke-derive v0.8.1
+   Compiling zerovec-derive v0.11.2
+   Compiling displaydoc v0.2.5
+   Compiling serde_derive v1.0.228
+   Compiling regex v1.12.3
+   Compiling toml v0.9.12+spec-1.1.0
+   Compiling git-version-macro v0.3.9
+   Compiling thiserror-impl v2.0.18
+   Compiling thiserror-impl v1.0.69
+   Compiling zerofrom v0.1.6
+   Compiling yoke v0.8.1
+   Compiling rayon v1.11.0
+   Compiling darling_macro v0.23.0
+   Compiling zerovec v0.11.5
+   Compiling zerotrie v0.2.3
+   Compiling darling v0.23.0
+   Compiling serde_with_macros v3.18.0
+   Compiling tinystr v0.8.2
+   Compiling potential_utf v0.1.4
+   Compiling icu_collections v2.1.1
+   Compiling parking_lot v0.12.5
+   Compiling quick-xml v0.38.4
+   Compiling icu_locale_core v2.1.1
+   Compiling base64 v0.22.1
+   Compiling linked-hash-map v0.5.6
+   Compiling serde_with v3.18.0
+   Compiling bytemuck v1.25.0
+   Compiling bugreport v0.5.1
+   Compiling rgb v0.8.53
+   Compiling yaml-rust v0.4.5
+   Compiling plist v1.8.0
+   Compiling icu_provider v2.1.1
+   Compiling crossterm v0.27.0
+   Compiling icu_properties v2.1.2
+   Compiling icu_normalizer v2.1.1
+   Compiling bat v0.26.1
+   Compiling sysinfo v0.33.1
+   Compiling flate2 v1.1.9
+   Compiling git-version v0.3.9
+   Compiling globset v0.4.18
+   Compiling textwrap v0.16.2
+   Compiling idna_adapter v1.2.1
+   Compiling bincode v1.3.3
+   Compiling idna v1.1.0
+   Compiling mio v1.2.0
+   Compiling terminal-trx v0.2.6
+   Compiling crossbeam-channel v0.5.15
+   Compiling ryu v1.0.23
+   Compiling url v2.5.8
+   Compiling unsafe-libyaml v0.2.11
+   Compiling termcolor v1.4.1
+   Compiling std_prelude v0.2.12
+   Compiling fnv v1.0.7
+   Compiling xterm-color v1.0.2
+   Compiling shell-escape v0.1.5
+   Compiling terminal-colorsaurus v1.0.3
+   Compiling minus v5.6.1
+   Compiling serde_yaml v0.9.34+deprecated
+   Compiling grep-cli v0.1.12
+   Compiling path_abs v0.5.1
+   Compiling ansi_colours v1.2.3
+   Compiling console v0.16.3
+   Compiling content_inspector v0.2.4
+   Compiling encoding_rs v0.8.35
+   Compiling clircle v0.6.1
+   Compiling etcetera v0.11.0
+   Compiling semver v1.0.27
+   Compiling shell-words v1.1.1
+   Compiling unicode-segmentation v1.13.2
+   Compiling wild v2.2.1
+   Compiling bytesize v1.3.3
+   Compiling nu-ansi-term v0.50.3
+   Compiling onig v6.5.1
+   Compiling syntect v5.3.0
+   Compiling git2 v0.20.4
+    Finished `release` profile [optimized] target(s) in 1m 06s
+  Installing /home/valentine/.cargo/bin/bat
+   Installed package `bat v0.26.1` (executable `bat`)
+installing eza...
+    Updating crates.io index
+ Downloading crates ...
+  Downloaded eza v0.23.4
+  Installing eza v0.23.4
+    Updating crates.io index
+     Locking 152 packages to latest compatible versions
+      Adding phf v0.12.1 (available: v0.13.1)
+      Adding timeago v0.4.2 (available: v0.6.0)
+      Adding uutils_term_grid v0.7.0 (available: v0.8.0)
+      Adding windows-sys v0.60.2 (available: v0.61.2)
+ Downloading crates ...
+  Downloaded dirs v6.0.0
+  Downloaded approx v0.5.1
+  Downloaded dirs-sys v0.5.0
+  Downloaded addr2line v0.25.1
+  Downloaded ansi-width v0.1.0
+  Downloaded autocfg v1.5.0
+  Downloaded by_address v1.2.1
+  Downloaded path-clean v1.0.1
+  Downloaded backtrace v0.3.76
+  Downloaded siphasher v1.0.2
+  Downloaded phf_shared v0.12.1
+  Downloaded partition-identity v0.3.1
+  Downloaded proc-mounts v0.3.0
+  Downloaded rustc-demangle v0.1.27
+  Downloaded uutils_term_grid v0.7.0
+  Downloaded phf_generator v0.12.1
+  Downloaded timeago v0.4.2
+  Downloaded uzers v0.12.2
+  Downloaded num-traits v0.2.19
+  Downloaded unsafe-libyaml-norway v0.2.15
+  Downloaded serde_norway v0.9.42
+  Downloaded palette_derive v0.7.6
+  Downloaded fastrand v2.3.0
+  Downloaded iana-time-zone v0.1.65
+  Downloaded chrono v0.4.44
+  Downloaded glob v0.3.3
+  Downloaded palette v0.7.6
+  Downloaded fast-srgb8 v1.0.0
+  Downloaded phf_macros v0.12.1
+  Downloaded unicode-width v0.1.14
+  Downloaded gimli v0.32.3
+  Downloaded phf v0.12.1
+  Downloaded option-ext v0.2.0
+  Downloaded object v0.37.3
+  Downloaded natord-plus-plus v2.0.0
+  Downloaded locale v0.2.2
+  Downloaded number_prefix v0.4.0
+   Compiling proc-macro2 v1.0.106
+   Compiling unicode-ident v1.0.24
+   Compiling quote v1.0.45
+   Compiling libc v0.2.183
+   Compiling stable_deref_trait v1.2.1
+   Compiling autocfg v1.5.0
+   Compiling shlex v1.3.0
+   Compiling find-msvc-tools v0.1.9
+   Compiling writeable v0.6.2
+   Compiling litemap v0.8.1
+   Compiling pkg-config v0.3.32
+   Compiling icu_normalizer_data v2.1.1
+   Compiling icu_properties_data v2.1.2
+   Compiling crossbeam-utils v0.8.21
+   Compiling vcpkg v0.2.15
+   Compiling serde_core v1.0.228
+   Compiling smallvec v1.15.1
+   Compiling siphasher v1.0.2
+   Compiling memchr v2.8.0
+   Compiling thiserror v2.0.18
+   Compiling num-traits v0.2.19
+   Compiling serde v1.0.228
+   Compiling phf_shared v0.12.1
+   Compiling iana-time-zone v0.1.65
+   Compiling rayon-core v1.13.0
+   Compiling powerfmt v0.2.0
+   Compiling hashbrown v0.16.1
+   Compiling percent-encoding v2.3.2
+   Compiling equivalent v1.0.2
+   Compiling utf8_iter v1.0.4
+   Compiling rustix v1.1.4
+   Compiling crossbeam-epoch v0.9.18
+   Compiling syn v2.0.117
+   Compiling fastrand v2.3.0
+   Compiling itoa v1.0.18
+   Compiling object v0.37.3
+   Compiling bitflags v2.11.0
+   Compiling phf_generator v0.12.1
+   Compiling crossbeam-deque v0.8.6
+   Compiling form_urlencoded v1.2.2
+   Compiling deranged v0.5.8
+   Compiling jobserver v0.1.34
+   Compiling chrono v0.4.44
+   Compiling option-ext v0.2.0
+   Compiling indexmap v2.13.0
+   Compiling log v0.4.29
+   Compiling linux-raw-sys v0.12.1
+   Compiling unicode-width v0.1.14
+   Compiling adler2 v2.0.1
+   Compiling time-core v0.1.8
+   Compiling cc v1.2.58
+   Compiling num-conv v0.2.1
+   Compiling palette v0.7.6
+   Compiling gimli v0.32.3
+   Compiling by_address v1.2.1
+   Compiling ansi-width v0.1.0
+   Compiling miniz_oxide v0.8.9
+   Compiling dirs-sys v0.5.0
+   Compiling quick-xml v0.38.4
+   Compiling either v1.15.0
+   Compiling ryu v1.0.23
+   Compiling time v0.3.47
+   Compiling unsafe-libyaml-norway v0.2.15
+   Compiling fast-srgb8 v1.0.0
+   Compiling rustc-demangle v0.1.27
+   Compiling base64 v0.22.1
+   Compiling cfg-if v1.0.4
+   Compiling eza v0.23.4
+   Compiling terminal_size v0.4.4
+   Compiling rayon v1.11.0
+   Compiling dirs v6.0.0
+   Compiling libz-sys v1.1.25
+   Compiling libgit2-sys v0.18.3+1.9.2
+   Compiling uutils_term_grid v0.7.0
+   Compiling uzers v0.12.2
+   Compiling locale v0.2.2
+   Compiling natord-plus-plus v2.0.0
+   Compiling unicode-width v0.2.2
+   Compiling path-clean v1.0.1
+   Compiling glob v0.3.3
+   Compiling timeago v0.4.2
+   Compiling number_prefix v0.4.0
+   Compiling addr2line v0.25.1
+   Compiling plist v1.8.0
+   Compiling synstructure v0.13.2
+   Compiling zerofrom-derive v0.1.6
+   Compiling yoke-derive v0.8.1
+   Compiling zerovec-derive v0.11.2
+   Compiling displaydoc v0.2.5
+   Compiling serde_derive v1.0.228
+   Compiling thiserror-impl v2.0.18
+   Compiling phf_macros v0.12.1
+   Compiling palette_derive v0.7.6
+   Compiling backtrace v0.3.76
+   Compiling zerofrom v0.1.6
+   Compiling phf v0.12.1
+   Compiling yoke v0.8.1
+   Compiling zerovec v0.11.5
+   Compiling zerotrie v0.2.3
+   Compiling partition-identity v0.3.1
+   Compiling proc-mounts v0.3.0
+   Compiling tinystr v0.8.2
+   Compiling icu_locale_core v2.1.1
+   Compiling potential_utf v0.1.4
+   Compiling icu_collections v2.1.1
+   Compiling icu_provider v2.1.1
+   Compiling icu_properties v2.1.2
+   Compiling icu_normalizer v2.1.1
+   Compiling nu-ansi-term v0.50.3
+   Compiling serde_norway v0.9.42
+   Compiling idna_adapter v1.2.1
+   Compiling idna v1.1.0
+   Compiling url v2.5.8
+   Compiling git2 v0.20.4
+    Finished `release` profile [optimized] target(s) in 49.14s
+  Installing /home/valentine/.cargo/bin/eza
+   Installed package `eza v0.23.4` (executable `eza`)
+installing fd-find...
+    Updating crates.io index
+ Downloading crates ...
+  Downloaded fd-find v10.4.2
+  Installing fd-find v10.4.2
+    Updating crates.io index
+     Locking 79 packages to latest compatible versions
+ Downloading crates ...
+  Downloaded heck v0.5.0
+  Downloaded ignore v0.4.25
+  Downloaded argmax v0.4.0
+  Downloaded ctrlc v3.5.2
+  Downloaded tikv-jemallocator v0.6.1
+  Downloaded clap_complete v4.6.0
+  Downloaded cfg_aliases v0.2.1
+  Downloaded normpath v1.5.0
+  Downloaded lscolors v0.21.0
+  Downloaded faccess v0.2.4
+  Downloaded bitflags v1.3.2
+  Downloaded clap_derive v4.6.0
+  Downloaded jiff-static v0.2.23
+  Downloaded nix v0.30.1
+  Downloaded nix v0.31.2
+  Downloaded jiff v0.2.23
+  Downloaded tikv-jemalloc-sys v0.6.1+5.3.0-1-ge13ca993e8ccb9ba9847cc330696e02839f328f7
+   Compiling libc v0.2.183
+   Compiling bitflags v2.11.0
+   Compiling cfg_aliases v0.2.1
+   Compiling proc-macro2 v1.0.106
+   Compiling memchr v2.8.0
+   Compiling crossbeam-utils v0.8.21
+   Compiling rustix v1.1.4
+   Compiling quote v1.0.45
+   Compiling unicode-ident v1.0.24
+   Compiling find-msvc-tools v0.1.9
+   Compiling cfg-if v1.0.4
+   Compiling shlex v1.3.0
+   Compiling linux-raw-sys v0.12.1
+   Compiling utf8parse v0.2.2
+   Compiling cc v1.2.58
+   Compiling anstyle-parse v1.0.0
+   Compiling regex-syntax v0.8.10
+   Compiling is_terminal_polyfill v1.70.2
+   Compiling anstyle-query v1.1.5
+   Compiling anstyle v1.0.14
+   Compiling colorchoice v1.0.5
+   Compiling nix v0.31.2
+   Compiling nix v0.30.1
+   Compiling heck v0.5.0
+   Compiling clap_lex v1.1.0
+   Compiling aho-corasick v1.1.4
+   Compiling anstream v1.0.0
+   Compiling strsim v0.11.1
+   Compiling bstr v1.12.1
+   Compiling same-file v1.0.6
+   Compiling crossbeam-epoch v0.9.18
+   Compiling anyhow v1.0.102
+   Compiling log v0.4.29
+   Compiling syn v2.0.117
+   Compiling crossbeam-deque v0.8.6
+   Compiling walkdir v2.5.0
+   Compiling nu-ansi-term v0.50.3
+   Compiling once_cell v1.21.4
+   Compiling bitflags v1.3.2
+   Compiling crossbeam-channel v0.5.15
+   Compiling etcetera v0.11.0
+   Compiling terminal_size v0.4.4
+   Compiling clap_builder v4.6.0
+   Compiling normpath v1.5.0
+   Compiling jiff v0.2.23
+   Compiling tikv-jemalloc-sys v0.6.1+5.3.0-1-ge13ca993e8ccb9ba9847cc330696e02839f328f7
+   Compiling lscolors v0.21.0
+   Compiling faccess v0.2.4
+   Compiling argmax v0.4.0
+   Compiling regex-automata v0.4.14
+   Compiling ctrlc v3.5.2
+   Compiling clap_derive v4.6.0
+   Compiling globset v0.4.18
+   Compiling regex v1.12.3
+   Compiling clap v4.6.0
+   Compiling clap_complete v4.6.0
+   Compiling ignore v0.4.25
+   Compiling tikv-jemallocator v0.6.1
+   Compiling fd-find v10.4.2
+    Finished `release` profile [optimized] target(s) in 53.82s
+  Installing /home/valentine/.cargo/bin/fd
+   Installed package `fd-find v10.4.2` (executable `fd`)
+installing ripgrep...
+    Updating crates.io index
+ Downloading crates ...
+  Downloaded ripgrep v15.1.0
+  Installing ripgrep v15.1.0
+    Updating crates.io index
+     Locking 46 packages to latest compatible versions
+ Downloading crates ...
+  Downloaded grep-matcher v0.1.8
+  Downloaded grep-regex v0.1.14
+  Downloaded lexopt v0.3.2
+  Downloaded grep v0.4.1
+  Downloaded grep-searcher v0.1.16
+  Downloaded encoding_rs_io v0.1.7
+  Downloaded memmap2 v0.9.10
+  Downloaded grep-printer v0.3.1
+   Compiling memchr v2.8.0
+   Compiling regex-syntax v0.8.10
+   Compiling log v0.4.29
+   Compiling libc v0.2.183
+   Compiling serde_core v1.0.228
+   Compiling zmij v1.0.21
+   Compiling cfg-if v1.0.4
+   Compiling crossbeam-utils v0.8.21
+   Compiling serde_json v1.0.149
+   Compiling serde v1.0.228
+   Compiling termcolor v1.4.1
+   Compiling itoa v1.0.18
+   Compiling encoding_rs v0.8.35
+   Compiling anyhow v1.0.102
+   Compiling same-file v1.0.6
+   Compiling walkdir v2.5.0
+   Compiling ripgrep v15.1.0
+   Compiling textwrap v0.16.2
+   Compiling lexopt v0.3.2
+   Compiling aho-corasick v1.1.4
+   Compiling grep-matcher v0.1.8
+   Compiling crossbeam-epoch v0.9.18
+   Compiling crossbeam-deque v0.8.6
+   Compiling memmap2 v0.9.10
+   Compiling encoding_rs_io v0.1.7
+   Compiling regex-automata v0.4.14
+   Compiling bstr v1.12.1
+   Compiling globset v0.4.18
+   Compiling grep-searcher v0.1.16
+   Compiling grep-regex v0.1.14
+   Compiling grep-cli v0.1.12
+   Compiling ignore v0.4.25
+   Compiling grep-printer v0.3.1
+   Compiling grep v0.4.1
+    Finished `release` profile [optimized + debuginfo] target(s) in 15.60s
+  Installing /home/valentine/.cargo/bin/rg
+   Installed package `ripgrep v15.1.0` (executable `rg`)
+installing tealdeer...
+    Updating crates.io index
+ Downloading crates ...
+  Downloaded tealdeer v1.8.1
+  Installing tealdeer v1.8.1
+    Updating crates.io index
+     Locking 128 packages to latest compatible versions
+      Adding toml v0.8.23 (available: v1.1.0+spec-1.1.0)
+      Adding zip v5.1.1 (available: v8.4.0)
+ Downloading crates ...
+  Downloaded serde_spanned v0.6.9
+  Downloaded xdg v2.5.2
+  Downloaded errno v0.2.8
+  Downloaded openssl-probe v0.2.1
+  Downloaded utf8-zero v0.8.1
+  Downloaded untrusted v0.9.0
+  Downloaded subtle v2.6.1
+  Downloaded toml_write v0.1.2
+  Downloaded byteorder v1.5.0
+  Downloaded zeroize v1.8.2
+  Downloaded rustls-pki-types v1.14.0
+  Downloaded getrandom v0.2.17
+  Downloaded toml_datetime v0.6.11
+  Downloaded app_dirs2 v2.5.5
+  Downloaded toml v0.8.23
+  Downloaded zopfli v0.8.3
+  Downloaded ureq-proto v0.6.0
+  Downloaded yansi v1.0.1
+  Downloaded http v1.4.0
+  Downloaded zip v5.1.1
+  Downloaded ureq v3.3.0
+  Downloaded rustls-webpki v0.103.10
+  Downloaded bytes v1.11.1
+  Downloaded zlib-rs v0.6.3
+  Downloaded bumpalo v3.20.2
+  Downloaded webpki-roots v1.0.6
+  Downloaded toml_edit v0.22.27
+  Downloaded httparse v1.10.1
+  Downloaded rustls-platform-verifier v0.6.2
+  Downloaded socks v0.3.4
+  Downloaded rustls v0.23.37
+  Downloaded rustls-native-certs v0.8.3
+  Downloaded pager v0.16.1
+  Downloaded ring v0.17.14
+   Compiling libc v0.2.183
+   Compiling cfg-if v1.0.4
+   Compiling find-msvc-tools v0.1.9
+   Compiling shlex v1.3.0
+   Compiling zeroize v1.8.2
+   Compiling proc-macro2 v1.0.106
+   Compiling serde_core v1.0.228
+   Compiling crc32fast v1.5.0
+   Compiling quote v1.0.45
+   Compiling serde v1.0.228
+   Compiling unicode-ident v1.0.24
+   Compiling log v0.4.29
+   Compiling rustix v1.1.4
+   Compiling simd-adler32 v0.3.9
+   Compiling cc v1.2.58
+   Compiling rustls-pki-types v1.14.0
+   Compiling untrusted v0.9.0
+   Compiling linux-raw-sys v0.12.1
+   Compiling adler2 v2.0.1
+   Compiling httparse v1.10.1
+   Compiling hashbrown v0.16.1
+   Compiling rustls v0.23.37
+   Compiling equivalent v1.0.2
+   Compiling bitflags v2.11.0
+   Compiling utf8parse v0.2.2
+   Compiling miniz_oxide v0.8.9
+   Compiling once_cell v1.21.4
+   Compiling anstyle-parse v1.0.0
+   Compiling anstyle-query v1.1.5
+   Compiling itoa v1.0.18
+   Compiling is_terminal_polyfill v1.70.2
+   Compiling openssl-probe v0.2.1
+   Compiling colorchoice v1.0.5
+   Compiling anstyle v1.0.14
+   Compiling bytes v1.11.1
+   Compiling zlib-rs v0.6.3
+   Compiling subtle v2.6.1
+   Compiling rustls-native-certs v0.8.3
+   Compiling indexmap v2.13.0
+   Compiling anstream v1.0.0
+   Compiling syn v2.0.117
+   Compiling getrandom v0.2.17
+   Compiling bumpalo v3.20.2
+   Compiling terminal_size v0.4.4
+   Compiling base64 v0.22.1
+   Compiling heck v0.5.0
+   Compiling toml_write v0.1.2
+   Compiling http v1.4.0
+   Compiling clap_lex v1.1.0
+   Compiling byteorder v1.5.0
+   Compiling winnow v0.7.15
+   Compiling anyhow v1.0.102
+   Compiling zopfli v0.8.3
+   Compiling ring v0.17.14
+   Compiling clap_builder v4.6.0
+   Compiling socks v0.3.4
+   Compiling errno v0.2.8
+   Compiling webpki-roots v1.0.6
+   Compiling xdg v2.5.2
+   Compiling utf8-zero v0.8.1
+   Compiling percent-encoding v2.3.2
+   Compiling memchr v2.8.0
+   Compiling app_dirs2 v2.5.5
+   Compiling ureq-proto v0.6.0
+   Compiling pager v0.16.1
+   Compiling yansi v1.0.1
+   Compiling serde_spanned v0.6.9
+   Compiling toml_datetime v0.6.11
+   Compiling flate2 v1.1.9
+   Compiling clap_derive v4.6.0
+   Compiling serde_derive v1.0.228
+   Compiling toml_edit v0.22.27
+   Compiling zip v5.1.1
+   Compiling clap v4.6.0
+   Compiling toml v0.8.23
+   Compiling rustls-webpki v0.103.10
+   Compiling rustls-platform-verifier v0.6.2
+   Compiling ureq v3.3.0
+   Compiling tealdeer v1.8.1
+    Finished `release` profile [optimized] target(s) in 48.79s
+  Installing /home/valentine/.cargo/bin/tldr
+   Installed package `tealdeer v1.8.1` (executable `tldr`)
+installing --locked tree-sitter-cli...
+    Updating crates.io index
+ Downloading crates ...
+  Downloaded tree-sitter-cli v0.26.7
+  Installing tree-sitter-cli v0.26.7
+    Updating crates.io index
+    Updating crates.io index
+ Downloading crates ...
+  Downloaded chunked_transfer v1.5.0
+  Downloaded ctor v0.2.9
+  Downloaded clap_lex v1.0.0
+  Downloaded anstyle-parse v0.2.7
+  Downloaded cexpr v0.6.0
+  Downloaded phf_shared v0.13.1
+  Downloaded phf_generator v0.13.1
+  Downloaded itoa v1.0.17
+  Downloaded colorchoice v1.0.4
+  Downloaded anstream v0.6.21
+  Downloaded tree-sitter-config v0.26.7
+  Downloaded ref-cast v1.0.25
+  Downloaded proc-macro-crate v3.4.0
+  Downloaded tree-sitter-tags v0.26.7
+  Downloaded utf8-width v0.1.8
+  Downloaded pathdiff v0.2.3
+  Downloaded thread_local v1.1.9
+  Downloaded tree-sitter-highlight v0.26.7
+  Downloaded html-escape v0.2.13
+  Downloaded streaming-iterator v0.1.9
+  Downloaded tree-sitter-loader v0.26.7
+  Downloaded rustversion v1.0.22
+  Downloaded tempfile v3.25.0
+  Downloaded toml_parser v1.0.9+spec-1.1.0
+  Downloaded clap_derive v4.5.55
+  Downloaded webbrowser v1.1.0
+  Downloaded toml_edit v0.23.10+spec-1.0.0
+  Downloaded tiny_http v0.12.0
+  Downloaded unicode-segmentation v1.12.0
+  Downloaded tree-sitter-generate v0.26.7
+  Downloaded rquickjs-core v0.10.0
+  Downloaded hashbrown v0.15.5
+  Downloaded nom v7.1.3
+  Downloaded itertools v0.13.0
+  Downloaded tree-sitter v0.26.7
+  Downloaded winnow v0.7.14
+  Downloaded bindgen v0.72.1
+  Downloaded clap_builder v4.5.60
+  Downloaded schemars v1.2.1
+  Downloaded wasmparser v0.243.0
+  Downloaded zerocopy v0.8.39
+  Downloaded rand v0.8.5
+  Downloaded minimal-lexical v0.2.1
+  Downloaded cc v1.2.56
+  Downloaded nix v0.31.1
+  Downloaded rustix v1.1.3
+  Downloaded rustix v0.38.44
+  Downloaded similar v2.7.0
+  Downloaded getrandom v0.4.1
+  Downloaded clap_complete_nushell v4.5.10
+  Downloaded clap_complete v4.5.66
+  Downloaded clap v4.5.60
+  Downloaded rquickjs-macro v0.10.0
+  Downloaded once_cell v1.21.3
+  Downloaded allocator-api2 v0.2.21
+  Downloaded schemars_derive v1.2.1
+  Downloaded ppv-lite86 v0.2.21
+  Downloaded libloading v0.9.0
+  Downloaded foldhash v0.1.5
+  Downloaded clang-sys v1.8.1
+  Downloaded relative-path v2.0.1
+  Downloaded ref-cast-impl v1.0.25
+  Downloaded rand_core v0.6.4
+  Downloaded quote v1.0.44
+  Downloaded convert_case v0.8.0
+  Downloaded topological-sort v0.2.2
+  Downloaded rquickjs v0.10.0
+  Downloaded rgb v0.8.52
+  Downloaded serde_derive_internals v0.29.1
+  Downloaded libc v0.2.180
+  Downloaded phf v0.13.1
+  Downloaded indoc v2.0.7
+  Downloaded dialoguer v0.11.0
+  Downloaded rquickjs-sys v0.10.0
+  Downloaded console v0.15.11
+  Downloaded fs4 v0.12.0
+  Downloaded smallbitvec v2.6.0
+  Downloaded libloading v0.8.9
+  Downloaded tree-sitter-language v0.1.7
+  Downloaded rustc-hash v2.1.1
+  Downloaded ascii v1.1.0
+  Downloaded anstyle v1.0.13
+  Downloaded fuzzy-matcher v0.3.7
+  Downloaded foldhash v0.2.0
+  Downloaded rand_chacha v0.3.1
+  Downloaded httpdate v1.0.3
+  Downloaded dyn-clone v1.0.20
+  Downloaded dunce v1.0.5
+  Downloaded linux-raw-sys v0.4.15
+  Downloaded linux-raw-sys v0.11.0
+   Compiling proc-macro2 v1.0.106
+   Compiling unicode-ident v1.0.24
+   Compiling quote v1.0.44
+   Compiling memchr v2.8.0
+   Compiling shlex v1.3.0
+   Compiling find-msvc-tools v0.1.9
+   Compiling allocator-api2 v0.2.21
+   Compiling equivalent v1.0.2
+   Compiling foldhash v0.2.0
+   Compiling zmij v1.0.21
+   Compiling cfg-if v1.0.4
+   Compiling glob v0.3.3
+   Compiling libc v0.2.180
+   Compiling prettyplease v0.2.37
+   Compiling stable_deref_trait v1.2.1
+   Compiling regex-syntax v0.8.10
+   Compiling cc v1.2.56
+   Compiling minimal-lexical v0.2.1
+   Compiling libloading v0.8.9
+   Compiling bindgen v0.72.1
+   Compiling serde_core v1.0.228
+   Compiling hashbrown v0.16.1
+   Compiling either v1.15.0
+   Compiling clang-sys v1.8.1
+   Compiling bitflags v2.11.0
+   Compiling rustc-hash v2.1.1
+   Compiling nom v7.1.3
+   Compiling itertools v0.13.0
+   Compiling log v0.4.29
+   Compiling syn v2.0.117
+   Compiling indexmap v2.13.0
+   Compiling regex-automata v0.4.14
+   Compiling serde_json v1.0.149
+   Compiling tree-sitter-language v0.1.7
+   Compiling itoa v1.0.17
+   Compiling aho-corasick v1.1.4
+   Compiling litemap v0.8.1
+   Compiling serde v1.0.228
+   Compiling writeable v0.6.2
+   Compiling icu_properties_data v2.1.2
+   Compiling thiserror v2.0.18
+   Compiling icu_normalizer_data v2.1.1
+   Compiling cexpr v0.6.0
+   Compiling winnow v0.7.14
+   Compiling utf8parse v0.2.2
+   Compiling anstyle-parse v0.2.7
+   Compiling regex v1.12.3
+   Compiling siphasher v1.0.2
+   Compiling zerocopy v0.8.39
+   Compiling is_terminal_polyfill v1.70.2
+   Compiling anstyle-query v1.1.5
+   Compiling smallvec v1.15.1
+   Compiling toml_datetime v0.7.5+spec-1.1.0
+   Compiling anstyle v1.0.13
+   Compiling colorchoice v1.0.4
+   Compiling getrandom v0.4.1
+   Compiling rustix v1.1.3
+   Compiling phf_shared v0.13.1
+   Compiling anstream v0.6.21
+   Compiling cfg_aliases v0.2.1
+   Compiling clap_lex v1.0.0
+   Compiling heck v0.5.0
+   Compiling strsim v0.11.1
+   Compiling streaming-iterator v0.1.9
+   Compiling unicode-segmentation v1.12.0
+   Compiling fastrand v2.3.0
+   Compiling relative-path v2.0.1
+   Compiling toml_parser v1.0.9+spec-1.1.0
+   Compiling linux-raw-sys v0.11.0
+   Compiling synstructure v0.13.2
+   Compiling rustix v0.38.44
+   Compiling once_cell v1.21.3
+   Compiling toml_edit v0.23.10+spec-1.0.0
+   Compiling phf_generator v0.13.1
+   Compiling convert_case v0.8.0
+   Compiling tree-sitter v0.26.7
+   Compiling clap_builder v4.5.60
+   Compiling proc-macro-crate v3.4.0
+   Compiling phf v0.13.1
+   Compiling nix v0.31.1
+   Compiling semver v1.0.27
+   Compiling zerofrom-derive v0.1.6
+   Compiling yoke-derive v0.8.1
+   Compiling zerovec-derive v0.11.2
+   Compiling displaydoc v0.2.5
+   Compiling zerofrom v0.1.6
+   Compiling yoke v0.8.1
+   Compiling serde_derive v1.0.228
+   Compiling zerotrie v0.2.3
+   Compiling thiserror-impl v2.0.18
+   Compiling zerovec v0.11.5
+   Compiling clap_derive v4.5.55
+   Compiling tinystr v0.8.2
+   Compiling icu_locale_core v2.1.1
+   Compiling potential_utf v0.1.4
+   Compiling icu_collections v2.1.1
+   Compiling getrandom v0.2.17
+   Compiling fnv v1.0.7
+   Compiling icu_provider v2.1.1
+   Compiling linux-raw-sys v0.4.15
+   Compiling icu_properties v2.1.2
+   Compiling icu_normalizer v2.1.1
+   Compiling percent-encoding v2.3.2
+   Compiling thiserror v1.0.69
+   Compiling utf8_iter v1.0.4
+   Compiling ident_case v1.0.1
+   Compiling ref-cast v1.0.25
+   Compiling tempfile v3.25.0
+   Compiling clap v4.5.60
+   Compiling form_urlencoded v1.2.2
+   Compiling idna_adapter v1.2.1
+   Compiling idna v1.1.0
+   Compiling ppv-lite86 v0.2.21
+   Compiling rand_core v0.6.4
+   Compiling ref-cast-impl v1.0.25
+   Compiling thiserror-impl v1.0.69
+   Compiling serde_derive_internals v0.29.1
+   Compiling thread_local v1.1.9
+   Compiling rquickjs-sys v0.10.0
+   Compiling etcetera v0.11.0
+   Compiling indoc v2.0.7
+   Compiling bytemuck v1.25.0
+   Compiling unicode-width v0.2.2
+   Compiling tree-sitter-loader v0.26.7
+   Compiling crc32fast v1.5.0
+   Compiling foldhash v0.1.5
+   Compiling anyhow v1.0.102
+   Compiling wasmparser v0.243.0
+   Compiling schemars_derive v1.2.1
+   Compiling hashbrown v0.15.5
+   Compiling fs4 v0.12.0
+   Compiling console v0.15.11
+   Compiling rgb v0.8.52
+   Compiling fuzzy-matcher v0.3.7
+   Compiling rand_chacha v0.3.1
+   Compiling url v2.5.8
+   Compiling clap_complete v4.5.66
+   Compiling libloading v0.9.0
+   Compiling ascii v1.1.0
+   Compiling chunked_transfer v1.5.0
+   Compiling topological-sort v0.2.2
+   Compiling smallbitvec v2.6.0
+   Compiling utf8-width v0.1.8
+   Compiling dunce v1.0.5
+   Compiling tree-sitter-cli v0.26.7
+   Compiling pathdiff v0.2.3
+   Compiling same-file v1.0.6
+   Compiling httpdate v1.0.3
+   Compiling shell-words v1.1.1
+   Compiling zeroize v1.8.2
+   Compiling dyn-clone v1.0.20
+   Compiling walkdir v2.5.0
+   Compiling schemars v1.2.1
+   Compiling dialoguer v0.11.0
+   Compiling tiny_http v0.12.0
+   Compiling html-escape v0.2.13
+   Compiling clap_complete_nushell v4.5.10
+   Compiling webbrowser v1.1.0
+   Compiling ctrlc v3.5.2
+   Compiling rand v0.8.5
+   Compiling ansi_colours v1.2.3
+   Compiling tree-sitter-tags v0.26.7
+   Compiling tree-sitter-highlight v0.26.7
+   Compiling tree-sitter-config v0.26.7
+   Compiling bstr v1.12.1
+   Compiling ctor v0.2.9
+   Compiling similar v2.7.0
+   Compiling rquickjs-core v0.10.0
+   Compiling rquickjs-macro v0.10.0
+   Compiling rquickjs v0.10.0
+   Compiling tree-sitter-generate v0.26.7
+    Finished `release` profile [optimized] target(s) in 1m 16s
+  Installing /home/valentine/.cargo/bin/tree-sitter
+   Installed package `tree-sitter-cli v0.26.7` (executable `tree-sitter`)
+[ crates installed ]
+
+[H[2J[H[2J+--------[ debian setup script ]--------+
+|                                       |
+|               [ rust ]                |
+|                                       |
+|             1. [x] rust               |
+|             2. [x] crates             |
+|                                       |
+|              [i] install              |
+|              [u] uninstall            |
+|              [b] back                 |
+|              [q] quit                 |
+|                                       |
++---------------------------------------+
+:[H[2J[H[2J+--------[ debian setup script ]--------+
+|                                       |
+|            [ components ]             |
+|                                       |
+|          [1] apt packages             |
+|          [2] rust                     |
+|          [3] haskell                  |
+|          [4] neovim                   |
+|          [5] git repos                |
+|          [6] docs                     |
+|          [7] stow symlinks            |
+|          [8] complete                 |
+|                                       |
+|          [q] quit                     |
+|                                       |
++---------------------------------------+
+:[H[2J[H[2J+--------[ debian setup script ]--------+
+|                                       |
+|              [ haskell ]              |
+|                                       |
+|              [i] install              |
+|              [u] uninstall            |
+|              [b] back                 |
+|              [q] quit                 |
+|                                       |
++---------------------------------------+
+:
+[ installing haskell... ]
+
+Welcome to Haskell!
+
+This script can download and install the following binaries:
+  * ghcup - The Haskell toolchain installer
+  * ghc   - The Glasgow Haskell Compiler
+  * cabal - The Cabal build tool for managing Haskell software
+  * stack - A cross-platform program for developing Haskell projects (similar to cabal)
+  * hls   - (optional) A language server for developers to integrate with their editor/IDE
+
+ghcup installs only into the following directory,
+which can be removed anytime:
+  /home/valentine/.ghcup
+
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0 21 29.6M   21 6652k    0     0  24.8M      0  0:00:01 --:--:--  0:00:01 24.7M100 29.6M  100 29.6M    0     0  55.3M      0 --:--:-- --:--:-- --:--:-- 55.2M
+[1m[92m[ Info  ][0m[0m downloading: https://raw.githubusercontent.com/haskell/ghcup-metadata/master/ghcup-0.0.9.yaml as file /home/valentine/.ghcup/cache/ghcup-0.0.9.yaml
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100  591k  100  591k    0     0  8694k      0 --:--:-- --:--:-- --:--:-- 8828k
+[1m[92m[ Info  ][0m[0m Upgrading GHCup...
+[1m[93m[ Warn  ][0m[0m No GHCup update available
+
+System requirements 
+  Please ensure the following distro packages are installed before continuing (you can exit ghcup and return at any time): build-essential curl libffi-dev libffi8 libgmp-dev libgmp10 libncurses-dev libncurses6 libtinfo6 pkg-config
+[1m[92m[ Info  ][0m[0m downloading: https://downloads.haskell.org/~ghc/9.14.1/ghc-9.14.1-x86_64-deb12-linux.tar.xz as file /home/valentine/.ghcup/cache/ghc-9.14.1-x86_64-deb12-linux.tar.xz
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  6  292M    6 17.5M    0     0  50.4M      0  0:00:05 --:--:--  0:00:05 50.3M 29  292M   29 85.6M    0     0  63.4M      0  0:00:04  0:00:01  0:00:03 63.4M 50  292M   50  147M    0     0  62.7M      0  0:00:04  0:00:02  0:00:02 62.7M 70  292M   70  207M    0     0  61.8M      0  0:00:04  0:00:03  0:00:01 61.8M 93  292M   93  273M    0     0  62.8M      0  0:00:04  0:00:04 --:--:-- 62.8M100  292M  100  292M    0     0  63.2M      0  0:00:04  0:00:04 --:--:-- 64.2M
+[1m[92m[ Info  ][0m[0m verifying digest of: ghc-9.14.1-x86_64-deb12-linux.tar.xz
+[1m[92m[ Info  ][0m[0m Unpacking: ghc-9.14.1-x86_64-deb12-linux.tar.xz to /home/valentine/.ghcup/tmp/ghcup-bdda6f957379b41c
+[1m[92m[ Info  ][0m[0m Installing GHC (this may take a while)
+
+
+
+
+
+
+[6A[0J
+
+
+
+
+
+[6A[0J[1m[92m[ Info  ][0m[0m Merging file tree from "/home/valentine/.ghcup/tmp/ghcup-c8a3aef7cf4d8764/home/valentine/.ghcup/ghc/9.14.1" to "/home/valentine/.ghcup/ghc/9.14.1"
+[1m[92m[ Info  ][0m[0m GHC installation successful
+[1m[92m[ Info  ][0m[0m GHC 9.14.1 successfully set as default version
+[1m[92m[ Info  ][0m[0m downloading: https://downloads.haskell.org/~ghcup/unofficial-bindists/cabal/3.16.1.0/cabal-install-3.16.1.0-x86_64-linux-glibc.tar.xz as file /home/valentine/.ghcup/cache/cabal-install-3.16.1.0-x86_64-linux-glibc.tar.xz
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100 5310k  100 5310k    0     0  23.5M      0 --:--:-- --:--:-- --:--:-- 23.5M
+[1m[92m[ Info  ][0m[0m verifying digest of: cabal-install-3.16.1.0-x86_64-linux-glibc.tar.xz
+[1m[92m[ Info  ][0m[0m Unpacking: cabal-install-3.16.1.0-x86_64-linux-glibc.tar.xz to /home/valentine/.ghcup/tmp/ghcup-fa21fc705433b890
+[1m[92m[ Info  ][0m[0m Installing cabal
+[1m[92m[ Info  ][0m[0m Cabal installation successful
+Config file path source is default config file.
+Config file not found: /home/valentine/.cabal/config
+Writing default configuration to /home/valentine/.cabal/config
+Downloading the latest package list from hackage.haskell.org
+Package list of hackage.haskell.org has been updated.
+The index-state is set to 2026-03-29T17:55:47Z.
+[1m[92m[ Info  ][0m[0m downloading: https://downloads.haskell.org/~ghcup/unofficial-bindists/haskell-language-server/2.13.0.0/haskell-language-server-2.13.0.0-x86_64-linux-deb13.tar.xz as file /home/valentine/.ghcup/cache/haskell-language-server-2.13.0.0-x86_64-linux-deb13.tar.xz
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0 26  216M   26 56.8M    0     0  69.3M      0  0:00:03 --:--:--  0:00:03 69.2M 67  216M   67  145M    0     0  80.0M      0  0:00:02  0:00:01  0:00:01 80.0M100  216M  100  216M    0     0  80.4M      0  0:00:02  0:00:02 --:--:-- 80.4M
+[1m[92m[ Info  ][0m[0m verifying digest of: haskell-language-server-2.13.0.0-x86_64-linux-deb13.tar.xz
+[1m[92m[ Info  ][0m[0m Unpacking: haskell-language-server-2.13.0.0-x86_64-linux-deb13.tar.xz to /home/valentine/.ghcup/tmp/ghcup-488539f25d085c6d
+[1m[92m[ Info  ][0m[0m Installing HLS
+
+
+
+
+
+
+[6A[0J[1m[92m[ Info  ][0m[0m Merging file tree from "/home/valentine/.ghcup/tmp/ghcup-6556d4a9e3515cbe/home/valentine/.ghcup/hls/2.13.0.0" to "/home/valentine/.ghcup/hls/2.13.0.0"
+[1m[92m[ Info  ][0m[0m HLS installation successful
+[1m[92m[ Info  ][0m[0m This is just the server part of your LSP configuration. Consult the README on how to
+[1m[92m[ ...   ] [0m[0mconfigure HLS, your project and your LSP client in your editor:
+[1m[92m[ ...   ] [0m[0m  https://haskell-language-server.readthedocs.io/en/stable/
+[1m[92m[ Info  ][0m[0m downloading: https://downloads.haskell.org/~ghcup/unofficial-bindists/stack/3.7.1/stack-3.7.1-linux-x86_64.tar.gz as file /home/valentine/.ghcup/cache/stack-3.7.1-linux-x86_64.tar.gz
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100 21.7M  100 21.7M    0     0  41.1M      0 --:--:-- --:--:-- --:--:-- 41.1M
+[1m[92m[ Info  ][0m[0m verifying digest of: stack-3.7.1-linux-x86_64.tar.gz
+[1m[92m[ Info  ][0m[0m Unpacking: stack-3.7.1-linux-x86_64.tar.gz to /home/valentine/.ghcup/tmp/ghcup-d303933a7f4e6616
+[1m[92m[ Info  ][0m[0m Installing stack
+[1m[92m[ Info  ][0m[0m Stack installation successful
+[1m[92m[ Info  ][0m[0m Stack manages GHC versions internally by default. To improve integration, please visit:
+[1m[92m[ ...   ] [0m[0m  https://www.haskell.org/ghcup/guide/#stack-integration
+[1m[92m[ ...   ] [0m[0m
+[1m[92m[ ...   ] [0m[0mAlso check out:
+[1m[92m[ ...   ] [0m[0m  https://docs.haskellstack.org/en/stable/yaml_configuration
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100   766  100   766    0     0   2886      0 --:--:-- --:--:-- --:--:--  2890
+
+===============================================================================
+
+[0;35mOK! /home/valentine/.bashrc has been modified. Restart your terminal for the changes to take effect,[0m
+[0;35mor type ". /home/valentine/.ghcup/env" to apply them in your current terminal session.[0m
+
+===============================================================================
+[0;32m[0m
+[0;32mAll done![0m
+[0;32m[0m
+[0;32mTo start a simple repl, run:[0m
+[0;32m  ghci[0m
+[0;32m[0m
+[0;32mTo start a new haskell project in the current directory, run:[0m
+[0;32m  cabal init --interactive[0m
+[0;32m[0m
+[0;32mTo install other GHC versions and tools, run:[0m
+[0;32m  ghcup tui[0m
+[0;32m[0m
+[0;32mIf you are new to Haskell, check out https://www.haskell.org/ghcup/steps/[0m
+[ installed haskell ]
+
+[H[2J[H[2J+--------[ debian setup script ]--------+
+|                                       |
+|              [ haskell ]              |
+|                                       |
+|              [i] install              |
+|              [u] uninstall            |
+|              [b] back                 |
+|              [q] quit                 |
+|                                       |
++---------------------------------------+
+:[H[2J[H[2J+--------[ debian setup script ]--------+
+|                                       |
+|            [ components ]             |
+|                                       |
+|          [1] apt packages             |
+|          [2] rust                     |
+|          [3] haskell                  |
+|          [4] neovim                   |
+|          [5] git repos                |
+|          [6] docs                     |
+|          [7] stow symlinks            |
+|          [8] complete                 |
+|                                       |
+|          [q] quit                     |
+|                                       |
++---------------------------------------+
+:[H[2J[H[2J+--------[ debian setup script ]--------+
+|                                       |
+|              [ neovim ]               |
+|                                       |
+|              [i] install              |
+|              [u] uninstall            |
+|              [b] back                 |
+|              [q] quit                 |
+|                                       |
++---------------------------------------+
+:
+[ installing neovim... ]
+couldn't find repository, downloading now
+Cloning into 'neovim'...
+error: inflate: data stream error (invalid literal/lengths set)
+fatal: serious inflate inconsistency
+fatal: fetch-pack: invalid index-pack output
+./dotfiles/scripts/bin/setup: line 234: cd: /home/valentine/public/neovim: No such file or directory
+make: *** No targets specified and no makefile found.  Stop.
+make: *** No rule to make target 'install'.  Stop.
+[ installed neovim ]
+
+[H[2J[H[2J+--------[ debian setup script ]--------+
+|                                       |
+|              [ neovim ]               |
+|                                       |
+|              [i] install              |
+|              [u] uninstall            |
+|              [b] back                 |
+|              [q] quit                 |
+|                                       |
++---------------------------------------+
+:
+[ installing neovim... ]
+couldn't find repository, downloading now
+Cloning into 'neovim'...
+error: inflate: data stream error (incorrect data check)
+fatal: serious inflate inconsistency
+fatal: fetch-pack: invalid index-pack output
+./dotfiles/scripts/bin/setup: line 234: cd: /home/valentine/public/neovim: No such file or directory
+make: *** No targets specified and no makefile found.  Stop.
+make: *** No rule to make target 'install'.  Stop.
+[ installed neovim ]
+
+[H[2J[H[2J+--------[ debian setup script ]--------+
+|                                       |
+|              [ neovim ]               |
+|                                       |
+|              [i] install              |
+|              [u] uninstall            |
+|              [b] back                 |
+|              [q] quit                 |
+|                                       |
++---------------------------------------+
+:[H[2J[H[2J+--------[ debian setup script ]--------+
+|                                       |
+|            [ components ]             |
+|                                       |
+|          [1] apt packages             |
+|          [2] rust                     |
+|          [3] haskell                  |
+|          [4] neovim                   |
+|          [5] git repos                |
+|          [6] docs                     |
+|          [7] stow symlinks            |
+|          [8] complete                 |
+|                                       |
+|          [q] quit                     |
+|                                       |
++---------------------------------------+
+:[H[2J[H[2J+--------[ debian setup script ]--------+
+|                                       |
+|            [ git repos ]              |
+|                                       |
+|             1. [ ] private            |
+|             2. [ ] public             |
+|                                       |
+|              [i] install              |
+|              [u] uninstall            |
+|              [b] back                 |
+|              [q] quit                 |
+|                                       |
++---------------------------------------+
+:[H[2J[H[2J+--------[ debian setup script ]--------+
+|                                       |
+|            [ git repos ]              |
+|                                       |
+|             1. [x] private            |
+|             2. [ ] public             |
+|                                       |
+|              [i] install              |
+|              [u] uninstall            |
+|              [b] back                 |
+|              [q] quit                 |
+|                                       |
++---------------------------------------+
+:[H[2J[H[2J+--------[ debian setup script ]--------+
+|                                       |
+|            [ git repos ]              |
+|                                       |
+|             1. [x] private            |
+|             2. [x] public             |
+|                                       |
+|              [i] install              |
+|              [u] uninstall            |
+|              [b] back                 |
+|              [q] quit                 |
+|                                       |
++---------------------------------------+
+:
+[ downloading private git repositories into ~/projects... ]
+[ repositories downloaded ]
+
+
+[ downloading public git repositories into ~/public/... ]
+installing stb with nothings/stb.git to public.
+Cloning into 'stb'...
+installing klib with attractivechaos/klib.git to public.
+Cloning into 'klib'...
+installing neovim with neovim/neovim to public.
+Cloning into 'neovim'...
+error: inflate: data stream error (invalid code -- missing end-of-block)
+fatal: serious inflate inconsistency
+fatal: fetch-pack: invalid index-pack output
+[ repositories downloaded ]
+
+[H[2J
++--------------[ ERROR ]----------------+
+> error downloading repository neovim to public
++---------------------------------------+
+
+[H[2J+--------[ debian setup script ]--------+
+|                                       |
+|            [ git repos ]              |
+|                                       |
+|             1. [x] private            |
+|             2. [x] public             |
+|                                       |
+|              [i] install              |
+|              [u] uninstall            |
+|              [b] back                 |
+|              [q] quit                 |
+|                                       |
++---------------------------------------+
+:[H[2J[H[2J+--------[ debian setup script ]--------+
+|                                       |
+|            [ components ]             |
+|                                       |
+|          [1] apt packages             |
+|          [2] rust                     |
+|          [3] haskell                  |
+|          [4] neovim                   |
+|          [5] git repos                |
+|          [6] docs                     |
+|          [7] stow symlinks            |
+|          [8] complete                 |
+|                                       |
+|          [q] quit                     |
+|                                       |
++---------------------------------------+
+:[H[2J[H[2J+--------[ debian setup script ]--------+
+|                                       |
+|            [ components ]             |
+|                                       |
+|          [1] apt packages             |
+|          [2] rust                     |
+|          [3] haskell                  |
+|          [4] neovim                   |
+|          [5] git repos                |
+|          [6] docs                     |
+|          [7] stow symlinks            |
+|          [8] complete                 |
+|                                       |
+|          [q] quit                     |
+|                                       |
++---------------------------------------+
+:[H[2J[H[2J+--------[ debian setup script ]--------+
+|                                       |
+|            [ components ]             |
+|                                       |
+|          [1] apt packages             |
+|          [2] rust                     |
+|          [3] haskell                  |
+|          [4] neovim                   |
+|          [5] git repos                |
+|          [6] docs                     |
+|          [7] stow symlinks            |
+|          [8] complete                 |
+|                                       |
+|          [q] quit                     |
+|                                       |
++---------------------------------------+
+:[H[2J[H[2J+--------[ debian setup script ]--------+
+|                                       |
+|            [ components ]             |
+|                                       |
+|          [1] apt packages             |
+|          [2] rust                     |
+|          [3] haskell                  |
+|          [4] neovim                   |
+|          [5] git repos                |
+|          [6] docs                     |
+|          [7] stow symlinks            |
+|          [8] complete                 |
+|                                       |
+|          [q] quit                     |
+|                                       |
++---------------------------------------+
+:[H[2J[H[2J+--------[ debian setup script ]--------+
+|                                       |
+|            [ components ]             |
+|                                       |
+|          [1] apt packages             |
+|          [2] rust                     |
+|          [3] haskell                  |
+|          [4] neovim                   |
+|          [5] git repos                |
+|          [6] docs                     |
+|          [7] stow symlinks            |
+|          [8] complete                 |
+|                                       |
+|          [q] quit                     |
+|                                       |
++---------------------------------------+
+:
