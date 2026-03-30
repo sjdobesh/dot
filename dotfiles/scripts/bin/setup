@@ -1333,6 +1333,8 @@ main_menu_prompt() {
 # install from source for latest kittens (mpv panel etc)
 # kitten themes --reload-in=all Rosé Pine
 # kitten fonts --reload-in=all Rosé Pine
+#
+# add downloading victor mono nerdfont
 
 # start log & prompt
 LOG_FILE="setup.log"

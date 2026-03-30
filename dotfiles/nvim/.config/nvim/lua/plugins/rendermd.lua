@@ -19,6 +19,14 @@ return {
                     (#set! injection.language "markdown"))
             ]],
       },
+      c = {
+        enabled = true,
+        query = [[
+                ((comment_content) @injection.content
+                    (#offset! @injection.content 0 0 0 1)
+                    (#set! injection.language "markdown"))
+            ]],
+      },
     },
   },
 }

@@ -255,3 +255,6 @@ end, { desc = "goto next conditional" })
 vim.keymap.set({ "n", "x", "o" }, "[?", function()
   require("nvim-treesitter-textobjects.move").goto_previous("@conditional.outer", "textobjects")
 end, { desc = "goto previous conditional" })
+
+-- externally defined keymaps
+--
