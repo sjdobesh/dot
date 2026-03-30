@@ -34,7 +34,7 @@ return {
       post_restore_cmds = {
         function()
           if vim.g.neotreeopen == true then
-            feedkeys(":Neotree toggle<cr><C-l>", "n", true)
+            feedkeys(":Neotree toggle<cr><C-w>l", "n", true)
           end
         end,
       },

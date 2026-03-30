@@ -18,6 +18,7 @@ vim.g.maplocalleader = "\\"
 vim.keymap.set({ "n", "i" }, "<C-q>", "<cmd>q!<CR>", { desc = "close program" })
 vim.keymap.set({ "n", "i" }, "<C-c>", "<cmd>close!<CR>", { desc = "close window" })
 vim.keymap.set({ "n", "i" }, "<C-b>", "<cmd>bd!<CR>", { desc = "close buffer" })
+vim.keymap.set({ "n", "i" }, "<leader>q", "<cmd>qall!<CR>", { desc = "close neovim (force)" })
 vim.keymap.set("n", "<leader>/", "<cmd>noh<CR>", { desc = "clear highlights" })
 vim.keymap.set("n", "<leader>r", "<cmd>restart<CR>", { desc = "restart neovim" })
 

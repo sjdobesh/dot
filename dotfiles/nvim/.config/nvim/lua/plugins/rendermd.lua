@@ -9,7 +9,7 @@ return {
   ---@type render.md.UserConfig
   opts = {
     copmpletions = { lsp = { enabled = true } },
-    file_types = { "bash", "markdown", "org", "lua", "html", "c", "h" },
+    file_types = { "bash", "org", "markdown", "lua", "html", "c", "h" },
     injections = {
       lua = {
         enabled = true,
