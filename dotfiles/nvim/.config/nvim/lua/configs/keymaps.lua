@@ -116,9 +116,12 @@ vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, { desc = "get
 vim.keymap.set("n", "gi", function() vim.lsp.buf.hover() end, { desc = "get information" })
 vim.keymap.set("n", "ge", function() vim.diagnostic.open_float({ scope = "line" }) end, { desc = "get error" })
 vim.keymap.set("n", "gr", function() require("telescope.builtin").lsp_references() end, { desc = "get references" })
+-- stylua: ignore end
 
--- make a new file path from a word
--- ie ./folder/newrelativefile.txt
+-----
+-- hacks
+
+-- make a new file path from WORD under cursor
 local function makeNewFile()
   local word = vim.fn.expand("<cWORD>")
   local newpath = word:match("[.~]*/[%w/]+")
@@ -127,11 +130,9 @@ local function makeNewFile()
     feedkeys(":e " .. newpath .. "<cr>", "n", true)
   end
 end
-vim.keymap.set("n", "gnf", function() makeNewFile() end, { desc = "get new file under cursor" })
--- stylua: ignore end
-
------
--- hacks
+vim.keymap.set("n", "gnf", function()
+  makeNewFile()
+end, { desc = "get new file under cursor" })
 
 -- macro wrapper
 vim.keymap.set("n", "<leader>m", function()
@@ -159,16 +160,20 @@ end)
 -----
 -- ## plugins
 
--- toggles
+-- command maps
+vim.keymap.set("n", "<leader>d", "<cmd>Dashboard<CR><cmd>DisableWhitespace<CR>", { desc = "open dashboard" })
 vim.keymap.set("n", "<leader>w", "<cmd>StripWhitespace<CR>", { desc = "strip whitespace" })
-vim.g.otreeopen = false -- default is false
+
+-- toggles
+vim.keymap.set("n", "<leader>o", "<cmd>Outline<CR>", { desc = "toggle symbol viewer" })
+vim.keymap.set("n", "<leader>u", "<cmd>UndotreeToggle<CR>", { desc = "toggle undotree" })
+vim.keymap.set("n", "<leader>l", "<cmd>UrlView<CR>", { desc = "toggle link viewer" })
+-- persistent autosession toggle
+vim.g.neotreeopen = false
 vim.keymap.set("n", "<leader>f", function()
-  vim.g.neotreeopen = not vim.g.otreeopen
+  vim.g.neotreeopen = not vim.g.neotreeopen
   vim.cmd("Neotree toggle")
 end, { desc = "toggle neotree and record state for autosession" })
-vim.keymap.set("n", "<leader>o", "<cmd>Outline<CR>", { desc = "toggle symbol viewer" })
-vim.keymap.set("n", "<leader>d", "<cmd>Dashboard<CR><cmd>DisableWhitespace<CR>", { desc = "open dashboard" })
-vim.keymap.set("n", "<leader>u", "<cmd>UndotreeToggle<CR>", { desc = "toggle undotree" })
 
 -----
 -- leap (s)kip to (2 letter search)
@@ -257,4 +262,19 @@ vim.keymap.set({ "n", "x", "o" }, "[?", function()
 end, { desc = "goto previous conditional" })
 
 -- externally defined keymaps
---
+
+--[[
+[linkview](./lua/plugins/linkview.lua)
+| keys | command |
+| -- | -- |
+| gl | get link |
+|gL | get previous link |
+]]
+
+--[[
+[neotree](./lua/plugins/neotree.lua)
+| keys | command |
+| -- | -- |
+| P | preview file |
+
+]]

@@ -10,6 +10,7 @@
 --   - blink.cmp
 
 local mason_lsps = {
+  "bashls",
   "lua_ls",
   "clangd",
   "glsl_analyzer",
@@ -34,9 +35,9 @@ return {
       library = {
         "lazy.nvim",
         "LazyVim",
-        { path = "${3rd}/love2d/library",     words = { "love" } },
-        { path = "${3rd}/luv/library",        words = { "vim%.uv" } },
-        { path = "wezterm-types",             mods = { "wezterm" } },
+        { path = "${3rd}/love2d/library", words = { "love" } },
+        { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+        { path = "wezterm-types", mods = { "wezterm" } },
         { path = "xmake-luals-addon/library", files = { "xmake.lua" } },
       },
     },

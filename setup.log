@@ -3340,4 +3340,120 @@ fatal: fetch-pack: invalid index-pack output
 |          [q] quit                     |
 |                                       |
 +---------------------------------------+
+:[H[2J[3J[H[2J[3J+--------[ debian setup script ]--------+
+|                                       |
+|            [ components ]             |
+|                                       |
+|          [1] apt packages             |
+|          [2] rust                     |
+|          [3] haskell                  |
+|          [4] neovim                   |
+|          [5] git repos                |
+|          [6] docs                     |
+|          [7] stow symlinks            |
+|          [8] complete                 |
+|                                       |
+|          [q] quit                     |
+|                                       |
++---------------------------------------+
+:[H[2J[3J+--------[ debian setup script ]--------+
+|                                       |
+|         [ apt package groups ]        |
+|                                       |
+|       1. [ ] core                     |
+|       2. [ ] networking               |
+|       3. [ ] c dev                    |
+|       4. [ ] c xtras                  |
+|       5. [ ] neovim dependecies       |
+|       6. [ ] haskell dependecies      |
+|       7. [ ] additional languages     |
+|       8. [ ] full                     |
+|       9. [ ] all                      |
+|                                       |
+|          [?] package info             |
+|          [i] install                  |
+|          [u] uninstall                |
+|          [b] back                     |
+|          [q] quit                     |
+|                                       |
++---------------------------------------+
+:[H[2J[3J+--------[ debian setup script ]--------+
+|                                       |
+|         [ apt package groups ]        |
+|                                       |
+|       1. [x] core                     |
+|       2. [ ] networking               |
+|       3. [ ] c dev                    |
+|       4. [ ] c xtras                  |
+|       5. [ ] neovim dependecies       |
+|       6. [ ] haskell dependecies      |
+|       7. [ ] additional languages     |
+|       8. [ ] full                     |
+|       9. [ ] all                      |
+|                                       |
+|          [?] package info             |
+|          [i] install                  |
+|          [u] uninstall                |
+|          [b] back                     |
+|          [q] quit                     |
+|                                       |
++---------------------------------------+
+:[ proposed command ]
+
+sudo apt-get install -y curl git ssh vim
+
+[ approve execution? (y/n) ] > 
+[ updating packages references ... ]
+sudo apt-get update -y
+/home/valentine/bin/setup: line 10: sudo apt-get update -y: command not found
+[ packages references updated ]
+
+[ installing package groups ... ]
+sudo apt-get install -y curl git ssh vim
+usage: sudo -h | -K | -k | -V
+usage: sudo -v [-ABkNnS] [-g group] [-h host] [-p prompt] [-u user]
+usage: sudo -l [-ABkNnS] [-g group] [-h host] [-p prompt] [-U user]
+            [-u user] [command [arg ...]]
+usage: sudo [-ABbEHkNnPS] [-r role] [-t type] [-C num] [-D directory]
+            [-g group] [-h host] [-p prompt] [-R directory] [-T timeout]
+            [-u user] [VAR=value] [-i | -s] [command [arg ...]]
+usage: sudo -e [-ABkNnS] [-r role] [-t type] [-C num] [-D directory]
+            [-g group] [-h host] [-p prompt] [-R directory] [-T timeout]
+            [-u user] file ...
+[ package groups installed ]
+
+[ updating and cleaning... ]
+/home/valentine/bin/setup: line 10: sudo apt-get update -y: command not found
+/home/valentine/bin/setup: line 10: sudo apt-get upgrade -y: command not found
+/home/valentine/bin/setup: line 10: sudo apt-get autoclean -y: command not found
+/home/valentine/bin/setup: line 10: sudo apt-get autoremove -y: command not found
+[ package refresh complete ]
+
+[ added the following packages... ]
+- [ curl ]
+- [ git ]
+- [ ssh ]
+- [ vim ]
+
+[ press any key to continue ] > [H[2J[3J+--------[ debian setup script ]--------+
+|                                       |
+|         [ apt package groups ]        |
+|                                       |
+|       1. [x] core                     |
+|       2. [ ] networking               |
+|       3. [ ] c dev                    |
+|       4. [ ] c xtras                  |
+|       5. [ ] neovim dependecies       |
+|       6. [ ] haskell dependecies      |
+|       7. [ ] additional languages     |
+|       8. [ ] full                     |
+|       9. [ ] all                      |
+|                                       |
+|          [?] package info             |
+|          [i] install                  |
+|          [u] uninstall                |
+|          [b] back                     |
+|          [q] quit                     |
+|                                       |
++---------------------------------------+
 :

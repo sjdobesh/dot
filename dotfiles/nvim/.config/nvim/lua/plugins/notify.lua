@@ -1,1 +1,1 @@
-return { "rcarriga/nvim-notify", opts = { render = "compact" } }
+return { "rcarriga/nvim-notify", opts = { render = "default" } }

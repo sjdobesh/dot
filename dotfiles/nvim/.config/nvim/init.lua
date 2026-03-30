@@ -40,6 +40,7 @@ local plugins = {
   require("plugins.glimmer"),     -- command animations
   require("plugins.imagenvim"),   -- image support for injected languages (3rd)
   require("plugins.imagesnacks"), -- main image support (folke)
+  require("plugins.linkview"),    -- link finder and picker
   require("plugins.luaconsole"),  -- lua scratch pad
   require("plugins.lualine"),     -- status line and tabs
   require("plugins.mason"),       -- lsp manager
@@ -55,7 +56,6 @@ local plugins = {
   require("plugins.timers"),      -- timer manager
   require("plugins.toggleterm"),  -- persistent term
   require("plugins.treesitter"),  -- syntax parser
-  require("plugins.linkview"),    -- link manager
   require("plugins.whichkey"),    -- key descriptions (ala hydra)
   require("plugins.yanky"),       -- kill ring
 }
@@ -67,7 +67,7 @@ local plugins = {
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
--- bootstrap lazy.nvim
+-- bootstrap [lazy.nvim](https://github.com/folke/lazy.nvim)
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   local lazyrepo = "https://github.com/folke/lazy.nvim.git"
@@ -75,7 +75,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
   if vim.v.shell_error ~= 0 then
     vim.api.nvim_echo({
       { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
-      { out,                            "WarningMsg" },
+      { out, "WarningMsg" },
       { "\nPress any key to exit..." },
     }, true, {})
     vim.fn.getchar()
@@ -87,13 +87,13 @@ vim.opt.rtp:prepend(lazypath)
 -- install plugins
 require("lazy").setup({
   spec = {
-    plugins,                        -- plugin table acquired through require commands above
+    plugins, -- plugin table acquired through require commands above
   },
   { checker = { enabled = true } }, -- auto update
 })
 
 -----
--- ## load other config files
+-- ## load other config files after plugins
 
 require("configs.options")
 require("configs.keymaps")

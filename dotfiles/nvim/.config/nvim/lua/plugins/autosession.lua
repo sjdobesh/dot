@@ -24,16 +24,16 @@ return {
       },
 
       save_extra_data = function(_)
-        return vim.fn.json_encode({ otree = vim.g.otreeopen })
+        return vim.fn.json_encode({ otree = vim.g.neotreeopen })
       end,
 
       restore_extra_data = function(_, extra_data)
-        vim.g.otreeopen = vim.fn.json_decode(extra_data).otree
+        vim.g.neotreeopen = vim.fn.json_decode(extra_data).otree
       end,
 
       post_restore_cmds = {
         function()
-          if vim.g.neootreeopen == true then
+          if vim.g.neotreeopen == true then
             feedkeys(":Neotree toggle<cr><C-l>", "n", true)
           end
         end,

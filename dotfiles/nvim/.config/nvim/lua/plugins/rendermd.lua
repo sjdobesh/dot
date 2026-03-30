@@ -9,7 +9,7 @@ return {
   ---@type render.md.UserConfig
   opts = {
     copmpletions = { lsp = { enabled = true } },
-    file_types = { "markdown", "org", "lua", "html", "c", "h" },
+    file_types = { "bash", "markdown", "org", "lua", "html", "c", "h" },
     injections = {
       lua = {
         enabled = true,
@@ -20,6 +20,14 @@ return {
             ]],
       },
       c = {
+        enabled = true,
+        query = [[
+                ((comment_content) @injection.content
+                    (#offset! @injection.content 0 0 0 1)
+                    (#set! injection.language "markdown"))
+            ]],
+      },
+      bash = {
         enabled = true,
         query = [[
                 ((comment_content) @injection.content

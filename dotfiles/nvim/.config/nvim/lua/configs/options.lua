@@ -13,6 +13,7 @@ vim.opt.signcolumn = "number" -- lets signs and numbers share a collumn
 vim.opt.mouse = "a" -- mouse support
 vim.opt.spelllang = "en-gb" -- default dictionary
 vim.opt.path:append("**") -- better file nav
+vim.o.scrolloff = 4 -- absolute lines
 
 -- tabs (2 tab width as spaces is default)
 vim.opt.tabstop = 2
@@ -47,4 +48,5 @@ vim.opt.splitright = true
 vim.opt.splitbelow = true
 
 -- set plugin notifications
-vim.notify = require("notify")
+-- error diagnostic is fine as notify is in fact a function
+vim.notify = vim.schedule_wrap(require("notify"))

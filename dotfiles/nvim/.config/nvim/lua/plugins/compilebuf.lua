@@ -23,7 +23,7 @@ return {
         lua = "lua %",
         javascript = "bun %",
         typescript = "bun %",
-        c = "cland -o %:r % && ./%:r",
+        c = "clang -o %:r % && ./%:r",
         cpp = "cc -std=c++23 -o %:r % && ./%:r",
         java = "javac % && java %:r",
         go = "go run %",

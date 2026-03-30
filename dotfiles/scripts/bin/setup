@@ -1,6 +1,16 @@
 #!/bin/bash
 # setup script #------------------------------------------------------------(80)
 
+# wrap command execution in debug mode
+DEBUG=true
+debug_exec () {
+  if [[ DEBUG -eq true ]]; then
+    echo "DEBUG MODE STOPPED EXECUTION: [$1]"
+  else
+    eval "$1"
+  fi
+}
+
 # folders
 public_repo_folder="public"
 private_repo_folder="project"
@@ -13,45 +23,48 @@ ssh_prefix="git@github.com:"
 
 
 # packages #--------------------------------------------------------------------
+# remember if you add something here, add it to the apt descriptions
 
 # minimum cli utils (what do you even do on linux without these?)
 CORE=(
-  "curl"
-  "git"
-  "ssh"
-  "vim"
+  "curl" # url tool
+  "git"  # vcs
+  "ssh"  # secure shell
+  "vim"  # text editor
 )
 
 # networking tools
 NETWORKING=(
-  "iproute2"
-  "net-tools"
+  "iproute2"  # modern tools
+  "net-tools" # legacy tools
 )
 
 # c development tools
 CDEV=(
-  "bear"
-  "build-essential"
-  "clang"
-  "clang-tools"
-  "cmake"
-  "gdb"
-  "lldb"
-  "valgrind"
+  "bear"            # cmake command generator
+  "build-essential" # gnu c build chain (gcc, g++, make)
+  "clang"           # llvm compiler
+  "clang-tools"     # llvm based c dev tools
+  "cmake"           # high level build system
+  "gdb"             # gnu debugger
+  "gf2"             # gdb gui
+  "lldb"            # llvm debugger
+  "valgrind"        # c runtime memory checker
+  "tcc"             # tiny compiler
 )
 
 # c libraries
 CXTRA=(
-  "libclang-dev"
-  "libncurses-dev"
-  "libpng-dev"
-  "libsdl3-dev"
-  "libsdl3-image-dev"
-  "libsdl3-ttf-dev"
+  "libclang-dev"      # clang dev
+  "libncurses-dev"    # ncurses dev
+  "libpng-dev"        # png dev
+  "libsdl3-dev"       # sdl3 core
+  "libsdl3-image-dev" # sdl3 image support
+  "libsdl3-ttf-dev"   # sdl3 font support
 )
 
 
-# haskell ghc dependencies (https://www.haskell.org/ghcup/install/)
+# [haskell ghc dependencies](https://www.haskell.org/ghcup/install/)
 HASKELL_DEP=( "build-essential"
   "curl"
   "libffi-dev"
@@ -64,7 +77,7 @@ HASKELL_DEP=( "build-essential"
   "pkg-config"
 )
 
-# neovim build dependencies (https://neovim.io/doc/build/)
+# [neovim build dependencies](https://neovim.io/doc/build/)
 NVIM_DEP=(
   "build-essential"
   "cmake"
@@ -72,33 +85,50 @@ NVIM_DEP=(
   "gettext"
   "git"
   "ninja-build"
-  "liblua5.1-0-dev" # <-- plugin dependency
+  "liblua5.1-0-dev" # <-- plugin dependency (wont be mentioned in wiki)
 )
+
+# [kitty build dependencies](https://sw.kovidgoyal.net/kitty/build/)
+KITTY_DEP=(
+  "libdbus-1-dev"
+  "libxcursor-dev"
+  "libxrandr-dev"
+  "libxi-dev"
+  "libxinerama-dev"
+  "libgl1-mesa-dev"
+  "libxkbcommon-x11-dev"
+  "libfontconfig-dev"
+  "libx11-xcb-dev"
+)
+
 # other language packages
 PROG_LANGS=(
   "default-jdk" # java
   "gnucobol"    # cobol
-  "perl"        # perl <3
+  "lua"         # lua <3
+  "luarocks"    # lua package manager
+  "perl"        # perl
   "python3"     # /\/\/\:<- (snek)
   "python3-pip" # _____:< (snek snacks)
 )
 
 # everything else
 FULL=(
-#  "debian-goodies" # deb tools
+  "imagemagick"    # image support
+  "openssh-server" # ssh host
   "lsof"           # list open files
   "fdisk"          # format disk
   "feh"            # image viewer
+  "fish"           # friendly interactive shell ><>
   "figlet"         # ascii art
   "fuse"           # needed to run app images
   "fzf"            # fuzzy finder
-#  "moreutils"      # extra bash tools
-  "tcc"            # tiny c compiler
+  "npm"            # node
   "rsync"          # recursive directory syncer
   "stow"           # symlink manager
-  "wget"           # gnu downloader
+  "wget"           # downloader
   "zip"            # file compressor
-  "zsh"            # shell
+  "zathura"        # pdf viewer
 )
 
 # all apt package groups
@@ -109,18 +139,20 @@ ALL_PACKAGES=(
   "${CXTRA[@]}"
   "${HASKELL_DEP[@]}"
   "${NVIM_DEP[@]}"
+  "${KITTY_DEP[@]}"
   "${PROG_LANGS[@]}"
   "${FULL[@]}"
 )
 
 # rust cargo packages (crates)
 CRATES=(
-  "bat"       # cat replacement
-  "eza"       # ls replacement
-  "fd-find"   # find replacement
-  "ripgrep"   # grep replacement
-  "tealdeer"  # tldr man pages
+  "bat"                      # cat replacement
+  "eza"                      # ls replacement
+  "fd-find"                  # find replacement
+  "ripgrep"                  # grep replacement
+  "tealdeer"                 # tldr man pages
   "--locked tree-sitter-cli" # tree sitter parser generator
+  "stylua"                   # lua formatter
 )
 
 # git repos #-------------------------------------------------------------------
@@ -224,57 +256,69 @@ install_nvim() {
   # check if source is available
   if [[ ! -d ~/public/neovim ]]; then
     echo "couldn't find repository, downloading now"
-    mkdir -p ~/public
-    cd ~/public
-    git clone https://github.com/neovim/neovim
+    debug_exec "mkdir -p $HOME/public"
+    debug_exec "cd $HOME/public"
+    debug_exec "git clone https://github.com/neovim/neovim"
   fi
 
   # build from source and install to ~/bin
-  cd ~/public/neovim
-  make CMAKE_BUILD_TYPE=Release CMAKE_EXTRA_FLAGS="-DCMAKE_INSTALL_PREFIX=$HOME/bin/neovim"
-  sudo make install
-  export PATH="$HOME/bin/neovim/bin:$PATH"
-  cd ~
+  debug_exec "cd $HOME/public/neovim"
+  debug_exec "make CMAKE_BUILD_TYPE=Release CMAKE_EXTRA_FLAGS=\"-DCMAKE_INSTALL_PREFIX=$HOME/bin/neovim\""
+  debug_exec "sudo make install"
+  debug_exec "export PATH=\"$HOME/bin/neovim/bin:$PATH\""
+  debug_exec "cd $HOME"
 
   echo "[ installed neovim ]"
   echo
+  sleep 1
 }
 
 uninstall_nvim() {
   echo
   echo "[ uninstalling neovim... ]"
 
-  if [[ ! -d ~/public/neovim ]]; then
+  if [[ ! -d "$HOME/public/neovim" ]]; then
     log_errors "error couldn't find neovim to uninstall"
     echo "[ neovim not installed ]"
     return
   fi
-  cd ~/repos/neovim
-  sudo cmake --build build/ --target uninstall
-  log_errors "error during cmake build"
-  cd ~
+  debug_exec "cd $HOME/repos/neovim"
+  debug_exec "sudo cmake --build build/ --target uninstall"
+  debug_exec "log_errors \"error during cmake build\""
+  debug_exec "cd $HOME"
 
   echo "[ uninstalled neovim ]"
   echo
+  sleep 1
 }
 
-# install rust (rustup + crates)
+# install rust
 install_rust() {
   echo
   echo "[ installing rust... ]"
 
-  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+  debug_exec "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y"
   log_errors "error installing rust"
-  export PATH=$PATH:$HOME/.cargo/bin
-  rustup self update
-  rustup update
+  debug_exec "export PATH=$PATH:$HOME/.cargo/bin"
+  debug_exec "rustup self update"
+  debug_exec "rustup update"
   log_errors "error during rust update"
-  rustup toolchain install nightly
+  debug_exec "rustup toolchain install nightly"
   log_errors "error during rust nightly install"
 
   echo "[ rust installed ]"
   sleep 1
   echo
+}
+
+uninstall_rust() {
+  echo
+  echo "[ uninstalling rust... ]"
+  debug_exec "rustup self uninstall"
+  log_errors "error uninstalling rust"
+  echo "[ uninstalled rust ]"
+  echo
+  sleep 1
 }
 
 install_crates() {
@@ -283,13 +327,13 @@ install_crates() {
 
   for crate in "${CRATES[@]}"; do
     echo "installing $crate..."
-    cargo install $crate
+    debug_exec "cargo install $crate"
     log_errors "error installing rust crate [$crate]"
   done
 
   echo "[ crates installed ]"
-  sleep 1
   echo
+  sleep 1
 }
 
 uninstall_crates() {
@@ -298,64 +342,60 @@ uninstall_crates() {
 
   for crate in "${CRATES[@]}"; do
     echo "uninstalling $crate..."
-    cargo uninstall $crate
+    debug_exec "cargo uninstall $crate"
     log_errors "error uninstalling rust crate [ $crate ]"
   done
 
   echo "[ crates uninstalled ]"
-  sleep 1
   echo
-}
-
-uninstall_rust() {
-  echo "[ uninstalling rust... ]"
-  rustup self uninstall
-  log_errors "error uninstalling rust"
-  echo "[ uninstalled rust ]"
+  sleep 1
 }
 
 install_haskell() {
   echo
   echo "[ installing haskell... ]"
-  curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | \
+  debug_exec "curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | \
     BOOTSTRAP_HASKELL_NONINTERACTIVE=1 \
     BOOTSTRAP_HASKELL_GHC_VERSION=latest \
     BOOTSTRAP_HASKELL_CABAL_VERSION=latest \
     BOOTSTRAP_HASKELL_INSTALL_STACK=1 \
     BOOTSTRAP_HASKELL_INSTALL_HLS=1 \
     BOOTSTRAP_HASKELL_ADJUST_BASHRC=P \
-    sh
+    sh"
   log_errors "error installing haskell"
   echo "[ installed haskell ]"
   echo
+  sleep 1
 }
 uninstall_haskell() {
   echo
   echo "[ uninstalling haskell... ]"
 
-  ghcup nuke
+  debug_exec "ghcup nuke"
   log_errors "error nuking haskell"
-  rm -rf ~/.ghcup ~/.cabal ~/.stack
+  debug_exec "rm -rf ~/.ghcup ~/.cabal ~/.stack"
 
   echo "[ uninstalled haskell ]"
   echo
+  sleep 1
 }
 
 # helper function
 download_repo_set() {
-  local -n arr_ref="$1"
+  local -n arr_ref="$1" # arg 1 is repos to download
   for repo_url in "${arr_ref[@]}"; do
     repo_name="$(basename "$repo_url" .git)"
     echo "installing $repo_name with $repo_url to $2."
     if [[ ! -d ~/$2/$repo_name ]]; then
-      git -C ~/$2 clone "$https_prefix$repo_url"
+      debug_exec "git -C ~/$2 clone \"$https_prefix$repo_url\""
       log_errors "error downloading repository $repo_name to $2"
     else
       echo "found $repo_name, pulling latest changes..."
-      git -C ~/$2/$repo_name pull
+      debug_exec "git -C ~/$2/$repo_name pull"
       log_errors "error pulling $repo_name"
     fi
   done
+  sleep 1
 }
 
 # download personal and external github repos
@@ -363,8 +403,8 @@ download_private_repos() {
   echo
   echo "[ downloading private git repositories into ~/projects... ]"
 
-  mkdir -p ~/projects
-  download_repo_set PERSONAL_REPOS projects
+  debug_exec "mkdir -p ~/projects"
+  debug_exec "download_repo_set PERSONAL_REPOS projects"
 
   echo "[ repositories downloaded ]"
   echo
@@ -375,8 +415,8 @@ download_public_repos() {
   echo
   echo "[ downloading public git repositories into ~/public/... ]"
 
-  mkdir -p ~/public
-  download_repo_set PUBLIC_REPOS public
+  debug_exec "mkdir -p ~/public"
+  debug_exec "download_repo_set PUBLIC_REPOS public"
 
   echo "[ repositories downloaded ]"
   echo
@@ -388,7 +428,7 @@ remove_public_repos() {
 
   for repo in ${PUBLIC_REPOS[@]}; do
     echo "removing $repo..."
-    rm -rf ~/public/$repo
+    debug_exec "rm -rf ~/public/$repo"
     echo "$repo removed"
   done
 
@@ -403,15 +443,15 @@ remove_private_repos() {
 
   for repo in ${PRIVATE_REPOS[@]}; do
     echo "removing $repo..."
-    cd ~/projects/"$repo"
+    debug_exec "cd ~/projects/$repo"
     gstatus=`git status -s | wc -l`
     if (( gstatus )); then
       echo "error, found git conflicts in $repo, please resolve before deleting"
       break
     else
       echo "removing $repo"
-      read -p "[ press any key to continue ] > "
-      rm -rf ~/projects/$repo
+      read -p "[ press any key to confirm or abort now ] > "
+      debug_exec "rm -rf ~/projects/$repo"
       echo "$repo removed"
     fi
   done
@@ -424,18 +464,8 @@ remove_private_repos() {
 download_docs() {
   echo
   echo "[ downloading documentation... ]"
-
-  cd ~
-  mkdir ~/docs
-  curl -LO https://wiki.libsdl.org/static_files/offline/sdlwiki.zip
-  log_errors "error downloading documentation"
-  mv sdlwiki.zip ~/docs
-  cd ~/docs
-  unzip sdlwiki.zip
-  log_errors "error extracting documentation"
-  rm sdlwiki.zip
-  cd ~
-
+  # TODO
+  sleep 1
   echo "[ documentation downloaded ]"
   echo
 }
@@ -443,7 +473,8 @@ download_docs() {
 remove_docs() {
   echo
   echo "[ removing documentation... ]"
-  rm -rf ~/docs
+  # TODO
+  sleep 1
   echo "[ removed documentation ]"
   echo
 }
@@ -454,13 +485,10 @@ stow_configs() {
   echo "[ stowing symlinks... ]"
 
   echo "dotfiles..."
-  cd ~/dot/dotfiles
-  stow --no-folding -vt ~ */
-  cd ~
+  debug_exec "cd $HOME/dot/dotfiles"
+  debug_exec "stow --no-folding -vt $HOME */"
+  debug_exec "cd $HOME"
   log_errors "error stowing configs"
-
-  # change shells now that there is a .zshrc : todo, move this elsewhere
-  chsh -s $(which zsh)
 
   echo "[ symlinks stowed ]"
   echo
@@ -471,8 +499,9 @@ unstow_configs() {
   echo "[ unstowing symlinks... ]"
 
   echo "dotfiles..."
-  cd ~/dot/dotfiles
-  stow -D --no-folding -vt ~ */
+  debug_exec "cd $HOME/dot/dotfiles"
+  debug_exec "stow -D --no-folding -vt $HOME */"
+  debug_exec "cd $HOME"
   log_errors "error unstowing configs"
 
   echo "[ symlinks unstowed ]"
@@ -488,15 +517,15 @@ init_ssh() {
   count=`ls ~/.ssh -1 *.pub 2>/dev/null | wc -l`
   if (( count == 0 )); then
     echo "no pub key found, generating new ssh key..."
-    ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519 -q -N ""
+    debug_exec "ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519 -q -N \"\""
     log_errors "error in ssh keygen"
   else
     echo "found existing ssh key."
   fi
 
   echo "setting git config user to $git_name at $git_email."
-  git config --global user.email "$git_email"
-  git config --global user.name "$git_name"
+  debug_exec "git config --global user.email \"$git_email\""
+  debug_exec "git config --global user.name \"$git_name\""
 
   # only update personal remotes, including dot repo
   echo "updating repo remote urls for personal repos..."
@@ -504,7 +533,7 @@ init_ssh() {
     repo_name="$(basename "$repo_url" .git)"
     echo "swapping $repo_name to ssh origin..."
     if [[ -d ~/project/$repo_name ]]; then
-      git -C ~/project/$repo_name remote set-url origin $ssh_prefix$repo_url
+      debug_exec "git -C ~/project/$repo_name remote set-url origin $ssh_prefix$repo_url"
       log_errors "error updating $repo_name origin to $ssh_prefix$repo_url"
     else
       echo "couldn't find $repo_name."
@@ -521,6 +550,7 @@ init_ssh() {
 
 # full installations -----------------------------------------------------------
 
+# deprecated kinda, but will fix eventually for full install
 install_all() {
   echo
   echo "[ installing full environment... ]"
@@ -655,6 +685,8 @@ declare -A APT_DESCRIPTIONS=(
 |                                       |\n\
 |   - [ lldb ] llvm debugger            |\n\
 |                                       |\n\
+|   - [ tcc ] tiny c compiler           |\n\
+|                                       |\n\
 |   - [ valgrind ] memory analyzer      |\n\
 |                                       |\n\
 +---------------------------------------+\n"
@@ -747,6 +779,12 @@ declare -A APT_DESCRIPTIONS=(
 |                                       |\n\
 |   - [ default-jdk ] java development  |\n\
 |                                       |\n\
+|   - [ gnucobol ] cobol build chain    |\n\
+|                                       |\n\
+|   - [ lua ] lua scripting             |\n\
+|                                       |\n\
+|   - [ luarocks ] package manager      |\n\
+|                                       |\n\
 |   - [ perl ] just another perl hacker |\n\
 |                                       |\n\
 |   - [ python3 ] snek /\\/\\/:<~         |\n\
@@ -762,34 +800,37 @@ declare -A APT_DESCRIPTIONS=(
 +---------------------------------------+\n\
 | includes...                           |\n\
 |                                       |\n\
-|   - [ lsof ]      list open files     |\n\
+|   - [ imagemagick ] image processor   |\n\
 |                                       |\n\
-|   - [ fdisk ]     format disk         |\n\
+|   - [openssh-server] ssh host         |\n\
 |                                       |\n\
-|   - [ feh ]       image viewer        |\n\
+|   - [ lsof ] list open files          |\n\
 |                                       |\n\
-|   - [ figlet ]    ascii art           |\n\
+|   - [ fdisk ] format disk             |\n\
 |                                       |\n\
-|   - [ fuse ]      run app images      |\n\
+|   - [ feh ] image viewer              |\n\
 |                                       |\n\
-|   - [ fzf ]       fuzzy finder        |\n\
+|   - [ fish ] friendly shell           |\n\
 |                                       |\n\
-|   - [ moreutils ] extra bash tools    |\n\
+|   - [ figlet ] ascii art              |\n\
 |                                       |\n\
-|   - [ tcc ]       tiny c compiler     |\n\
+|   - [ fuse ] run app images           |\n\
 |                                       |\n\
-|   - [ rsync ]     directory sync      |\n\
+|   - [ fzf ] fuzzy finder              |\n\
 |                                       |\n\
-|   - [ stow ]      symlink manager     |\n\
+|   - [ npm ] nodejs server             |\n\
 |                                       |\n\
-|   - [ wget ]      gnu downloader      |\n\
+|   - [ rsync ] directory sync          |\n\
 |                                       |\n\
-|   - [ zip ]       file compressor     |\n\
+|   - [ stow ] symlink manager          |\n\
 |                                       |\n\
-|   - [ zsh ]       shell               |\n\
+|   - [ wget ] gnu downloader           |\n\
+|                                       |\n\
+|   - [ zip ] file compressor           |\n\
+|                                       |\n\
+|   - [ zathura ] pdf viewer            |\n\
 |                                       |\n\
 +---------------------------------------+\n"
-
 )
 
 # rust menu arrays
@@ -967,14 +1008,24 @@ print_symlink_menu() {
   echo "+---------------------------------------+"
 }
 
+# docs
+# SDL3 https://wiki.libsdl.org/SDL3/FrontPage
+# lua https://www.lua.org/ftp/#manuals
+# love2d https://love2d.org/wiki.zip
+# c89 https://port70.net/~nsz/c/c89/c89-draft.html
+# cppref https://cppreference.com/
+
 print_doc_menu() {
   clear
   echo "+--------[ debian setup script ]--------+"
   echo "|                                       |"
   echo "|               [ docs ]                |"
   echo "|                                       |"
-  echo "|         1. xxx man                    |"
-  echo "|         2. xxx SDL3 documentation     |"
+  echo "|         1. xxx SDL3                   |"
+  echo "|         2. xxx lua                    |"
+  echo "|         3. xxx love                   |"
+  echo "|         4. xxx cppref                 |"
+  echo "|         5. xxx c89                    |"
   echo "|                                       |"
   echo "|              [i] install              |"
   echo "|              [u] uninstall            |"
@@ -1090,12 +1141,13 @@ apt_installer() {
   if [[ "$user_input" == y ]]; then
     echo
     echo "[ updating packages references ... ]"
-    sudo apt-get update -y
+    echo "sudo apt-get update -y"
+    debug_exec "sudo apt-get update -y"
     echo "[ packages references updated ]"
     echo
     echo "[ installing package groups ... ]"
-    echo $apt_command
-    $apt_command
+    echo "$apt_command"
+    debug_exec "$apt_command"
     echo "[ package groups installed ]"
     sleep 1
   else
@@ -1106,10 +1158,10 @@ apt_installer() {
   fi
   echo
   echo "[ updating and cleaning... ]"
-  sudo apt-get update -y
-  sudo apt-get upgrade -y
-  sudo apt-get autoclean -y
-  sudo apt-get autoremove -y
+  debug_exec "sudo apt-get update -y"
+  debug_exec "sudo apt-get upgrade -y"
+  debug_exec "sudo apt-get autoclean -y"
+  debug_exec "sudo apt-get autoremove -y"
   echo "[ package refresh complete ]"
 
   # update user on new packages available
@@ -1124,23 +1176,45 @@ apt_installer() {
 
 rust_installer() {
   local install_option="$1" # install (1) or uninstall (0)
-  if (( RUST_INSTALL_SELECTION["RUSTUP"] )); then
-    if (( install_option )); then
-      install_rust
-    else
-      uninstall_rust
-    fi
-  fi
-  if (( RUST_INSTALL_SELECTION["CRATES"] )); then
-    if (( install_option )); then
-      install_crates
-    else
-      uninstall_crates
-    fi
+
+  # install rust then crates
+  if (( install_option )); then
+      if (( RUST_INSTALL_SELECTION["RUSTUP"] )); then
+          install_rust
+      fi
+      if (( RUST_INSTALL_SELECTION["CRATES"] )); then
+          install_crates
+      fi
+  # uninstall crates then rust
+  else
+      if (( RUST_INSTALL_SELECTION["CRATES"] )); then
+          uninstall_crates
+      fi
+      if (( RUST_INSTALL_SELECTION["RUSTUP"] )); then
+        uninstall_rust
+      fi
   fi
 }
 
 repo_installer() {
+  local install_option="$1" # install (1) or uninstall (0)
+  if (( REPO_INSTALL_SELECTION["PRIVATE"] )); then
+    if (( install_option )); then
+      download_private_repos
+    else
+      remove_repos
+    fi
+  fi
+  if (( REPO_INSTALL_SELECTION["PUBLIC"] )); then
+    if (( install_option )); then
+      download_public_repos
+    else
+      remove_repos
+    fi
+  fi
+}
+
+doc_installer() {
   local install_option="$1" # install (1) or uninstall (0)
   if (( REPO_INSTALL_SELECTION["PRIVATE"] )); then
     if (( install_option )); then
@@ -1299,8 +1373,8 @@ doc_prompt() {
     case "$user_selection" in
       "1" ) (( REPO_INSTALL_SELECTION["PRIVATE"] = !REPO_INSTALL_SELECTION["PRIVATE"]  )) ;;
       "2" ) (( REPO_INSTALL_SELECTION["PUBLIC"]  = !REPO_INSTALL_SELECTION["PUBLIC"]  )) ;;
-      [i] ) repo_installer 1 ;;
-      [u] ) repo_installer 0 ;;
+      [i] ) doc_installer 1 ;;
+      [u] ) doc_installer 0 ;;
       [b] ) main_menu_prompt ;;
       [q] ) exit             ;;
       *   ) error=1          ;;
@@ -1325,7 +1399,6 @@ main_menu_prompt() {
       "4" ) nvim_prompt    ;;
       "5" ) repo_prompt    ;;
       "6" ) doc_prompt     ;;
-      # TODO FINISH THESE
     esac
   done
 }
@@ -1335,6 +1408,8 @@ main_menu_prompt() {
 # kitten fonts --reload-in=all Rosé Pine
 #
 # add downloading victor mono nerdfont
+#
+#
 
 # start log & prompt
 LOG_FILE="setup.log"

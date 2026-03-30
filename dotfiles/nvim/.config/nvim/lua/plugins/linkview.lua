@@ -6,8 +6,8 @@ return {
       default_picker = "telescope",
       default_action = "firefox",
       jump = {
-        next = "gp",
-        prev = "gP",
+        next = "gl",
+        prev = "gL",
       },
     })
   end,
