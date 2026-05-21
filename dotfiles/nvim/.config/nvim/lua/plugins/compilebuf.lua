@@ -1,6 +1,11 @@
 return {
   "ej-shafran/compile-mode.nvim",
   version = "^5.0.0",
+  lazy = true,
+  keys = {
+    { "<leader><", ":Compile<cr>", desc = "compile buffer" },
+    { "<leader>>", ":Recompile<cr>", desc = "rerun compile buffer" },
+  },
   -- you can just use the latest version:
   -- branch = "latest",
   -- or the most up-to-date updates:
@@ -23,7 +28,7 @@ return {
         lua = "lua %",
         javascript = "bun %",
         typescript = "bun %",
-        c = "clang -o %:r % && ./%:r",
+        c = "cc -o %:r % && ./%:r",
         cpp = "cc -std=c++23 -o %:r % && ./%:r",
         java = "javac % && java %:r",
         go = "go run %",
@@ -55,7 +60,7 @@ return {
       -- Default to calling `:Compile` for `:Recompile`
       -- when there's no previous command.
       -- :h compile-mode.recompile_no_fail
-      recompile_no_fail = false,
+      recompile_no_fail = true,
       -- Ask to save unsaved buffers before compiling.
       -- :h compile-mode.ask_about_save
       ask_about_save = true,
@@ -64,7 +69,7 @@ return {
       ask_to_interrupt = true,
       -- The name for the compilation buffer.
       -- :h compile-mode.buffer_name
-      buffer_name = "*compilation*",
+      buffer_name = "[compilation]",
       -- The format for the time information
       -- at the top of the compilation buffer
       -- :h compile-mode.time_format
@@ -80,13 +85,13 @@ return {
       clear_environment = false,
       -- Fix compilation for plugins like `nvim-cmp`.
       -- :h compile-mode.input_word_completion
-      input_word_completion = false,
+      input_word_completion = true,
       -- Hide the compliation buffer.
       -- :h compile-mode.hidden_buffer
-      hidden_buffer = false,
+      hidden_buffer = true,
       -- Automatically focus the compilation buffer.
       -- :h compile-mode.focus_compilation_buffer
-      focus_compilation_buffer = false,
+      focus_compilation_buffer = true,
       -- Automatically move the cursor to the end of the compilation buffer.
       -- :h compile-mode.auto_scroll
       auto_scroll = true,
@@ -96,10 +101,10 @@ return {
       use_circular_error_navigation = false,
       -- Print debug information.
       -- :h compile-mode.debug
-      debug = false,
+      debug = true,
       -- Use a pseudo terminal for command execution.
       -- :h compile-mode.use_pseudo_terminal
-      use_pseudo_terminal = false,
+      use_pseudo_terminal = true,
     }
   end,
 }

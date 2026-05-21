@@ -1,6 +1,7 @@
 return {
   {
     "nvim-neo-tree/neo-tree.nvim",
+    event = "VeryLazy",
     branch = "v3.x",
     dependencies = {
       "nvim-lua/plenary.nvim",
@@ -10,7 +11,7 @@ return {
     config = function()
       require("neo-tree").setup({
         filesystem = {
-          bind_to_cwd = true
+          bind_to_cwd = true,
         },
         window = {
           mappings = {
@@ -21,10 +22,10 @@ return {
                 use_float = true,
                 use_snacks_image = true,
                 use_image_nvim = false,
-              }
-            }
-          }
-        }
+              },
+            },
+          },
+        },
       })
     end,
   },

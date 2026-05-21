@@ -6,6 +6,9 @@ return {
     { "<Leader>`", desc = "Lua-console - attach to buffer" },
   },
   opts = {
-    preserve_context = false,
+    buffer = {
+      preserve_context = false,
+      clear_before_eval = true,
+    },
   },
 }

@@ -1,10 +1,14 @@
 return {
   "sjdobesh/linkview.nvim",
-  lazy = false,
+  lazy = true,
+  keys = {
+    "gl",
+    "gL",
+  },
   config = function()
     require("urlview").setup({
       default_picker = "telescope",
-      default_action = "firefox",
+      default_action = "lynx",
       jump = {
         next = "gl",
         prev = "gL",

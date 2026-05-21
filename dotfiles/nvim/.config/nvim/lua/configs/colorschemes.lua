@@ -2,50 +2,43 @@ return {
   {
     "rose-pine/neovim",
     lazy = false,
-    priority = 1000,
+    priority = 100,
     config = function()
       vim.cmd.colorscheme("rose-pine")
-    end
+    end,
+  },
+  {
+    "craftzdog/solarized-osaka.nvim",
+    opts = {},
   },
   {
     "sainnhe/sonokai",
-    lazy = false,
-    priority = 1000,
     config = function()
       vim.g.sonokai_enable_italic = true
       --vim.cmd.colorscheme("sonokai")
-    end
+    end,
   },
   {
     "sainnhe/gruvbox-material",
-    lazy = false,
-    priority = 1000,
   },
   {
     "savq/melange-nvim",
-    lazy = false,
-    priority = 1000,
   },
   {
     "AlexvZyl/nordic.nvim",
-    lazy = false,
-    priority = 1000,
     config = function()
       vim.g.sonokai_enable_italic = true
       -- vim.cmd.colorscheme("nordic")
-    end
+    end,
   },
-  { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
+  { "catppuccin/nvim", name = "catppuccin" },
   {
     "LuxVim/lux.nvim",
-    priority = 1000,
   },
   {
     "rebelot/kanagawa.nvim",
-    priority = 1000,
   },
   {
     "rafi/awesome-vim-colorschemes",
-    priority = 1000,
   },
 }

@@ -66,18 +66,19 @@ end, { desc = "cd to current file" })
 
 -----
 -- compilation
-vim.keymap.set("n", "<leader><", ":Compile<cr>", { desc = "compile buffer" })
-vim.keymap.set("n", "<leader>>", ":Recompile<cr>", { desc = "rerun compile buffer" })
 vim.keymap.set("n", "<leader>!", ":make<cr>", { desc = "filetype make" })
+-- command buffer
+vim.keymap.set("n", "<leader>:", "q:", { desc = "open command buffer" })
 
+-- write objdump to new file
 local function bangbuf(cmd)
-  -- write objdump to new file
   vim.cmd("vsp")
   local target_buf = vim.api.nvim_create_buf(false, true)
   vim.api.nvim_set_current_buf(target_buf)
-  vim.cmd("read !" .. cmd)
+  vim.cmd("read ! " .. cmd)
 end
 
+-- run a command and dump it to a file
 vim.keymap.set("n", "<leader>so", function()
   local cmd = vim.fn.input(":buf!")
   if cmd == "" then
@@ -162,10 +163,21 @@ end)
 -- ## plugins
 
 -- command maps
+vim.g.journalopen = false
+vim.keymap.set("n", "<leader>j", function()
+  if vim.g.journalopen then
+    vim.cmd("bd ~/journal.md")
+  else
+    vim.cmd("e ~/journal.md")
+  end
+  vim.g.journalopen = not vim.g.journalopen
+end, { desc = "toggle journal" })
+
 vim.keymap.set("n", "<leader>d", "<cmd>Dashboard<CR><cmd>DisableWhitespace<CR>", { desc = "open dashboard" })
 vim.keymap.set("n", "<leader>w", "<cmd>StripWhitespace<CR>", { desc = "strip whitespace" })
 
 -- toggles
+vim.keymap.set("n", "<leader>v", "<cmd>MarkdownPreviewToggle<CR>", { desc = "toggle markdown browser view" })
 vim.keymap.set("n", "<leader>o", "<cmd>Outline<CR>", { desc = "toggle symbol viewer" })
 vim.keymap.set("n", "<leader>u", "<cmd>UndotreeToggle<CR>", { desc = "toggle undotree" })
 vim.keymap.set("n", "<leader>l", "<cmd>UrlView<CR>", { desc = "toggle link viewer" })

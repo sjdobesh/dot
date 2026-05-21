@@ -1,19 +1,25 @@
--- mason lsp stuff
--- load after plugins!
+-- lsp stuff
 --
 -- loads the following
---   - mason.nvim
---   - mason-lspconfig.nvim
---   - mason-nvim-dap.nvim
---   - lazydev
---   - nvim-cmp
---   - blink.cmp
+-- - lsp servers
+--   - mason package manager
+--     - mason.nvim
+--     - mason-lspconfig.nvim
+--     - mason-nvim-dap.nvim
+--   - lua ls management for nvim
+--     - lazydev
+-- - auto complete
+--   - nvim-cmp  # used as source
+--   - blink.cmp # main autocomplete engine
 
 local mason_lsps = {
   "bashls",
-  "lua_ls",
   "clangd",
+  "cmake",
+  "fish_lsp",
   "glsl_analyzer",
+  "hls",
+  "lua_ls",
   "rust_analyzer",
 }
 
@@ -42,7 +48,7 @@ return {
       },
     },
   },
-  { -- optional cmp completion source for require statements and module annotations
+  { -- source for require statements and module annotations
     "hrsh7th/nvim-cmp",
     opts = function(_, opts)
       opts.sources = opts.sources or {}
@@ -55,11 +61,14 @@ return {
     "saghen/blink.cmp",
     dependencies = { "rafamadriz/friendly-snippets" },
     build = "cargo +nightly build --release",
+    branch = "v1",
     opts = {
       keymap = {
         preset = "super-tab",
         ["<C-k>"] = { "select_prev", "fallback" },
         ["<C-j>"] = { "select_next", "fallback" },
+        ["<A-k>"] = { "scroll_documentation_up", "fallback" },
+        ["<A-j>"] = { "scroll_documentation_down", "fallback" },
         ["<C-s>"] = { "show_signature", "hide_signature" },
       },
       appearance = { nerd_font_variant = "mono" },
@@ -78,6 +87,13 @@ return {
       signature = { enabled = true },
       fuzzy = { implementation = "prefer_rust_with_warning" },
       completion = {
+        documentation = {
+          window = {
+            border = "single",
+          },
+          auto_show = true,
+          auto_show_delay_ms = 100,
+        },
         accept = {
           auto_brackets = {
             enabled = false,

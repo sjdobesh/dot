@@ -8,7 +8,11 @@ return {
   ---@module 'render-markdown'
   ---@type render.md.UserConfig
   opts = {
-    copmpletions = { lsp = { enabled = true } },
+    completions = { lsp = { enabled = true } },
+    win_options = {
+      conceallevel = { default = vim.o.conceallevel, rendered = 3 },
+      concealcursor = { default = vim.o.concealcursor, rendered = "" },
+    },
     file_types = { "bash", "org", "markdown", "lua", "html", "c", "h" },
     injections = {
       lua = {
@@ -22,19 +26,27 @@ return {
       c = {
         enabled = true,
         query = [[
-                ((comment_content) @injection.content
-                    (#offset! @injection.content 0 0 0 1)
+                ((comment) @injection.content
+                    (#offset! @injection.content 0 3 0 0)
                     (#set! injection.language "markdown"))
             ]],
       },
-      bash = {
-        enabled = true,
-        query = [[
-                ((comment_content) @injection.content
-                    (#offset! @injection.content 0 0 0 1)
-                    (#set! injection.language "markdown"))
-            ]],
-      },
+      -- h = {
+      --   enabled = true,
+      --   query = [[
+      --           ((comment_content) @injection.content
+      --               (#offset! @injection.content 0 0 0 1)
+      --               (#set! injection.language "markdown"))
+      --       ]],
+      -- },
+      -- bash = {
+      --   enabled = true,
+      --   query = [[
+      --           ((comment_content) @injection.content
+      --               (#offset! @injection.content 0 0 0 1)
+      --               (#set! injection.language "markdown"))
+      --       ]],
+      -- },
     },
   },
 }

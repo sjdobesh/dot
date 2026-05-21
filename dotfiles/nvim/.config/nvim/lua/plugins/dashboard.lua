@@ -38,7 +38,7 @@ return {
         icon = "  ",
         desc = " journal",
         key = "j",
-        action = "cd ~ | e ~/projects/journal.md",
+        action = "cd ~ | e ~/journal.md",
         group = "DashboardNewFile", -- highlight group
       },
 

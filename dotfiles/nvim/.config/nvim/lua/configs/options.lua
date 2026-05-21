@@ -15,7 +15,7 @@ vim.opt.spelllang = "en-gb" -- default dictionary
 vim.opt.path:append("**") -- better file nav
 vim.o.scrolloff = 4 -- absolute lines
 
--- tabs (2 tab width as spaces is default)
+-- tabs (2 space tabs are my default)
 vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
 vim.opt.shiftwidth = 2
@@ -23,7 +23,7 @@ vim.opt.expandtab = true
 vim.opt.smarttab = true
 vim.opt.autoindent = true
 
--- smart searching
+-- search
 vim.opt.ignorecase = true -- ignore case in searches
 vim.opt.smartcase = true -- unless its a capital
 vim.opt.gdefault = true
@@ -47,6 +47,17 @@ vim.opt.cursorcolumn = true
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 
+-- color 80th col for readability reminder
+vim.opt.colorcolumn = "80"
+
 -- set plugin notifications
 -- error diagnostic is fine as notify is in fact a function
 vim.notify = vim.schedule_wrap(require("notify"))
+
+-- create custom filetype for journal.md and then map it to markdown parser
+vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
+  pattern = { "journal.md" },
+  callback = function()
+    vim.bo.bufhidden = "wipe"
+  end,
+})

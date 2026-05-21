@@ -19,7 +19,6 @@ return {
         "~/bin",
         "~/docs",
         "~/repos",
-        "~/projects",
         "~/public",
       },
 

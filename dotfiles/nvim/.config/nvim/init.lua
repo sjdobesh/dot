@@ -25,8 +25,8 @@ local plugins = {
 
   -- other simple config plugins
   { "mbbill/undotree" },                      -- branching undo tree
-  { "j-hui/fidget.nvim" },                    -- fidget for lsp progress
   { "airblade/vim-gitgutter" },               -- git gutter in sign column
+  { "jghauser/follow-md-links.nvim" },        -- follow md links with enter
   { "nvim-tree/nvim-web-devicons" },          -- icons (common dependency)
   { "ntpeters/vim-better-whitespace" },       -- whitespace management
   { "https://codeberg.org/andyg/leap.nvim" }, -- leap command (sneak but better)
@@ -37,15 +37,15 @@ local plugins = {
   require("plugins.compilebuf"),  -- compilation buffer
   require("plugins.conform"),     -- formatter
   require("plugins.dashboard"),   -- start screen
+  require("plugins.emoji"),       -- emoji picker
   require("plugins.glimmer"),     -- command animations
   require("plugins.imagenvim"),   -- image support for injected languages (3rd)
   require("plugins.imagesnacks"), -- main image support (folke)
   require("plugins.linkview"),    -- link finder and picker
   require("plugins.luaconsole"),  -- lua scratch pad
   require("plugins.lualine"),     -- status line and tabs
-  require("plugins.mason"),       -- lsp manager
+  require("plugins.lsp"),         -- lsp manager
   require("plugins.mdpreview"),   -- render markdown into a browser
-  require("plugins.neorg"),       -- org mode
   require("plugins.neotree"),     -- file tree
   require("plugins.notify"),      -- nice notifications
   require("plugins.oil"),         -- file viewer/editor

@@ -2,17 +2,18 @@ if status is-interactive
     # aliases
 
     # command abbreviations
-    abbr --add v "nvim"
-    abbr --add o "xdg-open"
-    abbr --add g "git"
+    abbr --add v nvim
+    abbr --add o xdg-open
+    abbr --add g git
     abbr --add mv "mv -i"
-    abbr --add ly "lynx"
-    abbr --add l2 "links2"
+    abbr --add ly lynx
+    abbr --add l2 links2
     abbr --add diff "kitten diff"
     abbr --add ip "ip -c=auto"
     abbr --add feh "feh -Zx -g 1920x1080 -B black --force-alias --auto-reload"
     abbr --add icat "kitten icat"
     abbr --add video "mpv --profile=sw-fast --vo=kitty --vo-kitty-use-shm=yes --really-quiet"
+    abbr --add cbuild "cmake -S . -B build "
 
     # symlink management
     alias upstow "cd ~/dot/dotfiles/; stow --no-folding -vt ~ */; cd -"
@@ -20,10 +21,10 @@ if status is-interactive
     alias restow "unstow; upstow"
 
     # let me out dear god please let me out
-    alias q "exit"
-    alias wq "exit"
-    alias :q "exit"
-    alias :wq "exit"
+    alias q exit
+    alias wq exit
+    alias :q exit
+    alias :wq exit
 
     # web search
     function ff
@@ -34,25 +35,39 @@ if status is-interactive
     end
 
     function ref
-      switch "$argv[1]"
-        case tidal
-          firefox "https://tidalcycles.org/docs/reference/cycles"
-        case haskell
-          firefox "https://www.haskell.org/documentation/"
-        case nvim
-          firefox "https://neovim.io/doc/user/quickref/"
-        case fish
-          firefox "https://fishshell.com/docs/current/index.html"
-        case lua
-          firefox "https://www.lua.org/manual/5.5/"
-        case love
-          firefox "https://love2d.org/wiki/Main_Page"
-        case c
-          firefox "https://en.cppreference.com/w/c.html"
-        case cpp
-          firefox "https://en.cppreference.com/w/cpp.html"
-        case '*'
-          firefox -search "$argv -ai-none"
+        switch "$argv[1]"
+            case tidal
+                lynx "https://tidalcycles.org/docs/reference/cycles"
+            case haskell
+                lynx "https://www.haskell.org/documentation/"
+            case nvim
+                lynx "https://neovim.io/doc/user/quickref/"
+            case fish
+                lynx "https://fishshell.com/docs/current/index.html"
+            case lua
+                # lynx "https://www.lua.org/manual/5.5/"
+                lynx "~/documents/lua-5.5/doc/contents.html"
+            case love
+                # lynx "https://love2d.org/wiki/Main_Page"
+                lynx "~/public/docmirrors/love2doc/love2d.org/wiki/love.html#Modules"
+            case SDL3
+                # lynx "https://love2d.org/wiki/Main_Page"
+                lynx "~/documents/sdlwiki/SDL3/CategoryAPI.html"
+            case SDL3.overview
+                # lynx "https://love2d.org/wiki/Main_Page"
+                lynx "~/documents/sdlwiki/SDL3/APIByCategory.html"
+            case SDL2
+                # lynx "https://love2d.org/wiki/Main_Page"
+                lynx "~/documents/sdlwiki/SDL3/CategoryAPI.html"
+            case SDL2.overview
+                # lynx "https://love2d.org/wiki/Main_Page"
+                lynx "~/documents/sdlwiki/SDL2/APIByCategory.html"
+            case c
+                lynx "https://en.cppreference.com/w/c.html"
+            case cpp
+                lynx "https://en.cppreference.com/w/cpp.html"
+            case '*'
+                firefox -search "$argv -ai-none"
         end
     end
 

@@ -1,6 +1,6 @@
 return {
   "stevearc/oil.nvim",
-  lazy = false,
+  lazy = true,
   opts = {
     default_file_explorer = true,
 
@@ -10,6 +10,7 @@ return {
       "icon",
       "permissions",
       "size",
+      "ctime",
     },
 
     buf_options = {
@@ -41,26 +42,26 @@ return {
     constrain_cursor = "editable",
     watch_for_changes = true,
     keymaps = {
-      ["g?"]    = { "actions.show_help", mode = "n" },
-      ["<CR>"]  =   "actions.select",
+      ["?"] = { "actions.show_help", mode = "n" },
+      ["<CR>"] = "actions.select",
       ["<A-s>"] = { "actions.select", opts = { vertical = true } },
       ["<A-f>"] = { "actions.select", opts = { tab = true } },
-      ["<A-p>"] =   "actions.preview",
+      ["<A-p>"] = "actions.preview",
       ["<A-c>"] = { "actions.close", mode = "n" },
-      ["-"]     = { "actions.parent", mode = "n" },
-      ["_"]     = { "actions.open_cwd", mode = "n" },
-      ["`"]     = { "actions.cd", mode = "n" },
-      ["g~"]    = { "actions.cd", opts = { scope = "tab" }, mode = "n" },
-      ["gs"]    = { "actions.change_sort", mode = "n" },
-      ["gx"]    =   "actions.open_external",
-      ["g."]    = { "actions.toggle_hidden", mode = "n" },
-      ["g\\"] = {   "actions.toggle_trash", mode = "n" },
+      ["-"] = { "actions.parent", mode = "n" },
+      ["_"] = { "actions.open_cwd", mode = "n" },
+      ["`"] = { "actions.cd", mode = "n" },
+      ["g~"] = { "actions.cd", opts = { scope = "tab" }, mode = "n" },
+      ["gs"] = { "actions.change_sort", mode = "n" },
+      ["gx"] = "actions.open_external",
+      ["g."] = { "actions.toggle_hidden", mode = "n" },
+      ["g\\"] = { "actions.toggle_trash", mode = "n" },
       ["<A-h>"] = { "actions.select", opts = { horizontal = true } },
-      ["<A-l>"] =   "actions.refresh",
+      ["<A-l>"] = "actions.refresh",
     },
 
     -- set to false to disable all of the above keymaps
-    use_default_keymaps = false,
+    use_default_keymaps = true,
     view_options = {
       show_hidden = true,
       -- defines "hidden" file
@@ -92,8 +93,8 @@ return {
 
     float = {
       padding = 2,
-      min_width = { 20, 0.25},
-      max = { 20, 0.25},
+      min_width = { 20, 0.25 },
+      max = { 20, 0.25 },
       border = nil,
       preview_split = "left",
       -- config passed to nvim_open_win.
