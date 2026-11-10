@@ -43,6 +43,7 @@ return {
           regex = true,
         })
       end,
+      mode = "x",
       desc = "align to regex",
     },
   },

@@ -1,0 +1,60 @@
+{
+  "Addition Equals" : {
+    "prefix": "+=",
+    "body": [
+      "$1 = $1 + $2"
+    ],
+    "description": "Add equals shortcut"
+  },
+  "Subtraction Equals" : {
+    "prefix": "-=",
+    "body": [
+      "$1 = $1 - $2"
+    ],
+    "description": "Sub equals shortcut"
+  },
+  "Division Equals" : {
+    "prefix": "/=",
+    "body": [
+      "$1 = $1 / $2"
+    ],
+    "description": "Div equals shortcut"
+  },
+  "Multiplication Equals" : {
+    "prefix": "*=",
+    "body": [
+      "$1 = $1 * $2"
+    ],
+    "description": "Mul equals shortcut"
+  },
+
+  "Increment" : {
+    "prefix": "inc",
+    "body": [
+      "$1 = $1 + 1"
+    ],
+    "description": "Inc shortcut"
+  },
+
+  "Decrement" : {
+    "prefix": "dec",
+    "body": [
+      "$1 = $1 - 1"
+    ],
+    "description": "Dec shortcut"
+  },
+  "lovetemplate" : {
+    "prefix": "lovet",
+    "body": [
+      "function love.load() end",
+      "function love.update(dt) end",
+      "function love.draw() end",
+      "function love.keypressed(key)",
+      "    if key == 'q' or key == 'escape' then",
+      "        love.event.quit()",
+      "    end",
+      "end"
+    ],
+    "description": "love call back template"
+  }
+}

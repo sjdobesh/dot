@@ -3,8 +3,8 @@ return {
   version = "^5.0.0",
   lazy = true,
   keys = {
-    { "<leader><", ":Compile<cr>", desc = "compile buffer" },
-    { "<leader>>", ":Recompile<cr>", desc = "rerun compile buffer" },
+    { "<leader><", ":silent! Compile<cr>", desc = "compile buffer" },
+    { "<leader>>", ":silent! Recompile<cr>", desc = "rerun compile buffer" },
   },
   -- you can just use the latest version:
   -- branch = "latest",
@@ -85,10 +85,10 @@ return {
       clear_environment = false,
       -- Fix compilation for plugins like `nvim-cmp`.
       -- :h compile-mode.input_word_completion
-      input_word_completion = true,
+      input_word_completion = false,
       -- Hide the compliation buffer.
       -- :h compile-mode.hidden_buffer
-      hidden_buffer = true,
+      hidden_buffer = false,
       -- Automatically focus the compilation buffer.
       -- :h compile-mode.focus_compilation_buffer
       focus_compilation_buffer = true,
@@ -101,10 +101,10 @@ return {
       use_circular_error_navigation = false,
       -- Print debug information.
       -- :h compile-mode.debug
-      debug = true,
+      debug = false,
       -- Use a pseudo terminal for command execution.
       -- :h compile-mode.use_pseudo_terminal
-      use_pseudo_terminal = true,
+      use_pseudo_terminal = false,
     }
   end,
 }

@@ -1,25 +1,25 @@
 return {
-	"gbprod/yanky.nvim",
-	dependencies = {
-		{ "kkharji/sqlite.lua" },
-	},
-	opts = {
-		ring = { storage = "sqlite" },
-	},
+  "gbprod/yanky.nvim",
+  dependencies = {
+    { "kkharji/sqlite.lua" },
+  },
+  opts = {
+    ring = { storage = "sqlite" },
+  },
   -- stylua: ignore
 	keys = {
-		{ "<leader>p", "<cmd>YankyRingHistory<cr>", mode = { "n", "x" }, desc = "Open Yank History" },
+		{ "<leader>ph", "<cmd>YankyRingHistory<cr>", mode = { "n", "x" }, desc = "Open Yank History" },
 		{ "y", "<Plug>(YankyYank)", mode = { "n", "x" }, desc = "Yank text" },
 		{ "p", "<Plug>(YankyPutAfter)", mode = { "n", "x" }, desc = "Put yanked text after cursor" },
 		{ "P", "<Plug>(YankyPutBefore)", mode = { "n", "x" }, desc = "Put yanked text before cursor" },
 		{
-			"gp",
+			"<leader>pa",
 			"<Plug>(YankyGPutAfter)",
 			mode = { "n", "x" },
 			desc = "Put yanked text after cursor and leave cursor after",
 		},
 		{
-			"gP",
+			"<leader>pb",
 			"<Plug>(YankyGPutBefore)",
 			mode = { "n", "x" },
 			desc = "Put yanked text before cursor and leave cursor after",

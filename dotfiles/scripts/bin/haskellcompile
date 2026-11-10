@@ -1,0 +1,34 @@
+#!/usr/bin/env lua
+
+-- file system
+LFS = require("lfs")
+
+-- [haskell ghc dependencies](https://www.haskell.org/ghcup/install/)
+Dependencies = {
+  "build-essential",
+  "curl",
+  "libffi-dev",
+  "libffi8",
+  "libgmp-dev",
+  "libgmp10",
+  "libncurses-dev",
+  "libncurses6",
+  "libtinfo6",
+  "pkg-config",
+}
+
+-- install dependencies
+print("[ INSTALLING DEPENDENCIES ]")
+os.execute("sudo apt install " .. table.concat(Dependencies, " ") .. " -y")
+
+-- download
+os.execute(
+  "curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | "
+    .. "BOOTSTRAP_HASKELL_NONINTERACTIVE=1 "
+    .. "BOOTSTRAP_HASKELL_GHC_VERSION=latest "
+    .. "BOOTSTRAP_HASKELL_CABAL_VERSION=latest "
+    .. "BOOTSTRAP_HASKELL_INSTALL_STACK=1 "
+    .. "BOOTSTRAP_HASKELL_INSTALL_HLS=1 "
+    .. "BOOTSTRAP_HASKELL_ADJUST_BASHRC=P "
+    .. "sh"
+)

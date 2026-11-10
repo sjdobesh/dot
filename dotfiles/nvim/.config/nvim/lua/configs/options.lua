@@ -1,6 +1,34 @@
 -- s.nvim
 
 -- options -------------------------------------------------------------------80
+-- set actual colorscheme here
+vim.cmd.colorscheme("vague")
+local min_width = 60
+vim.api.nvim_create_autocmd({ "VimResized", "WinEnter", "BufEnter" }, {
+  callback = function()
+    local current_width = vim.api.nvim_win_get_width(0)
+    if current_width < min_width then
+      require("lualine").hide({ place = { "statusline", "tabline", "winbar" }, unhide = false })
+    else
+      require("lualine").hide({ place = { "statusline", "tabline", "winbar" }, unhide = true })
+    end
+  end,
+})
+
+-- send pwd to neovim from terminal
+vim.api.nvim_create_autocmd("TermRequest", {
+  desc = "Handles OSC 7 dir change requests",
+  callback = function(ev)
+    local val = vim.v.termrequest
+    if string.sub(val, 1, 4) == "\x1b]7;" then
+      local dir = string.gsub(val, "\x1b]7;!file://[^/]*", "")
+      if vim.fn.isdirectory(dir) == 1 then
+        -- Change the current working directory of Neovim
+        vim.cmd.cd(dir)
+      end
+    end
+  end,
+})
 
 -- load filetype files after other init
 vim.cmd("filetype plugin on")

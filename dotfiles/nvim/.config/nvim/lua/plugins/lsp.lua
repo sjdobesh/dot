@@ -41,6 +41,7 @@ return {
       library = {
         "lazy.nvim",
         "LazyVim",
+        "~/.config/nvim/snippets/",
         { path = "${3rd}/love2d/library", words = { "love" } },
         { path = "${3rd}/luv/library", words = { "vim%.uv" } },
         { path = "wezterm-types", mods = { "wezterm" } },
@@ -54,6 +55,7 @@ return {
       opts.sources = opts.sources or {}
       table.insert(opts.sources, {
         name = "lazydev",
+        group_index = 0, -- set group index to 0 to skip loading LuaLS completions
       })
     end,
   },

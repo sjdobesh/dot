@@ -1,10 +1,10 @@
 return {
-  "ravsii/timers.nvim",
-  version = "0.4.2", -- use latest stable release
-  event = "VimEnter",
-  opts = {
-    persistent = true,
-  },
+	"ravsii/timers.nvim",
+	version = "0.4.2", -- use latest stable release
+	event = "VimEnter",
+	opts = {
+		persistent = true,
+	},
   -- stylua: ignore
   keys = {
     { "<leader>ta", function() require("timers.ui").active_timers() end, desc = "active timers"     },

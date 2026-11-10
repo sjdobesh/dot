@@ -6,6 +6,7 @@ if status is-interactive
     abbr --add o xdg-open
     abbr --add g git
     abbr --add mv "mv -i"
+    abbr --add rm "rm -i"
     abbr --add ly lynx
     abbr --add l2 links2
     abbr --add diff "kitten diff"
@@ -14,6 +15,31 @@ if status is-interactive
     abbr --add icat "kitten icat"
     abbr --add video "mpv --profile=sw-fast --vo=kitty --vo-kitty-use-shm=yes --really-quiet"
     abbr --add cbuild "cmake -S . -B build "
+    abbr --add plot "gnuplot -p -e 'set terminal dumb size 100, 20; set autoscale; plot "
+    abbr --add gs "git status"
+    abbr --add ga "git add"
+    abbr --add gr "git restore"
+    abbr --add gc "git commit"
+    abbr --add chrome "google-chrome --ozone-platform=x11 &> /dev/null & disown"
+    abbr --add google "google-chrome --ozone-platform=x11 &> /dev/null & disown"
+    abbr --add web "google-chrome --ozone-platform=x11 &> /dev/null & disown"
+    abbr --add cal ncal
+    abbr --add apt "sudo apt"
+
+    # tell neovim to swap to this directory
+    function neovimcd
+        printf "sending OSC7\n"
+        printf "\033]7;!file://$PWD\033\\"
+    end
+    alias ncd neovimcd
+    alias vcd neovimcd
+    alias osc7 neovimcd
+
+    ## add !! back
+    function last_history_item
+        echo $history[1]
+    end
+    abbr --add !! --position anywhere --function last_history_item
 
     # symlink management
     alias upstow "cd ~/dot/dotfiles/; stow --no-folding -vt ~ */; cd -"

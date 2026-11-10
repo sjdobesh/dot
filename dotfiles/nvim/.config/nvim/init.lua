@@ -26,7 +26,8 @@ local plugins = {
   -- other simple config plugins
   { "mbbill/undotree" },                      -- branching undo tree
   { "airblade/vim-gitgutter" },               -- git gutter in sign column
-  { "jghauser/follow-md-links.nvim" },        -- follow md links with enter
+  -- { "jghauser/follow-md-links.nvim" },        -- follow md links (original)
+  { "sjdobesh/follow-md-links.nvim" },        -- follow md links (my fork)
   { "nvim-tree/nvim-web-devicons" },          -- icons (common dependency)
   { "ntpeters/vim-better-whitespace" },       -- whitespace management
   { "https://codeberg.org/andyg/leap.nvim" }, -- leap command (sneak but better)
@@ -44,13 +45,14 @@ local plugins = {
   require("plugins.linkview"),    -- link finder and picker
   require("plugins.luaconsole"),  -- lua scratch pad
   require("plugins.lualine"),     -- status line and tabs
-  require("plugins.lsp"),         -- lsp manager
+  require("plugins.lsp"),         -- filetype lsp manager
   require("plugins.mdpreview"),   -- render markdown into a browser
+  require("plugins.minimap"),     -- minimap renderer
+  require("plugins.multicursor"), -- multicursor
   require("plugins.neotree"),     -- file tree
   require("plugins.notify"),      -- nice notifications
   require("plugins.oil"),         -- file viewer/editor
-  require("plugins.outline"),     -- symbol viewer
-  require("plugins.rendermd"),    -- render markdown in terminal
+  -- require("plugins.rendermd"),    -- render markdown in terminal
   require("plugins.scope"),       -- scope/indent outliner
   require("plugins.telescope"),   -- fuzzy finder
   require("plugins.timers"),      -- timer manager

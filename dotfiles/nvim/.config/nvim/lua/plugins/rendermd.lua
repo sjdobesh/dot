@@ -13,7 +13,7 @@ return {
       conceallevel = { default = vim.o.conceallevel, rendered = 3 },
       concealcursor = { default = vim.o.concealcursor, rendered = "" },
     },
-    file_types = { "bash", "org", "markdown", "lua", "html", "c", "h" },
+    file_types = { "lua", "bash", "org", "markdown", "html", "c", "h" },
     injections = {
       lua = {
         enabled = true,

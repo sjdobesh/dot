@@ -1,0 +1,102 @@
+#!/usr/bin/env lua
+
+-- file system
+LFS = require("lfs")
+-- git source
+Git = "https://github.com/neovim/neovim.git"
+-- [neovim build dependencies](https://neovim.io/doc/build/)
+Dependencies = {
+  "build-essential",
+  "cmake",
+  "curl",
+  "gettext",
+  "git",
+  "ninja-build",
+  "liblua5.1-0-dev", -- <-- plugin dependency (wont be mentioned in wiki)
+}
+
+-- autorun flag
+_G.AutoRun = false
+
+-- ask a yes or no question to continue or halt script.
+-- if autorun is enabled, it will always return true.
+--
+-- `[yY]` to confirm
+-- `[qQ]` to abort
+-- any other input will return false
+---@param str string question to ask
+function AskBeforeContinue(str)
+  -- don't ask and continue
+  if _G.AutoRun then
+    return true
+  end
+  -- ask
+  io.write(str .. " (y/n) : ")
+  local input = io.read()
+  -- quit script w q
+  if string.match(input, "[qQ]") then
+    print("aborting installation.")
+    os.exit(0)
+  end
+  -- otherwise return response
+  if not string.match(input, "[yY]") then
+    return false
+  end
+  return true
+end
+if arg[1] == "-y" then
+  print("auto running ...")
+  _G.AutoRun = true
+end
+
+-- install apt dependencies
+function InstallDependencies()
+  if AskBeforeContinue(table.concat(Dependencies, " ") .. "\ninstall dependencies?") then
+    print("\n[ INSTALL DEPENDENCIES ]")
+    os.execute("sudo apt install " .. table.concat(Dependencies, " ") .. " -y")
+  end
+end
+
+-- download git repo
+function ManageGit()
+  print("\n[ MANAGE GIT SOURCE ]")
+  -- check for public folder
+  if not LFS.attributes("/home/valentine/public") then
+    print("no public folder found.")
+    if AskBeforeContinue("create `/home/valentine/public`?") then
+      os.execute("mkdir /home/valentine/public")
+    end
+  end
+  -- download or update
+  if not LFS.attributes("/home/valentine/public/neovim") then
+    print("couldn't locate neovim git source.")
+    if AskBeforeContinue("install at `/home/valentine/public/neovim`?") then
+      LFS.chdir("/home/valentine/public")
+      os.execute("git clone " .. Git)
+    end
+  else
+    print("located neovim git source at `/home/valentine/public`.")
+    if AskBeforeContinue("pull latest version?") then
+      LFS.chdir("/home/valentine/public/neovim")
+      os.execute("git pull origin master")
+    end
+  end
+end
+
+-- compile and install to /home/valentine/bin
+function Compile()
+  print("\n[ COMPILE NEOVIM ]")
+  if AskBeforeContinue("compile and install neovim to `/home/valentine/bin`?") then
+    LFS.chdir("/home/valentine/public/neovim")
+    os.execute('make CMAKE_BUILD_TYPE=Release CMAKE_EXTRA_FLAGS="-DCMAKE_INSTALL_PREFIX=$HOME/bin/neovim"')
+    os.execute("sudo make install")
+    os.execute('export PATH="$HOME/bin/neovim/bin:$PATH"')
+    LFS.chdir("/home/valentine")
+    print("\n[ NEOVIM INSTALLED TO /home/valentine/bin ]\n")
+  end
+end
+
+print("[ NEOVIM FROM SRC ]")
+InstallDependencies()
+ManageGit()
+Compile()

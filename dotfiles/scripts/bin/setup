@@ -170,7 +170,7 @@ PRIVATE_REPOS=(
 PUBLIC_REPOS=(
   "nothings/stb.git"         # header only libraries
   "attractivechaos/klib.git" # macro libraries
-  "neovim/neovim"            # neovim source
+  "neovim/neovim.git"            # neovim source
 )
 
 

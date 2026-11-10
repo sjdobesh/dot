@@ -1,6 +1,5 @@
 -- # s.nvim keymaps
 ------------------------------------------------------------------------------80
-
 -- helper function
 -- useful for conditional mappings and hacks
 local function feedkeys(keys, mode, escape_ks)
@@ -35,22 +34,27 @@ vim.keymap.set("v", "<A-l>", "xpgv=gv", { desc = "rotate selection right" })
 
 -----
 -- append/prepend visual
-vim.keymap.set("x", "<C-a>", function()
+vim.keymap.set("x", "<leader>ap", function()
   local arg = vim.fn.input("append: ")
   feedkeys(": '<,'>normal A" .. arg .. "<CR>", "v", true)
-end, { desc = "append to selection" })
-vim.keymap.set("x", "<C-i>", function()
+end, { desc = "append" })
+vim.keymap.set("x", "<leader>pp", function()
   local arg = vim.fn.input("prepend: ")
   feedkeys(": '<,'>normal I" .. arg .. "<CR>", "v", true)
-end, { desc = "prepend to selection" })
+end, { desc = "prepend" })
 
 -----
 -- window nav
-vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "move window left" })
-vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "move window down" })
-vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "move window up" })
-vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "move window right" })
+vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "move to left window" })
+vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "move to lower window" })
+vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "move to upper window" })
+vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "move to right window" })
 vim.keymap.set("n", "<C-w>", "<C-w>w", { desc = "toggle windows" })
+
+-----
+-- splits
+vim.keymap.set("n", "<leader>sv", "<cmd>vsp<cr>", { desc = "split vertical" })
+vim.keymap.set("n", "<leader>sh", "<cmd>sp<cr>", { desc = "split horizontal" })
 
 -----
 -- buffer nav
@@ -79,14 +83,14 @@ local function bangbuf(cmd)
 end
 
 -- run a command and dump it to a file
-vim.keymap.set("n", "<leader>so", function()
+vim.keymap.set("n", "<leader>$", function()
   local cmd = vim.fn.input(":buf!")
   if cmd == "" then
     return
   else
     bangbuf(cmd)
   end
-end, { desc = "dump shell output to new buffer" })
+end, { desc = "dump shell output to buffer" })
 
 -- write hex to new file
 vim.keymap.set("n", "<leader>x", function()
@@ -94,8 +98,8 @@ vim.keymap.set("n", "<leader>x", function()
   local data = vim.api.nvim_buf_get_lines(source_buf, 0, -1, false)
   local target_buf = vim.api.nvim_create_buf(false, true)
   vim.api.nvim_buf_set_lines(target_buf, 0, -1, false, data)
-  vim.api.nvim_set_current_buf(target_buf)
   feedkeys(":%!xxd<cr>", "n", true)
+  vim.api.nvim_set_current_buf(target_buf)
   vim.g.hexmode = true
 end, { desc = "dump current file hex to new buffer" })
 
@@ -117,8 +121,8 @@ vim.keymap.set("n", "gb", "<C-O>", { desc = "go back" })
 vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, { desc = "get definition" })
 vim.keymap.set("n", "gi", function() vim.lsp.buf.hover() end, { desc = "get information" })
 vim.keymap.set("n", "ge", function() vim.diagnostic.open_float({ scope = "line" }) end, { desc = "get error" })
-vim.keymap.set("n", "gr", function() require("telescope.builtin").lsp_references() end, { desc = "get references" })
 -- stylua: ignore end
+-- many functions supported by [telescope bindings](./lua/telescope.lua)
 
 -----
 -- hacks
@@ -132,7 +136,7 @@ local function makeNewFile()
     feedkeys(":e " .. newpath .. "<cr>", "n", true)
   end
 end
-vim.keymap.set("n", "gnf", function()
+vim.keymap.set("n", "mnf", function()
   makeNewFile()
 end, { desc = "get new file under cursor" })
 
@@ -166,9 +170,9 @@ end)
 vim.g.journalopen = false
 vim.keymap.set("n", "<leader>j", function()
   if vim.g.journalopen then
-    vim.cmd("bd ~/journal.md")
+    vim.cmd("bd ~/journal/journal.md")
   else
-    vim.cmd("e ~/journal.md")
+    vim.cmd("e ~/journal/journal.md")
   end
   vim.g.journalopen = not vim.g.journalopen
 end, { desc = "toggle journal" })
@@ -178,9 +182,10 @@ vim.keymap.set("n", "<leader>w", "<cmd>StripWhitespace<CR>", { desc = "strip whi
 
 -- toggles
 vim.keymap.set("n", "<leader>v", "<cmd>MarkdownPreviewToggle<CR>", { desc = "toggle markdown browser view" })
-vim.keymap.set("n", "<leader>o", "<cmd>Outline<CR>", { desc = "toggle symbol viewer" })
+vim.keymap.set("n", "<leader>o", "<cmd>InspectTree<CR>", { desc = "toggle symbol tree" })
 vim.keymap.set("n", "<leader>u", "<cmd>UndotreeToggle<CR>", { desc = "toggle undotree" })
 vim.keymap.set("n", "<leader>l", "<cmd>UrlView<CR>", { desc = "toggle link viewer" })
+
 -- persistent autosession toggle
 vim.g.neotreeopen = false
 vim.keymap.set("n", "<leader>f", function()
@@ -190,6 +195,7 @@ end, { desc = "toggle neotree and record state for autosession" })
 
 -----
 -- leap (s)kip to (2 letter search)
+vim.keymap.set("n", "S", "<Nop>", { noremap = true, silent = true })
 vim.keymap.set({ "n", "x", "o" }, "s", "<Plug>(leap-forward)", { desc = "2 letter search forwards" })
 vim.keymap.set({ "n", "x", "o" }, "S", "<Plug>(leap-backward)", { desc = "2 letter search backwards" })
 
@@ -200,12 +206,13 @@ vim.keymap.set("n", "<Esc>", ':lua require("notify").dismiss()<CR>', { desc = "d
 -----
 -- nvim-treesitter-textobjects
 
--- select
+-- selections
+
 -- function blocks
-vim.keymap.set({ "x", "o" }, "am", function()
+vim.keymap.set({ "x", "o" }, "af", function()
   require("nvim-treesitter-textobjects.select").select_textobject("@function.outer", "textobjects")
 end, { desc = "select around function" })
-vim.keymap.set({ "x", "o" }, "im", function()
+vim.keymap.set({ "x", "o" }, "if", function()
   require("nvim-treesitter-textobjects.select").select_textobject("@function.inner", "textobjects")
 end, { desc = "select inside function" })
 -- class blocks
@@ -217,77 +224,93 @@ vim.keymap.set({ "x", "o" }, "ic", function()
 end, { desc = "select inside class" })
 
 -- swap arguments
-vim.keymap.set("n", "<leader>a", function()
+vim.keymap.set("n", "<leader>sn", function()
   require("nvim-treesitter-textobjects.swap").swap_next("@parameter.inner")
 end, { desc = "swap next arg" })
-vim.keymap.set("n", "<leader>A", function()
+vim.keymap.set("n", "<leader>sp", function()
   require("nvim-treesitter-textobjects.swap").swap_previous("@parameter.outer")
 end, { desc = "swap prev arg" })
 
 -- move
 -- functions next / previous
-vim.keymap.set({ "n", "x", "o" }, "]m", function()
+vim.keymap.set({ "n", "x", "o" }, "gnf", function()
   require("nvim-treesitter-textobjects.move").goto_next_start("@function.outer", "textobjects")
 end, { desc = "goto next function" })
-vim.keymap.set({ "n", "x", "o" }, "[m", function()
+vim.keymap.set({ "n", "x", "o" }, "gpf", function()
   require("nvim-treesitter-textobjects.move").goto_previous_start("@function.outer", "textobjects")
 end, { desc = "goto previous function" })
-vim.keymap.set({ "n", "x", "o" }, "]M", function()
+vim.keymap.set({ "n", "x", "o" }, "gef", function()
   require("nvim-treesitter-textobjects.move").goto_next_end("@function.outer", "textobjects")
 end, { desc = "goto next function end" })
-vim.keymap.set({ "n", "x", "o" }, "[M", function()
+vim.keymap.set({ "n", "x", "o" }, "gepf", function()
   require("nvim-treesitter-textobjects.move").goto_previous_end("@function.outer", "textobjects")
 end, { desc = "goto previous function end" })
 
 -- class next / previous
-vim.keymap.set({ "n", "x", "o" }, "]]", function()
+vim.keymap.set({ "n", "x", "o" }, "gnc", function()
   require("nvim-treesitter-textobjects.move").goto_next_start("@class.outer", "textobjects")
 end, { desc = "goto next class" })
-vim.keymap.set({ "n", "x", "o" }, "[[", function()
+vim.keymap.set({ "n", "x", "o" }, "gpc", function()
   require("nvim-treesitter-textobjects.move").goto_previous_start("@class.outer", "textobjects")
 end, { desc = "goto previous class" })
-vim.keymap.set({ "n", "x", "o" }, "][", function()
+vim.keymap.set({ "n", "x", "o" }, "gec", function()
   require("nvim-treesitter-textobjects.move").goto_next_end("@class.outer", "textobjects")
-end, { desc = "goto next class end" })
-vim.keymap.set({ "n", "x", "o" }, "[]", function()
+end, { desc = "goto end of class" })
+vim.keymap.set({ "n", "x", "o" }, "gepc", function()
   require("nvim-treesitter-textobjects.move").goto_previous_end("@class.outer", "textobjects")
-end, { desc = "goto previous class end" })
+end, { desc = "goto end of previous class" })
 
--- next loop
-vim.keymap.set({ "n", "x", "o" }, "]o", function()
+-- loop
+vim.keymap.set({ "n", "x", "o" }, "gnl", function()
   require("nvim-treesitter-textobjects.move").goto_next_start({ "@loop.inner", "@loop.outer" }, "textobjects")
-end, { desc = "goto next loop start" })
--- next scope
-vim.keymap.set({ "n", "x", "o" }, "]s", function()
+end, { desc = "goto next loop" })
+vim.keymap.set({ "n", "x", "o" }, "gpl", function()
+  require("nvim-treesitter-textobjects.move").goto_previous_start({ "@loop.inner", "@loop.outer" }, "textobjects")
+end, { desc = "goto previous loop" })
+vim.keymap.set({ "n", "x", "o" }, "gel", function()
+  require("nvim-treesitter-textobjects.move").goto_next_end({ "@loop.inner", "@loop.outer" }, "textobjects")
+end, { desc = "goto end of loop" })
+vim.keymap.set({ "n", "x", "o" }, "gepl", function()
+  require("nvim-treesitter-textobjects.move").goto_previous_end({ "@loop.inner", "@loop.outer" }, "textobjects")
+end, { desc = "goto end of previous loop" })
+
+-- scope
+vim.keymap.set({ "n", "x", "o" }, "gns", function()
   require("nvim-treesitter-textobjects.move").goto_next_start("@local.scope", "locals")
 end, { desc = "goto next scope" })
--- next fold
-vim.keymap.set({ "n", "x", "o" }, "]z", function()
+vim.keymap.set({ "n", "x", "o" }, "gps", function()
+  require("nvim-treesitter-textobjects.move").goto_previous_start("@local.scope", "locals")
+end, { desc = "goto previous scope" })
+vim.keymap.set({ "n", "x", "o" }, "ges", function()
+  require("nvim-treesitter-textobjects.move").goto_next_end("@local.scope", "locals")
+end, { desc = "goto end of scope" })
+vim.keymap.set({ "n", "x", "o" }, "geps", function()
+  require("nvim-treesitter-textobjects.move").goto_previous_end("@local.scope", "locals")
+end, { desc = "goto previous end of scope" })
+-- fold
+vim.keymap.set({ "n", "x", "o" }, "gnz", function()
   require("nvim-treesitter-textobjects.move").goto_next_start("@fold", "folds")
 end, { desc = "goto next fold" })
+vim.keymap.set({ "n", "x", "o" }, "gpz", function()
+  require("nvim-treesitter-textobjects.move").goto_previous_start("@fold", "folds")
+end, { desc = "goto previous fold" })
+vim.keymap.set({ "n", "x", "o" }, "gez", function()
+  require("nvim-treesitter-textobjects.move").goto_next_end("@fold", "folds")
+end, { desc = "goto end of fold" })
+vim.keymap.set({ "n", "x", "o" }, "gepz", function()
+  require("nvim-treesitter-textobjects.move").goto_previous_end("@fold", "folds")
+end, { desc = "goto end of previous fold" })
 
--- next / previous condition
-vim.keymap.set({ "n", "x", "o" }, "]?", function()
+-- conditions
+vim.keymap.set({ "n", "x", "o" }, "gn?", function()
   require("nvim-treesitter-textobjects.move").goto_next("@conditional.outer", "textobjects")
 end, { desc = "goto next conditional" })
-vim.keymap.set({ "n", "x", "o" }, "[?", function()
-  require("nvim-treesitter-textobjects.move").goto_previous("@conditional.outer", "textobjects")
+vim.keymap.set({ "n", "x", "o" }, "gp?", function()
+  require("nvim-treesitter-textobjects.move").goto_previous_start("@conditional.outer", "textobjects")
 end, { desc = "goto previous conditional" })
-
--- externally defined keymaps
-
---[[
-[linkview](./lua/plugins/linkview.lua)
-| keys | command |
-| -- | -- |
-| gl | get link |
-|gL | get previous link |
-]]
-
---[[
-[neotree](./lua/plugins/neotree.lua)
-| keys | command |
-| -- | -- |
-| P | preview file |
-
-]]
+vim.keymap.set({ "n", "x", "o" }, "ge?", function()
+  require("nvim-treesitter-textobjects.move").goto_next_end("@conditional.outer", "textobjects")
+end, { desc = "goto end of conditional" })
+vim.keymap.set({ "n", "x", "o" }, "gep?", function()
+  require("nvim-treesitter-textobjects.move").goto_next_end("@conditional.outer", "textobjects")
+end, { desc = "goto end of previous conditional" })
